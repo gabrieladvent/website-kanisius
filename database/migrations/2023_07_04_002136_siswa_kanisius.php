@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sd_kanisius_sengkan', function (Blueprint $table) {
+        Schema::create('siswa_kanisius', function (Blueprint $table) {
             $table->integer('nipd')->primary();
-            $table->string('nama_depan')->length(100);
-            $table->string('nama_tengah')->length(100);
-            $table->string('nama_belakang')->length(100);
+            $table->string('nama_siswa')->length(500);
             $table->string('jenis_kelamin')->length(100);
             $table->integer('nisn')->length(10);
             $table->string('tempat_lahir')->length(100);
@@ -84,6 +82,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sd_kanisius_sengkan');
+        Schema::dropIfExists('siswa_kanisius');
     }
 };
