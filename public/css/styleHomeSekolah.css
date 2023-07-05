@@ -28,18 +28,11 @@ p{
     width: 30%;
     margin-left: 25%;
     margin-top: 5%;
-    /* width: 40%;
-    margin-left: 40%;
-    margin-top: 2%; */
 }
 .branding{
     width: 30vw;
     margin-top: 10%;
     margin-left: 20%;
-    /* width: 52%;
-    height: 10%;
-    margin-left: 25%;
-    margin-top: 1%; */
 
 }
 .ihs-logo{
@@ -131,3 +124,48 @@ padding:0;
     color: aqua;
     background-color: aquamarine;
 }
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.search-container {
+  margin-left: 1%;
+  justify-content: end;
+  flex-shrink: 0;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px; /* Adjust the width as needed */
+}
+  .dropdown-select {
+    width: 120px; /* Adjust the width as needed */
+    height: 34px; /* Adjust the height as needed */
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .filter-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4%;
+    background-color: rgba(0, 157, 255, 1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+  }
+  
+  .filter-popup.show {
+    display: block;
+  }
+  
+  
