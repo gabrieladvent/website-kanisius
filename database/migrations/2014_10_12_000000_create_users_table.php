@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->integer('ID')->primary()->length(5);
-            $table->string('username')->length(100);
-            $table->string('nama_user')->length(255);
-            $table->string('nama_sekolah')->length(255);
+            $table->string('NAMA')->length(100);
+            $table->string('USERNAME')->length(255);
+            $table->string('NAMA SEKOLAH')->length(255);
             $table->timestamps();
         });
     }
