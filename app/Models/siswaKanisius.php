@@ -11,6 +11,6 @@ class siswaKanisius extends Model
 
     public function sekolah()
     {
-        return $this->belongsTo(sekolahKanisus::class, 'nomor_sekolah');
+        return $this->belongsTo(sekolahKanisus::class, 'NOMOR SEKOLAH');
     }
 }

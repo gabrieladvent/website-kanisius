@@ -11,11 +11,11 @@ class sekolahKanisus extends Model
 
     public function siswa()
     {
-        return $this->hasMany(siswaKanisius::class, 'nomor_sekolah');
+        return $this->hasMany(siswaKanisius::class, 'NOMOR SEKOLAH');
     }
 
     public function arsip()
     {
-        return $this->hasMany(arsipData::class, 'nomor_sekolah');
+        return $this->hasMany(arsipData::class, 'NOMOR SEKOLAH');
     }
 }

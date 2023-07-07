@@ -14,3 +14,5 @@ class kirimData extends Model
         return $this->belongsTo(users::class, 'ID');
     }
 }
+
+//TEMPT

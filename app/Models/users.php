@@ -14,3 +14,4 @@ class users extends Model
         return $this->hasMany(kirimData::class, 'ID');
     }
 }
+//TEMPT
