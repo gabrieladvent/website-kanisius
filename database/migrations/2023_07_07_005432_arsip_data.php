@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('siswa_kanisius', function (Blueprint $table) {
-            $table->integer('nipd')->primary();
+        Schema::create('arsip_data', function (Blueprint $table) {
+            $table->integer('nipd');
             $table->string('nama_siswa')->length(500);
             $table->string('jenis_kelamin')->length(100);
             $table->integer('nisn')->length(10);
@@ -83,6 +83,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('siswa_kanisius');
+        Schema::dropIfExists('arsip_data');
     }
 };
