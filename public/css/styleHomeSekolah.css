@@ -1,0 +1,181 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+p{
+    padding-top: 1%;
+}
+.navbar{
+    box-shadow:4px 7px 10px rgba(0,0,0,.4);
+    position: fixed;
+    width: 100%;
+}
+.data-siswa{
+    background-color: #ffff;
+    box-shadow:4px 7px 10px rgba(0,0,0,.4);
+    margin-left: 6%;
+    margin-right: 1%;
+}
+.data-siswa{
+    margin-top: 2%;
+}
+.container{
+    margin-left: -60px;
+    margin-right: 0%;
+}
+.col.order-first.middle{
+    margin-left: -90px;
+}
+
+.img-kanisius{
+    width: 25%;
+    margin-left: 20%;
+    margin-top: 13.4%;
+}
+.branding{
+    width: 25vw;
+    margin-top: 20%;
+    margin-left: 20%;
+
+}
+.ihs-logo{
+    width: 30%;
+    margin-left: 61.5%;
+    margin-top: 10%;
+}
+
+.fa-2x {
+    font-size: 2.4vw;
+    margin-top: 50%;
+    margin-left: 15%;
+
+}
+
+.fa {
+position: relative;
+display: table-cell;
+width: 60%;
+text-align: center;
+vertical-align: middle;
+font-size:20px;
+}
+.fs-3{
+    margin-top: -3%;
+}
+
+.main-menu {
+background:#ffff;
+position:fixed;
+top: 10%;
+bottom:0;
+left:0;
+width:4%;
+overflow:hidden;
+z-index: index 1000;;
+box-shadow:4px 7px 10px rgba(0,0,0,.4);
+}
+
+.main-menu>ul {
+margin:7px;
+}
+
+.main-menu li {
+position:relative;
+display:block;
+width:100%;
+}
+
+.main-menu li>a {
+position:relative;
+display:table;
+border-collapse:collapse;
+border-spacing:0;
+color:black;
+  
+}
+
+.main-menu .nav-icon {
+position:relative;
+display:table-cell;
+width:60px;
+/* height:36px; */
+text-align:center;
+vertical-align:middle;
+font-size:18px;
+}
+
+.main-menu .nav-text {
+position:relative;
+display:table-cell;
+vertical-align:middle;
+width:190px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+position:absolute;
+bottom: 0;
+}
+
+nav ul,nav li {
+outline:0;
+margin:0;
+padding:0;
+}
+/* .main-menu li:hover{
+    color: aqua;
+    background-color: aquamarine;
+} */
+.filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.search-container {
+  margin-left: 1%;
+  justify-content: end;
+  flex-shrink: 0;
+}
+
+.search-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px; /* Adjust the width as needed */
+}
+  .dropdown-select {
+    width: 120px; /* Adjust the width as needed */
+    height: 34px; /* Adjust the height as needed */
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .filter-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4%;
+    background-color: rgba(0, 157, 255, 1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+  }
+  
+  .filter-popup.show {
+    display: block;
+  }
+  
+  
+.icon{
+  width: 2vw;
+  margin-top: 3vw;
+  margin-left: 15%;
+}
+
+/* .content{
+  margin-top: 50%;
+} */
