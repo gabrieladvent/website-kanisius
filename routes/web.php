@@ -24,17 +24,22 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/login', 'App\Http\Controllers\Controller@login_proses')->name('login');
 // Route::post('login', [Controller::class, 'authenticate'])->name('login.action');
 
-Route::middleware(['auth', 'role:yayasan'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
-});
+// Route::middleware(['auth', 'role:yayasan'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+      
+//     });
+// });
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('role:yayasan,yayasan');
 
-Route::middleware(['auth', 'role:sekolah'])->group(function () {
-    Route::get('/homesekolah', function () {
-        return view('homeSekolah');
-    });
-});
+Route::get('/homesekolah', function () {
+    return view('homeSekolah');
+})->middleware('role:sekolah,sekolah');
+
+
+
 
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -68,9 +73,9 @@ Route::get('sekolah/{nomor_s}/upload/', function () {
 //     }
 // })->name('success')->middleware('web');
 
-Route::get('/success', function(){
-    return view('uploadsucess');
-})->name('success');
+// Route::get('/success', function(){
+//     return view('uploadsucess');
+// })->name('success');
 
 // Remove submitted
 Route::post('/remove', [KirimController::class, 'removeFile']);

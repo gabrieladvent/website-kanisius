@@ -8,11 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     // 
+    use AuthenticableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -49,9 +51,9 @@ protected $validRoles = ['yayasan', 'sekolah'];
         'password' => 'hashed',
     ];
 
-    public function hasRole($role)
+    public function hasRole($role1,$role2)
 {
-    return $this->role === $role;
+    return $this->status === [$role1, $role2];
 }
 
   

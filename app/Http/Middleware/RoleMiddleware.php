@@ -14,11 +14,32 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request,Closure $next, $role): Response
+    // public function handle(Request $request,Closure $next, $role1, $role2): Response
+    // {
+        
+    //     if (!Auth::check() || !Auth::user()->hasRole([$role1, $role2])) {
+    //         return redirect('/unauthorized');
+    //     }
+    //     return $next($request);
+    // }
+    public function handle($request, Closure $next, $role1, $role2)
     {
-        if (!Auth::check() || Auth::user()->status !== $role) {
-            return redirect('/unauthorized');
+        // Periksa apakah pengguna telah login
+        if (Auth::check()) {
+            // Periksa peran pengguna
+            if (Auth::user()->status == $role1) {
+                // Jika pengguna memiliki peran pertama, arahkan ke halaman A
+                return response()->view('/dashboard');
+                
+            } elseif (Auth::user()->status == $role2) {
+                // Jika pengguna memiliki peran kedua, arahkan ke halaman B
+                return response()->view('/homesekolah');
+            }
         }
-        return $next($request);
+
+        // Jika pengguna tidak memiliki peran yang valid atau belum login,
+        // Anda dapat mengarahkannya ke halaman tertentu atau memberikan respons sesuai kebutuhan.
+        return response()->view('');
     }
+
 }
