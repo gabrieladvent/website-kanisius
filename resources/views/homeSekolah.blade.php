@@ -134,7 +134,7 @@
             </tr>
         </thead>
         <tbody>
-          {{-- @foreach ($data as $item)
+          @foreach ($data as $item)
                   <tr>
                       <td>{{ $item->NISN }}</td>
                       <td>{{ $item->Nama }}</td>
@@ -148,7 +148,7 @@
                       </td>
                       <td>{{ $item->Rombel_Set_Ini }}</td>
                   </tr>
-              @endforeach --}}
+              @endforeach
               <tr>
                 <td>NISN</td>
                 <td>Nama Siswa</td>

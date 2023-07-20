@@ -113,7 +113,7 @@
                     </div>
                     <div class="row d-flex justify-content-center">
                         <div class="col-3 mt-3 text-center">
-                            <p class="fw-bold ">G1140 Cahyadi Purnomo </p>
+                            <p class="fw-bold">{{ $user->id .' '. $user->name }} </p>
                         </div>
                     </div>
                     <div class="row d-flex justify-content-center">
