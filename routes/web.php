@@ -19,32 +19,4 @@ use App\Http\Controllers\SiswaController;
 */
 
 
-//role yayasan
-
-    Route::get('dashboard/data/', [SiswaController::class, 'index']);
-    Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
-    Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan');
-    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan');
-    Route::post('/store', [UserController::class, 'create'])->name('store');
-
-
-
-
-
-
-//role login
-Route::post('/uploadFile', [KirimController::class, 'postFile']);
-Route::get('sekolah/{nomor_s}/upload/', function () {
-    return view('uploadfile');
-});
-Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah');
-Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa']);
-Route::post('/remove', [KirimController::class, 'removeFile']);
-
-
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-
-
+// /
