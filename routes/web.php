@@ -20,24 +20,26 @@ use App\Http\Controllers\SiswaController;
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
 //role yayasan
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('role:yayasan');
-Route::get('dashboard/data/', [SiswaController::class, 'index'])->middleware('role:yayasan');
-Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit')->middleware('role:yayasan');
-Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->middleware('role:yayasan');
-Route::post('/store', [UserController::class, 'create'])->name('store')->middleware('role:yayasan');
+
+    Route::get('dashboard/data/', [SiswaController::class, 'index']);
+    Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
+    Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan');
+    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan');
+    Route::post('/store', [UserController::class, 'create'])->name('store');
+
+
+
 
 
 
 //role login
-Route::post('/uploadFile', [KirimController::class, 'postFile'])->middleware('role:sekolah');;
+Route::post('/uploadFile', [KirimController::class, 'postFile']);
 Route::get('sekolah/{nomor_s}/upload/', function () {
     return view('uploadfile');
-})->middleware('role:sekolah');
-Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->middleware('role:sekolah');
-Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa'])->middleware('role:sekolah');
-Route::post('/remove', [KirimController::class, 'removeFile'])->middleware('role:sekolah');
+});
+Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah');
+Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa']);
+Route::post('/remove', [KirimController::class, 'removeFile']);
 
 
 Auth::routes();
