@@ -77,3 +77,6 @@ function closePopup() {
 $(document).ready(function (){
   $('#example').DataTable();
 });
+
+
+
