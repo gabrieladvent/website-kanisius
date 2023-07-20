@@ -32,11 +32,11 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware('role:yayasan,yayasan');
+})->middleware('role:yayasan');
 
 Route::get('/homesekolah', function () {
     return view('homeSekolah');
-})->middleware('role:sekolah,sekolah');
+})->middleware('role:sekolah');
 
 
 
