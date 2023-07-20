@@ -65,27 +65,29 @@
       <nav class="main-menu">
         <ul>
             <li>
-                <a href="/sekolah/2032" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
+                <a href="/dashboard" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
             </li>
 
-
             <li>
-              <a href="#" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}" alt=""></a>
+              <a href="#lihatKiriman" class="icon"><img src="{{ asset('/icon/database-solid.svg') }}" alt=""></a>
             </li>
             <li>
-              <a href="dataSiswaSekolah.blade.html" class="icon"><img src="{{ asset('/icon/user-group-solid.svg') }}" alt=""></a>
+              <a href="{{ route('dashboard.data') }}" class="icon"><img src="{{ asset('/icon/user-group-solid.svg') }}" alt=""></a>
             </li>
             <li>
-              <a href="#" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}" alt=""></a>
+              <a href="#notifikasi" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}" alt=""></a>
             </li>
+            <li>
+                <a href="#laporan" class="icon"><img src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
+              </li>
         </ul>
 
         <ul class="logout">
             <li>
-              <a href="#" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
+              <a href="{{ route('profile') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
             </li> 
             <li>
-              <a href="#" class="icon"><img src="{{ ('/icon/gear-solid.svg') }}" alt=""></a>
+              <a href="#logout" class="icon"><img src="{{ ('/icon/sign-out-alt-solid.svg') }}" alt=""></a>
            </li>  
         </ul>
     </nav>
@@ -108,35 +110,55 @@
                     <th>No</th>
                     <th>Nama Pegawai</th>
                     <th>Username</th>
-                    <th>Nama Sekoalah</th>
+                    <th>Nama Sekolah</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
               @foreach ($data as $item)
-                @if ($item->status == 'sekolah')
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->email }}</td>
-                        <td>{{ $item->namasekolah }}</td>
-                        <td>
-                            {{-- {{ route('admin.user.edit', ['id' => $d->id]) }} --}}
-                            {{-- <a href="{{ route('dashboard.edit', ['id' => $item->ID]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a> --}}
-                            {{-- data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" --}}
-                            {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Hapus</a> --}}
-                        </td>
-                    </tr>
-                @endif          
-              @endforeach
+              @if ($item->status == 'sekolah')
+                  <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $item->name }}</td>
+                      <td>{{ $item->email }}</td>
+                      <td>{{ $item->namasekolah }}</td>
+                      <td>
+                          <a href="{{ route('dashboard.edit', ['id' => $item->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
+                          
+                          <a data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Hapus</a>
+                      </td>
+                  </tr>
+                  <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Penghapusan Data</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          Apakah Anda Yakin Ingin Menghapus Data <strong>{{ $item->name }}</strong>
+                        </div>
+                        <div class="modal-footer">
+                          <form action="{{ route('dashboard.delete',['id' => $item->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-danger">Hapus Akun</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              @endif          
+            @endforeach
             </tbody>
             <tfoot>
                 <tr>
                     <th>No</th>
                     <th>Nama Pegawai</th>
                     <th>Username</th>
-                    <th>Nama Sekoalah</th>
-                    <th>Status</th>
+                    <th>Nama Sekolah</th>
+                    <th>Action</th>
                 </tr>
             </tfoot>
         </table>

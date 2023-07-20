@@ -10,7 +10,9 @@ use App\Models\Siswa;
 class SiswaController extends Controller
 {
     public function index(){ 
-        $data_siswa = Siswa::paginate(20);
+        $siswa = Siswa::all();
+        // Lakukan eager loading untuk data sekolah terkait
+        $data_siswa = $siswa->load('sekolah');
         return view('tabeluseryayasan', compact('data_siswa'));
     }
 

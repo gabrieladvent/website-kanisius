@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -15,9 +17,20 @@ class LoginController extends Controller
     }
 
     public function dashboard() {
-        return view('dashboard');
+        $user = Auth::user();
+        return view('dashboard', compact('user'));
     }
 
+    public function logout(Request $request): RedirectResponse
+{
+    Auth::logout();
+ 
+    $request->session()->invalidate();
+ 
+    $request->session()->regenerateToken();
+ 
+    return redirect('/login');
+}
    
 
 }

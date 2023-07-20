@@ -47,6 +47,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile');
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('dashboard/data/', [SiswaController::class, 'index'])->name('dashboard.data');
+Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
+Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 //role yayasan
 // Route::middleware('role:admin,editor')->group(function () {

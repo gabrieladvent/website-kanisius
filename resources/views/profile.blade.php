@@ -19,94 +19,93 @@
     <link rel="stylesheet" href="{{ asset('/css/mdb.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/addons/datatables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/styleHomeSekolah.css') }}"/>
 </head>
 
-<body>
-    <!--Main Navigation-->
-
-    <section style="background-image: url('{{ asset('/image/bg.png') }}');">
-        <div class="row ">
-            <div class="col-1 mt-5">
-
+<body style="background-image: url('{{ asset('/image/bg.png') }}');">
                 <!--Main Navigation-->
                 <header>
-                    <!-- Sidebar -->
-                    <nav id="sidebarMenu" style="width: 100px !important;"
-                        class="collapse d-lg-block sidebar collapse bg-white">
-                        <div class="position-sticky d-flex justify-content-center ">
-                            <div class="list-group list-group-flush mx-3 mt-4">
-                                <a href="#" class=" list-group-item-action py-2 ripple" aria-current="true">
-                                    <i class="fas fa-solid-alt fa-house fa-lg me-3"></i>
-                                </a>
-                                <a href="#" class=" list-group-item-action py-2 ripple ">
-                                    <i class="fas fa-solid fa-table fa-lg me-3"></i>
-                                </a>
-                                <a href="#" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas fa-solid fa-users fa-lg me-3"></i><span></span></a>
-                                <a href="#" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas fa-solid fa-bell fa-lg me-3"></i><span></span></a>
-                                <a href="#" class=" list-group-item-action py-2 ripple">
-                                    <i class="fas mb-14 fa-solid fa-book fa-lg me-3"></i><span></span>
-                                </a>
-                                <a href="#" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas  fa-solid fa-user fa-lg me-3"></i><span></span></a>
-                                <a href="#" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas fa-solid fa-gear fa-lg me-3"></i><span></span></a>
-
-                            </div>
-                        </div>
-                    </nav>
-                    <!-- Sidebar -->
-
-                    <!-- Navbar -->
-                    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                        <!-- Container wrapper -->
-                        <div class="container-fluid">
-                            <!-- Toggle button -->
-                            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                                data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-                                aria-label="Toggle navigation">
-                                <i class="fas fa-bars"></i>
-                            </button>
-
-                            <!-- Brand -->
-                            <a class="navbar-brand" href="#">
-                                <img src="{{ asset('image/logo-status.png') }}" class="w-75" alt="Kanisius Logo" loading="lazy" />
-                            </a>
-                            <!-- Right links -->
-                            <ul class="navbar-nav ms-auto d-flex flex-row ">
-                                <!-- Notification dropdown -->
-                                <li class="nav-item dropdown px-3">
-                                    <a href="" class="text-dark">Video Tutorial</a>
+                    <body style="background-color: #fcf2fc;">
+                        <section>
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                              <div class="container-fluid">
+                                <button
+                                  class="navbar-toggler"
+                                  type="button"
+                                  data-mdb-toggle="collapse"
+                                  data-mdb-target="#navbarRightAlignExample"
+                                  aria-controls="navbarRightAlignExample"
+                                  aria-expanded="false"
+                                  aria-label="Toggle navigation"
+                                >
+                                  <i class="fas fa-bars"></i>
+                                </button>
+                          
+                                <!-- Collapsible wrapper -->
+                                <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+                                  <div class="row">
+                                    <div class="col-lg-12 ms-5">
+                                        <h5 class="inter text">
+                                            Selamat Datang, <strong>{{ $user->name }}</strong>
+                                        </h5>
+                                    </div>
+                                  </div>
+                                  <!-- Left links -->
+                                  <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-nowrap">
+                                    <li class="nav-item">
+                                      <a class="inter nav-link active" aria-current="page" href="#">Video Tutorial</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="inter nav-link text-dark" href="#">Dokumentasi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                      <a class="inter nav-link text-dark" href="#">Kontak Admin</a>
+                                    </li>
+                                  </ul>
+                                  <!-- Left links -->
+                                </div>
+                                <!-- Collapsible wrapper -->
+                              </div>
+                              <!-- Container wrapper -->
+                            </nav>
+                          </section>
+                    
+                          <!-- sidebar -->
+                          <nav class="main-menu">
+                            <ul>
+                                <li>
+                                    <a href="/dashboard" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
                                 </li>
-
-                                <!-- Icon -->
-                                <li class="nav-item px-3">
-                                    <a class="text-dark" href="#">
-                                        Dokumentasi
-                                    </a>
+                    
+                                <li>
+                                  <a href="#lihatKiriman" class="icon"><img src="{{ asset('/icon/database-solid.svg') }}" alt=""></a>
                                 </li>
-                                <!-- Icon -->
-                                <li class="nav-item">
-                                    <a class="text-dark" href="#">
-                                        Kontak Admin
-                                    </a>
+                                <li>
+                                  <a href="{{ route('dashboard.data') }}" class="icon"><img src="{{ asset('/icon/user-group-solid.svg') }}" alt=""></a>
                                 </li>
+                                <li>
+                                  <a href="#notifikasi" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}" alt=""></a>
+                                </li>
+                                <li>
+                                    <a href="#laporan" class="icon"><img src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
+                                  </li>
                             </ul>
-                        </div>
-                        <!-- Container wrapper -->
-                    </nav>
-                    <!-- Navbar -->
+                    
+                            <ul class="logout">
+                                <li>
+                                  <a href="{{ route('profile') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
+                                </li> 
+                                <li>
+                                  <a href="#logout" class="icon"><img src="{{ ('/icon/sign-out-alt-solid.svg') }}" alt=""></a>
+                               </li>  
+                            </ul>
+                        </nav>
                 </header>
                 <!--Main Navigation-->
 
                 <!--Main layout-->
-                <main style="margin-top: 58px;">
-                    <div class="container pt-4"></div>
-                </main>
-                <!--Main layout-->
             </div>
-            <div class="col mt-5 py-4 px-5 container-fluid shadow-6-strong  ">
+            <div class=" mt-5 py-4 px-5 container-fluid">
                 <div class="row mt-5 d-flex justify-content-center">
                     <div class="col-3 text-center">
                         <img src="{{ asset('/icon/user-tie-solid.svg') }}" width="100px" alt="">
@@ -134,7 +133,6 @@
                 </div>
             </div>
         </div>
-    </section>
     <!--Main layout-->
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
