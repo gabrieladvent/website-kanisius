@@ -114,17 +114,17 @@
             </thead>
             <tbody>
               @foreach ($data as $item)
-                @if ($item->STATUS == 'Sekolah')
+                @if ($item->status == 'sekolah')
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->NAMA }}</td>
-                        <td>{{ $item->EMAIL }}</td>
-                        <td>{{ $item->NAMASEKOLAH }}</td>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->email }}</td>
+                        <td>{{ $item->namasekolah }}</td>
                         <td>
                             {{-- {{ route('admin.user.edit', ['id' => $d->id]) }} --}}
-                            <a href="{{ route('dashboard.edit', ['id' => $item->ID]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
+                            {{-- <a href="{{ route('dashboard.edit', ['id' => $item->ID]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a> --}}
                             {{-- data-toggle="modal" data-target="#modal-hapus{{ $d->id }}" --}}
-                            <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Hapus</a>
+                            {{-- <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Hapus</a> --}}
                         </td>
                     </tr>
                 @endif          

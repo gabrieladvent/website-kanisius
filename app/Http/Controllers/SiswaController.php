@@ -25,10 +25,11 @@ class SiswaController extends Controller
     }
 
     public function dashboardSekolah($nomor_s) {
-        $data_siswa = Siswa::where('nomor_s', $nomor_s)->paginate(8);
+        $data = Siswa::where('nomor_s', $nomor_s)->get();
+        
 
-        if ($data_siswa) {
-            return view('homeSekolah', compact('data_siswa'));
+        if ($data) {
+            return view('homeSekolah', compact('data'));
         } else {
             return response('Siswa tidak ditemukan', 404);
         }

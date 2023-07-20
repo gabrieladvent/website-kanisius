@@ -18,7 +18,7 @@ use App\Http\Controllers\SiswaController;
 |
 */
 
-
+Route::get('/', [LoginController::class, 'index'])->name('login');
 //role yayasan
 Route::get('/dashboard', function () {
     return view('dashboard');
