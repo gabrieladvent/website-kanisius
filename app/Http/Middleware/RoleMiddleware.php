@@ -39,7 +39,7 @@ class RoleMiddleware
 
         // Jika pengguna tidak memiliki peran yang valid atau belum login,
         // Anda dapat mengarahkannya ke halaman tertentu atau memberikan respons sesuai kebutuhan.
-        return response()->view('');
+        return response()->view('/login');
     }
 
 }
