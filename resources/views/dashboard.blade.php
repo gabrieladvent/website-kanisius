@@ -14,81 +14,83 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
     <!-- link css -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/styleHomeSekolah.css') }}"/>
     <!-- link scss -->
 
 </head>
 
 <body style="background-color: #fcf2fc;">
     <section>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-4-strong">
-            <!-- Container wrapper -->
-            <div class="position-sticky container-fluid">
-                <!-- Toggle button -->
-                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                    data-mdb-target="#navbarRightAlignExample" aria-controls="navbarRightAlignExample"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
-                </button>
-
-                <!-- Collapsible wrapper -->
-                <div class="collapse navbar-collapse" id="navbarRightAlignExample">
-                    <div class="row">
-                        <div class="col-lg-12 mx-4">
-                            <h5 class="inter text">Selamat Datang, <strong>Cahyadi Purnomo</strong></h5>
-                        </div>
-                    </div>
-                    <!-- Left links -->
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="inter nav-link active" aria-current="page" href="#">Video Tutorial</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="inter nav-link text-dark" href="#">Dokumentasi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="inter nav-link text-dark">Kontak Admin</a>
-                        </li>
-                    </ul>
-                    <!-- Left links -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-mdb-toggle="collapse"
+              data-mdb-target="#navbarRightAlignExample"
+              aria-controls="navbarRightAlignExample"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <i class="fas fa-bars"></i>
+            </button>
+      
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+              <div class="row">
+                <div class="col-lg-12 ms-5">
+                  <img src="{{ asset('/image/logo.png') }}" style="width: 3%;">
+                  <img src="{{ asset('/image/HITAM.png') }}" style="width: 15%; margin-left: 1%; margin-top: 1%">
                 </div>
-                <!-- Collapsible wrapper -->
+              </div>
+              <!-- Left links -->
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-nowrap">
+                <li class="nav-item">
+                  <a class="inter nav-link active" aria-current="page" href="#">Video Tutorial</a>
+                </li>
+                <li class="nav-item">
+                  <a class="inter nav-link text-dark" href="#">Dokumentasi</a>
+                </li>
+                <li class="nav-item">
+                  <a class="inter nav-link text-dark" href="#">Kontak Admin</a>
+                </li>
+              </ul>
+              <!-- Left links -->
             </div>
-            <!-- Container wrapper -->
+            <!-- Collapsible wrapper -->
+          </div>
+          <!-- Container wrapper -->
         </nav>
-    </section>
+      </section>
 
-    <section>
-        <!--Main Navigation-->
-        <div class="row">
-            <div class="col-1 ">
-                <header>
-                    <!-- Sidebar -->
-                    <nav id="sidebarMenu" style="width: 100px !important;"
-                        class="collapse d-lg-block sidebar collapse bg-white">
-                        <div class="d-flex justify-content-center ">
-                            <div class="list-group list-group-flush mx-3 mt-4">
-                                <a href="dashboard/" class=" list-group-item-action py-2 ripple" aria-current="true">
-                                    <i class="fas fa-solid-alt fa-house fa-lg me-3"></i>
-                                </a>
-                                <a href="#" class=" list-group-item-action py-2 ripple ">
-                                    <i class="fas fa-solid fa-table fa-lg me-3"></i>
-                                </a>
-                                <a href="dashboard/data/" class="list-group-item-action py-2 ripple"><i
-                                    class="fas fa-solid fa-users fa-lg me-3"></i></a>
-                                <a href="#" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas fa-solid fa-bell fa-lg me-3"></i><span></span></a>
-                                <a href="#" class=" list-group-item-action py-2 ripple">
-                                    <i class="fas mb-14 fa-solid fa-book fa-lg me-3"></i><span></span>
-                                </a>
-                                <a href="{{ route('profile') }}" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas  fa-solid fa-user fa-lg me-3"></i><span></span></a>
-                                <a href="#" class=" list-group-item-action py-2 ripple"><i
-                                        class="fas fa-solid fa-gear fa-lg me-3"></i><span></span></a>
+      <!-- sidebar -->
+      <nav class="main-menu">
+        <ul>
+            <li>
+                <a href="/sekolah/2032" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
+            </li>
 
-                            </div>
-                        </div>
-                    </nav>
-                    <!-- Sidebar -->
+
+            <li>
+              <a href="#" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}" alt=""></a>
+            </li>
+            <li>
+              <a href="dataSiswaSekolah.blade.html" class="icon"><img src="{{ asset('/icon/user-group-solid.svg') }}" alt=""></a>
+            </li>
+            <li>
+              <a href="#" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}" alt=""></a>
+            </li>
+        </ul>
+
+        <ul class="logout">
+            <li>
+              <a href="#" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
+            </li> 
+            <li>
+              <a href="#" class="icon"><img src="{{ ('/icon/gear-solid.svg') }}" alt=""></a>
+           </li>  
+        </ul>
+    </nav>
                 </header>
             </div>
             <div class="col">
@@ -206,7 +208,6 @@
             <div class="container pt-4"></div>
         </main>
         <!--Main layout-->
-    </section>
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
