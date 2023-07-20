@@ -22,16 +22,16 @@ class RoleMiddleware
     //     }
     //     return $next($request);
     // }
-    public function handle($request, Closure $next, $role1, $role2)
+    public function handle($request, Closure $next)
     {
         // Periksa apakah pengguna telah login
         if (Auth::check()) {
             // Periksa peran pengguna
-            if (Auth::user()->status == $role1) {
+            if (Auth::user()->status == "yayasan") {
                 // Jika pengguna memiliki peran pertama, arahkan ke halaman A
                 return response()->view('/dashboard');
                 
-            } elseif (Auth::user()->status == $role2) {
+            } elseif (Auth::user()->status == "sekolah") {
                 // Jika pengguna memiliki peran kedua, arahkan ke halaman B
                 return response()->view('/homesekolah');
             }
