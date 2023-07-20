@@ -94,3 +94,5 @@ Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashbo
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/store', [UserController::class, 'create'])->name('store');

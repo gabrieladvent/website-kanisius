@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('store') }}">
                         @csrf
 
                         <div class="row mb-3">
@@ -61,10 +61,42 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label for="namasekolah" class="col-md-4 col-form-label text-md-end">{{ __('Nama Sekolah') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="namasekolah" type="text" class="form-control @error('namasekolah') is-invalid @enderror" name="namasekolah" value="{{ old('namasekolah') }}" required autocomplete="namasekolah">
+
+                                @error('namasekolah')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="status" class="col-md-4 col-form-label text-md-end">{{ __('Status') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="radio-container">
+                                    <input type="radio" name="status" value="Sekolah" id="sekolah">
+                                    <label for="sekolah">Operator Sekolah</label>
+                                </div>
+                                <div class="radio-container">
+                                    <input type="radio" name="status" value="Yayasan" id="yayasan">
+                                    <label for="yayasan">Operator Yayasan</label>
+                                </div>
+                                @error('status')
+                                <small>{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ ('Register') }}
                                 </button>
                             </div>
                         </div>
