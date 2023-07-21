@@ -22,42 +22,41 @@ class RoleMiddleware
     //     }
     //     return $next($request);
     // }
-    public function handle($request, Closure $next  )
+    public function handle($request, Closure $next)
     {
-    //     // Periksa apakah pengguna telah login
-    //     if (Auth::check()) {
-    //         // Periksa peran pengguna
-    //         if (Auth::user()->status == "yayasan") {
-    //             // Jika pengguna memiliki peran pertama, arahkan ke halaman A
-    //             return response()->view('/dashboard');
-                
-    //         } elseif (Auth::user()->status == "sekolah") {
-    //             // Jika pengguna memiliki peran kedua, arahkan ke halaman B
-    //             return response()->view('/homesekolah');
-    //         }
-    //     }
-
-    //     // Jika pengguna tidak memiliki peran yang valid atau belum login,
-    //     // Anda dapat mengarahkannya ke halaman tertentu atau memberikan respons sesuai kebutuhan.
-    //     return response()->view('/home');
-    // }
-
-    
+        // Periksa apakah pengguna telah login
         if (Auth::check()) {
-            $user = Auth::user();
-
             // Periksa peran pengguna
-            if ($user->status == 'yayasan') {
-                // Jika peran adalah 'admin', arahkan ke halaman dashboard admin
+            if (Auth::user()->status == "yayasan") {
+                // Jika pengguna memiliki peran pertama, arahkan ke halaman A
                 return response()->view('/dashboard');
-            } elseif ($user->status == 'sekolah') {
-                // Jika peran adalah 'editor', arahkan ke halaman dashboard editor
+                
+            } elseif (Auth::user()->status == "sekolah") {
+                // Jika pengguna memiliki peran kedua, arahkan ke halaman B
                 return response()->view('/homesekolah');
             }
         }
 
-        return $next($request);
+        // Jika pengguna tidak memiliki peran yang valid atau belum login,
+        // Anda dapat mengarahkannya ke halaman tertentu atau memberikan respons sesuai kebutuhan.
+        return response()->view('/home');
+    }
+
+    
+    //     if (Auth::check()) {
+    //         $user = Auth::user();
+
+    //         // Periksa peran pengguna
+    //         if ($user->status == 'yayasan') {
+    //             // Jika peran adalah 'admin', arahkan ke halaman dashboard admin
+    //             return view('/dashboard');
+    //         } elseif ($user->status == 'sekolah') {
+    //             // Jika peran adalah 'editor', arahkan ke halaman dashboard editor
+    //             return view('/homesekolah');
+    //         }
+    //     }
+
+    //     return $next($request);
     
 
     }
-}
