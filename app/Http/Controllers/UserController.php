@@ -47,6 +47,6 @@ class UserController extends Controller
             $data['status'] = $request->input('status');
         User::create($data);
 
-        return view('/dashboard');
+        return redirect()->route('login');
     }
 }

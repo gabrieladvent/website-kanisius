@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_yayasan')->length(100);
             $table->string('alamat')->length(100);
-            $table->string('nama_foto');
+            $table->string('nama_foto')->nullable();
             $table->timestamps();
         });
     }

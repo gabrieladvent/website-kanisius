@@ -86,7 +86,7 @@
                   <a href="#" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
                 </li> 
                 <li>
-                  <a href="#" class="icon"><img src="{{ ('/icon/sign-out-alt-solid.svg') }}" alt=""></a>
+                  <a href="{{ route('logout') }}" class="icon"><img src="{{ ('/icon/sign-out-alt-solid.svg') }}" alt=""></a>
                </li>  
             </ul>
         </nav>
@@ -97,14 +97,6 @@
   <div class="content">
     <div class="logo-banner">
       <table>
-        {{-- <tr>
-          <th> <i><img src="{{ asset('/image/logo.png') }}" class="img-kanisius"></i></th>
-          <th>
-            <i><img src="{{ asset('/image/alamat.png') }}" class="branding"> <span></span></i>
-          </th>
-          <th><i><img src="{{ asset('/image/IHS_Logo.png') }}" class="ihs-logo"></i></th>
-        </tr> --}}
-
         <tr>
           <th> <i><img src="{{ asset('/image/logo.png') }}" class="img-kanisius-baru"></i></th>
           <th>
@@ -112,9 +104,6 @@
           </th>
           <th><i><img src="{{ asset('/image/ihs-baru.png') }}" class="ihs-logo-baru"></i></th>
         </tr>
-        {{-- <tr>
-          <th><img src="{{ asset('/image/ihs-baru.png') }}" alt=""></th>
-        </tr> --}}
       </table>
     </div>
     <div class="data-siswa">

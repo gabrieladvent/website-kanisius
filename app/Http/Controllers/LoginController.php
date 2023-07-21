@@ -18,7 +18,12 @@ class LoginController extends Controller
 
     public function dashboard() {
         $user = Auth::user();
-        return view('dashboard', compact('user'));
+        if($user->status == 'sekolah'){
+            $sekolahId = $user->id;
+            return redirect()->route('sekolah', ['nomor_s' => $sekolahId]);
+        } else{
+            return view('dashboard', compact('user'));
+        }
     }
 
     public function logout(Request $request): RedirectResponse

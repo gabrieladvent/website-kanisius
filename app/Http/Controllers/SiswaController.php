@@ -28,8 +28,6 @@ class SiswaController extends Controller
 
     public function dashboardSekolah($nomor_s) {
         $data = Siswa::where('nomor_s', $nomor_s)->get();
-        
-
         if ($data) {
             return view('homeSekolah', compact('data'));
         } else {
