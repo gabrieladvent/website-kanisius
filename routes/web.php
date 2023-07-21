@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KirimController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\YayasanController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,13 +36,17 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
 
 
 //role login
-Route::post('/uploadFile', [KirimController::class, 'postFile']);
+Route::post('/uploadFile', [KirimController::class, 'postFile'])->name('upload');
 Route::get('sekolah/{nomor_s}/upload/', function () {
     return view('uploadfile');
 });
 Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah');
 Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa']);
 Route::post('/remove', [KirimController::class, 'removeFile']);
+
+Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data');
+
+Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
 
 
 Auth::routes();

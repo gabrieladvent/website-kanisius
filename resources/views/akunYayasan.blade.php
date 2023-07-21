@@ -117,38 +117,51 @@
             <tbody>
               @foreach ($data as $item)
               @if ($item->status == 'sekolah')
-                  <tr>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $item->name }}</td>
-                      <td>{{ $item->email }}</td>
-                      <td>{{ $item->namasekolah }}</td>
-                      <td>
-                          <a href="{{ route('dashboard.edit', ['id' => $item->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-                          
-                          <a data-bs-toggle="modal" data-bs-target="#exampleModal{{ $item->id }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Hapus</a>
-                      </td>
-                  </tr>
-                  <div class="modal fade" id="exampleModal{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">Konfirmasi Penghapusan Data</h1>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                          Apakah Anda Yakin Ingin Menghapus Data <strong>{{ $item->name }}</strong>
-                        </div>
-                        <div class="modal-footer">
-                          <form action="{{ route('dashboard.delete',['id' => $item->id]) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            <button type="submit" class="btn btn-danger">Hapus Akun</button>
-                          </form>
-                        </div>
-                      </div>
+              <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->email }}</td>
+                <td>{{ $item->namasekolah }}</td>
+                <td>
+                    <a href="{{ route('dashboard.edit', ['id' => $item->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
+
+                    <a href="{{ route('dashboard.delete', ['id' => $item->id]) }}" class="btn btn-danger" onclick="event.preventDefault(); if (confirm('Anda yakin ingin menghapus data ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();">
+                      <i class="fas fa-trash-alt"></i> Hapus
+                  </a>
+                  
+                  <form id="delete-form-{{ $item->id }}" action="{{ route('dashboard.delete', ['id' => $item->id]) }}" method="POST" style="display: none;">
+                      @csrf
+                      @method('DELETE')
+                  </form>
+                  
+                </td>
+              </tr>
+              {{-- <div class="modal fade" id="modal-hapus">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Konfirmasi Hapus Data</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Ingin Hapus Data <b></b>?</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                      <form action="{{ route('dashboard.delete', ['id' => $item->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                      </form>
                     </div>
                   </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
+              <!-- /.modal --> --}}
               @endif          
             @endforeach
             </tbody>

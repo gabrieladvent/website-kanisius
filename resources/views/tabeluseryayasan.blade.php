@@ -121,9 +121,6 @@
               <option value="pilihan3">2024</option>
             </select>
           </div>
-          {{-- <div class="filter">
-            <button type="button" class="btn btn-primary">Filter</button>
-          </div> --}}
         </div>
         
       </div>

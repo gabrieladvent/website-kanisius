@@ -119,9 +119,6 @@
               <option value="pilihan3">2024</option>
             </select>
           </div>
-          {{-- <div class="filter">
-            <button type="button" class="btn btn-primary">Filter</button>
-          </div> --}}
         </div>
         
       </div>
@@ -171,20 +168,7 @@
     </div>
 
     <!-- pop up -->
-    <div class="filter-popup" id="filterPopup">
-      <h4>Filter Options</h4>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="Laki-Laki" id="option1">
-        <label class="form-check-label" for="option1">
-          Laki-Laki
-        </label>
-      </div>
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="Perempuan" id="option2">
-        <label class="form-check-label" for="option2">
-          Perempuan
-        </label>
-      </div>
+    <div class="filter-popup" id="filterPopup" hidden>
       <button type="button" class="btn btn-primary" id="applyBtn">Apply</button>
       <button type="button" class="btn btn-secondary" id="closeBtn">Close</button>
     </div>

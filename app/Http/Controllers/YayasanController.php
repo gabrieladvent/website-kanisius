@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class YayasanController extends Controller
 {
-    //
+    public function kiriman() {
+        return view('tablesekolah');
+    }
 }

@@ -49,4 +49,35 @@ class UserController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function update(Request $request, $id){
+        $validator = Validator::make($request->all(),[
+            'id' => 'required',
+            'name'  => 'required',
+            'email' => 'required|email',
+            'password' => 'nullable',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        
+            $data['id'] = $request->id;
+            $data['name'] = $request->name;
+            $data['email'] = $request->email;
+
+        if($request->password){
+            $data['password'] = Hash::make($request->password);
+        }
+
+        User::whereId($id)->update($data);
+        return redirect()->route('akun-yayasan');
+    }
+
+    public function delete(Request $request, $id) {
+        $data = User::find($id);
+
+        if($data){
+            $data->delete();
+        }
+        return redirect()->route('akun-yayasan');
+    }
 }

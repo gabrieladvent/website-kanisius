@@ -71,7 +71,7 @@
             </li>
 
             <li>
-              <a href="#lihatKiriman" class="icon"><img src="{{ asset('/icon/database-solid.svg') }}" alt=""></a>
+              <a href="{{ route('kiriman-data') }}" class="icon"><img src="{{ asset('/icon/database-solid.svg') }}" alt=""></a>
             </li>
             <li>
               <a href="{{ route('dashboard.data') }}" class="icon"><img src="{{ asset('/icon/user-group-solid.svg') }}" alt=""></a>
