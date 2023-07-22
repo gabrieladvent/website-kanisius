@@ -21,44 +21,69 @@ use App\Http\Controllers\YayasanController;
 |
 */
 
-
-Route::get('/', [LoginController::class, 'index'])->name('login');
-//role yayasan
-
-    Route::get('dashboard/data/', [SiswaController::class, 'index']);
-    Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
-    Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan');
-    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan');
+// Route untuk login
+    Route::get('/', [LoginController::class, 'index'])->name('login');
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Registrasi akun
     Route::post('/store', [UserController::class, 'create'])->name('store');
+// Logout
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::get('/dashboard', [DashboardController::class, 'getNotifikasi'])->name('dashboard');
-    Route::get('/notofikasi', [DashboardController::class, 'showNotofikasi'])->name('notofikasi');
+// Yang login adalah admin/yayasan
+    //Masuk dashboard yayasan
+        Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->defaults('title', 'Dashboard');
+    // Masuk ke tampil data
+        Route::get('dashboard/data/', [SiswaController::class, 'index'])->name('dashboard.data')->defaults('title', 'Data Siswa');
+    // Masuk ke tampilan update file
+        Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data')->defaults('title', 'Update Data');
+    // Masuk ke tampilan notifikasi
+        Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
+    // Masuk ke tampilan profile
+        Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile')->defaults('title', 'Profile');
+    // Masuk ke tampilan akun-akun operator
+        Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->defaults('title', 'Akun Operator');
+    // Masuk ke tampilan edit profile untuk akun operator sekolah
+        Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit')->defaults('title', 'Edit Akun');
+        // fungsi untuk update data
+            Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
+    // Fungsi untuk hapus akun
+        Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete');
 
 
+// Yang login adalah sekolah/operator sekolah
+    // Masuk ke dashboard sekolah
+        Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Dashboard');
+    // Masuk ke tampilan upload file
+        Route::get('sekolah/{nomor_s}/upload/', function () {
+            return view('uploadfile',[
+                "title" => "Upload File"
+            ]);
+        });
+        // Fungsi untuk post file
+            Route::post('/uploadFile', [KirimController::class, 'postFile'])->name('upload');
+        // Tampilan ketika berhasil post file
+            Route::get('/success', function(){
+                return view('uploadsucess');
+            })->name('success');
+    // Masuk ke tampilan data siswa
+        Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa');
 
-
-//role login
-Route::post('/uploadFile', [KirimController::class, 'postFile'])->name('upload');
-Route::get('sekolah/{nomor_s}/upload/', function () {
-    return view('uploadfile');
-});
-Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah');
-Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa']);
-Route::post('/remove', [KirimController::class, 'removeFile']);
-
-Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data');
-
-Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
 
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::get('dashboard/data/', [SiswaController::class, 'index'])->name('dashboard.data');
-Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
-Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+// route berhasil
+// Route::get('/success', function () {
+//     if (session()->has('upload_sukses')) {
+//         return view('uploadsucess');
+//     } else {
+//         return redirect()->back();
+//     }
+// })->name('success')->middleware('web');
+
+
+
+
 
 //role yayasan
 // Route::middleware('role:admin,editor')->group(function () {
@@ -69,11 +94,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //     Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->middleware('role:yayasan');
 //     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan')->middleware('role:yayasan');
 //     Route::post('/store', [UserController::class, 'create'])->name('store')->middleware('role:yayasan');
-
-
-
-
-
 
 // //role login
 // Route::post('/uploadFile', [KirimController::class, 'postFile'])->middleware('role:sekolah');;

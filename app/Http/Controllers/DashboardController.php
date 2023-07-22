@@ -9,31 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function showNotifikasi($title)
     {
-        // Implementasi kode untuk menampilkan dashboard
-        return view('dashboard');
-    }
-
-    public function getNotifikasi()
-    {
-        $notifikasi = Kirim::latest()->take(2)->get();
-        $user = Auth::user();
+        $notifikasi = Kirim::all();
         $users = User::pluck('namasekolah', 'id');
-       // dd($users, $notifikasi);
 
-        return view('dashboard', compact('notifikasi', 'users', 'user'));
+        return view('notifikasi', compact('notifikasi', 'users', 'title'));
     }
-
-    // Tambahan metode lainnya sesuai dengan kebutuhan
-
-    public function showNotifikasi()
-{
-    $notifikasi = Kirim::all();
-    $users = User::pluck('namasekolah', 'id');
-
-    return view('notifikasi', compact('notifikasi', 'users'));
 }
-
-}
-

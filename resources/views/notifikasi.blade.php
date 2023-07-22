@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layout-yayasan.second')
 
-@section('content')
-<div class="container">
-    <h2>Notifikasi Lainnya</h2>
+@section('isi-content')
+<div class="toper">
+    <h2>Message</h2>
     <table class="table table-bordered">
         <thead>
             <tr>

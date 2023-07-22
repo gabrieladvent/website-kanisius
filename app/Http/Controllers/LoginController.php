@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Kirim;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
@@ -16,16 +16,26 @@ class LoginController extends Controller
         return view('auth.login');
     }
 
-    public function dashboard() {
+    public function dashboard($title) {
         $user = Auth::user();
-        if($user->status == 'sekolah'){
+        $notifikasi = Kirim::latest()->take(2)->get();
+        $users = User::pluck('namasekolah', 'id');
+    
+        if ($user->status == 'sekolah') {
             $sekolahId = $user->id;
-            return redirect()->route('sekolah', ['nomor_s' => $sekolahId]);
-        } else{
-            return view('dashboard', compact('user'));
+            return $this->sekolah($sekolahId);
+        } else {
+            return view('dashboard', compact('notifikasi', 'users', 'user', 'title'));
         }
     }
 
+    public function sekolah($sekolahId)
+    {
+        $user = Auth::user();
+        $data = Siswa::where('nomor_s', $sekolahId)->get();
+        return view('homeSekolah', compact('user', 'data'));
+    }
+    
     public function logout(Request $request): RedirectResponse
 {
     Auth::logout();

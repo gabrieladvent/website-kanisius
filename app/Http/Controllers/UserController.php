@@ -11,19 +11,19 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request, $title) {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        return view('profile', compact('user', 'title'));
     }
 
-    public function akun_yayasan(){
+    public function akun_yayasan($title){
         $data = User::paginate(10);
-        return view('akunYayasan', compact('data'));
+        return view('akunYayasan', compact('data', 'title'));
     }
 
-    public function edit(Request $request, $id){
+    public function edit(Request $request, $id, $title){
         $data = User::find($id);
-        return view('editAkun', compact('data'));
+        return view('editAkun', compact('data', 'title'));
     }
     
     public function validator(array $data) {
