@@ -114,18 +114,30 @@
                         <div class="col">
                             <table class="table table-borderless mt-3 w-100  " style="background-color: #F5F4F4;">
                                 <tbody class=" mt-5">
-                                    <tr class="border-bottom border-primary border-1">
-                                        <th></th>
-                                        <td>SD Kanisius Sanken mengirimkan file</td>
-                                        <td><a href="" class="text-primary">Lihat</a></td>
-                                        <td><a href="" class="text-primary">Download dan Upload</a></td>
-                                    </tr>
-                                    <tr class="border-bottom border-primary border-1">
-                                        <th></th>
-                                        <td>SD Kanisius Condong Catur </td>
-                                        <td><a href="" class="text-primary">Lihat</a></td>
-                                        <td><a href="" class="text-primary">Download dan Upload</a></td>
-                                    </tr>
+                                    @if ($notifikasi -> isEmpty())
+                                        <tr class="">
+                                            <th></th>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td></td>
+                                            <td class="text-secondary">Tidak Ada Pesan</td>
+                                        </tr>
+                                    @endif
+                                    @foreach ($notifikasi as $notif)
+                                        
+                                        <tr class="border-bottom border-primary border-1">
+                                            <th></th>
+                                            <td>{{ $users[$notif]->id }} mengirimkan file</td>
+                                            <td>
+                                                <a href="" class="text-primary">Lihat</a>
+                                            </td>
+                                            <td>
+                                                <a href="" class="text-primary">Download dan Update</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 

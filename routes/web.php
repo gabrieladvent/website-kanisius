@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -30,7 +31,8 @@ Route::get('/', [LoginController::class, 'index'])->name('login');
     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan');
     Route::post('/store', [UserController::class, 'create'])->name('store');
 
-
+    Route::get('/dashboard', [DashboardController::class, 'getNotifikasi'])->name('dashboard');
+    Route::get('/notofikasi', [DashboardController::class, 'showNotofikasi'])->name('notofikasi');
 
 
 
