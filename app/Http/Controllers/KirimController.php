@@ -18,7 +18,6 @@ class KirimController extends Controller
     public function postFile(Request $request)
     {
         $id = 2039; //Cuma nilai sementara, nantinya akan diubah
-
         // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:20480',
@@ -62,17 +61,7 @@ class KirimController extends Controller
 
     public function removeFile()
     {
-        $id = 2039; 
-        // $data = Kirim::where('ID', $id)->latest('created_at')->first();
-        // if ($data) {
-        //     Storage::delete('public/simpanFile', basename($data->nama_file)) ;
-        //     $data->delete();
-        //     return redirect()->route('sekolah', ['nomor_s' => 2032])->with('Sukses', 'File berhasil dihapus.');
-        // } else {
-        //     return redirect()->route('/sekolah/2032/upload')->with('error', 'File tidak ditemukan.');
-        // }
-
-        // $id = $request->input('id');
+        $id = 2039;
         $post = Kirim::where('ID', $id)->latest('created_at')->findOrFail($id);
         dump($post->nama_file);
         
@@ -88,27 +77,3 @@ class KirimController extends Controller
         return redirect()->route('sekolah', ['nomor_s' => 2032])->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
-
-
-// public function delete($basename)
-// {
-//     $file = $this->search($basename);
-//     $type = $file->resource['mimeType'];
-//     try {
-//         switch ($type) {
-//             case 'image/jpg': // masih belum bisa, kemungkinan karena browser atau cors policy
-//             case 'image/jpeg':
-//             case 'image/png':
-//                 Storage::delete(self::$BASE_DIR_IMAGE . $basename);
-//                 break;
-//             case 'application/pdf':
-//                 Storage::delete(self::$BASE_DIR_DOCUMENT . $basename);
-//                 break;
-//             default:
-//                 break;
-//         }
-//         return new JsonResponse(200, 'Hapus File Berhasil', true);
-//     } catch (\Throwable $th) {
-//         return new JsonResponse(200, '', false);
-//     }
-// }

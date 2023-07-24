@@ -34,7 +34,7 @@
                         src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
             </li>
             <li>
-                <a href="/sekolah/2032/upload" class="icon"><img
+                <a href="{{ route('upload-view',['nomor_s' =>$user->id]) }}" class="icon"><img
                         src="{{ asset('/icon/paper-plane-solid.svg') }}" alt=""></a>
             </li>
             <li>
@@ -51,7 +51,8 @@
                 <a href="#" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
             </li>
             <li>
-                <a href="#" class="icon"><img src="{{ '/icon/gear-solid.svg' }}" alt=""></a>
+                <a href="{{ route('logout') }}" class="icon"><img src="{{ '/icon/sign-out-alt-solid.svg' }}"
+                        alt=""></a>
             </li>
         </ul>
     </nav>
