@@ -24,9 +24,9 @@
             <div class="row d-flex justify-content-center">
                 <div class="col-3 mt-3 mb-12 text-center">
                     <a href="akun-yayasan" class="btn bg-light w-50 ">AKun Yayasan</a>
->>>>>>> 837d8683578a4425a915382bb9540a4250900316
+
                 </div>
-            </div> --}}
+            </div> 
                 <div class="col-4  mt-5 py-4 px-5">
                     <div class="row mt-5 shadow-3-strong">
                         <div class="col mt-3 ms-4  ">
@@ -83,7 +83,7 @@
                     </div>
 
                 </div>
-                <<<<<<< HEAD </section>
+              </section>
                     <!--Main layout-->
                     <!-- MDB -->
                     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
@@ -257,9 +257,9 @@
     </body>
 
     </html>
-    =======
+    Z
     </div>
     </div>
     </div>
 @endsection
->>>>>>> 837d8683578a4425a915382bb9540a4250900316
+

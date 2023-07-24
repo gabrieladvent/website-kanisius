@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'yayasan' => [
+            'driver' => 'session',
+            'provider' => 'yayasan',
+        ],
     ],
 
     /*
@@ -63,8 +67,24 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+            
+            
         ],
+        
+        'yayasan' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Yayasan::class,
+            
+            
+        ],
+        
 
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    
+    
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

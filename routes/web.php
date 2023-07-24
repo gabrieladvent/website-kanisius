@@ -51,6 +51,10 @@ use App\Http\Controllers\YayasanController;
     // Fungsi untuk hapus akun
         Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete')->middleware('role:yayasan');
 
+    // Fungsi untuk update tema
+    Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+    
+
 
 // Yang login adalah sekolah/operator sekolah
     // Masuk ke dashboard sekolah

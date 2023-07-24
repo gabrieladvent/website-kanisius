@@ -13,8 +13,8 @@
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
     <!-- link css -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/styleHomeSekolah.css') }}" />
+    <link rel="stylesheet" href="{{ asset('../css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('../css/styleHomeSekolah.css') }}" />
     <!-- link scss -->
 
 </head>
