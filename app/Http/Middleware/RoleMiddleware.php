@@ -36,23 +36,19 @@ class RoleMiddleware
         // Jika pengguna tidak memiliki peran yang valid atau belum login,
         // Anda dapat mengarahkannya ke halaman tertentu atau memberikan respons sesuai kebutuhan.
        
-    
+        $user = Auth::user()->status;
 
-    
-        if (Auth::check()) {
-            $user = Auth::user();
-
-            // Periksa peran pengguna
-            if ($user->status == 'yayasan') {
-                // Jika peran adalah 'admin', arahkan ke halaman dashboard admin
-                return view('/dashboard');
-            } elseif ($user->status == 'sekolah') {
-                // Jika peran adalah 'editor', arahkan ke halaman dashboard editor
-                return view('/homesekolah');
-            }
+        if (!$user || $user !== $role) {
+            return redirect('dahsboard'); // Ganti '/' dengan rute halaman yang ingin ditampilkan ketika akses ditolak
         }
 
         return $next($request);
+    
+
+    
+        // 
+
+        // return $next($request);
     
 
     }
