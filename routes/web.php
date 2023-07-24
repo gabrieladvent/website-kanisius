@@ -80,6 +80,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // })->name('success')->middleware('web');
 
 
+
 Route::get('dashboard/profile-yayasan', [DashboardController::class, 'profile'])->name('profile-yayasan')->defaults('title', 'Profile');
 
 
