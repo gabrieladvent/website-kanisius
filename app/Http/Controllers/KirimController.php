@@ -10,14 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class KirimController extends Controller
 {
-    public function kirim_file ($title){
+    public function kirim_file()
+    {
         $user = Auth::user();
-        return view('uploadfile', compact('title', 'user'));
+        $title = 'Upload File';
+        return view('uploadfile', compact('user', 'title'));
     }
     // Fungsi untuk memproses file yang diupload
-    public function postFile(Request $request)
+    public function postFile(Request $request, $nomor_s)
     {
-        $id = 2039; //Cuma nilai sementara, nantinya akan diubah
         // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:20480',
@@ -27,7 +28,7 @@ class KirimController extends Controller
             $data = new Kirim();
             // Mengambil nama file yang diupload dengan nama aslinya
             $data->nama_file = $request->file('file')->getClientOriginalName();
-            $data->ID = $id;
+            $data->ID = $nomor_s;
             // Mengambil komentar jika 
             $komentar = $request->input('komentar');
             // Normalisasi: jika komentar kosong maka akan diisi dengan string kosong
@@ -64,7 +65,7 @@ class KirimController extends Controller
         $id = 2039;
         $post = Kirim::where('ID', $id)->latest('created_at')->findOrFail($id);
         dump($post->nama_file);
-        
+
         $filePath = 'simpanFile/' . basename($post->nama_file);
         dump($filePath);
 

@@ -16,4 +16,9 @@ class DashboardController extends Controller
 
         return view('notifikasi', compact('notifikasi', 'users', 'title'));
     }
+
+    public function profile(Request $request, $title) {
+        $user = Auth::user();
+        return view('profileYayasan', compact('user', 'title'));
+    }
 }

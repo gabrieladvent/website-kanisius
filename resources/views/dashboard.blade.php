@@ -34,12 +34,12 @@
                             @foreach ($notifikasi as $notif)
                                 <tr class="border-bottom border-primary border-1">
                                     <th></th>
-                                    <td>{{ $users[$notif]->id }} mengirimkan file</td>
+                                    <td>{{ $notif->user->namasekolah }} mengirimkan file</td>
                                     <td>
-                                        <a href="" class="text-primary">Lihat</a>
+                                        <a href="{{ route('kiriman-data') }}" class="text-primary">Lihat</a>
                                     </td>
                                     <td>
-                                        <a href="" class="text-primary">Download dan Update</a>
+                                        <a href="#proses-update" class="text-primary">Download dan Update</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,7 +67,7 @@
                         <p></p>
                     </div>
                     <div class="row"><a href="">
-                            <p class="fs-6">see More...</p>
+                            <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
                         </a></div>
                 </div>
             </div>

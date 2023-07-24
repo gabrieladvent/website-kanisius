@@ -29,7 +29,7 @@ use App\Http\Controllers\YayasanController;
 // Logout
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-    
+
 
 // Yang login adalah admin/yayasan
     //Masuk dashboard yayasan
@@ -50,15 +50,15 @@ use App\Http\Controllers\YayasanController;
             Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update')->middleware('role:yayasan');
     // Fungsi untuk hapus akun
         Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete')->middleware('role:yayasan');
-  
+
 
 // Yang login adalah sekolah/operator sekolah
     // Masuk ke dashboard sekolah
         Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'SekolahDashoard')->middleware('role:sekolah');
     // Masuk ke tampilan upload file
-        Route::get('/sekolah/upload/{nomor_s}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File')->middleware('role:sekolah');
+        Route::get('/sekolah/upload/{nomor_s}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
         // Fungsi untuk post file
-            Route::post('/uploadFile', [KirimController::class, 'postFile'])->name('upload');
+            Route::post('/uploadFile/{nomor_s}', [KirimController::class, 'postFile'])->name('upload');
         // Tampilan ketika berhasil post file
             Route::get('/success', function(){
                 return view('uploadsucess')->middleware('role:sekolah');
@@ -80,7 +80,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // })->name('success')->middleware('web');
 
 
-
+Route::get('dashboard/profile-yayasan', [DashboardController::class, 'profile'])->name('profile-yayasan')->defaults('title', 'Profile');
 
 
 //role yayasan

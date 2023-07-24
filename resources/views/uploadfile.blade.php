@@ -17,7 +17,7 @@
             <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
                 <div class="col">
                     <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
-                    <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('upload',['nomor_s' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <fieldset class="upload_dropZone text-center mb-3 p-4">
                             <legend class="visually-hidden">Image uploader</legend>

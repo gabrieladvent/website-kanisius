@@ -14,7 +14,7 @@
         </div>
         <div class="data-siswa">
             <div class="judul" style="margin-top: 4%;">
-                <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi SD Sangken</p>
+                <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi {{ $user->namasekolah }}</p>
                 <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran 2023/2024</p>
             </div>
             <div class=" table-data" style="margin-top: -1%; margin-left: 1%; margin-right:1%;">
