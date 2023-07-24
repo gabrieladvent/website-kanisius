@@ -53,9 +53,9 @@ protected $validRoles = ['yayasan', 'sekolah'];
         'password' => 'hashed',
     ];
 
-    public function hasRole($role1,$role2)
+    public function hasRole($role1)
 {
-    return $this->status === [$role1, $role2];
+    return $this->status === [$role1];
 }
 
   

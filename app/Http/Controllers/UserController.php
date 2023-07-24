@@ -17,6 +17,7 @@ class UserController extends Controller
     }
 
     public function akun_yayasan(){
+        //$this->middleware('role:yayasan');
         $data = User::paginate(10);
         return view('akunYayasan', compact('data'));
     }

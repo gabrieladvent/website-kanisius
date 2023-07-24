@@ -15,6 +15,7 @@ class LoginController extends Controller
     }
 
     public function dashboard() {
+        $this->middleware(['auth','status:yayasan']);
         return view('dashboard');
     }
 

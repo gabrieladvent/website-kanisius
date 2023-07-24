@@ -46,20 +46,16 @@ use App\Http\Controllers\SiswaController;
 
 
 //role yayasan
-Route::middleware('role:yayasan')->group(function () {
+Route::group(['Middleware' => ['auth','role:yayasan']], function () {
+    // Definisikan route untuk halaman admin di sini
+    Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan');//->middleware('role:yayasn');
+   
 });
-    Route::get('dashboard/data/', [SiswaController::class, 'index']);
-    Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
+Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit');
     Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan');
-    Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan');
+   
     Route::post('/store', [UserController::class, 'create'])->name('store');
-
-
-
-
-
-
-
+Route::get('dashboard/data/', [SiswaController::class, 'index']);
 
 
 //role login
