@@ -1,4 +1,4 @@
-@extends('layout-yayasan.second')
+{{-- @extends('layout-yayasan.second')
 @section('isi-content')
     <div class=" mt-5 py-4 px-5 container-fluid">
         <div class="row mt-5 d-flex justify-content-center">
@@ -28,4 +28,4 @@
         </div>
     </div>
     </div>
-@endsection
+@endsection --}}

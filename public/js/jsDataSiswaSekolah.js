@@ -264,3 +264,32 @@ $(document).ready(function () {
       }
 
   })();
+
+//   JS untuk edit profile operato sekolah
+document.addEventListener("DOMContentLoaded", function() {
+    // Pastikan checkbox bernilai false secara default (input dinonaktifkan)
+    document.getElementById('edit-checkbox').checked = false;
+    toggleInputs(); // Panggil fungsi toggleInputs untuk mengatur status input secara awal
+});
+
+function toggleInputs() {
+    var editCheckbox = document.getElementById('edit-checkbox');
+    var nomorIDInput = document.getElementById('name');
+    var passwordInput = document.getElementById('exampleInputPassword1');
+    var confirmPasswordInput = document.getElementById('password-confirm');
+    var updateBtn = document.getElementById('update-btn');
+
+    if (editCheckbox.checked) {
+        // Jika checkbox bernilai true, maka aktifkan input dan tombol
+        nomorIDInput.disabled = false;
+        passwordInput.disabled = false;
+        confirmPasswordInput.disabled = false;
+        updateBtn.disabled = false;
+    } else {
+        // Jika checkbox bernilai false, maka nonaktifkan input dan tombol
+        nomorIDInput.disabled = true;
+        passwordInput.disabled = true;
+        confirmPasswordInput.disabled = true;
+        updateBtn.disabled = true;
+    }
+}

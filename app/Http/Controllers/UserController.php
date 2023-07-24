@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -23,7 +22,9 @@ class UserController extends Controller
 
     public function edit(Request $request, $id, $title){
         $data = User::find($id);
-        return view('editAkun', compact('data', 'title'));
+        $user = Auth::user();
+        // dd($user->status);
+        return view('editAkun', compact('data', 'title', 'user'));
     }
     
     public function validator(array $data) {
@@ -79,5 +80,23 @@ class UserController extends Controller
             $data->delete();
         }
         return redirect()->route('akun-yayasan');
+    }
+
+    public function update_sekolah(Request $request, $id){
+        $validator = Validator::make($request->all(),[
+            'name'  => 'required',
+            'password' => 'nullable',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        
+            $data['name'] = $request->name;
+
+        if($request->password){
+            $data['password'] = Hash::make($request->password);
+        }
+
+        User::whereId($id)->update($data);
+        return redirect()->route('profile');
     }
 }

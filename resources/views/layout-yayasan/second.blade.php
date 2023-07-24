@@ -47,7 +47,7 @@
 
         <ul class="logout">
             <li>
-                <a href="{{ route('profile-yayasan') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}"
+                <a href="{{ route('profile') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}"
                         alt=""></a>
             </li>
             <li>

@@ -17,8 +17,21 @@ class DashboardController extends Controller
         return view('notifikasi', compact('notifikasi', 'users', 'title'));
     }
 
-    public function profile(Request $request, $title) {
+    public function profile(Request $request) {
         $user = Auth::user();
-        return view('profileYayasan', compact('user', 'title'));
+        if ($user->status == 'sekolah') {
+            $sekolahId = $user->id;
+            return $this->sekolah($sekolahId);
+        } else {
+            $title = "Profile Yayasan";
+            return view('profileYayasan', compact('user', 'title'));
+        }   
+    }
+
+    public function sekolah($sekolahId)
+    {
+        $user = Auth::user();
+        $title = "Profile Sekolah";
+        return view('profileSekolah', compact('user', 'title'));
     }
 }
