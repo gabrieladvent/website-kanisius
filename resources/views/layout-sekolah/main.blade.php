@@ -29,7 +29,7 @@
                         alt=""></a>
             </li>
             <li>
-                <a href="/sekolah/2032/upload" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}"
+                <a href="{{ route('upload-view',['nomor_s' =>$user->id]) }}" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}"
                         alt=""></a>
             </li>
             <li>

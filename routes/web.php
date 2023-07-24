@@ -54,11 +54,7 @@ use App\Http\Controllers\YayasanController;
     // Masuk ke dashboard sekolah
         Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Dashboard');
     // Masuk ke tampilan upload file
-        Route::get('sekolah/{nomor_s}/upload/', function () {
-            return view('uploadfile',[
-                "title" => "Upload File"
-            ]);
-        });
+        Route::get('/sekolah/upload/{nomor_s}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
         // Fungsi untuk post file
             Route::post('/uploadFile', [KirimController::class, 'postFile'])->name('upload');
         // Tampilan ketika berhasil post file
