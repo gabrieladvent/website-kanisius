@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Siswa;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Siswa;   
 use Illuminate\Support\Facades\Auth;
 
 class SiswaController extends Controller

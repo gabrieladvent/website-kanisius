@@ -20,7 +20,7 @@ class LoginController extends Controller
     public function dashboard($title)
     {
         $user = Auth::user();
-        $notifikasi = Kirim::latest()->take(2)->get();
+        $notifikasi = Kirim::with('user')->latest()->take(2)->get();
         $users = User::pluck('namasekolah', 'id');
 
         if ($user->status == 'sekolah') {

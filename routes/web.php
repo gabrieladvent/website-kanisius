@@ -54,9 +54,9 @@ use App\Http\Controllers\YayasanController;
     // Masuk ke dashboard sekolah
         Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Dashboard');
     // Masuk ke tampilan upload file
-        Route::get('/sekolah/upload/{nomor_s}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
+        Route::get('/sekolah/upload/{nomor_s}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('titel', 'Upload File');
         // Fungsi untuk post file
-            Route::post('/uploadFile', [KirimController::class, 'postFile'])->name('upload');
+            Route::post('/uploadFile/{nomor_s}', [KirimController::class, 'postFile'])->name('upload');
         // Tampilan ketika berhasil post file
             Route::get('/success', function(){
                 return view('uploadsucess');
@@ -78,7 +78,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // })->name('success')->middleware('web');
 
 
-
+Route::get('dashboard/profile-yayasan', [DashboardController::class, 'profile'])->name('profile-yayasan')->defaults('title', 'Profile');
 
 
 //role yayasan
