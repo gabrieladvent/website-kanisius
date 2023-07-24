@@ -12,15 +12,17 @@ use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('auth.login');
     }
 
-    public function dashboard($title) {
+    public function dashboard($title)
+    {
         $user = Auth::user();
         $notifikasi = Kirim::latest()->take(2)->get();
         $users = User::pluck('namasekolah', 'id');
-    
+
         if ($user->status == 'sekolah') {
             $sekolahId = $user->id;
             return $this->sekolah($sekolahId);
@@ -35,17 +37,15 @@ class LoginController extends Controller
         $data = Siswa::where('nomor_s', $sekolahId)->get();
         return view('homeSekolah', compact('user', 'data'));
     }
-    
-    public function logout(Request $request): RedirectResponse
-{
-    Auth::logout();
- 
-    $request->session()->invalidate();
- 
-    $request->session()->regenerateToken();
- 
-    return redirect('/login');
-}
-   
 
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
 }
