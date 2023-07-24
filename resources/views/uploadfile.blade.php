@@ -25,7 +25,7 @@
 </head>
 
 <body style="background-color: #fcf2fc;">
-    @include('sweetalert::alert')
+    {{-- @include('sweetalert::alert') --}}
     <!--Main Navigation-->
 
         <div class="row">
@@ -128,7 +128,7 @@
                 <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
                     <div class="col">
                         <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
-                        <form action="{{ url('uploadFile') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('upload') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <fieldset class="upload_dropZone text-center mb-3 p-4">
                                 <legend class="visually-hidden">Image uploader</legend>
@@ -177,7 +177,7 @@
                     </div>
                 </div>
             </form>
-            @if (session::has('Sukses'))
+            {{-- @if (session::has('Sukses'))
                 <script>
                     // swal("Berhasil!", "{{ session('success') }}", "success");
                     swal({
@@ -193,7 +193,7 @@
                 <script>
                     swal("Error!", "{{ session('error') }}", "error");
                 </script>
-            @endif
+            @endif --}}
             </div>
         </div>
     {{-- </section> --}}

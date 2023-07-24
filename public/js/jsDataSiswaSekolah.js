@@ -78,5 +78,29 @@ $(document).ready(function (){
   $('#example').DataTable();
 });
 
+// from submit file
+$(document).ready(function () {
+  $('#dtBasicExample').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
 
+// add code js
+  const dropZone = document.querySelector('.upload_dropZone');
+  const fileInput = document.querySelector('#upload_image_background');
 
+  dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+  });
+
+  dropZone.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      fileInput.files = files;
+  });

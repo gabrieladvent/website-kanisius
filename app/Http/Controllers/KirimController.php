@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kirim;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Storage;
 
 class KirimController extends Controller
 {
+    public function kirim_file ($title){
+        $user = Auth::user();
+        return view('uploadfile', compact('title', 'user'));
+    }
     // Fungsi untuk memproses file yang diupload
     public function postFile(Request $request)
     {
