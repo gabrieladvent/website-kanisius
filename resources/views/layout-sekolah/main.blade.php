@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}" alt=""></a>
+                <a href="{{ route('notifikasi') }}" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}" alt=""></a>
             </li>
         </ul>
 
