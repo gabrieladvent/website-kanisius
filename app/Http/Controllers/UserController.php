@@ -16,14 +16,12 @@ class UserController extends Controller
     public function index(Request $request, $title)
     {
         $user = Auth::user();
-      
         return view('profile', compact('user', 'title'));
     }
 
     public function akun_yayasan($title)
     {
         $data = User::paginate(10);
-       
         return view('akunYayasan', compact('data', 'title'));
     }
 
