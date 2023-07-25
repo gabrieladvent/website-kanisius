@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kirim;
+use App\Models\Yayasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -17,7 +19,8 @@ class DashboardController extends Controller
         return view('notifikasi', compact('notifikasi', 'users', 'title'));
     }
 
-    public function profile(Request $request) {
+    public function profile(Request $request)
+    {
         $user = Auth::user();
         if ($user->status == 'sekolah') {
             $sekolahId = $user->id;
@@ -25,7 +28,7 @@ class DashboardController extends Controller
         } else {
             $title = "Profile Yayasan";
             return view('profileYayasan', compact('user', 'title'));
-        }   
+        }
     }
 
     public function sekolah($sekolahId)
@@ -35,7 +38,8 @@ class DashboardController extends Controller
         return view('profileSekolah', compact('user', 'title'));
     }
 
-    public function sukses ($title){
+    public function sukses($title)
+    {
         $user = Auth::user();
         return view('uploadsucess', compact('title', 'user'));
     }

@@ -48,7 +48,7 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
     // Masuk ke tampilan notifikasi
         Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
     // Masuk ke tampilan akun-akun operator
-        Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->defaults('title', 'Akun Operator')->middleware('role:yayasan');
+            Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->defaults('title', 'Akun Operator')->middleware('role:yayasan');
     // Masuk ke tampilan edit profile untuk akun operator sekolah
         Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit')->defaults('title', 'Edit Akun')->middleware('role:yayasan');
         // fungsi untuk update data
@@ -65,6 +65,10 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
             'title' => 'Tambah Akun'
         ]);
     })->name('tambah-akun')->middleware('role:yayasan');
+
+    Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+    //Route::get('/viewupdate/{id}', [YayasanController::class, 'showUpdateForm'])->name('showUpdateForm');
+    //Route::get('/updatetema/{id}', [YayasanController::class, 'showUpdateForm']);
     
 
 
