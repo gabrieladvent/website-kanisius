@@ -105,11 +105,6 @@ $(document).ready(function () {
       fileInput.files = files;
   });
 
-
-
-<<<<<<< HEAD
-=======
-
   // Drag and drop - single or multiple image files
   // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
   // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
@@ -292,4 +287,3 @@ function toggleInputs() {
         updateBtn.disabled = true;
     }
 }
->>>>>>> 143e9533db34bde961644e44b39b02aa3c183c16
