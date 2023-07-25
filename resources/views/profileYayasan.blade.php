@@ -13,7 +13,6 @@
             </div>
         </div>
     </div>
-
     <div class="col  mt-5 py-4 px-5">
         <div class="row mt-5 d-flex justify-content-center shadow-3-strong">
             <div class="col-3 mt-5 mb-3  text-center">
@@ -25,8 +24,10 @@
         </div>
         <div class="row mt-3 py-5 shadow-3-strong">
             <p class="text-center fs-5">Upload Tema Disini</p>
-            <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
+           
+            <form action="{{ route('update.profile')}}" method="post" enctype="multipart/form-data">
                 @csrf
+               
                 <fieldset class="upload_dropZone text-center mb-2 p-2">
                     <legend class="visually-hidden">Image uploader</legend>
                     <svg class="upload_svg" width="60" height="60" aria-hidden="true">
@@ -34,11 +35,12 @@
                     </svg>
                     <p class="small my-2">Drag &amp; Drop tema gambar(s) dengan format png<br><i>or</i>
                     </p>
-                    <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" type="file" name="photo" multiple accept="image/png" />
+                    <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" value="" type="file" name="photo" multiple accept="image/png" />
                     <label class="btn btn-upload mb-3" for="upload_image_background">Choose
                         file(s)</label>
                     <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
                 </fieldset>
+
            
             <svg style="display:none">
                 <defs>
@@ -49,7 +51,7 @@
             </svg>
             <div class="row">
                 <div class="col mt-1    ">
-                    <button type="submit" value="upload" class=" float-end fs-6 btn bg-primary text-white">Submit </button>
+                    <button type="submit"  class=" float-end fs-6 btn bg-primary text-white">Submit </button>
                 </div>
             </div>
         </form>
