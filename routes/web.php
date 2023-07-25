@@ -44,7 +44,7 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
     // Masuk ke tampilan notifikasi
         Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan')->middleware('role:yayasan');
     // Masuk ke tampilan profile
-        Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile')->defaults('title', 'Profile');
+       // Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile')->defaults('title', 'Profile');
 
         Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data')->defaults('title', 'Update Data');
     // Masuk ke tampilan notifikasi
@@ -59,7 +59,7 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
         Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete')->middleware('role:yayasan');
 
     // Fungsi untuk update tema
-    Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+    Route::post('/updateaction/{id}', [YayasanController::class, 'update'])->name('update.profile');
     
 
 

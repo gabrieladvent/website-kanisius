@@ -25,7 +25,7 @@
         </div>
         <div class="row mt-3 py-5 shadow-3-strong">
             <p class="text-center fs-5">Upload Tema Disini</p>
-            <form action="{{route('update.profile')}}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <fieldset class="upload_dropZone text-center mb-2 p-2">
                     <legend class="visually-hidden">Image uploader</legend>
@@ -34,7 +34,7 @@
                     </svg>
                     <p class="small my-2">Drag &amp; Drop tema gambar(s) dengan format png<br><i>or</i>
                     </p>
-                    <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" type="file" name="nama_foto" multiple accept="image/png" />
+                    <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" type="file" name="photo" multiple accept="image/png" />
                     <label class="btn btn-upload mb-3" for="upload_image_background">Choose
                         file(s)</label>
                     <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
@@ -49,7 +49,7 @@
             </svg>
             <div class="row">
                 <div class="col mt-1    ">
-                    <button type="submit" class=" float-end fs-6 btn bg-primary text-white">Submit </button>
+                    <button type="submit" value="upload" class=" float-end fs-6 btn bg-primary text-white">Submit </button>
                 </div>
             </div>
         </form>
