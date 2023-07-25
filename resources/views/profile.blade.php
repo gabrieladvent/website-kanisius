@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 @extends('layout-yayasan.second')
+=======
+{{-- @extends('layout-yayasan.second')
+>>>>>>> 143e9533db34bde961644e44b39b02aa3c183c16
 @section('isi-content')
     <div class=" mt-5 py-4 px-5 container-fluid">
         <div class="row mt-5 d-flex justify-content-center">
@@ -261,5 +265,9 @@
     </div>
     </div>
     </div>
+<<<<<<< HEAD
 @endsection
 
+=======
+@endsection --}}
+>>>>>>> 143e9533db34bde961644e44b39b02aa3c183c16
