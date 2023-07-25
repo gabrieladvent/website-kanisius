@@ -30,8 +30,6 @@ use App\Http\Controllers\YayasanController;
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Masuk ke tampilan profile
 Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
-// Masuk ke tampilan notifikasi
-Route::get('/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
 
 // Yang login adalah admin/yayasan
     //Masuk dashboard yayasan
@@ -40,6 +38,8 @@ Route::get('/notifikasi', [DashboardController::class, 'showNotifikasi'])->name(
         Route::get('dashboard/data/', [SiswaController::class, 'index'])->name('dashboard.data')->defaults('title', 'Data Siswa');
     // Masuk ke tampilan update file
         Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data')->defaults('title', 'Update Data');
+    // Masuk ke tampilan notifikasi
+        Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
     // Masuk ke tampilan akun-akun operator
         Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->defaults('title', 'Akun Operator');
     // Masuk ke tampilan edit profile untuk akun operator sekolah
@@ -65,6 +65,7 @@ Route::get('/notifikasi', [DashboardController::class, 'showNotifikasi'])->name(
         Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa');
     // fungsi untuk update profile sekolah
     Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('update');
+
 
 
 Auth::routes();
