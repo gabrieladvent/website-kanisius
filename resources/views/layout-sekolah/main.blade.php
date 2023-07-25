@@ -25,15 +25,15 @@
     <nav class="main-menu">
         <ul>
             <li>
-                <a href="{{ route('sekolah', ['nomor_s' => $user->id]) }}" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}"
+                <a href="{{ route('sekolah', ['slug' => $user->slug]) }}" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}"
                         alt=""></a>
             </li>
             <li>
-                <a href="{{ route('upload-view',['nomor_s' =>$user->id]) }}" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}"
+                <a href="{{ route('upload-view',['slug' => $user->slug]) }}" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}"
                         alt=""></a>
             </li>
             <li>
-                <a href="{{ route('data-siswa', ['nomor_s' => $user->id]) }}" class="icon">
+                <a href="{{ route('data-siswa', ['slug' => $user->slug]) }}" class="icon">
                     <img src="{{ asset('/icon/user-group-solid.svg') }}" alt="">
                 </a>
             </li>

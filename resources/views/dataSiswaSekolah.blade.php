@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data_siswa as $item)
+                    @foreach ($data as $item)
                         <tr>
                             <td>{{ $item->NISN }}</td>
                             <td>{{ $item->Nama }}</td>

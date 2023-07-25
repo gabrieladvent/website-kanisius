@@ -25,7 +25,8 @@
         </div>
         <div class="row mt-3 py-5 shadow-3-strong">
             <p class="text-center fs-5">Upload Tema Disini</p>
-            <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
+            {{-- {{ route('update.profile') }} --}}
+            <form action="#" method="post" enctype="multipart/form-data">
                 @csrf
                 <fieldset class="upload_dropZone text-center mb-2 p-2">
                     <legend class="visually-hidden">Image uploader</legend>

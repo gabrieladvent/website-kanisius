@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('namasekolah');
             $table->enum('status', ['yayasan', 'sekolah']);
+            $table->string('slug')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

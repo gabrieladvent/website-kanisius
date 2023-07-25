@@ -34,4 +34,9 @@ class DashboardController extends Controller
         $title = "Profile Sekolah";
         return view('profileSekolah', compact('user', 'title'));
     }
+
+    public function sukses ($title){
+        $user = Auth::user();
+        return view('uploadsucess', compact('title', 'user'));
+    }
 }
