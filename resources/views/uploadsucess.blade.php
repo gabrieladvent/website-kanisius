@@ -1,17 +1,17 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
-    <div class="col px-5 mt-5">
-        <div class="row mt-4 ms-5">
-            <p class="text-dark mt-5 h2 fw-bold">Submission Status</p>
-        </div>
-        <div class="tengah px-5">
+    <div class="row ms-5 px-5 mt-5">
+        <p class="text-dark mt-5 h2 fw-bold">Submission Status</p>
+    </div>
+    <div class="tengah px-5">
+        <div class="sub-tengah px-5">
             <div class="item-bar" style="background-color: white;">
                 <div class="row mt-3">
                     <div class="col-2 mt-3 ms-2">
                         <p class="text-dark h5 mt-2">Submission Status</p>
                     </div>
                     <div class="col py-2 items" style="background-color: #CEEECE;">
-                        <p class="h4 fw-bold mt-1" style="letter-spacing: 3px">Submitted</p>
+                        <p class="h4 fw-bold mt-1" style="letter-spacing: 3px">{{ session('id_kirim') }}</p>
                     </div>
                 </div>
             </div>
@@ -45,27 +45,39 @@
                         <p class="text-dark h5 mt-2">Comments Submissions</p>
                     </div>
                     <div class="col py-2">
-                        @if (session('komentar') !== '')
-                            <p class="h5 mt-1"><i class="fa-xl me-2"></i>{{ session('komentar') }}</p>
-                        @else
-                            <p class="h5 mt-1"><i class="fa-xl me-2"></i>Tidak Ada komentar</p>
-                        @endif
+                        <p class="h5 mt-1"><i class="fa-xl me-2"></i>{{ session('komentar') }}</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="mb-5 ms-5">
-            <div class="row mt-5 mb-5 ms-5 d-flex justify-content-center">
-                <div class="col-2 mb-5">
-                    <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
-                </div>
-                <div class="col-3">
-                    <form action="{{ url('remove') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button>
-                    </form>
-                </div>
+    <div class="mb-5 ms-5">
+        <div class="row mt-5 mb-5 ms-5 d-flex justify-content-center">
+            <div class="col-2 mb-5">
+                <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
+            </div>
+            <div class="col-3">
+                <a href="{{ route('dashboard.delete', ['id' => $item->id]) }}" class="btn btn-danger"
+                    onclick="event.preventDefault(); if (confirm('Anda yakin ingin menghapus data ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();">
+                    <i class="fas fa-trash-alt"></i> Hapus
+                </a>
+
+                <form id="delete-form-{{ $item->id }}"
+                    action="{{ route('dashboard.delete', ['id' => $item->id]) }}" method="POST"
+                    style="display: none;">
+                    @csrf
+                    @method('DELETE')
+                </form>
+
+                <form action="{{ route('hapus-file') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <!-- Input hidden untuk menyimpan ID file yang akan dihapus -->
+                    <input type="hidden" name="id_kirim" value="{{ session('id_kirim') }}">
+                    {{-- <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button> --}}
+                    
+                </form>
             </div>
         </div>
     </div>

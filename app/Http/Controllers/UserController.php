@@ -29,7 +29,6 @@ class UserController extends Controller
     {
         $data = User::find($id);
         $user = Auth::user();
-        // dd($user->status);
         return view('editAkun', compact('data', 'title', 'user'));
     }
 
@@ -102,7 +101,7 @@ class UserController extends Controller
         return redirect()->route('akun-yayasan');
     }
 
-    public function delete(Request $request, $id)
+    public function delete($id)
     {
         $data = User::find($id);
 

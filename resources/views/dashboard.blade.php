@@ -38,9 +38,8 @@
                                     <td>
                                         <a href="{{ route('kiriman-data') }}" class="text-primary">Lihat</a>
                                     </td>
-                                    <td>
-                                        <a href="#proses-update" class="text-primary">Download dan Update</a>
-                                    </td>
+                                    {{-- {{ route('download', ['id' => $notif->id_kirim]) }} --}}
+                                    <td><a href="" class="text-primary">Download dan Update</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

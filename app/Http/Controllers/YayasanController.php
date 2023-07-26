@@ -46,7 +46,7 @@ class YayasanController extends Controller
             DB::beginTransaction();
             try {
                // $photo->name = $file->getClientOriginalName();
-                 $photo->nama_foto = 'photo/' . $filename;
+                $photo->nama_foto = 'photo/' . $filename;
                 $photo->save();
                 DB::commit();
     
