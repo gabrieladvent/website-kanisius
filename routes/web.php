@@ -21,6 +21,10 @@ use App\Http\Controllers\YayasanController;
 |
 */
 
+Route::get('/regis', function(){
+    return view('auth.regis');
+});
+
 // Route untuk login
     Route::get('/', [LoginController::class, 'index'])->name('login');
    // Route::get('/loginaction', [LoginController::class, 'actionlogin'])->name('actionlogin');
