@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Siswa;
+use App\Models\Yayasan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        $poto = DB::table('yayasan')->first();
+        return view('auth.login' ,compact('poto'));
     }
 
     public function dashboard($title)
@@ -46,6 +49,8 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
+
+
 }
