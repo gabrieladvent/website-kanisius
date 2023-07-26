@@ -225,5 +225,9 @@ padding:0;
 
 .text-p{
   font-size: 2vw;
-  margin-top: -4%;
+  margin-top: -2%;
+}
+.item-bar{
+  margin-top: 2.3%;
+  margin-right: -5%;
 }

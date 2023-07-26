@@ -53,7 +53,7 @@ class KirimController extends Controller
 
             $name = $data->nama_file;
             // Jika berhasil maka akan beralih ke laman upload sukses dengan membawa nama file dan parameter untuk swal
-            return redirect()->route('success')->with('filename', $name)->with('Sukses', 'File berhasil diunggah.');
+            return redirect()->route('sukses')->with('filename', $name)->with('Sukses', 'File berhasil diunggah.');
         } catch (\Exception $e) {
             // Jika gagal maka laman tidak akan berubah
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
@@ -77,4 +77,5 @@ class KirimController extends Controller
 
         return redirect()->route('sekolah', ['nomor_s' => 2032])->with(['success' => 'Data Berhasil Dihapus!']);
     }
+    
 }

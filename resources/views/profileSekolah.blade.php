@@ -5,16 +5,16 @@
             <div class="row mt-5 shadow-3-strong ms-5 bg-white">
                 <div class="col-8 mt-3">
                     <div>
-                        <label class="ms-2">ID User</label>
-                        <p class="text-p fw-bold ms-2"> {{ $user->id }} </p>
-                    </div>
-                    <div class="border border-secondary-subtle">
-                        <label class="ms-2">Nama User</label>
-                        <p class="text-p fw-bold ms-2"> {{ $user->name }} </p>
+                        <label class="ms-2 fw-bold" style="font-size: 1.7vw">ID User</label>
+                        <p class="text-p ms-2"> {{ $user->id }} </p>
                     </div>
                     <div class="">
-                        <label class="ms-2">Nama Sekolah</label>
-                        <p class="text-p fw-bold ms-2">{{ $user->namasekolah }}</p>
+                        <label class="ms-2 fw-bold" style="font-size: 1.7vw">Nama User</label>
+                        <p class="text-p ms-2 border border-secondary-subtle"> {{ $user->name }} </p>
+                    </div>
+                    <div class="">
+                        <label class="ms-2 fw-bold" style="font-size: 1.7vw">Nama Sekolah</label>
+                        <p class="text-p ms-2">{{ $user->namasekolah }}</p>
                     </div>
                 </div>
                 <div class="col mt-4">

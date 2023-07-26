@@ -24,18 +24,17 @@
         </div>
         <div class="row mt-3 py-5 shadow-3-strong">
             <p class="text-center fs-5">Upload Tema Disini</p>
-           
             <form action="{{ route('update.profile')}}" method="post" enctype="multipart/form-data">
                 @csrf
-               
-                <fieldset class="upload_dropZone text-center mb-2 p-2" name="dragdrop">
+
+                <fieldset class="upload_dropZone text-center mb-2 p-2">
                     <legend class="visually-hidden">Image uploader</legend>
                     <svg class="upload_svg" width="60" height="60" aria-hidden="true">
                         <use href="#icon-imageUpload"></use>
                     </svg>
                     <p class="small my-2">Drag &amp; Drop tema gambar(s) dengan format png<br><i>or</i>
                     </p>
-                    <input id="upload_image_background" data-post-name="image_background" data-post-url="{{route('update.profile')}}" class="position-absolute invisible"  type="file" name="photo" multiple accept="image/png" />   
+                    <input id="upload_image_background" data-post-name="image_background" data-post-url="{{route('update.profile')}}" class="position-absolute invisible"  type="file" name="photo" multiple accept="image/png" />
                     <label class="btn btn-upload mb-3" for="upload_image_background">Choose
                         file(s)</label>
                     <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
@@ -46,7 +45,7 @@
                     </div>
                 </div>
             </form>
-           
+
             <svg style="display:none">
                 <defs>
                     <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
@@ -54,7 +53,7 @@
                     </symbol>
                 </defs>
             </svg>
-            
+
         </div>
     </div>
 </div>

@@ -21,6 +21,10 @@ use App\Http\Controllers\YayasanController;
 |
 */
 
+Route::get('/regis', function(){
+    return view('auth.regis');
+});
+
 // Route untuk login
     Route::get('/', [LoginController::class, 'index'])->name('login');
    // Route::get('/loginaction', [LoginController::class, 'actionlogin'])->name('actionlogin');
@@ -30,8 +34,6 @@ use App\Http\Controllers\YayasanController;
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Masuk ke tampilan profile
 Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
-
-
 
 // Yang login adalah admin/yayasan
     //Masuk dashboard yayasan
@@ -59,6 +61,15 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
         Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete')->middleware('role:yayasan');
 
     // Fungsi untuk update tema
+    Route::post('/updateaction/{id}', [YayasanController::class, 'update'])->name('update.profile');
+
+    // Route tambah akun
+    Route::get('/dashboard/tambah-akun', function(){
+        return view('auth.register',[
+            'title' => 'Tambah Akun'
+        ]);
+    })->name('tambah-akun')->middleware('role:yayasan');
+
     Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
     //Route::get('/viewupdate/{id}', [YayasanController::class, 'showUpdateForm'])->name('showUpdateForm');
     //Route::get('/updatetema/{id}', [YayasanController::class, 'showUpdateForm']);
@@ -67,21 +78,23 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
 
 // Yang login adalah sekolah/operator sekolah
     // Masuk ke dashboard sekolah
-        Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'SekolahDashoard')->middleware('role:sekolah');
+        Route::get('/sekolah/{slug}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'SekolahDashoard')->middleware('role:sekolah');
     // Masuk ke tampilan upload file
-        Route::get('/sekolah/upload/{nomor_s}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
+        Route::get('/sekolah/upload/{slug}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
         // Fungsi untuk post file
-            Route::post('/uploadFile/{nomor_s}', [KirimController::class, 'postFile'])->name('upload');
+            Route::post('/uploadFile/{slug}', [KirimController::class, 'postFile'])->name('upload');
         // Tampilan ketika berhasil post file
-            Route::get('/success', function(){
-                return view('uploadsucess')->middleware('role:sekolah');
-            })->name('success');
+            // Route::get('/success', function(){
+            //     return view('uploadsucess',[
+            //         'title' => 'Sukses'
+            //     ]);
+            // })->name('success')->middleware('role:sekolah');
+            Route::get('/success', [DashboardController::class, 'sukses'])->name('sukses')->defaults('title', 'Sukses')->middleware('role:sekolah');
+
     // Masuk ke tampilan data siswa
+        Route::get('/sekolah/data/{slug}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa')->middleware('role:sekolah');
+        // Route::get('/sekolah/data/{slug}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa');
 
-        Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa')->middleware('role:sekolah');
-
-
-        Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa');
     // fungsi untuk update profile sekolah
     Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('update');
 
@@ -97,35 +110,3 @@ Auth::routes();
 //         return redirect()->back();
 //     }
 // })->name('success')->middleware('web');
-
-
-
-
-
-
-//role yayasan
-// Route::middleware('role:admin,editor')->group(function () {
-//     Route::get('/profile/{id}', 'ProfileController@show')->name('profile');
-// });
-//     Route::get('dashboard/data/', [SiswaController::class, 'index'])->middleware('role:yayasan');
-//     Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit')->middleware('role:yayasan');
-//     Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->middleware('role:yayasan');
-//     Route::get('dashboard', [LoginController::class, 'dashboard'])->name('akun-yayasan')->middleware('role:yayasan');
-//     Route::post('/store', [UserController::class, 'create'])->name('store')->middleware('role:yayasan');
-
-// //role login
-// Route::post('/uploadFile', [KirimController::class, 'postFile'])->middleware('role:sekolah');;
-// Route::get('sekolah/{nomor_s}/upload/', function () {
-//     return view('uploadfile');
-// })->middleware('role:sekolah');
-// Route::get('/sekolah/{nomor_s}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->middleware('role:sekolah');
-// Route::get('/sekolah/data/{nomor_s}', [SiswaController::class, 'detailSiswa'])->middleware('role:sekolah');
-// Route::post('/remove', [KirimController::class, 'removeFile'])->middleware('role:sekolah');
-
-
-// Auth::routes();
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// Route::get('dashboard/profile', [UserController::class, 'index'])->name('profile');
-// Route::get('/login', [LoginController::class, 'index'])->name('login');
-
-

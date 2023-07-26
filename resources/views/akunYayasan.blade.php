@@ -8,8 +8,10 @@
 
     </div>
 
-
-    <div class="data-siswa py-3 ">
+    <div>
+        <a href="{{ route('tambah-akun') }}" class="btn btn-primary float-end me-5 mt-4 mb-3"><i class="fas fa-pen"></i>Tambah Akun</a>
+    </div>  
+    <div class="data-siswa py-3 ">        
         <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
             <table id="example" class="table table-bordered" style="width:100%">
                 <thead>
@@ -30,8 +32,7 @@
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->namasekolah }}</td>
                                 <td>
-                                    <a href="{{ route('dashboard.edit', ['id' => $item->id]) }}" class="btn btn-primary"><i
-                                            class="fas fa-pen"></i>Edit</a>
+                                    <a href="{{ route('dashboard.edit', ['id' => $item->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
 
                                     <a href="{{ route('dashboard.delete', ['id' => $item->id]) }}" class="btn btn-danger"
                                         onclick="event.preventDefault(); if (confirm('Anda yakin ingin menghapus data ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();">
