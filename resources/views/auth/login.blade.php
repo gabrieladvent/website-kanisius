@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="col-lg-7">
-          <img src="{{ asset('/image/tema.png')}}" alt="Logo" width="800" class="d-inline-block mx-auto mt-4" />
+          <img src="{{ asset('storage/'.$poto ->nama_foto)}}" alt="" style="width:500px;" class="me-3 d-flex d-inline-block mx-auto mt-4" />
         </div>
       </div>
     </div>

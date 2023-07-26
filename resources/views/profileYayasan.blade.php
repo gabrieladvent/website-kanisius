@@ -28,19 +28,24 @@
             <form action="{{ route('update.profile')}}" method="post" enctype="multipart/form-data">
                 @csrf
                
-                <fieldset class="upload_dropZone text-center mb-2 p-2">
+                <fieldset class="upload_dropZone text-center mb-2 p-2" name="dragdrop">
                     <legend class="visually-hidden">Image uploader</legend>
                     <svg class="upload_svg" width="60" height="60" aria-hidden="true">
                         <use href="#icon-imageUpload"></use>
                     </svg>
                     <p class="small my-2">Drag &amp; Drop tema gambar(s) dengan format png<br><i>or</i>
                     </p>
-                    <input id="upload_image_background" data-post-name="image_background" data-post-url="https://someplace.com/image/uploads/backgrounds/" class="position-absolute invisible" value="" type="file" name="photo" multiple accept="image/png" />
+                    <input id="upload_image_background" data-post-name="image_background" data-post-url="{{route('update.profile')}}" class="position-absolute invisible"  type="file" name="photo" multiple accept="image/png" />   
                     <label class="btn btn-upload mb-3" for="upload_image_background">Choose
                         file(s)</label>
                     <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
                 </fieldset>
-
+                <div class="row">
+                    <div class="col mt-1    ">
+                        <button type="submit"  class=" float-end fs-6 btn bg-primary text-white">Submit</button>
+                    </div>
+                </div>
+            </form>
            
             <svg style="display:none">
                 <defs>
@@ -49,14 +54,8 @@
                     </symbol>
                 </defs>
             </svg>
-            <div class="row">
-                <div class="col mt-1    ">
-                    <button type="submit"  class=" float-end fs-6 btn bg-primary text-white">Submit </button>
-                </div>
-            </div>
-        </form>
+            
         </div>
     </div>
-    
 </div>
 @endsection
