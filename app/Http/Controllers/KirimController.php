@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 
 class KirimController extends Controller
 {
@@ -67,57 +68,68 @@ class KirimController extends Controller
     // }
 
     public function postFile(Request $request, $nomor_s)
-{
-    // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv|max:20480',
-    ]);
-
-    try {
-        // Membaca file Excel yang diupload oleh user
-        $uploadedFile = $request->file('file');
-        $filename = $uploadedFile->getClientOriginalName();
-        $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
-
-        // Membuat instance Spreadsheet
-        $spreadsheet = new Spreadsheet();
-
-        // Membaca file Excel yang telah diunggah
-        $reader = IOFactory::createReaderForFile($filePath);
-        $spreadsheet = $reader->load($filePath);
-
-        // Mendapatkan sheet pertama dari file Excel
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Menambahkan kolom baru dengan nama "nomor_s" di baris pertama (header) dan mengisi dengan ID pengirim
-        $sheet->setCellValue('BO1', 'nomor_s');
-        $sheet->setCellValue('Z2', $nomor_s); // Mengisi nomor_s pada baris kedua, sesuai dengan ID pengirim
-
-        // Menyimpan file Excel yang sudah dimodifikasi
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($filePath);
-
-        // ... Simpan data ke database ...
-        $data = new Kirim();
-        $data->nama_file = $filename;
-        $data->ID = $nomor_s;
-        $komentar = $request->input('komentar');
-        $data->Komentar = !empty($komentar) ? $komentar : '';
-        $data->save();
-
-        // Simpan id_kirim ke dalam session
-        Session::put('id_kirim', $data->id_kirim);
-
-        return redirect()->route('sukses')->with([
-            'filename' => $filename,
-            'komentar' => $komentar,
-            'id_kirim' => $data->id_kirim,
-        ])->with('Sukses', 'File berhasil diunggah.');
-    } catch (\Exception $e) {
-        // Jika gagal maka laman tidak akan berubah
-        return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
+    {
+        // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv|max:20480',
+        ]);
+    
+        try {
+            // Membaca file Excel yang diupload oleh user
+            $uploadedFile = $request->file('file');
+            $filename = $uploadedFile->getClientOriginalName();
+            $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
+    
+            // Membuat instance Spreadsheet
+            $spreadsheet = IOFactory::load($filePath);
+    
+            // Mendapatkan sheet pertama dari file Excel
+            $sheet = $spreadsheet->getActiveSheet();
+    
+            // Mencari kolom terakhir yang terisi pada baris pertama (header)
+            $lastColumn = $sheet->getHighestColumn();
+    
+            // Mengubah huruf kolom terakhir menjadi nomor indeks kolom
+            $lastColumnIndex = Coordinate::columnIndexFromString($lastColumn);
+    
+            // Menyimpan data nomor_s di kolom terakhir yang terisi pada baris pertama (header)
+            $newColumnIndex = $lastColumnIndex + 1;
+            $newColumn = Coordinate::stringFromColumnIndex($newColumnIndex);
+            $sheet->setCellValue($newColumn . '1', 'nomor_s');
+    
+            // Menyimpan data nomor_s pada kolom terakhir yang terisi dari baris kedua hingga sesuai dengan banyaknya data pada kolom A
+            $lastRow = $sheet->getHighestRow();
+            for ($i = 2; $i <= $lastRow; $i++) {
+                // Isi data nomor_s sesuai dengan data pada kolom A di baris ke-$i
+                $nomor_s = $sheet->getCell('A' . $i)->getValue(); // Ganti 'A' sesuai dengan kolom yang sesuai di file Anda
+                $sheet->setCellValue($newColumn . $i, $nomor_s);
+            }
+    
+            // Menyimpan file Excel yang sudah dimodifikasi
+            $writer = new Xlsx($spreadsheet);
+            $writer->save($filePath);
+    
+            // Simpan data ke database
+            $data = new Kirim();
+            $data->nama_file = $filename;
+            $data->ID = $nomor_s;
+            $komentar = $request->input('komentar');
+            $data->Komentar = !empty($komentar) ? $komentar : '';
+            $data->save();
+    
+            // Simpan id_kirim ke dalam session
+            Session::put('id_kirim', $data->id_kirim);
+    
+            return redirect()->route('sukses')->with([
+                'filename' => $filename,
+                'komentar' => $komentar,
+                'id_kirim' => $data->id_kirim,
+            ])->with('Sukses', 'File berhasil diunggah.');
+        } catch (\Exception $e) {
+            // Jika gagal maka laman tidak akan berubah
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
+        }
     }
-}
 
     public function deleteFile(Request $request)
     {
