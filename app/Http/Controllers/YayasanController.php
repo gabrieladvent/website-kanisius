@@ -95,35 +95,35 @@ class YayasanController extends Controller
     //     return redirect()->back()->with('error', 'Gagal mengupdate foto.');
     // }
 
+
  
-//     public function upload(Request $request)
-//     {
-      
-//         $request->validate([
-//             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-//         ]);
-    
-//         if ($request->hasFile('photo')) {
-//             $file = $request->file('photo');
-//             $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
-//             Storage::putFileAs('photos', $file, $filename);
-    
-//             // Simpan informasi foto ke database
-//             DB::beginTransaction();
-//             try {
-//                 $photo = new Yayasan();
-//                 //$photo->name = $file->getClientOriginalName();
-//                 $photo->nama_foto = 'photos/' . $filename;
-//                 $photo->save();
-//                 DB::commit();
-    
-//             return redirect()->back()->with('success', 'Foto berhasil diupload!');
-//             } catch (\Exception $e) {
-//                 DB::rollback();
-//                 return redirect()->back()->with('error', 'Gagal mengupload foto.');
-//             }
-//         }
-    
-//         return redirect()->back()->with('error', 'Gagal mengupload foto.');
-//     }
+    public function upload(Request $request)
+{
+    $request->validate([
+        'photo' => 'required|image|mimes:png|max:2048',
+    ]);
+
+    if ($request->hasFile('photo')) {
+        $file = $request->file('photo');
+        $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
+        $file->storeAs('/public/img', $filename); // Simpan gambar ke 'public/storage/img'
+
+        // Buat entri baru di database untuk menyimpan informasi foto
+        DB::beginTransaction();
+        try {
+            $photo = new Yayasan();
+            $photo->nama_foto = 'img/' . $filename;
+            $photo->save();
+            DB::commit();
+
+            return back()->with('success', 'Foto berhasil diupload!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', 'Gagal mengupload foto.');
+        }
+    }
+
+    return redirect()->back()->with('error', 'Gagal mengupload foto.');
+}
+
  }

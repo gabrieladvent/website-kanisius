@@ -17,6 +17,8 @@ class LoginController extends Controller
     public function index()
     {
         $poto = DB::table('yayasan')->first();
+        // $poto = Yayasan::first();
+        // dd($poto);
         return view('auth.login' ,compact('poto'));
     }
 
