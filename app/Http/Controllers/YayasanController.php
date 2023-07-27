@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\File;
 
 class YayasanController extends Controller
 {
-    public function kiriman($title) {
+    public function kiriman($title) {   
         return view('tablesekolah', compact('title'));
     }
 

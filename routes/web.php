@@ -100,7 +100,8 @@ Route::post('/uploadFile/{slug}', [KirimController::class, 'postFile'])->name('u
 Route::get('/success', [DashboardController::class, 'sukses'])->name('sukses')->defaults('title', 'Sukses')->middleware('role:sekolah');
 
 // Hapus kiriman
-Route::delete('/sekolah/hapus/', [KirimController::class, 'deleteFile'])->name('hapus-file');
+Route::delete('/sekolah/hapus/{id}', [KirimController::class, 'deleteFile'])->name('hapus-file');
+Route::get('/sekolah/{id}', [DataController::class, 'showdelete'])->name('data.delete');
 
 // Edit kiriman
 

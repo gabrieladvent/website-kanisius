@@ -20,137 +20,75 @@ class KirimController extends Controller
         return view('uploadfile', compact('user', 'title'));
     }
     // Fungsi untuk memproses file yang diupload
-    // public function postFile(Request $request, $nomor_s)
-    // {
-    //     // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
-    //     $request->validate([
-    //         'file' => 'required|mimes:xlsx,xls,csv|max:20480',
-    //     ]);
-
-    //     try {
-    //         $data = new Kirim();
-    //         $data->nama_file = $request->file('file')->getClientOriginalName();
-    //         $data->ID = $nomor_s;
-    //         $komentar = $request->input('komentar');
-    //         $data->Komentar = !empty($komentar) ? $komentar : '';
-
-    //         // Simpan komentar ke dalam session supaya bisa diakses dari laman upload sukses
-    //         Session::put('komentar', $data->Komentar);
-
-    //         // Simpan sebuah session untuk bisa akses ke upload sukses
-    //         Session::put('upload_sukses', true);
-
-    //         // Simpan data ke database
-    //         $data->save();
-
-    //         // Simpan file ke server dengan mengambil nama dari yang sebelumnya, dan meminta original ekstensionnya
-    //         $filename = $data->nama_file . '.' . $request->file('file')->getClientOriginalExtension();
-    //         $uploadedFile = $request->file('file');
-    //         // Memindahkan file ke server
-    //         $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
-
-    //         $name = $data->nama_file;
-
-    //         // Simpan id_kirim ke dalam session
-    //         Session::put('id_kirim', $data->id_kirim);
-    //         // dd($data->id);
-
-    //         return redirect()->route('sukses')->with([
-    //             'filename' => $name,
-    //             'komentar' => $komentar,
-    //             'id_kirim' => $data->id,
-    //         ])->with('Sukses', 'File berhasil diunggah.');
-    //     } catch (\Exception $e) {
-    //         // Jika gagal maka laman tidak akan berubah
-    //         return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
-    //     }
-    // }
-
     public function postFile(Request $request, $nomor_s)
-{
-    // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
-    $request->validate([
-        'file' => 'required|mimes:xlsx,xls,csv|max:20480',
-    ]);
-
-    try {
-        // Membaca file Excel yang diupload oleh user
-        $uploadedFile = $request->file('file');
-        $filename = $uploadedFile->getClientOriginalName();
-        $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
-
-        // Membuat instance Spreadsheet
-        $spreadsheet = new Spreadsheet();
-
-        // Membaca file Excel yang telah diunggah
-        $reader = IOFactory::createReaderForFile($filePath);
-        $spreadsheet = $reader->load($filePath);
-
-        // Mendapatkan sheet pertama dari file Excel
-        $sheet = $spreadsheet->getActiveSheet();
-
-        // Menambahkan kolom baru dengan nama "nomor_s" di baris pertama (header) dan mengisi dengan ID pengirim
-        $sheet->setCellValue('BO1', 'nomor_s');
-        $sheet->setCellValue('Z2', $nomor_s); // Mengisi nomor_s pada baris kedua, sesuai dengan ID pengirim
-
-        // Menyimpan file Excel yang sudah dimodifikasi
-        $writer = new Xlsx($spreadsheet);
-        $writer->save($filePath);
-
-        // ... Simpan data ke database ...
-        $data = new Kirim();
-        $data->nama_file = $filename;
-        $data->ID = $nomor_s;
-        $komentar = $request->input('komentar');
-        $data->Komentar = !empty($komentar) ? $komentar : '';
-        $data->save();
-
-        // Simpan id_kirim ke dalam session
-        Session::put('id_kirim', $data->id_kirim);
-
-        return redirect()->route('sukses')->with([
-            'filename' => $filename,
-            'komentar' => $komentar,
-            'id_kirim' => $data->id_kirim,
-        ])->with('Sukses', 'File berhasil diunggah.');
-    } catch (\Exception $e) {
-        // Jika gagal maka laman tidak akan berubah
-        return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
-    }
-}
-
-    public function deleteFile(Request $request)
     {
+        // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
         $request->validate([
-            'id_kirim' => 'required|integer', // Pastikan id_kirim ada dan merupakan integer.
+            'file' => 'required|mimes:xlsx,xls,csv|max:20480',
         ]);
 
-        // Ambil nilai id_kirim dari data yang dikirimkan oleh form.
-        $idKirim = $request->input('id_kirim');
+        try {
+            $data = new Kirim();
+            $data->nama_file = $request->file('file')->getClientOriginalName();
+            $data->ID = $nomor_s;
+            $komentar = $request->input('komentar');
+            $data->Komentar = !empty($komentar) ? $komentar : '';
 
-        // dd($idKirim);
+            // dd($data);
+            // Simpan komentar ke dalam session supaya bisa diakses dari laman upload sukses
+            Session::put('komentar', $data->Komentar);
 
-        // Cari data Kirim berdasarkan id_kirim di database.
-        $kirim = Kirim::where('id_kirim', $idKirim)->first();
-        // dd($kirim->nama_file);
+            // Simpan sebuah session untuk bisa akses ke upload sukses
+            Session::put('upload_sukses', true);
 
-        // Cek apakah data Kirim ditemukan di database.
-        if ($kirim) {
-            $kirim->delete();
+            // Simpan data ke database
+            $data->save();
 
-            // Hapus file dari server berdasarkan nama file yang ada di database.
-            $filePath = public_path('storage/simpanFile/' . $kirim->nama_file);
-            // dd($filePath);
+            // Simpan file ke server dengan mengambil nama dari yang sebelumnya, dan meminta original ekstensionnya
+            $filename = $data->nama_file . '.' . $request->file('file')->getClientOriginalExtension();
+            $uploadedFile = $request->file('file');
+            // Memindahkan file ke server
+            $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
 
-            if (Storage::exists($filePath)) {
-                dd('masuk');
-            }
-            Storage::delete($filePath);
-            return redirect()->route('dashboard')->with('success', 'File berhasil dihapus.');
-        } else {
-            // Jika data Kirim tidak ditemukan, redirect dengan pesan error.
-            return redirect()->back()->with('error', 'Data Kirim tidak ditemukan.');
+            $name = $data->nama_file;
+
+            // Simpan id_kirim ke dalam session
+            Session::put('id_kirim', $data->id_kirim);
+            // dd($data->id);
+
+            return redirect()->route('sukses')->with([
+                'filename' => $name,
+                'komentar' => $komentar,
+                'id_kirim' => $data->id,
+            ])->with('Sukses', 'File berhasil diunggah.');
+        } catch (\Exception $e) {
+            // Jika gagal maka laman tidak akan berubah
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
         }
+    }
+
+    public function showdelete()
+    {
+        $data = Auth::Kirim();
+        // $title = 'Upload File';
+        return view('uploadfile', compact('data', 'title'));
+    }
+
+    public function deleteFile($id)
+    {
+        // Cari data berdasarkan ID
+        $data = Kirim::find($id);
+
+        // Jika data tidak ditemukan, kembalikan respons atau lakukan sesuai kebutuhan Anda
+        if (!$data) {
+            return response()->json(['message' => 'Data not found'], 404);
+        }
+
+        // Hapus data
+        $data->delete();
+
+        // Berikan respons yang sesuai
+        return response()->json(['message' => 'Data deleted successfully'], 200);
     }
 
     public function updateFile()
