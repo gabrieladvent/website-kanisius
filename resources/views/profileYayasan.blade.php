@@ -40,7 +40,7 @@
                     <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
                 </fieldset>
                 <div class="row">
-                    <div class="col mt-1    ">
+                    <div class="col mt-1">
                         <button type="submit"  class=" float-end fs-6 btn bg-primary text-white">Submit</button>
                     </div>
                 </div>

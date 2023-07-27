@@ -25,6 +25,7 @@ class YayasanController extends Controller
         return view('akunYayasan', compact('photo'));
     }
     
+    
     public function update(Request $request)
 {
     $request->validate([

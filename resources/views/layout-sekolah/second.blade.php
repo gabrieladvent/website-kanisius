@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="{{ asset('/css/mdb.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/css/addons/datatables.min.css') }}">
+    @push('js')
+        <script src="{{ asset('js/js.js') }}"></script>
+    @endpush
+    @push('table')
+        <script src="{{ asset('/js/jsDataSiswaSekolah.js') }}"></script>
+    @endpush
 </head>
 
 <body style="background-color: #fcf2fc;">
@@ -34,7 +40,7 @@
                         src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
             </li>
             <li>
-                <a href="{{ route('upload-view',['slug' => $user->slug]) }}" class="icon"><img
+                <a href="{{ route('upload-view', ['slug' => $user->slug]) }}" class="icon"><img
                         src="{{ asset('/icon/paper-plane-solid.svg') }}" alt=""></a>
             </li>
             <li>
@@ -48,7 +54,8 @@
 
         <ul class="logout">
             <li>
-                <a href="{{ route('profile') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}" alt=""></a>
+                <a href="{{ route('profile') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}"
+                        alt=""></a>
 
             </li>
             <li>
@@ -67,7 +74,7 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-    
+
 
     <script type="text/javascript" src="{{ asset('/js/popper.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
@@ -77,9 +84,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
         integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
-        <script src="{{ asset('/js/jsDataSiswaSekolah.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('/js/js.js') }}"></script>
+    @stack('js')
+    @stack('table')
 </body>
 
 </html>
