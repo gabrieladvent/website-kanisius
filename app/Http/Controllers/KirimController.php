@@ -21,105 +21,58 @@ class KirimController extends Controller
         return view('uploadfile', compact('user', 'title'));
     }
     // Fungsi untuk memproses file yang diupload
-    // public function postFile(Request $request, $nomor_s)
-    // {
-    //     // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
-    //     $request->validate([
-    //         'file' => 'required|mimes:xlsx,xls,csv|max:20480',
-    //     ]);
-
-    //     try {
-    //         $data = new Kirim();
-    //         $data->nama_file = $request->file('file')->getClientOriginalName();
-    //         $data->ID = $nomor_s;
-    //         $komentar = $request->input('komentar');
-    //         $data->Komentar = !empty($komentar) ? $komentar : '';
-
-    //         // Simpan komentar ke dalam session supaya bisa diakses dari laman upload sukses
-    //         Session::put('komentar', $data->Komentar);
-
-    //         // Simpan sebuah session untuk bisa akses ke upload sukses
-    //         Session::put('upload_sukses', true);
-
-    //         // Simpan data ke database
-    //         $data->save();
-
-    //         // Simpan file ke server dengan mengambil nama dari yang sebelumnya, dan meminta original ekstensionnya
-    //         $filename = $data->nama_file . '.' . $request->file('file')->getClientOriginalExtension();
-    //         $uploadedFile = $request->file('file');
-    //         // Memindahkan file ke server
-    //         $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
-
-    //         $name = $data->nama_file;
-
-    //         // Simpan id_kirim ke dalam session
-    //         Session::put('id_kirim', $data->id_kirim);
-    //         // dd($data->id);
-
-    //         return redirect()->route('sukses')->with([
-    //             'filename' => $name,
-    //             'komentar' => $komentar,
-    //             'id_kirim' => $data->id,
-    //         ])->with('Sukses', 'File berhasil diunggah.');
-    //     } catch (\Exception $e) {
-    //         // Jika gagal maka laman tidak akan berubah
-    //         return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
-    //     }
-    // }
-
     public function postFile(Request $request, $nomor_s)
     {
         // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:20480',
         ]);
-    
+
         try {
             // Membaca file Excel yang diupload oleh user
             $uploadedFile = $request->file('file');
             $filename = $uploadedFile->getClientOriginalName();
-            $filePath = $uploadedFile->storeAs('public/simpanFile', $filename);
-    
+            $filePath = $uploadedFile->getPathname();
+
             // Membuat instance Spreadsheet
             $spreadsheet = IOFactory::load($filePath);
-    
             // Mendapatkan sheet pertama dari file Excel
             $sheet = $spreadsheet->getActiveSheet();
-    
             // Mencari kolom terakhir yang terisi pada baris pertama (header)
             $lastColumn = $sheet->getHighestColumn();
-    
             // Mengubah huruf kolom terakhir menjadi nomor indeks kolom
             $lastColumnIndex = Coordinate::columnIndexFromString($lastColumn);
-    
+
             // Menyimpan data nomor_s di kolom terakhir yang terisi pada baris pertama (header)
-            $newColumnIndex = $lastColumnIndex + 1;
+            $newColumnIndex = $lastColumnIndex;
             $newColumn = Coordinate::stringFromColumnIndex($newColumnIndex);
-            $sheet->setCellValue($newColumn . '1', 'nomor_s');
-    
+            $sheet->setCellValue($newColumn . '5', 'nomor_s');
+
             // Menyimpan data nomor_s pada kolom terakhir yang terisi dari baris kedua hingga sesuai dengan banyaknya data pada kolom A
             $lastRow = $sheet->getHighestRow();
-            for ($i = 2; $i <= $lastRow; $i++) {
-                // Isi data nomor_s sesuai dengan data pada kolom A di baris ke-$i
-                $nomor_s = $sheet->getCell('A' . $i)->getValue(); // Ganti 'A' sesuai dengan kolom yang sesuai di file Anda
+            $startRow = 6; 
+            for ($i = $startRow; $i <= $lastRow; $i++) {
                 $sheet->setCellValue($newColumn . $i, $nomor_s);
             }
-    
+
             // Menyimpan file Excel yang sudah dimodifikasi
             $writer = new Xlsx($spreadsheet);
             $writer->save($filePath);
-    
-            // Simpan data ke database
+
+            // Simpan file ke server dengan mengambil nama dari yang sebelumnya, dan meminta original ekstensionnya
+            $uploadedFile->storeAs('public/simpanFile', $filename);
+
+            // ... Lanjutkan dengan kode Anda untuk menyimpan data ke database ...
             $data = new Kirim();
             $data->nama_file = $filename;
             $data->ID = $nomor_s;
             $komentar = $request->input('komentar');
             $data->Komentar = !empty($komentar) ? $komentar : '';
             $data->save();
-    
+
             // Simpan id_kirim ke dalam session
             Session::put('id_kirim', $data->id_kirim);
-    
+
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
                 'komentar' => $komentar,
@@ -131,38 +84,30 @@ class KirimController extends Controller
         }
     }
 
-    public function deleteFile(Request $request)
+
+
+    public function showdelete()
     {
-        $request->validate([
-            'id_kirim' => 'required|integer', // Pastikan id_kirim ada dan merupakan integer.
-        ]);
+        $data = Auth::Kirim();
+        // $title = 'Upload File';
+        return view('uploadfile', compact('data', 'title'));
+    }
 
-        // Ambil nilai id_kirim dari data yang dikirimkan oleh form.
-        $idKirim = $request->input('id_kirim');
+    public function deleteFile($id)
+    {
+        // Cari data berdasarkan ID
+        $data = Kirim::find($id);
 
-        // dd($idKirim);
-
-        // Cari data Kirim berdasarkan id_kirim di database.
-        $kirim = Kirim::where('id_kirim', $idKirim)->first();
-        // dd($kirim->nama_file);
-
-        // Cek apakah data Kirim ditemukan di database.
-        if ($kirim) {
-            $kirim->delete();
-
-            // Hapus file dari server berdasarkan nama file yang ada di database.
-            $filePath = public_path('storage/simpanFile/' . $kirim->nama_file);
-            // dd($filePath);
-
-            if (Storage::exists($filePath)) {
-                dd('masuk');
-            }
-            Storage::delete($filePath);
-            return redirect()->route('dashboard')->with('success', 'File berhasil dihapus.');
-        } else {
-            // Jika data Kirim tidak ditemukan, redirect dengan pesan error.
-            return redirect()->back()->with('error', 'Data Kirim tidak ditemukan.');
+        // Jika data tidak ditemukan, kembalikan respons atau lakukan sesuai kebutuhan Anda
+        if (!$data) {
+            return response()->json(['message' => 'Data not found'], 404);
         }
+
+        // Hapus data
+        $data->delete();
+
+        // Berikan respons yang sesuai
+        return response()->json(['message' => 'Data deleted successfully'], 200);
     }
 
     public function updateFile()

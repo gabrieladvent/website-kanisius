@@ -26,7 +26,6 @@ use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use DB;
 
 class SessionGuard implements StatefulGuard, SupportsBasicAuth
 {
@@ -139,9 +138,6 @@ class SessionGuard implements StatefulGuard, SupportsBasicAuth
      *
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
      */
-
-
-
     public function user()
     {
         if ($this->loggedOut) {

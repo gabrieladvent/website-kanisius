@@ -18,9 +18,12 @@
     <link rel="stylesheet" href="{{ asset('/css/styleHomeSekolah.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
     @push('js')
-    <script src="{{ asset('js/js.js') }}"></script>
-@endpush
-  
+        <script src="{{ asset('js/js.js') }}"></script>
+    @endpush
+    @push('table')
+        <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
+    @endpush
+
 </head>
 
 <body style="background-color: #fcf2fc;">
@@ -70,12 +73,9 @@
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
-    {{-- <script src="{{ asset('/js/jsDataSiswaSekolah.js') }}"></script>
-    <script src="{{ asset('js/js.js') }}"></script> --}}
-     @stack('js')
+    @stack('js')
+    @stack('table')
 
-    <script src="{{ asset('/js/jsDataSiswaSekolah.js') }}"></script>
-    <script src="{{ asset('../js/js.js') }}"></script>
 
 </body>
 

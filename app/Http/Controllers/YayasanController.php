@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\File;
 
 class YayasanController extends Controller
 {
-    public function kiriman($title) {
+    public function kiriman($title) {   
         return view('tablesekolah', compact('title'));
     }
 
@@ -24,6 +24,7 @@ class YayasanController extends Controller
         $photo = yayasan::findOrFail($id);
         return view('akunYayasan', compact('photo'));
     }
+    
     
     public function update(Request $request)
 {
