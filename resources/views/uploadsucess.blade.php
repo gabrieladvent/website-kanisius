@@ -58,25 +58,12 @@
                 <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
             </div>
             <div class="col-3">
-                <a href="{{ route('dashboard.delete', ['id' => $item->id]) }}" class="btn btn-danger"
-                    onclick="event.preventDefault(); if (confirm('Anda yakin ingin menghapus data ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();">
-                    <i class="fas fa-trash-alt"></i> Hapus
-                </a>
-
-                <form id="delete-form-{{ $item->id }}"
-                    action="{{ route('dashboard.delete', ['id' => $item->id]) }}" method="POST"
-                    style="display: none;">
-                    @csrf
-                    @method('DELETE')
-                </form>
-
                 <form action="{{ route('hapus-file') }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <!-- Input hidden untuk menyimpan ID file yang akan dihapus -->
                     <input type="hidden" name="id_kirim" value="{{ session('id_kirim') }}">
                     {{-- <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button> --}}
-                    
                 </form>
             </div>
         </div>
