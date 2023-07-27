@@ -16,7 +16,6 @@
             </tr>
         </thead>
         <tbody>
-        
             @foreach($notifikasi as $notif)
             <tr>
                 
