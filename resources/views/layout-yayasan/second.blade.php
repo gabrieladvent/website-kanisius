@@ -23,7 +23,6 @@
     @push('table')
         <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
     @endpush
-
 </head>
 
 <body style="background-color: #fcf2fc;">

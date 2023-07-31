@@ -44,7 +44,7 @@ class KirimController extends Controller
             $lastColumnIndex = Coordinate::columnIndexFromString($lastColumn);
 
             // Menyimpan data nomor_s di kolom terakhir yang terisi pada baris pertama (header)
-            $newColumnIndex = $lastColumnIndex;
+            $newColumnIndex = $lastColumnIndex + 1;
             $newColumn = Coordinate::stringFromColumnIndex($newColumnIndex);
             $sheet->setCellValue($newColumn . '5', 'nomor_s');
 

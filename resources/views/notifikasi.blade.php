@@ -31,7 +31,7 @@
                 </td>
                 <td>{{ $notif->created_at }}</td>
                 <td>
-                    <a href="{{ route('kiriman-data') }}" class="btn btn-primary">Lihat</a>
+                    <a href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}" class="btn btn-primary">Lihat</a>
                     <a href="#" class="btn btn-primary">Downlaod dan Upload</a>
                 </td>
             </tr>

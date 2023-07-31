@@ -42,7 +42,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Masuk ke tampilan profile
 Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
 
-
 // Yang login adalah admin/yayasan
 //Masuk dashboard yayasan
 Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->defaults('title', 'Dashboard');
@@ -55,10 +54,6 @@ Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->na
 
 // Masuk ke tampilan notifikasi
 Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan')->middleware('role:yayasan');
-Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data')->defaults('title', 'Update Data');
-
-// Masuk ke tampilan notifikasi
-Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
 
 // Masuk ke tampilan akun-akun operator
 Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->defaults('title', 'Akun Operator')->middleware('role:yayasan');
@@ -84,6 +79,15 @@ Route::get('/dashboard/tambah-akun', function () {
 
 // Route untuk ganti tema
 Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+
+// Route untuk tampil data yang sudah dikirim
+Route::get('/show-notifikasi/{id}', [YayasanController::class, 'showNotifikasi'])->name('show-notifikasi')->defaults('title', 'Update Data');
+
+// Untuk Update data siswa 
+// Route::post('dashboard/update-siswa', [SiswaController::class, 'updateData'])->name('update-data')->middleware('role:yayasan');
+Route::post('dashboard/update-siswa/{id}', [SiswaController::class, 'updateData'])->name('update-data')->middleware('role:yayasan');
+
+
 
 
 // Yang login adalah sekolah/operator sekolah

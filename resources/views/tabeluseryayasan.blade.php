@@ -38,6 +38,7 @@
             <table id="example" class="table table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>No.</th>
                         <th>NISN</th>
                         <th>Nama Siswa</th>
                         <th>Tanggal Lahir</th>
@@ -49,6 +50,7 @@
                 <tbody>
                     @foreach ($data_siswa as $item)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->NISN }}</td>
                             <td>{{ $item->Nama }}</td>
                             <td>{{ $item->Tanggal_Lahir }}</td>
@@ -66,6 +68,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>No.</th>
                         <th>NISN</th>
                         <th>Nama Siswa</th>
                         <th>Tanggal Lahir</th>

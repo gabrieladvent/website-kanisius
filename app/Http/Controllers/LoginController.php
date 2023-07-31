@@ -25,7 +25,7 @@ class LoginController extends Controller
     public function dashboard($title)
     {
         $user = Auth::user();
-        $notifikasi = Kirim::with('user')->latest()->take(2)->get();
+        $notifikasi = Kirim::with('user')->get();
         $users = User::pluck('namasekolah', 'id');
 
         if ($user->status == 'sekolah') {
@@ -39,7 +39,7 @@ class LoginController extends Controller
     public function sekolah($sekolahId)
     {
         $user = Auth::user();
-        $data = Siswa::where('nomor_s', $sekolahId)->get();
+        $data = Siswa::where('nomor_s', $sekolahId)->paginate(5);
         return view('homeSekolah', compact('user', 'data'));
     }
 

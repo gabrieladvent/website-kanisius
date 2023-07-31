@@ -11,7 +11,7 @@
                         <p class="text-dark h5 mt-2">Submission Status</p>
                     </div>
                     <div class="col py-2 items" style="background-color: #CEEECE;">
-                        <p class="h4 fw-bold mt-1" style="letter-spacing: 3px">{{ session('id_kirim') }}</p>
+                        <p class="h4 fw-bold mt-1" style="letter-spacing: 3px">Berhasil</p>
                     </div>
                 </div>
             </div>
@@ -58,13 +58,13 @@
                 <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
             </div>
             <div class="col-3">
-                {{-- <form action="{{ route('hapus-file', ['id' => $data->id]) }}" method="POST">
+                <form action="#" method="POST">
                     @csrf
                     @method('DELETE')
                     <!-- Input hidden untuk menyimpan ID file yang akan dihapus -->
                     <input type="hidden" name="id_kirim" value="{{ session('id_kirim') }}">
                     <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button>
-                </form> --}}
+                </form>
             </div>
         </div>
     </div>

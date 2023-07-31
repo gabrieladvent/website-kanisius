@@ -15,12 +15,14 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
-
     <link rel="stylesheet" href="{{ asset('/css/styleHomeSekolah.css') }}" />
     <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/mdb.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/css/addons/datatables.min.css') }}">
+    @push('js')
+        <script src="{{ asset('js/js.js') }}"></script>
+    @endpush
+    @push('table')
+        <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
+    @endpush
 </head>
 
 <body style="background-color: #fcf2fc;">
@@ -63,13 +65,16 @@
         @yield('isi-content')
     </div>
 
-    <script src="{{ asset('/js/jsDataSiswaSekolah.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/js/js.js') }}"></script>
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
+
+    @stack('js')
+    @stack('table')
+
+    <script src="{{ asset('/js/jsDataSiswaSekolah.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/js.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('/js/popper.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/js/bootstrap.min.js') }}"></script>
