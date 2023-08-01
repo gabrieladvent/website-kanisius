@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kirim;
-use App\Models\Arship;
 use App\Models\Siswa;
+use App\Models\Arship;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class SiswaController extends Controller
 {
@@ -62,7 +64,6 @@ class SiswaController extends Controller
         try {
             // Ambil data dari tabel Kirim berdasarkan id
             $kirim = Kirim::where('id_kirim', $id)->first();
-            // dd($kirim);
 
             if (!$kirim) {
                 throw new \Exception('Data tidak ditemukan');
@@ -75,7 +76,6 @@ class SiswaController extends Controller
             $spreadsheet = IOFactory::load($file);
             $worksheet = $spreadsheet->getActiveSheet();
             $dataExcel = $worksheet->toArray();
-            // dd($dataExcel);
 
             // Hapus header (baris 1 hingga 6)
             for ($i = 0; $i < 6; $i++) {
@@ -87,14 +87,12 @@ class SiswaController extends Controller
                 unset($rowData[0]); // Hapus kolom A (indeks 0) dari baris saat ini
                 $rowData = array_values($rowData); // Reset indeks array setelah menghapus kolom A
             }
-            unset($rowData); 
-            // dd($dataExcel);
+            unset($rowData);
 
             // Pesan sebelum pemindahan data
             echo "Memulai pemindahan data...\n";
 
-            // Simpan data ke tabel Siswa
-
+            // Cek data di tabel siswa, apakah ada di tabel siswa yang sama.
             foreach ($dataExcel as $rowData) {
                 // Cek apakah data memiliki NOMOR_S
                 if (isset($rowData[65]) && !empty($rowData[65])) {
@@ -112,7 +110,6 @@ class SiswaController extends Controller
                         }
                     }
                 }
-
             }
 
             // Memasukkan data dari file Excel ke tabel Siswa
@@ -197,7 +194,6 @@ class SiswaController extends Controller
                 $kirim->delete();
                 // dd('terhapus');
             } else {
-                // Jika data dengan ID yang diberikan tidak ditemukan, tampilkan pesan kesalahan
                 dd('tidak hapus');
             }
 
@@ -212,13 +208,87 @@ class SiswaController extends Controller
         } catch (\Exception $e) {
             // Rollback transaksi database jika terjadi error
             DB::rollback();
-
             // Tampilkan pesan error
             dd($e->getMessage());
-
-            // Tangani error atau redirect ke halaman error
-            // ...
             return redirect()->back();
         }
     }
+
+    public function download($id)
+    {
+        try {
+            // dd('id download', $id);
+            $kirim = Kirim::where('id_kirim', $id)->first();
+            // dd($kirim->nama_file);
+
+            if (!$kirim) {
+                throw new \Exception('Data tidak ditemukan');
+            }
+
+            // Mendapatkan path file Excel
+            $filePath = storage_path('app/public/simpanFile/' . $kirim->nama_file);
+            // dd($filePath);
+
+            if (!file_exists($filePath)) {
+                abort(404, 'File not found');
+            }
+
+            // Baca data dari file Excel
+            $spreadsheet = IOFactory::load($filePath);
+            $worksheet = $spreadsheet->getActiveSheet();
+
+            // Hapus kolom NOMOR_S (kolom terakhir) dari setiap baris
+            foreach ($worksheet->getRowIterator() as $row) {
+                $cellIterator = $row->getCellIterator();
+                $cellIterator->setIterateOnlyExistingCells(false);
+
+                foreach ($cellIterator as $cell) {
+                    if ($cell->getColumn() == 'BO') { // Assuming NOMOR_S is in column N
+                        // Hapus kolom NOMOR_S dari setiap baris
+                        $colIndex = Coordinate::columnIndexFromString($cell->getColumn());
+                        $worksheet->removeColumnByIndex($colIndex);
+                    }
+                }
+            }
+
+            // Simpan perubahan ke file sementara
+            $tempFileName = 'temp_' . $kirim->nama_file;
+            // dd($tempFileName);
+            $tempFilePath = storage_path('app/public/simpanFile/temp_/' . $tempFileName);
+            // dd($tempFilePath);
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save($tempFilePath);
+            // dd($writer);
+
+            // Mendownload file Excel yang telah dimodifikasi tanpa kolom NOMOR_S
+            if (file_exists($tempFilePath)) {
+                // dd('masuk if');
+                return response()->download($tempFilePath, $tempFileName, [
+                    'Content-Disposition' => 'attachment; filename="' . $kirim->nama_file . '"',
+                    'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+                    'Pragma' => 'no-cache',
+                ])->deleteFileAfterSend(); // Menandai file untuk dihapus setelah didownload
+            } else {
+                abort(404, 'Temporary file not found');
+            }
+            dd('keluar if');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            return redirect()->back();
+        }
+    }
+
+    // public function updateAndDownload($id)
+    // {
+    //     try {
+
+    //         $this->updateData($id);
+
+    //         return $this->download($id);
+    //     } catch (\Exception $e) {
+    //         // Tangani error jika terjadi exception
+    //         dd($e->getMessage());
+    //         return redirect()->back();
+    //     }
+    // }
 }

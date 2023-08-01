@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kirim;
+use App\Models\Sekolah;
 use App\Models\Yayasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,11 @@ class DashboardController extends Controller
         $users = User::pluck('namasekolah', 'id');
 
         return view('notifikasi', compact('notifikasi', 'users', 'title'));
+    }
+
+    public function daftarSekolah($title) {
+        $dataSekolah = Sekolah::all();
+        return view('notifikasi', compact('title','dataSekolah'));
     }
 
     public function profile(Request $request)

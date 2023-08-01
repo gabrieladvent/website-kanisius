@@ -45,6 +45,7 @@
                         <th>Jenis Kelamin</th>
                         <th>Nama Sekolah</th>
                         <th>Kelas</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,6 +64,7 @@
                             </td>
                             <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
                             <td>{{ $item->Rombel_Set_Ini }}</td>
+                            <td><a href="#" class="btn btn-primary">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -75,6 +77,7 @@
                         <th>Jenis Kelamin</th>
                         <th>Nama Sekolah</th>
                         <th>Kelas</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>

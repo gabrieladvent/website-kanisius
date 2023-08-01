@@ -84,9 +84,16 @@ Route::post('/updateaction', [YayasanController::class, 'update'])->name('update
 Route::get('/show-notifikasi/{id}', [YayasanController::class, 'showNotifikasi'])->name('show-notifikasi')->defaults('title', 'Update Data');
 
 // Untuk Update data siswa 
-// Route::post('dashboard/update-siswa', [SiswaController::class, 'updateData'])->name('update-data')->middleware('role:yayasan');
 Route::post('dashboard/update-siswa/{id}', [SiswaController::class, 'updateData'])->name('update-data')->middleware('role:yayasan');
 
+// Untuk Download data
+Route::get('dashboard/download/{id}', [SiswaController::class, 'download'])->name('download-file')->middleware('role:yayasan');
+
+// Untuk download dan update (namun belum jadi)
+Route::get('/update-and-download/{id}', [SiswaController::class, 'updateAndDownload'])->name('update-and-download')->middleware('role:yayasan');
+
+// Untuk masuk ke daftar sekolah
+Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah')->middleware('role:yayasan');
 
 
 

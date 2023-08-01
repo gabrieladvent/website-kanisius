@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="col">
-                        <table class="table table-borderless mt-3 w-100" style="background-color: #F5F4F4;">
+                        <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
                             <tbody class="mt-5">
                                 @if ($notifikasi->isEmpty())
                                     <tr>
@@ -50,63 +50,107 @@
                                         @break
                                     @endif
                                 @endforeach
-                                @if ($notificationCount > 2)
-                                    <div class="col-2 position-absolute bottom-1 end-0">
-                                        <div class="row ms-5 mt-5">
-                                            <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
-                                        </div>
-                                    </div>
-                                @endif
                             @endif
                         </tbody>
                     </table>
                 </div>
-
-
-            </div>
-        </div>
-
-
-        <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
-            style="border-radius: 20px">
-            <div class="col">
-                <table class="table table-borderless mt-3 w-100  " style="background-color: #F5F4F4;">
-                    <thead class="">
-                        <td class="col-3">Yayasan Kanisius:</td>
-                        <td class="col-2">Sekolah Dasar</td>
-                        <td class="">Sekolah Menengah Pertama</td>
-                    </thead>
-                    <tbody class=" mt-5">
-                        <tr>
-                            <th></th>
-                            <td>Sekolah Dasar</td>
-                            <td>Sekolah Menengah Pertama</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td>Sekolah Dasar</td>
-                            <td>Sekolah Menengah Pertama</td>
-                        </tr>
-                        <tr class="">
-                            <th></th>
-                            <td>Sekolah Dasar</td>
-                            <td>Sekolah Menengah Pertama</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-2 ">
-                <div class="row mt-5"></div>
-                <div class="row mt-5"></div>
-                <div class="row mt-5"></div>
-                <div class="row mt-5"></div>
-                <div class="row"><a href="">
-                        <p class="fs-6">see More...</p>
-                    </a></div>
+                <div class="col-1">
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row">
+                        @if ($notificationCount > 2)
+                                    <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
+                        @endif
+                    </div>
+                </div>
             </div>
 
+
+            <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
+                style="border-radius: 20px">
+                <div class="col">
+                    @php
+                        $tempTK = [];
+                        $tempSD = [];
+                        $tempSMP = [];
+                    @endphp
+
+                    @foreach ($dataSekolah as $item)
+                        @if (strpos($item->NAMASEKOLAH, 'TK') !== false)
+                            @php
+                                $tempTK[] = $item->NAMASEKOLAH;
+                            @endphp
+                        @elseif (strpos($item->NAMASEKOLAH, 'SD') !== false)
+                            @php
+                                $tempSD[] = $item->NAMASEKOLAH;
+                            @endphp
+                        @else
+                            @php
+                                $tempSMP[] = $item->NAMASEKOLAH;
+                            @endphp
+                        @endif
+                    @endforeach
+
+                    {{-- Tampilkan data yang sudah disimpan dalam array dengan batasan 5 data --}}
+                    <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                        <thead>
+                            <th>Yayasan Kanisius:</th>
+                            <th class="col-3">Taman Kanak (TK)</th>
+                            <th class="col-3">Sekolah Dasar (SD)</th>
+                            <th class="col-4">Sekolah Menengah Pertama (SMP)</th>
+                        </thead>
+                        <tbody class="mt-5 table-group-divider">
+                            <tr class="">
+                                <td></td>
+                                <td>
+                                    <ol>
+                                        @foreach ($tempTK as $index => $namaTK)
+                                            @if ($loop->iteration <= 5)
+                                                <li>{{ $namaTK }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        @foreach ($tempSD as $index => $namaSD)
+                                            @if ($loop->iteration <= 5)
+                                                <li>{{ $namaSD }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        @foreach ($tempSMP as $index => $namaSMP)
+                                            @if ($loop->iteration <= 5)
+                                                <li>{{ $namaSMP }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-1">
+                    <div class="row mt-5"></div>
+                    <div class="row mt-5"></div>
+                    <div class="row mt-5"></div>
+                    <div class="row mt-5"></div>
+                    <div class="row">
+                        <a href="{{ route('daftar-sekolah') }}">
+                            <p class="fs-6">see More...</p>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

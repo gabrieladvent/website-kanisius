@@ -43,6 +43,7 @@
                         <th>Tanggal Lahir</th>
                         <th>Jenis Kelamin</th>
                         <th>Kelas</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,6 +61,9 @@
                                 @endif
                             </td>
                             <td>{{ $item->Rombel_Set_Ini }}</td>
+                            <td>
+                                <a href="#" class="btn btn-primary">Detail</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -71,6 +75,7 @@
                         <th>Tanggal Lahir</th>
                         <th>Jenis Kelamin</th>
                         <th>Kelas</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>
