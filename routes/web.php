@@ -97,11 +97,11 @@ Route::get('/sekolah/upload/{slug}', [KirimController::class, 'kirim_file'])->na
 Route::post('/uploadFile/{slug}', [KirimController::class, 'postFile'])->name('upload');
 
 // Tampilan ketika berhasil post file
-Route::get('/success', [DashboardController::class, 'sukses'])->name('sukses')->defaults('title', 'Sukses')->middleware('role:sekolah');
+Route::get('/success/{id_kirim}', [DashboardController::class, 'sukses'])->name('sukses')->defaults('title', 'Sukses')->middleware('role:sekolah');
 
 // Hapus kiriman
-Route::delete('/sekolah/hapus/{id}', [KirimController::class, 'deleteFile'])->name('hapus-file');
-Route::get('/sekolah/{id}', [DataController::class, 'showdelete'])->name('data.delete');
+Route::delete('/delete/{id_kirim}', [KirimController::class, 'deleteFile'])->name('file.delete');
+//Route::get('/sekolah/{$id_kirim}', [KirimController::class, 'showdelete'])->name('data.delete');
 
 // Edit kiriman
 

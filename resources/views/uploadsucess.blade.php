@@ -58,14 +58,18 @@
                 <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
             </div>
             <div class="col-3">
-                <form action="{{ route('hapus-file', ['id' => $data->id]) }}" method="POST">
+               
+                <form action="{{ route('file.delete') }}" method="POST">
                     @csrf
-                    @method('DELETE')
+                        @method('delete')
                     <!-- Input hidden untuk menyimpan ID file yang akan dihapus -->
-                    <input type="hidden" name="id_kirim" value="{{ session('id_kirim') }}">
+                    {{-- <input type="hidden" name="id_kirim" value="{{ session('id_kirim') }}"> --}}
                     <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button>
                 </form>
+             
             </div>
         </div>
     </div>
 @endsection
+
+

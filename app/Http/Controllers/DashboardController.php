@@ -38,9 +38,11 @@ class DashboardController extends Controller
         return view('profileSekolah', compact('user', 'title'));
     }
 
-    public function sukses($title)
+    public function sukses($title,$id_kirim)
     {
-        $user = Auth::user();
-        return view('uploadsucess', compact('title', 'user'));
+         $user = Auth::user();
+         $file = Kirim::find($id_kirim);     //   $file = Auth::kirim()->where('id_kirim',$id)->first();
+       // $data = Kirim::where('id_kirim',$id_kirim);
+        return view('uploadsucess', compact('title','file','user'));
     }
 }
