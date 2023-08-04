@@ -18,23 +18,25 @@ class LoginController extends Controller
     public function index()
     {
         $poto = DB::table('yayasan')->first();
-        //  $poto = Yayasan::first();
-        //dd($poto);
-        return view('auth.login' ,compact('poto'));
+        return view('auth.login', compact('poto'));
     }
 
     public function dashboard($title)
     {
-        $user = Auth::user();
-        $notifikasi = Kirim::with('user')->get();
-        $users = User::pluck('namasekolah', 'id');
-        $dataSekolah = Sekolah::all();
+        try {
+            $user = Auth::user();
+            $notifikasi = Kirim::with('user')->get();
+            $users = User::pluck('namasekolah', 'id');
+            $dataSekolah = Sekolah::all();
 
-        if ($user->status == 'sekolah') {
-            $sekolahId = $user->id;
-            return $this->sekolah($sekolahId);
-        } else {
-            return view('dashboard', compact('notifikasi', 'users', 'user', 'title', 'dataSekolah'));
+            if ($user->status == 'sekolah') {
+                $sekolahId = $user->id;
+                return $this->sekolah($sekolahId);
+            } else {
+                return view('dashboard', compact('notifikasi', 'users', 'user', 'title', 'dataSekolah'));
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('gagal', 'Gagal Login. Silahkan Login Ulang');
         }
     }
 
@@ -48,13 +50,9 @@ class LoginController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
     }
-
-
 }

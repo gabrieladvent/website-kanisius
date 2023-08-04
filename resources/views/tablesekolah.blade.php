@@ -54,12 +54,8 @@
                     </div>
 
                     <div class="col-3 justify-content-center ms-5">
-                        <a href="{{ route('download-file', ['id' => $notifikasi->id_kirim]) }}"
-                            class="btn bg-light text-dark border border-2">Download</a>
+                        <a href="{{ route('update-and-download', ['id' => $notifikasi->id_kirim]) }}" class="btn btn-white border border-2">Update-Download</a>
                     </div>
-                    <!-- Tombol untuk update dan download -->
-                    {{-- <a href="{{ route('update-and-download', ['id' => $notifikasi->id_kirim]) }}" class="btn btn-primary">Update-Download</a> --}}
-
                 </div>
             @else
                 <div class="px-5 mt-5">

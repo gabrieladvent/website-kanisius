@@ -1,10 +1,10 @@
 @extends('layout-yayasan.second')
-
 @section('isi-content')
-    @if (isset($notifikasi) && count($notifikasi) > 0)
+    @if ($isFromShow && isset($notifikasi) && count($notifikasi) > 0)
         <div class="toper">
             <h2>Message</h2>
             <div class="message-box" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);padding:1%">
+
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -42,7 +42,7 @@
                 </table>
             </div>
         </div>
-    @else
+    @elseif(!$isFromShow && !$dataSekolah->isEmpty())
         <div class="ms-5 mt-5">
             <div class="mt-5">
                 <h2 class="fw-bold text-center mb-5 pt-5">Daftar Sekolah <br> Di Kanisius Cabang Yogyakarta </h2>
@@ -106,6 +106,10 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    @else
+        <div class="toper text-center mt-5">
+            <h2>TIDAK ADA PESAN</h2>
         </div>
     @endif
 @endsection

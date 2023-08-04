@@ -62,6 +62,7 @@ class UserController extends Controller
         }
 
         // Membuat data user dari input
+        
         $data = [
             'id' => $request->id,
             'name' => $request->name,
@@ -75,7 +76,7 @@ class UserController extends Controller
         $slugOptions = $user->getSlugOptions();
         $user->save();
 
-        return redirect()->route('akun-yayasan');
+        return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
     public function update(Request $request, $id)
@@ -98,7 +99,7 @@ class UserController extends Controller
         }
 
         User::whereId($id)->update($data);
-        return redirect()->route('akun-yayasan');
+        return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Diupdate');
     }
 
     public function delete($id)
@@ -107,8 +108,10 @@ class UserController extends Controller
 
         if ($data) {
             $data->delete();
+            return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Dihapus');
+        } else{
+            return redirect()->back()->with('gagal', 'Data Gagal Dihapus');
         }
-        return redirect()->route('akun-yayasan');
     }
 
     public function update_sekolah(Request $request, $id)
@@ -127,6 +130,6 @@ class UserController extends Controller
         }
 
         User::whereId($id)->update($data);
-        return redirect()->route('profile');
+        return redirect()->route('profile')->with('success', 'Akun Berhasil Diupdate');
     }
 }

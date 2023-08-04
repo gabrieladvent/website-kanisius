@@ -56,11 +56,11 @@ class YayasanController extends Controller
                 return back()->with('success', 'Foto berhasil diupdate!');
             } catch (\Exception $e) {
                 DB::rollback();
-                return redirect()->back()->with('error', 'Gagal mengupdate foto.');
+                return redirect()->back()->with('gagal', 'Gagal mengupdate foto.');
             }
         }
 
-        return redirect()->back()->with('error', 'Gagal mengupdate foto.');
+        return redirect()->back()->with('gagal', 'Gagal mengupdate foto.');
     }
 
     // Method untuk upload foto tema
@@ -86,17 +86,19 @@ class YayasanController extends Controller
                 return back()->with('success', 'Foto berhasil diupload!');
             } catch (\Exception $e) {
                 DB::rollback();
-                return redirect()->back()->with('error', 'Gagal mengupload foto.');
+                return redirect()->back()->with('gagal', 'Gagal mengupload foto.');
             }
         }
-        return redirect()->back()->with('error', 'Gagal mengupload foto.');
+        return redirect()->back()->with('gagal', 'Gagal mengupload foto.');
     }
 
     // Method untuk menampilkan message di dashboard yayasan
     public function showNotifikasi($id, $title)
     {
         $notifikasi = Kirim::where('id_kirim', $id)->with('user')->first();
-
+        if(!$notifikasi){
+            return redirect()->route('profile')->with('gagal', 'INI YANG MANA?');
+        }
         // Pastikan file Excel ada pada path yang sesuai
         $excelPath = public_path('storage/simpanFile/' . $notifikasi->nama_file);
 
@@ -126,7 +128,6 @@ class YayasanController extends Controller
             if ($currentRow === $maxRows) {
                 break; // Hentikan perulangan setelah mencapai 10 baris
             }
-
             $currentRow++;
         }
 

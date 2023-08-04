@@ -53,7 +53,7 @@
                         </tr>
                         <tr>
                             <td colspan="5">
-                                <center><a href="/sekolah/data/2032">Lihat Lengkap</a></center>
+                                <center><a href="{{ route('data-siswa', ['slug' => $user->slug]) }}">Lihat Lengkap</a></center>
                             </td>
                         </tr>
                     </tbody>

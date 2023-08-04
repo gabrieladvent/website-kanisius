@@ -1,3 +1,7 @@
+@php
+    $notificationCount = $notifikasi->count();
+@endphp
+
 @extends('layout-yayasan.main')
 @section('isi-content')
     <div class="col" style="margin-left: 5%; margin-top:5.6%">
@@ -28,12 +32,10 @@
                                     </tr>
                                     <tr>
                                         <th></th>
+                                        <td></td>
                                         <td class="text-secondary">Tidak Ada Pesan</td>
                                     </tr>
                                 @else
-                                    @php
-                                        $notificationCount = $notifikasi->count();
-                                    @endphp
                                     @foreach ($notifikasi as $index => $notif)
                                         <tr class="border-bottom border-primary border-1">
                                             <th></th>
@@ -43,7 +45,7 @@
                                                     href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}">Lihat</a>
                                             </td>
                                             <td>
-                                                <a href="#" class="text-primary">Download dan Update</a>
+                                                <a href="{{ route('update-and-download', ['id' => $notif->id_kirim]) }}" class="text-primary">Download dan Update</a>
                                             </td>
                                         </tr>
                                         @if ($index === 1 && $notificationCount > 2)
@@ -55,15 +57,27 @@
                     </table>
                 </div>
                 <div class="col-1">
-                    <div class="row"><p></p></div>
-                    <div class="row"><p></p></div>
-                    <div class="row"><p></p></div>
-                    <div class="row"><p></p></div>
-                    <div class="row"><p></p></div>
-                    <div class="row"><p></p></div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
+                    <div class="row">
+                        <p></p>
+                    </div>
                     <div class="row">
                         @if ($notificationCount > 2)
-                                    <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
+                            <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
                         @endif
                     </div>
                 </div>
@@ -153,4 +167,7 @@
         </div>
     </div>
 </div>
+<script>
+    
+</script>
 @endsection
