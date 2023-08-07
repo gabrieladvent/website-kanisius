@@ -5,15 +5,15 @@
             <div class="row mt-5 shadow-3-strong ms-5 bg-white">
                 <div class="col-8 mt-3">
                     <div>
-                        <label class="ms-2 fw-bold" style="font-size: 1.7vw">ID User</label>
+                        <label class="ms-2 fw-bold" style="font-size: 1 vw">ID User</label>
                         <p class="text-p ms-2"> {{ $user->id }} </p>
                     </div>
                     <div class="">
-                        <label class="ms-2 fw-bold" style="font-size: 1.7vw">Nama User</label>
+                        <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama User</label>
                         <p class="text-p ms-2 border border-secondary-subtle"> {{ $user->name }} </p>
                     </div>
                     <div class="">
-                        <label class="ms-2 fw-bold" style="font-size: 1.7vw">Nama Sekolah</label>
+                        <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama Sekolah</label>
                         <p class="text-p ms-2">{{ $user->namasekolah }}</p>
                     </div>
                 </div>
@@ -40,21 +40,35 @@
                         @csrf
                         @method('PUT')
                         <label for="nomorID">Nama User</label>
-                        <input disabled type="text" class="form-control" id="name" placeholder="Masukan Nama"
-                            name="name" value="{{ $user->name }}">
-                        @error('name')
-                            <small>{{ $message }}</small>
-                        @enderror
+                        <div class="input-group mb-3">
+                            <input disabled type="text" class="form-control" id="name" placeholder="Masukan Nama"
+                                name="name" value="{{ $user->name }}">
+                            @error('name')
+                                <small>{{ $message }}</small>
+                            @enderror
+                        </div>
 
                         <label for="exampleInput disabled ssword1">Password</label>
-                        <input disabled type="password" name="password" class="form-control" id="exampleInputPassword1"
-                            placeholder="Password">
+                        <div class="input-group mb-3">
+                            <div class="password-container">
+                                <input disabled type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 170%">
+                                <i class="fa fa-eye-slash" id="togglePassword" style="margin-left: 86%"></i>
+                            </div>
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                         <label for="password-confirm">Konfirmasi Password</label>
                         <input disabled id="password-confirm" type="password" class="form-control"
                             name="password_confirmation"autocomplete="new-password" placeholder="Konfirmasi Password">
 
-                        <button type="submit" class="btn btn-primary float-end mt-3">Update Profile</button>
+                        <button type="submit" class="btn btn-primary float-end mt-3 mb-3">Update Profile</button>
                     </form>
                 </div>
             </div>

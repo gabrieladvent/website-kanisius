@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarRightAlignExample">
                 <div class="row">
                     <div class="col-lg-12 ms-5">
-                        <h5 class="inter text">
+                        <h5 class="inter text" style="">
                             Selamat Datang, <strong>{{ $user->name }}</strong>
                         </h5>
                     </div>

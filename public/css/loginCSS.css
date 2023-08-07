@@ -21,3 +21,14 @@ body {
   height: 100%;
   z-index: -1;
 }
+
+  .password-container i {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .form-control{
+    width: 29.6vw
+  }

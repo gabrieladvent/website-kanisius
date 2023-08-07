@@ -12,6 +12,9 @@
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <!-- MDB -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- link css -->
     <link rel="stylesheet" href="{{ asset('../css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('../css/styleHomeSekolah.css') }}" />
@@ -21,38 +24,52 @@
 
 <body style="background-color: #fcf2fc;">
     @include('navbar.navbar-main')
-    <nav class="main-menu">
+    <nav class="main-menu" style="margin-top: 4.5%">
         <ul>
-            <li>
-                <a href="/dashboard" class="icon"><img src="{{ asset('/icon/house-solid.svg') }}" alt=""></a>
+            <li style="margin-bottom: 30px;">
+                <a href="/dashboard">
+                    <img src="{{ asset('/icon/house-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Dashboard</span>
+                </a>
             </li>
-
-            <li>
-                <a href="{{ route('kiriman-data') }}" class="icon"><img src="{{ asset('/icon/database-solid.svg') }}"
-                        alt=""></a>
+            <li style="margin-bottom: 30px;" class="has-subnav">
+                <a href="{{ route('kiriman-data') }}">
+                    <img src="{{ asset('/icon/database-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Update Database</span>
+                </a>
             </li>
-            <li>
-                <a href="{{ route('dashboard.data') }}" class="icon"><img
-                        src="{{ asset('/icon/user-group-solid.svg') }}" alt=""></a>
+            <li style="margin-bottom: 30px;" class="has-subnav">
+                <a href="{{ route('dashboard.data') }}">
+                    <img src="{{ asset('/icon/user-group-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Daftar Siswa-Siswi</span>
+                </a>
             </li>
-            <li>
-                <a href="{{ route('notifikasi') }}" class="icon"><img src="{{ asset('/icon/bell-solid.svg') }}"
-                        alt=""></a>
+            <li style="margin-bottom: 30px;" class="has-subnav">
+                <a href="{{ route('notifikasi') }}">
+                    <img src="{{ asset('/icon/bell-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Notifikasi</span>
+                </a>
             </li>
-            <li>
-                {{-- laporan  --}}
-                <a href="{{ route('laporan-data') }}" class="icon"><img src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
+            <li style="margin-bottom: 30px;" class="has-subnav">
+                <a href="{{ route('laporan-data') }}">
+                    <img src="{{ asset('/icon/book-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Laporan</span>
+                </a>
             </li>
         </ul>
 
-        <ul class="logout">
-            <li>
-                <a href="{{ route('profile') }}" class="icon"><img src="{{ asset('/icon/user-tie-solid.svg') }}"
-                        alt=""></a>
+        <ul class="logout" style="bottom: 8.1%">
+            <li style="margin-bottom: 10px;">
+                <a href="{{ route('profile') }}">
+                    <img src="{{ asset('/icon/user-tie-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Profile</span>
+                </a>
             </li>
             <li>
-                <a href="{{ route('logout') }}" class="icon"><img src="{{ '/icon/sign-out-alt-solid.svg' }}"
-                        alt=""></a>
+                <a href="{{ route('logout') }}">
+                    <img src="{{ asset('/icon/power-off-solid.svg') }}" alt="" class="fa fa-2x">
+                    <span class="nav-text">Logout</span>
+                </a>
             </li>
         </ul>
     </nav>
@@ -63,5 +80,29 @@
 
     <!-- MDB -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @if (Session::has('success'))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                positionClass: 'toast-top-right',
+            }
+            toastr.success("{{ Session::get('success') }}");
+        </script>
+    @endif
+    @if (Session::has('gagal'))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                positionClass: 'toast-top-right',
+            }
+            toastr.error();
+            ("{{ Session::get('gagal') }}");
+        </script>
+    @endif
 </body>
+
 </html>

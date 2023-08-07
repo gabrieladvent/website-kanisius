@@ -2,7 +2,7 @@
 @section('isi-content')
 <section class="content-akun">
     <div class="container-fluid">
-        <form action="{{ route('user.update', ['id' => $data->id]) }}" method="POST">
+        <form action="{{ route('update-user', ['id' => $data->id]) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="row">

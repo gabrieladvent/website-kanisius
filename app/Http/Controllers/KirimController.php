@@ -20,6 +20,7 @@ class KirimController extends Controller
         $title = 'Upload File';
         return view('uploadfile', compact('user', 'title'));
     }
+
     // Fungsi untuk memproses file yang diupload
     public function postFile(Request $request, $nomor_s)
     {
@@ -44,13 +45,13 @@ class KirimController extends Controller
             $lastColumnIndex = Coordinate::columnIndexFromString($lastColumn);
 
             // Menyimpan data nomor_s di kolom terakhir yang terisi pada baris pertama (header)
-            $newColumnIndex = $lastColumnIndex;
+            $newColumnIndex = $lastColumnIndex + 1;
             $newColumn = Coordinate::stringFromColumnIndex($newColumnIndex);
             $sheet->setCellValue($newColumn . '5', 'nomor_s');
 
             // Menyimpan data nomor_s pada kolom terakhir yang terisi dari baris kedua hingga sesuai dengan banyaknya data pada kolom A
             $lastRow = $sheet->getHighestRow();
-            $startRow = 6; 
+            $startRow = 6;
             for ($i = $startRow; $i <= $lastRow; $i++) {
                 $sheet->setCellValue($newColumn . $i, $nomor_s);
             }
@@ -70,21 +71,19 @@ class KirimController extends Controller
             $data->Komentar = !empty($komentar) ? $komentar : '';
             $data->save();
 
-            // Simpan id_kirim ke dalam session
+            // Simpan id_kirim yang baru saja di-generate ke dalam session
             Session::put('id_kirim', $data->id_kirim);
 
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
                 'komentar' => $komentar,
                 'id_kirim' => $data->id_kirim,
-            ])->with('Sukses', 'File berhasil diunggah.');
+            ])->with('success', 'File berhasil diunggah.');
         } catch (\Exception $e) {
             // Jika gagal maka laman tidak akan berubah
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.')->withInput();
+            return redirect()->back()->with('gagal', 'Terjadi kesalahan saat mengunggah file.')->withInput();
         }
     }
-
-
 
     public function showdelete()
     {

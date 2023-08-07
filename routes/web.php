@@ -43,7 +43,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 // Masuk ke tampilan profile
 Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
 
-
 // Yang login adalah admin/yayasan
 //Masuk dashboard yayasan
 Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->defaults('title', 'Dashboard');
@@ -56,10 +55,6 @@ Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->na
 
 // Masuk ke tampilan notifikasi
 Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan')->middleware('role:yayasan');
-Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data')->defaults('title', 'Update Data');
-
-// Masuk ke tampilan notifikasi
-Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
 
 // Masuk ke tampilan Laporan data siswa siswi 
 Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa')->middleware('role:yayasan');
@@ -78,7 +73,7 @@ Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->n
 Route::get('dashboard/edit/{id}', [UserController::class, 'edit'])->name('dashboard.edit')->defaults('title', 'Edit Akun')->middleware('role:yayasan');
 
 // fungsi untuk update data
-Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update')->middleware('role:yayasan');
+Route::put('dashboard/update/{id}', [UserController::class, 'update'])->name('update-user');
 
 // Fungsi untuk hapus akun
 Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete')->middleware('role:yayasan');
@@ -95,6 +90,22 @@ Route::get('/dashboard/tambah-akun', function () {
 
 // Route untuk ganti tema
 Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+
+// Route untuk tampil data yang sudah dikirim
+Route::get('/show-notifikasi/{id}', [YayasanController::class, 'showNotifikasi'])->name('show-notifikasi')->defaults('title', 'Update Data');
+
+// Untuk Update data siswa 
+Route::post('dashboard/update-siswa/{id}', [SiswaController::class, 'updateData'])->name('update-data')->middleware('role:yayasan');
+
+// Untuk Download data
+Route::get('dashboard/download/{id}', [SiswaController::class, 'download'])->name('download-file')->middleware('role:yayasan');
+
+// Untuk download dan update (namun belum jadi)
+Route::get('/update-and-download/{id}', [SiswaController::class, 'downloadAndUpdate'])->name('update-and-download')->middleware('role:yayasan');
+
+// Untuk masuk ke daftar sekolah
+Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah')->middleware('role:yayasan');
+
 
 
 // Yang login adalah sekolah/operator sekolah
