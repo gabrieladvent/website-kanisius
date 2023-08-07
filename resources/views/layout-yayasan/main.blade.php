@@ -40,7 +40,8 @@
                         alt=""></a>
             </li>
             <li>
-                <a href="#laporan" class="icon"><img src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
+                {{-- laporan  --}}
+                <a href="{{ route('laporan-data') }}" class="icon"><img src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
             </li>
         </ul>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\KirimController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\YayasanController;
+use App\Http\Controllers\LaporanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,16 @@ Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->na
 
 // Masuk ke tampilan notifikasi
 Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan');
+
+// Masuk ke tampilan Laporan data siswa siswi 
+Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa')->middleware('role:yayasan');
+
+// Masuk ke tampilan Laporan penghasilan,Agama,JK,KPS data siswa siswi 
+Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
+Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
+// cetak laporan
+Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
+
 
 // Masuk ke tampilan akun-akun operator
 Route::get('dashboard/akun-yayasan', [UserController::class, 'akun_yayasan'])->name('akun-yayasan')->defaults('title', 'Akun Operator')->middleware('role:yayasan');

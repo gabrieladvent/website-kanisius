@@ -1,7 +1,6 @@
 body {
   font-family: "Inter" !important;
 }
-
 i {
   color: #072a40;
 }
@@ -67,6 +66,8 @@ ul li span:hover {
   
   body {
     margin: 24px;
+    z-index: -1;
+    background-color: #0D1282; /* Ganti dengan warna background yang diinginkan */
   }
   
   
@@ -110,6 +111,32 @@ ul li span:hover {
 
 .items{
   margin-right: 1% ;
+}
+
+/*SVG tampolan waves file laporan, tabel sekolah, tabel useryayasan */
+.judul {
+  margin-top: 8%;
+  margin-bottom: 30px;
+  text-align: center;
+}
+.judul-container {
+  background-color: white; /* Memberi warna latar belakang putih */
+  display: inline-block; /*Membuat elemen div berada di dalam block*/
+  padding: 8px; /* Menambahkan padding agar teks tidak terlalu dekat dengan tepi background */
+  border-radius: 20px;
+}
+.judul p {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0; /* Menghilangkan margin default dari teks agar tidak ada ruang tambahan di sekitar teks */
+}
+.svg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 /* .badan{
   

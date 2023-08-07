@@ -26,7 +26,7 @@
 
 </head>
 
-<body style="background-color: #fcf2fc;">
+<body>
     @include('navbar.navbar-second')
     <!-- sidebar -->
     <nav class="main-menu">
@@ -48,7 +48,8 @@
                         alt=""></a>
             </li>
             <li>
-                <a href="#laporan" class="icon"><img src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
+                <a href="{{ route('laporan-data') }}" class="icon"><img 
+                    src="{{ asset('/icon/book-solid.svg') }}" alt=""></a>
             </li>
         </ul>
 

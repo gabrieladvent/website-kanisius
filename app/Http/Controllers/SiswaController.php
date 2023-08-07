@@ -16,6 +16,7 @@ class SiswaController extends Controller
         $data_siswa = $siswa->load('sekolah');
         return view('tabeluseryayasan', compact('data_siswa', 'title', 'user'));
     }
+    
 
     public function detailSiswa($slug, $title) {
         // Dapatkan id siswa berdasarkan slug dari tabel User

@@ -1,9 +1,9 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
     <div class="">
-        <div class="judul" style="margin-top: 8%;">
-            <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi {{ $user->namasekolah }}</p>
-            <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran 2023/2024</p>
+        <div class="judul text-center" style="margin-top: 10%;">
+            <p class="fs-3 fw-bold text-wrap text-center bg-light col-12" >Data Siswa-Siswi{{ $user->namasekolah }}</p>
+            <p class="fs-3 fw-bold text-wrap text-center bg-light col-12" >Tahun Ajaran 2023/2024</p>
         </div>
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="dropdown" style="margin-left: 12vw;">
