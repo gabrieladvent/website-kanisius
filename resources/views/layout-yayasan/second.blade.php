@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('/image/logo.png') }}" rel="icon">
-    <title>Yayasan | {{ $title }}</title>
+    {{-- <title>Yayasan | {{ $title }}</title> --}}
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <!-- Google Fonts -->
@@ -23,7 +23,6 @@
     @push('table')
         <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
     @endpush
-
 </head>
 
 <body style="background-color: #fcf2fc;">

@@ -29,7 +29,7 @@
                         alt=""></a>
             </li>
             <li>
-                <a href="{{ route('upload-view',['slug' => $user->slug]) }}" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}"
+                <a href="{{ route('upload-view',['id' => $user->id]) }}" class="icon"><img src="{{ asset('/icon/paper-plane-solid.svg') }}"
                         alt=""></a>
             </li>
             <li>

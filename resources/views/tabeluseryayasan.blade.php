@@ -38,17 +38,20 @@
             <table id="example" class="table table-bordered" style="width:100%">
                 <thead>
                     <tr>
+                        <th>No.</th>
                         <th>NISN</th>
                         <th>Nama Siswa</th>
                         <th>Tanggal Lahir</th>
                         <th>Jenis Kelamin</th>
                         <th>Nama Sekolah</th>
                         <th>Kelas</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($data_siswa as $item)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->NISN }}</td>
                             <td>{{ $item->Nama }}</td>
                             <td>{{ $item->Tanggal_Lahir }}</td>
@@ -61,17 +64,20 @@
                             </td>
                             <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
                             <td>{{ $item->Rombel_Set_Ini }}</td>
+                            <td><a href="#" class="btn btn-primary">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>No.</th>
                         <th>NISN</th>
                         <th>Nama Siswa</th>
                         <th>Tanggal Lahir</th>
                         <th>Jenis Kelamin</th>
                         <th>Nama Sekolah</th>
                         <th>Kelas</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>

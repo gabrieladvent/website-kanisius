@@ -11,106 +11,146 @@
             <div class="col-3 ms-5">
                 <img src="{{ asset('/image/IHS_Logo.png') }}" class="w-75 ms-5" alt="">
             </div>
-            <div class="row d-flex justify-content-center border-2 border-top border-primary mt-3 container-fluid shadow-6-strong"
-                style="border-radius: 20px">
-                <div class="col-1 mt-4">
-                    <p>Message</p>
-                </div>
+            <div style="position: relative;">
+                <div class="row d-flex justify-content-center border-2 border-top border-primary mt-3 container-fluid shadow-6-strong"
+                    style="border-radius: 20px">
+                    <div class="col-1 mt-4">
+                        <p>Message</p>
+                    </div>
 
-                <div class="col">
-                    <table class="table table-borderless mt-3 w-100  " style="background-color: #F5F4F4;">
-                        <tbody class=" mt-5">
-                            @if ($notifikasi->isEmpty())
-                                <tr class="">
-                                    <th></th>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <th></th>
-                                    <td></td>
-                                    <td class="text-secondary">Tidak Ada Pesan</td>
-                                </tr>
+                    <div class="col">
+                        <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                            <tbody class="mt-5">
+                                @if ($notifikasi->isEmpty())
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td class="text-secondary">Tidak Ada Pesan</td>
+                                    </tr>
+                                @else
+                                    @php
+                                        $notificationCount = $notifikasi->count();
+                                    @endphp
+                                    @foreach ($notifikasi as $index => $notif)
+                                        <tr class="border-bottom border-primary border-1">
+                                            <th></th>
+                                            <td>{{ $notif->user->namasekolah }} mengirimkan file</td>
+                                            <td>
+                                                <a
+                                                    href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}">Lihat</a>
+                                            </td>
+                                            <td>
+                                                <a href="#" class="text-primary">Download dan Update</a>
+                                            </td>
+                                        </tr>
+                                        @if ($index === 1 && $notificationCount > 2)
+                                        @break
+                                    @endif
+                                @endforeach
                             @endif
-                            @foreach ($notifikasi as $notif)
-                                <tr class="border-bottom border-primary border-1">
-                                    <th></th>
-                                    <td>{{ $notif->user->namasekolah }} mengirimkan file</td>
-                                    <td>
-                                        <a href="{{ route('kiriman-data') }}" class="text-primary">Lihat</a>
-                                    </td>
-                                    {{-- {{ route('download', ['id' => $notif->id_kirim]) }} --}}
-                                    <td><a href="" class="text-primary">Download dan Update</a></td>
-                                </tr>
-                            @endforeach
                         </tbody>
                     </table>
-
                 </div>
-                <div class="col-2 ">
+                <div class="col-1">
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
+                    <div class="row"><p></p></div>
                     <div class="row">
-                        <p></p>
+                        @if ($notificationCount > 2)
+                                    <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
+                        @endif
                     </div>
-                    <div class="row">
-                        <p></p>
-                    </div>
-                    <div class="row">
-                        <p></p>
-                    </div>
-                    <div class="row">
-                        <p></p>
-                    </div>
-                    <div class="row">
-                        <p></p>
-                    </div>
-                    <div class="row">
-                        <p></p>
-                    </div>
-                    <div class="row"><a href="">
-                            <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
-                        </a></div>
                 </div>
             </div>
+
 
             <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
                 style="border-radius: 20px">
                 <div class="col">
-                    <table class="table table-borderless mt-3 w-100  " style="background-color: #F5F4F4;">
-                        <thead class="">
-                            <td class="col-3">Yayasan Kanisius:</td>
-                            <td class="col-2">Sekolah Dasar</td>
-                            <td class="">Sekolah Menengah Pertama</td>
+                    @php
+                        $tempTK = [];
+                        $tempSD = [];
+                        $tempSMP = [];
+                    @endphp
+
+                    @foreach ($dataSekolah as $item)
+                        @if (strpos($item->NAMASEKOLAH, 'TK') !== false)
+                            @php
+                                $tempTK[] = $item->NAMASEKOLAH;
+                            @endphp
+                        @elseif (strpos($item->NAMASEKOLAH, 'SD') !== false)
+                            @php
+                                $tempSD[] = $item->NAMASEKOLAH;
+                            @endphp
+                        @else
+                            @php
+                                $tempSMP[] = $item->NAMASEKOLAH;
+                            @endphp
+                        @endif
+                    @endforeach
+
+                    {{-- Tampilkan data yang sudah disimpan dalam array dengan batasan 5 data --}}
+                    <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                        <thead>
+                            <th>Yayasan Kanisius:</th>
+                            <th class="col-3">Taman Kanak (TK)</th>
+                            <th class="col-3">Sekolah Dasar (SD)</th>
+                            <th class="col-4">Sekolah Menengah Pertama (SMP)</th>
                         </thead>
-                        <tbody class=" mt-5">
-                            <tr>
-                                <th></th>
-                                <td>Sekolah Dasar</td>
-                                <td>Sekolah Menengah Pertama</td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>Sekolah Dasar</td>
-                                <td>Sekolah Menengah Pertama</td>
-                            </tr>
+                        <tbody class="mt-5 table-group-divider">
                             <tr class="">
-                                <th></th>
-                                <td>Sekolah Dasar</td>
-                                <td>Sekolah Menengah Pertama</td>
+                                <td></td>
+                                <td>
+                                    <ol>
+                                        @foreach ($tempTK as $index => $namaTK)
+                                            @if ($loop->iteration <= 5)
+                                                <li>{{ $namaTK }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        @foreach ($tempSD as $index => $namaSD)
+                                            @if ($loop->iteration <= 5)
+                                                <li>{{ $namaSD }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </td>
+                                <td>
+                                    <ol>
+                                        @foreach ($tempSMP as $index => $namaSMP)
+                                            @if ($loop->iteration <= 5)
+                                                <li>{{ $namaSMP }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-2 ">
+                <div class="col-1">
                     <div class="row mt-5"></div>
                     <div class="row mt-5"></div>
                     <div class="row mt-5"></div>
                     <div class="row mt-5"></div>
-                    <div class="row"><a href="">
+                    <div class="row">
+                        <a href="{{ route('daftar-sekolah') }}">
                             <p class="fs-6">see More...</p>
-                        </a></div>
+                        </a>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
-    </div>
+</div>
 @endsection

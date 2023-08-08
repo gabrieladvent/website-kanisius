@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kirim;
+use App\Models\Sekolah;
 use App\Models\Yayasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -17,6 +19,11 @@ class DashboardController extends Controller
         $users = User::pluck('namasekolah', 'id');
 
         return view('notifikasi', compact('notifikasi', 'users', 'title'));
+    }
+
+    public function daftarSekolah($title) {
+        $dataSekolah = Sekolah::all();
+        return view('notifikasi', compact('title','dataSekolah'));
     }
 
     public function profile(Request $request)
@@ -38,11 +45,10 @@ class DashboardController extends Controller
         return view('profileSekolah', compact('user', 'title'));
     }
 
-    public function sukses($title,$id_kirim)
+    public function sukses($title)
     {
          $user = Auth::user();
-         $file = Kirim::find($id_kirim);     //   $file = Auth::kirim()->where('id_kirim',$id)->first();
-       // $data = Kirim::where('id_kirim',$id_kirim);
-        return view('uploadsucess', compact('title','file','user'));
+         $files = Storage::files('simpanFile');
+        return view('uploadsucess',['files' => $files], compact('title','user'));
     }
 }
