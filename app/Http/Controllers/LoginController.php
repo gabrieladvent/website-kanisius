@@ -25,15 +25,15 @@ class LoginController extends Controller
     {
         try {
             $user = Auth::user();
-            $notifikasi = Kirim::with('user')->get();
-            $users = User::pluck('namasekolah', 'id');
             $dataSekolah = Sekolah::all();
+            
+            $kirim = Kirim::all();
 
             if ($user->status == 'sekolah') {
                 $sekolahId = $user->id;
                 return $this->sekolah($sekolahId);
             } else {
-                return view('dashboard', compact('notifikasi', 'users', 'user', 'title', 'dataSekolah'));
+                return view('dashboard', compact('kirim', 'user', 'title', 'dataSekolah'));
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('gagal', 'Gagal Login. Silahkan Login Ulang');

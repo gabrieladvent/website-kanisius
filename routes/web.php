@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KirimController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\YayasanController;
 
@@ -122,16 +123,10 @@ Route::get('/sekolah/data/{slug}', [SiswaController::class, 'detailSiswa'])->nam
 // fungsi untuk update profile sekolah
 Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('update');
 
+// Masuk ke halaman history
+Route::get('/riwayat-kirim/sekolah/{slug}/', [SekolahController::class, 'history'])->name('riwayat-kirim')->defaults('title', 'Riwayat Kirim')->middleware('role:sekolah');
+
 
 Auth::routes();
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// route berhasil
-// Route::get('/success', function () {
-//     if (session()->has('upload_sukses')) {
-//         return view('uploadsucess');
-//     } else {
-//         return redirect()->back();
-//     }
-// })->name('success')->middleware('web');
 
 

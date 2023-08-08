@@ -6,14 +6,14 @@ use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Siswa;
 use App\Models\Arship;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\DatabaseNotification;
 
 class SiswaController extends Controller
 {
@@ -70,6 +70,23 @@ class SiswaController extends Controller
             if (!$kirim) {
                 throw new \Exception('Data tidak ditemukan');
             }
+
+            $filename = $kirim->nama_file;
+            $user = Kirim::where('id_kirim', $id)->value('ID');
+            $name = User::where('id', $user)->value('namasekolah');
+            $notifications = DB::table('notifications')
+                ->select('id')
+                ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
+                ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
+                ->pluck('id');
+            // dd($notifications);
+            if (!$notifications) {
+                dd('Data kosong');
+            }
+            // dd('keluar if');
+            DB::table('notifications')
+                ->whereIn('id', $notifications)
+                ->delete();
 
             // Ambil path file Excel
             $file = public_path('storage/simpanFile/' . $kirim->nama_file);
@@ -186,19 +203,8 @@ class SiswaController extends Controller
                     'NOMOR_S' => $rowData[65],
                 ]);
             }
-
-            // Hapus data dari tabel Kirim
-            $kirim = Kirim::where('id_kirim', $id)->first();
-            // dd($kirim);
-            // Periksa apakah data dengan ID yang diberikan ada
-            if (file_exists($file)) {
-                // Delete file from storage and data from database
-                Storage::disk('local')->delete($file);
-                DB::table('kirim')->where('id_kirim', '=', $id)->delete();
-            } else {
-                dd('tidak hapus');
-            }
-
+            $data['status'] = 1;
+            Kirim::where('id_kirim', $id)->update($data);
             // Commit transaksi database
             DB::commit();
             // dd('bisa commit');
@@ -286,6 +292,23 @@ class SiswaController extends Controller
         if (!$kirim) {
             abort(404, 'Data Tidak Ditemukan');
         }
+
+        $filename = $kirim->nama_file;
+        $user = Kirim::where('id_kirim', $id)->value('ID');
+        $name = User::where('id', $user)->value('namasekolah');
+        $notifications = DB::table('notifications')
+            ->select('id')
+            ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
+            ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
+            ->pluck('id');
+            
+        if (!$notifications) {
+            abort(404, 'Data Tidak Ditemukan');
+        }
+        
+        DB::table('notifications')
+            ->whereIn('id', $notifications)
+            ->delete();
 
         $filepath = public_path('storage/simpanFile/' . $kirim->nama_file);
         if (!file_exists($filepath)) {
@@ -403,6 +426,9 @@ class SiswaController extends Controller
                 ]);
             }
 
+            $data['status'] = 1;
+            Kirim::where('id_kirim', $id)->update($data);
+            
             DB::commit();
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -429,18 +455,8 @@ class SiswaController extends Controller
             $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
             $writer->save($tempFilePath);
 
-            if (file_exists($tempFilePath)) {
-                if (file_exists($filepath)) {
-                    // Delete file from storage and data from database
-                    Storage::disk('local')->delete($filepath);
-                    DB::table('kirim')->where('id_kirim', '=', $id)->delete();
-                } else {
-                    dd('tidak hapus');
-                }
-            }
-            
             Session::flash('success', 'Data berhasil disimpan.');
-            
+
             // Continue to download the file
             return response()->download($tempFilePath, $tempFileName, [
                 'Content-Disposition' => 'attachment; filename="' . $kirim->nama_file . '"',
