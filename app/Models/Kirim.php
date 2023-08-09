@@ -11,7 +11,9 @@ class Kirim extends Model
     use HasFactory;
     
     protected $table = 'kirim';
+
     protected $fillable = ['nama_file', 'ID','id_kirim', 'Komentar'];
+
 
     public function getUrl()
     {

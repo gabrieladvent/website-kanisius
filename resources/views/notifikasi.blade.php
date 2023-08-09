@@ -1,25 +1,37 @@
 @extends('layout-yayasan.second')
-
 @section('isi-content')
-    @if (isset($notifikasi) && count($notifikasi) > 0)
+    @if ($isFromShow && isset($notifikasi) && count($notifikasi) > 0)
         <div class="toper">
             <h2>Message</h2>
             <div class="message-box" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);padding:1%">
+
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th>ID</th>
+                        <tr class="text-center">
+                            <th>Nomor</th>
                             <th>Nama Sekolah</th>
                             <th>Nama File</th>
                             <th>Komentar</th>
-                            <th>Tanggal Waktu Kirim</th>
-                            <th>Action</th>
+                            <th>Tanggal Kirim</th>
+                            <th>Status</th>
+                            <th colspan="2">Action</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $true = [];
+                            $false = [];
+                        @endphp
                         @foreach ($notifikasi as $notif)
-                            <tr>
+                            @if ($notif->status == 0)
+                                @php $false[] = $notif; @endphp
+                            @else
+                                @php $true[] = $notif; @endphp
+                            @endif
+                        @endforeach
 
+                        @foreach ($false as $notif)
+                            <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $notif->user->namasekolah }}</td>
                                 <td>{{ $notif->nama_file }}</td>
@@ -30,11 +42,41 @@
                                         Tidak ada komentar
                                     @endunless
                                 </td>
-                                <td>{{ $notif->created_at }}</td>
+                                <td>{{ $notif->created_at->format('Y-m-d') }}</td>
                                 <td>
+                                    Belum Dibaca
+                                </td>
+                                <td colspan="1">
                                     <a href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}"
-                                        class="btn btn-primary">Lihat</a>
-                                    <a href="#" class="btn btn-primary">Downlaod dan Upload</a>
+                                        class="fs-6">Lihat</a>
+                                    
+                                </td>
+                                <td>
+                                    <a href="{{ route('update-and-download', ['id' => $notif->id_kirim]) }}" class="fs-6">Update-Download</a>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        <tr><td colspan="8"></td></tr>
+
+                        @foreach ($true as $notif)
+                            <tr class="table-secondary">
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $notif->user->namasekolah }}</td>
+                                <td>{{ $notif->nama_file }}</td>
+                                <td>
+                                    @unless (empty($notif->Komentar))
+                                        {{ $notif->Komentar }}
+                                    @else
+                                        Tidak ada komentar
+                                    @endunless
+                                </td>
+                                <td>{{ $notif->updated_at->format('Y-m-d') }}</td>
+                                <td>
+                                    Sudah Dibaca
+                                </td>
+                                <td colspan="2" class="text-center">
+                                    Tidak Ada Action
                                 </td>
                             </tr>
                         @endforeach
@@ -42,7 +84,7 @@
                 </table>
             </div>
         </div>
-    @else
+    @elseif(!$isFromShow && !$dataSekolah->isEmpty())
         <div class="ms-5 mt-5">
             <div class="mt-5">
                 <h2 class="fw-bold text-center mb-5 pt-5">Daftar Sekolah <br> Di Kanisius Cabang Yogyakarta </h2>
@@ -106,6 +148,10 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    @else
+        <div class="toper text-center mt-5">
+            <h2>TIDAK ADA PESAN</h2>
         </div>
     @endif
 @endsection

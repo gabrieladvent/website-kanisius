@@ -54,9 +54,9 @@
 
     <div class="mb-5 ms-5">
         <div class="row mt-5 mb-5 ms-5 d-flex justify-content-center">
-            <div class="col-2 mb-5">
+            {{-- <div class="col-2 mb-5">
                 <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
-            </div>
+            </div> --}}
             <div class="col-3">
                 {{-- @foreach($files as $file) --}}
                

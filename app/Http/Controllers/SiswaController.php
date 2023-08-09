@@ -6,12 +6,14 @@ use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Siswa;
 use App\Models\Arship;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Notifications\DatabaseNotification;
 
 class SiswaController extends Controller
 {
@@ -68,6 +70,23 @@ class SiswaController extends Controller
             if (!$kirim) {
                 throw new \Exception('Data tidak ditemukan');
             }
+
+            $filename = $kirim->nama_file;
+            $user = Kirim::where('id_kirim', $id)->value('ID');
+            $name = User::where('id', $user)->value('namasekolah');
+            $notifications = DB::table('notifications')
+                ->select('id')
+                ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
+                ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
+                ->pluck('id');
+            // dd($notifications);
+            if (!$notifications) {
+                dd('Data kosong');
+            }
+            // dd('keluar if');
+            DB::table('notifications')
+                ->whereIn('id', $notifications)
+                ->delete();
 
             // Ambil path file Excel
             $file = public_path('storage/simpanFile/' . $kirim->nama_file);
@@ -184,19 +203,8 @@ class SiswaController extends Controller
                     'NOMOR_S' => $rowData[65],
                 ]);
             }
-
-            // Hapus data dari tabel Kirim
-            $kirim = Kirim::where('id_kirim', $id)->first();
-            // dd($kirim);
-            // Periksa apakah data dengan ID yang diberikan ada
-            if ($kirim) {
-                // Jika data ditemukan, hapus data tersebut
-                $kirim->delete();
-                // dd('terhapus');
-            } else {
-                dd('tidak hapus');
-            }
-
+            $data['status'] = 1;
+            Kirim::where('id_kirim', $id)->update($data);
             // Commit transaksi database
             DB::commit();
             // dd('bisa commit');
@@ -204,13 +212,13 @@ class SiswaController extends Controller
             // Pesan setelah commit
             echo "Transaksi berhasil di-commit.\n";
 
-            return redirect()->route('dashboard.data')->with('success', 'Data berhasil diupdate, dipindahkan ke Arsip, dan data baru dari file Excel dimasukkan ke Siswa.');
+            return redirect()->route('dashboard.data')->with('success', 'Data Siswa Berhasil Di Update');
         } catch (\Exception $e) {
             // Rollback transaksi database jika terjadi error
             DB::rollback();
             // Tampilkan pesan error
             dd($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('gagal', 'Gagal Mengupdate Data');
         }
     }
 
@@ -274,21 +282,189 @@ class SiswaController extends Controller
             dd('keluar if');
         } catch (\Exception $e) {
             dd($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('gagal', 'File Tidak Bisa Didownload');
         }
     }
 
-    // public function updateAndDownload($id)
-    // {
-    //     try {
+    public function downloadAndUpdate($id)
+    {
+        $kirim = Kirim::where('id_kirim', $id)->first();
+        if (!$kirim) {
+            abort(404, 'Data Tidak Ditemukan');
+        }
 
-    //         $this->updateData($id);
+        $filename = $kirim->nama_file;
+        $user = Kirim::where('id_kirim', $id)->value('ID');
+        $name = User::where('id', $user)->value('namasekolah');
+        $notifications = DB::table('notifications')
+            ->select('id')
+            ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
+            ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
+            ->pluck('id');
+            
+        if (!$notifications) {
+            abort(404, 'Data Tidak Ditemukan');
+        }
+        
+        DB::table('notifications')
+            ->whereIn('id', $notifications)
+            ->delete();
 
-    //         return $this->download($id);
-    //     } catch (\Exception $e) {
-    //         // Tangani error jika terjadi exception
-    //         dd($e->getMessage());
-    //         return redirect()->back();
-    //     }
-    // }
+        $filepath = public_path('storage/simpanFile/' . $kirim->nama_file);
+        if (!file_exists($filepath)) {
+            abort(404, 'Data Tidak Ditemukan');
+        }
+
+        $spreadsheet = IOFactory::load($filepath);
+        $worksheet = $spreadsheet->getActiveSheet();
+        $dataExcel = $worksheet->toArray();
+
+        DB::beginTransaction();
+        try {
+            // Hapus header (baris 1 hingga 6)
+            for ($i = 0; $i < 6; $i++) {
+                array_shift($dataExcel);
+            }
+
+            // Hapus kolom A dari setiap baris
+            foreach ($dataExcel as &$rowData) {
+                unset($rowData[0]); // Hapus kolom A (indeks 0) dari baris saat ini
+                $rowData = array_values($rowData); // Reset indeks array setelah menghapus kolom A
+            }
+            unset($rowData);
+
+            // Cek data di tabel siswa, apakah ada di tabel siswa yang sama.
+            foreach ($dataExcel as $rowData) {
+                // Cek apakah data memiliki NOMOR_S
+                if (isset($rowData[65]) && !empty($rowData[65])) {
+                    // dd('masuk if ketiga');
+                    // Cari data siswa dengan NOMOR_S yang sama di tabel Siswa
+                    $siswa = Siswa::where('NOMOR_S', $rowData[65])->get();
+                    // dd($siswa);
+                    if ($siswa->isNotEmpty()) {
+                        // Memindahkan data siswa ke tabel Arship dan hapus dari tabel Siswa
+                        foreach ($siswa as $siswaItem) {
+                            // dd($siswaItem);
+                            Arship::create($siswaItem->toArray());
+                            $siswaItem->delete();
+                            // dd($siswaItem);
+                        }
+                    }
+                }
+            }
+
+            // Memasukkan data dari file Excel ke tabel Siswa
+            foreach ($dataExcel as $rowData) {
+                // dd('masuk perulangan kedua');
+                Siswa::create([
+                    'Nama' => $rowData[0],
+                    'NIPD' => $rowData[1],
+                    'JK' => $rowData[2],
+                    'NISN' => $rowData[3],
+                    'Tempat_lahir' => $rowData[4],
+                    'Tanggal_Lahir' => $rowData[5],
+                    'NIK' => $rowData[6] !== '' ? $rowData[6] : null,
+                    'Agama' => $rowData[7],
+                    'Alamat' => $rowData[8],
+                    'RT' => $rowData[9],
+                    'RW' => $rowData[10],
+                    'Dusun' => $rowData[11],
+                    'Kelurahan' => $rowData[12],
+                    'Kecamatan' => $rowData[13],
+                    'kode_pos' => $rowData[14],
+                    'Jenis_Tinggal' => $rowData[15],
+                    'Alat_Transportasi' => $rowData[16],
+                    'Telepon' => $rowData[17],
+                    'HP' => $rowData[18],
+                    'Email' => $rowData[19],
+                    'SKHUN' => $rowData[20],
+                    'Penerima_KPS' => $rowData[21],
+                    'No_KPS' => $rowData[22] !== '' ? $rowData[22] : null,
+                    'Nama_Ayah' => $rowData[23],
+                    'Tahun_Lahir_Ayah' => $rowData[24],
+                    'Jenjang_Pendidikan_Ayah' => $rowData[25],
+                    'Pekerjaan_Ayah' => $rowData[26],
+                    'Penghasilan_Ayah' => $rowData[27],
+                    'NIK_Ayah' => $rowData[28],
+                    'Nama_ibu' => $rowData[29],
+                    'Tahun_Lahir_Ibu' => $rowData[30],
+                    'Jenjang_Pendidikan_Ibu' => $rowData[31],
+                    'Pekerjaan_Ibu' => $rowData[32],
+                    'Penghasilan_Ibu' => $rowData[33],
+                    'NIK_Ibu' => $rowData[34],
+                    'Nama_wali' => $rowData[35],
+                    'Tahun_Lahir_wali' => $rowData[36],
+                    'Jenjang_Pendidikan_wali' => $rowData[37],
+                    'Pekerjaan_wali' => $rowData[38],
+                    'Penghasilan_wali' => $rowData[39],
+                    'NIK_wali' => $rowData[40],
+                    'Rombel_Set_Ini' => $rowData[41],
+                    'No_Peserta_Ujian_Nasional' => $rowData[42],
+                    'No_Seri_Ijazah' => $rowData[43],
+                    'Penerima_KIP' => $rowData[44],
+                    'Nomor_KIP' => $rowData[45],
+                    'Nama_di_KIP' => $rowData[46],
+                    'No_KKS' => $rowData[47],
+                    'No_Registrasi_Akta_Lahir' => $rowData[48],
+                    'Bank' => $rowData[49],
+                    'Nomor_Rekening_Bank' => $rowData[50],
+                    'Rekening_atas_nama' => $rowData[51],
+                    'Layak_PIP' => $rowData[52],
+                    'Alasan_Layak_PIP' => $rowData[53],
+                    'Kebutuhan_Khusus' => $rowData[54],
+                    'Sekolah_Asal' => $rowData[55],
+                    'Anak_ke_berapa' => $rowData[56],
+                    'Lintang' => $rowData[57],
+                    'bujur' => $rowData[58],
+                    'No_KK' => $rowData[59],
+                    'Berat_Badan' => $rowData[60],
+                    'Tinggi_badan' => $rowData[61],
+                    'Lingkar_Kepala' => $rowData[62],
+                    'Jml_Saudara_Kandung' => $rowData[63],
+                    'Jarak_Rumah_ke_Sekolah' => $rowData[64],
+                    'NOMOR_S' => $rowData[65],
+                ]);
+            }
+
+            $data['status'] = 1;
+            Kirim::where('id_kirim', $id)->update($data);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
+
+        try {
+            // Hapus kolom NOMOR_S (kolom terakhir) dari setiap baris
+            foreach ($worksheet->getRowIterator() as $row) {
+                $cellIterator = $row->getCellIterator();
+                $cellIterator->setIterateOnlyExistingCells(false);
+
+                foreach ($cellIterator as $cell) {
+                    if ($cell->getColumn() == 'BO') { // Assuming NOMOR_S is in column N
+                        // Hapus kolom NOMOR_S dari setiap baris
+                        $colIndex = Coordinate::columnIndexFromString($cell->getColumn());
+                        $worksheet->removeColumnByIndex($colIndex);
+                    }
+                }
+            }
+
+            // Simpan perubahan ke file sementara
+            $tempFileName = 'File ' . $kirim->nama_file;
+            $tempFilePath = storage_path('app/public/simpanFile/temp_/' . $tempFileName);
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save($tempFilePath);
+
+            Session::flash('success', 'Data berhasil disimpan.');
+
+            // Continue to download the file
+            return response()->download($tempFilePath, $tempFileName, [
+                'Content-Disposition' => 'attachment; filename="' . $kirim->nama_file . '"',
+                'Cache-Control' => 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+                'Pragma' => 'no-cache',
+            ])->deleteFileAfterSend();
+        } catch (\Exception $e) {
+            abort(404, 'Data Invalid');
+        }
+    }
 }

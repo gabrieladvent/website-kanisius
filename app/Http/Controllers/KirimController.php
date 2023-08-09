@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kirim;
+use App\Models\User;
+use App\Notifications\KirimNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -11,10 +13,14 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Support\Facades\File;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-
 use Illuminate\Support\Facades\DB;
 
+
+// use Illuminate\Notifications\Notification;
+
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use Illuminate\Support\Facades\Notification;
+
 
 class KirimController extends Controller
 {
@@ -25,6 +31,7 @@ class KirimController extends Controller
         return view('uploadfile', compact('user', 'title'));
     }
 
+
     //Fungsi untuk memproses file yang diupload
     public function showdelete()
     {
@@ -33,8 +40,19 @@ class KirimController extends Controller
         return view('uploadfile', compact('data', 'title'));
     }
     
+
+    // Fungsi untuk memproses file yang diupload
+
     public function postFile(Request $request, $nomor_s)
     {
+        $user = User::all();
+        $namasekolah = User::where('id', $nomor_s)->value('namasekolah');
+
+        $userId = Auth::user();
+        $userLogin = $userId->id;
+        $users = User::where('status', 'yayasan')->get();
+        $sekolah = User::where('id', $nomor_s)->value('namasekolah');
+
         // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:20480',
@@ -80,6 +98,9 @@ class KirimController extends Controller
             $data->ID = $nomor_s;
             $komentar = $request->input('komentar');
             $data->Komentar = !empty($komentar) ? $komentar : '';
+            $data->status = 0;
+
+            Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin));
             $data->save();
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session
@@ -92,6 +113,7 @@ class KirimController extends Controller
             ])->with('success', 'File berhasil diunggah.');
         } catch (\Exception $e) {
             // Jika gagal maka laman tidak akan berubah
+
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
                 'komentar' => $komentar,
@@ -103,14 +125,22 @@ class KirimController extends Controller
     public function deleteFile($filename)
     {
         // dd(Storage::exists('public/simpanFile/'.$filename));
-       // Hapus file dengan nama yang diberikan
+        // Hapus file dengan nama yang diberikan
+        // return redirect()->back()->with('gagal', 'Terjadi kesalahan saat mengunggah file.')->withInput();
         if (Storage::exists('public/simpanFile/'.$filename)) {
             Storage::delete('public/simpanFile/'.$filename);
-
+    
             DB::delete("DELETE FROM kirim WHERE nama_file = ? AND ID = ?", [$filename, Auth::user()->id]);
-            return redirect()->back()->with('success', 'File berhasil dihapus.');
+            return redirect()->route('upload-view',['slug' => 'slug'])->with('success', 'File berhasil dihapus.');
         } else {
             return redirect()->back()->with('error', 'File tidak ditemukan.');
         }
     }
+
+    // public function showdelete()
+    // {
+    //     // dd(Storage::exists('public/simpanFile/'.$filename));
+    //         // Hapus file dengan nama yang diberikan
+    // }
+       
 }

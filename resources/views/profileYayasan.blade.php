@@ -38,15 +38,29 @@
                         @csrf
                         @method('PUT')
                         <label for="nomorID">Nama User</label>
-                        <input disabled type="text" class="form-control" id="name" placeholder="Masukan Nama"
-                            name="name" value="{{ $user->name }}">
-                        @error('name')
-                            <small>{{ $message }}</small>
-                        @enderror
+                        <div class="input-group mb-3">
+                            <input disabled type="text" class="form-control" id="name" placeholder="Masukan Nama"
+                                name="name" value="{{ $user->name }}">
+                            @error('name')
+                                <small>{{ $message }}</small>
+                            @enderror
+                        </div>
 
                         <label for="exampleInput disabled ssword1">Password</label>
-                        <input disabled type="password" name="password" class="form-control" id="exampleInputPassword1"
-                            placeholder="Password">
+                        <div class="input-group mb-3">
+                            <div class="password-container">
+                                <input disabled type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28.8vw;">
+                                <i class="fa fa-eye-slash" id="togglePassword"></i>
+                            </div>
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
                         <label for="password-confirm">Konfirmasi Password</label>
                         <input disabled id="password-confirm" type="password" class="form-control"

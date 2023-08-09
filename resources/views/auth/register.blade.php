@@ -112,6 +112,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ ('Register') }}
                                 </button>
+                                    <button type="button" class="btn btn-info float-end" onclick="goBack()">
+                                        <i class="fas fa-arrow-left"></i> Batal</button>
+                                
                             </div>
                         </div>
                     </form>

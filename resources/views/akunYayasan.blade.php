@@ -62,6 +62,10 @@
                 </tfoot>
             </table>
         </div>
+        <div class="px-5 mt-4">
+            <button type="button" class="btn btn-info" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Kembali</button>
+        </div>
     </div>
     </div>
 @endsection

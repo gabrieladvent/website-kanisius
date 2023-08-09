@@ -15,16 +15,20 @@ class DashboardController extends Controller
 {
     public function showNotifikasi($title)
     {
+
         $notifikasi = Kirim::all();
         $users = User::pluck('namasekolah', 'id');
 
-        return view('notifikasi', compact('notifikasi', 'users', 'title'));
+        return view('notifikasi', compact('notifikasi', 'users', 'title'))->with('isFromShow', true);
     }
 
-    public function daftarSekolah($title) {
+    public function daftarSekolah($title)
+    {
         $dataSekolah = Sekolah::all();
-        return view('notifikasi', compact('title','dataSekolah'));
+
+        return view('notifikasi', compact('dataSekolah', 'title'))->with('isFromShow', false);
     }
+
 
     public function profile(Request $request)
     {

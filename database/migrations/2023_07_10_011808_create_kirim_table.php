@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_file')->length(255);
             $table->string('ID')->length(5);
             $table->string('Komentar')->length(255);
+            $table->integer('status');
             $table->timestamps();
         });
     }
