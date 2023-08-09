@@ -75,9 +75,10 @@
         <div class="col ms-5 mt-5">
             <div class="row mt-5 mb-5 ms-5 d-flex justify-content-center shadow-3-strong bg-light">
                 <div class="col-3 mt-3 mb-3  text-center">
-                    <div class="row  text-center">
                         <a href="akun-yayasan" class="btn bg-dark text-white">Daftar Akun Operator</a>
-                    </div>
+                </div>
+                <div class="col-3 mt-3 mb-3  text-center">
+                        <a href="#" class="btn bg-white text-dark border border-2">Portal Upload File</a>
                 </div>
             </div>
 

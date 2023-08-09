@@ -467,4 +467,10 @@ class SiswaController extends Controller
             abort(404, 'Data Invalid');
         }
     }
+
+    public function SiswaPersonal($nisn, $title){
+        $data = Siswa::where('NISN', $nisn)->get();
+        // dd($data);
+        return view('detailSiswa', compact('data','title'));
+    }
 }

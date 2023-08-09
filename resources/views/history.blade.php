@@ -44,7 +44,6 @@
                                     <td>No Record</td>
                                 </tr>
                             @endforelse
-                            
                         </tbody>
                     </table>
                 </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\YayasanController;
+use App\Models\Sekolah;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,11 +97,13 @@ Route::get('/update-and-download/{id}', [SiswaController::class, 'downloadAndUpd
 // Untuk masuk ke daftar sekolah
 Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah')->middleware('role:yayasan');
 
+// Untuk masuk ke tampilan detail siswa
+Route::get('/detail-siswa/personal/{nisn}', [SiswaController::class, 'SiswaPersonal'])->name('detail-siswa-personal')->defaults('title', 'Detail')->middleware('role:yayasan');
 
 
 // Yang login adalah sekolah/operator sekolah
 // Masuk ke dashboard sekolah
-Route::get('/sekolah/{slug}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'SekolahDashoard')->middleware('role:sekolah');
+Route::get('/sekolah/{slug}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Sekolah Dashoard')->middleware('role:sekolah');
 
 // Masuk ke tampilan upload file
 Route::get('/sekolah/upload/{slug}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
@@ -126,6 +129,8 @@ Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('upd
 // Masuk ke halaman history
 Route::get('/riwayat-kirim/sekolah/{slug}/', [SekolahController::class, 'history'])->name('riwayat-kirim')->defaults('title', 'Riwayat Kirim')->middleware('role:sekolah');
 
+
+Route::get('/dokumentas', [SekolahController::class, 'showGoogleDriveLink'])->name('dokumentasi');
 
 Auth::routes();
 
