@@ -4,10 +4,17 @@
         <div class="row gutters-sm px-5 mt-5">
             <div class="col-md-4 mb-3 mt-5">
                 <div class="card">
+                    {{-- https://bootdey.com/img/Content/avatar/avatar7.png --}}
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="rounded-circle"
+                            @if ($item->JK === 'L')
+                                <img src="{{ asset('/icon/laki.png') }}" alt="" class="rounded-circle"
                                 width="150">
+                            @else
+                                <img src="{{ asset('/icon/cewe.png') }}" alt="" class="rounded-circle"
+                                 width="150">
+                            @endif
+                            
                             <div class="mt-3">
                                 <h4>{{ $item->Nama }}</h4>
                                 @if ($item->JK === 'P')
@@ -197,12 +204,10 @@
                                 <h6 class="mb-0">Layak PIP</h6>
                             </div>
                             <div class="col">Alasan</div>
-                            <div class="col"></div>
                             <div class="col-sm-12 text-secondary">
                                 <div class="row">
                                     <div class="col">{{ $item->Layak_PIP }}</div>
                                     <div class="col">{{ $item->Alasan_Layak_PIP ? $item->Alasan_Layak_PIP : '-'  }}</div>
-                                    <div class="col"></div>
                                 </div>
                             </div>
                         </div>
@@ -212,12 +217,10 @@
                                 <h6 class="mb-0">Penerima KPS</h6>
                             </div>
                             <div class="col">Nomor KPS</div>
-                            <div class="col"></div>
                             <div class="col-sm-12 text-secondary">
                                 <div class="row">
                                     <div class="col">{{ $item->Penerima_KPS }}</div>
                                     <div class="col">{{ $item->No_KPS ? $item->No_KPS : '-'  }}</div>
-                                    <div class="col"></div>
                                 </div>
                             </div>
                         </div>
@@ -246,108 +249,215 @@
             <div class="col">
                 <div class="row gutters-sm">
                     <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
+                        <div class="card">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i
-                                        class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="mb-0">Data Ayah</h4>
+                                    </div>
                                 </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                        aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Nama Ayah</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Nama_Ayah ? $item->Nama_Ayah : '-'  }}
+                                    </div>
                                 </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                        aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Tahun Lahir</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Tahun_Lahir_Ayah ? $item->Tahun_Lahir_Ayah : '-'  }}
+                                    </div>
                                 </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                        aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">NIK Ayah</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->NIK_Ayah ? $item->NIK_Ayah : '-'  }}
+                                    </div>
                                 </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                        aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Jenjang Pendidikan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Jenjang_Pendidikan_Ayah ? $item->Jenjang_Pendidikan_Ayah : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Pekerjaan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Pekerjaan_Ayah ? $item->Pekerjaan_Ayah : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Penghasilan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Penghasilan_Ayah ? $item->Penghasilan_Ayah : '-'  }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
+                        <div class="card">
                             <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i
-                                        class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="mb-0">Data Ibu</h4>
+                                    </div>
                                 </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                        aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                        aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                        aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                        aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-sm-6 mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3"><i
-                                        class="material-icons text-info mr-2">assignment</i>Project Status</h6>
-                                <small>Web Design</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%"
-                                        aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Nama Ibu</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Nama_ibu ? $item->Nama_ibu : '-'  }}
+                                    </div>
                                 </div>
-                                <small>Website Markup</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 72%"
-                                        aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Tahun Lahir</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Tahun_Lahir_Ibu ? $item->Tahun_Lahir_Ibu : '-'  }}
+                                    </div>
                                 </div>
-                                <small>One Page</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 89%"
-                                        aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">NIK Ibu</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->NIK_Ibu ? $item->NIK_Ibu : '-'  }}
+                                    </div>
                                 </div>
-                                <small>Mobile Template</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                        aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Jenjang Pendidikan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Jenjang_Pendidikan_Ibu ? $item->Jenjang_Pendidikan_Ibu : '-'  }}
+                                    </div>
                                 </div>
-                                <small>Backend API</small>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                        aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Pekerjaan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Pekerjaan_Ibu ? $item->Pekerjaan_Ibu : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Penghasilan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Penghasilan_Ibu ? $item->Penghasilan_Ibu : '-'  }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>     
+
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="mb-0">Data Wali</h4>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Nama wali</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Nama_wali ? $item->Nama_wali : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Tahun Lahir</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Tahun_Lahir_wali ? $item->Tahun_Lahir_wali : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">NIK wali</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->NIK_wali ? $item->NIK_wali : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Jenjang Pendidikan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Jenjang_Pendidikan_wali ? $item->Jenjang_Pendidikan_wali : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Pekerjaan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Pekerjaan_wali ? $item->Pekerjaan_wali : '-'  }}
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col">
+                                        <h6 class="mb-0">Penghasilan</h6>
+                                    </div>
+                                    <div class="col-sm-12 text-secondary">
+                                        {{ $item->Penghasilan_wali ? $item->Penghasilan_wali : '-'  }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
                 </div>
             </div>
+            <div>
+                <button type="button" class="btn btn-info px-5" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Kembali</button>
+            </div>
+            
         </div>
     @endforeach
 @endsection
