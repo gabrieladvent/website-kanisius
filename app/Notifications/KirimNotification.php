@@ -17,11 +17,13 @@ class KirimNotification extends Notification
     private $filename;
     private $namasekolah;
     private $userLogin;
-    public function __construct($filename, $namasekolah, $userLogin)
+    private $komen;
+    public function __construct($filename, $namasekolah, $userLogin, $komen)
     {
         $this->filename = $filename;
         $this->namasekolah = $namasekolah;
         $this->userLogin = $userLogin;
+        $this->komen = $komen;
     }
 
     /**
@@ -55,7 +57,8 @@ class KirimNotification extends Notification
         return [
             'name' =>$this->filename,
             'namasekolah' =>$this->namasekolah,
-            'userLogin'=>$this->userLogin
+            'userLogin'=>$this->userLogin,
+            'komen' =>$this->komen
         ];
     }
 }

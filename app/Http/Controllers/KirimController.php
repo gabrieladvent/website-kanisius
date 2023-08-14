@@ -58,7 +58,14 @@ class KirimController extends Controller
             $lastColumnIndex = Coordinate::columnIndexFromString($lastColumn);
 
             // Menyimpan data nomor_s di kolom terakhir yang terisi pada baris pertama (header)
-            $newColumnIndex = $lastColumnIndex + 1;
+            
+            if (strpos($sekolah, 'TK') === 0) {
+                $newColumnIndex = $lastColumnIndex;
+            } else {
+                $newColumnIndex = $lastColumnIndex + 1;
+            }
+
+            
             $newColumn = Coordinate::stringFromColumnIndex($newColumnIndex);
             $sheet->setCellValue($newColumn . '5', 'nomor_s');
 
@@ -84,7 +91,9 @@ class KirimController extends Controller
             $data->Komentar = !empty($komentar) ? $komentar : '';
             $data->status = 0;
 
-            Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin));
+            $komen = !empty($komentar) ? $komentar : '';
+
+            Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen));
             $data->save();
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session

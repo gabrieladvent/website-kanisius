@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Siswa;
 use App\Models\Arship;
+use App\Models\Siswa_TK;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -21,9 +22,11 @@ class SiswaController extends Controller
     {
         $user = Auth::user();
         $siswa = Siswa::all();
+        $tk = Siswa_TK::all();
         // Lakukan eager loading untuk data sekolah terkait
         $data_siswa = $siswa->load('sekolah');
-        return view('tabeluseryayasan', compact('data_siswa', 'title', 'user'));
+        $data_tk = $tk->load('sekolah');
+        return view('tabeluseryayasan', compact('data_siswa', 'data_tk', 'title', 'user'));
     }
 
     public function detailSiswa($slug, $title)
@@ -35,8 +38,10 @@ class SiswaController extends Controller
         $data = Siswa::where('nomor_s', $id)->get();
 
         $user = Auth::user();
+        $isTK = $user->namasekolah;
+        $TK = Siswa_TK::where('NOMOR_S', $id)->get();
         if ($data) {
-            return view('dataSiswaSekolah', compact('data', 'user', 'title'));
+            return view('dataSiswaSekolah', compact('data', 'isTK', 'TK', 'user', 'title'));
         } else {
             return response('Siswa tidak ditemukan', 404);
         }
@@ -50,9 +55,11 @@ class SiswaController extends Controller
         // Dapatkan siswa-siswa dari tabel siswa yang memiliki nomor_s yang sama dengan id
         $data = Siswa::where('nomor_s', $id)->paginate(5);
         $user = Auth::user();
+        $isTK = $user->namasekolah;
+        $TK = Siswa_TK::where('NOMOR_S', $id)->paginate(5);
 
         if ($data) {
-            return view('homeSekolah', compact('data', 'title', 'user'));
+            return view('homeSekolah', compact('data','isTK', 'TK', 'title', 'user'));
         } else {
             return response('Siswa tidak ditemukan', 404);
         }
@@ -301,11 +308,11 @@ class SiswaController extends Controller
             ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
             ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
             ->pluck('id');
-            
+
         if (!$notifications) {
             abort(404, 'Data Tidak Ditemukan');
         }
-        
+
         DB::table('notifications')
             ->whereIn('id', $notifications)
             ->delete();
@@ -428,7 +435,7 @@ class SiswaController extends Controller
 
             $data['status'] = 1;
             Kirim::where('id_kirim', $id)->update($data);
-            
+
             DB::commit();
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -468,9 +475,19 @@ class SiswaController extends Controller
         }
     }
 
-    public function SiswaPersonal($nisn, $title){
-        $data = Siswa::where('NISN', $nisn)->get();
+    public function SiswaPersonal($nisn, $namasekolah, $title)
+    {
+        // dd($namasekolah);
+        $user = Auth::user();
+        if(strpos($namasekolah, 'TK') === 0){
+            $isTK = true;
+            $data = Siswa_TK::where('NISN', $nisn)->get();
+        }else{
+            $isTK = false;
+            $data = Siswa::where('NISN', $nisn)->get();
+        }
         // dd($data);
-        return view('detailSiswa', compact('data','title'));
+        
+        return view('detailSiswa', compact('data', 'user', 'isTK', 'title'));
     }
 }

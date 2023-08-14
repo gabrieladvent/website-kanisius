@@ -96,6 +96,7 @@ class YayasanController extends Controller
     // Method untuk menampilkan message di dashboard yayasan
     public function showNotifikasi($id, $title)
     {
+
         $idLoginNotif = '';
         $notification = DB::table('notifications')
                         ->select('data')
@@ -114,6 +115,7 @@ class YayasanController extends Controller
         if (!$notifikasi) {
             return redirect()->route('profile')->with('gagal', 'Data tidak ditemukan');
         }
+        $userKirim = User::where('id', $idLoginNotif)->value('namasekolah');
         // Pastikan file Excel ada pada path yang sesuai
         $excelPath = public_path('storage/simpanFile/' . $notifikasi->nama_file);
 
@@ -146,6 +148,6 @@ class YayasanController extends Controller
             $currentRow++;
         }
 
-        return view('tableSekolah', compact('notifikasi', 'data_siswa', 'title'));
+        return view('tableSekolah', compact('notifikasi', 'data_siswa', 'userKirim', 'title'));
     }
 }

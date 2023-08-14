@@ -14,7 +14,7 @@
                             <th>Komentar</th>
                             <th>Tanggal Kirim</th>
                             <th>Status</th>
-                            <th colspan="2">Action</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,37 +30,26 @@
                             @endif
                         @endforeach
 
-                        @foreach ($false as $notif)
+                        @foreach (\Auth::user()->notifications as $notif)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $notif->user->namasekolah }}</td>
-                                <td>{{ $notif->nama_file }}</td>
-                                <td>
-                                    @unless (empty($notif->Komentar))
-                                        {{ $notif->Komentar }}
-                                    @else
-                                        Tidak ada komentar
-                                    @endunless
-                                </td>
+                            <td>{{ $loop->iteration }}</td>
+                                <td>{{ $notif->data['namasekolah'] }} </td>
+                                <td>{{ $notif->data['name'] }}</td>
+                                <td>{{ $notif->data['komen'] }}</td>
                                 <td>{{ $notif->created_at->format('Y-m-d') }}</td>
+                                <td>Belum Di Baca</td>
                                 <td>
-                                    Belum Dibaca
-                                </td>
-                                <td colspan="1">
-                                    <a href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}"
-                                        class="fs-6">Lihat</a>
-                                    
-                                </td>
-                                <td>
-                                    <a href="{{ route('update-and-download', ['id' => $notif->id_kirim]) }}" class="fs-6">Update-Download</a>
+                                    <a href="{{ route('show-notifikasi', ['id' => $notif->id]) }}">
+                                        Lihat
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
 
-                        <tr><td colspan="8"></td></tr>
+                        <tr><td colspan="7"></td></tr>
 
                         @foreach ($true as $notif)
-                            <tr class="table-secondary">
+                            <tr class="table-secondary text-secondary">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $notif->user->namasekolah }}</td>
                                 <td>{{ $notif->nama_file }}</td>
@@ -75,9 +64,7 @@
                                 <td>
                                     Sudah Dibaca
                                 </td>
-                                <td colspan="2" class="text-center">
-                                    Tidak Ada Action
-                                </td>
+                                <td class="">Tidak Ada Action</td>
                             </tr>
                         @endforeach
                     </tbody>

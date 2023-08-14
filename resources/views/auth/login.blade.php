@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
+    <link href="{{ asset('/image/logo.png') }}" rel="icon">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -71,7 +72,7 @@
                                     class="form-control  @error('email') is-invalid @enderror" placeholder="Email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>Nama pengguna atau kata sandi salah</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -96,7 +97,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-primary btn-block">Sign In</button>
@@ -113,6 +114,27 @@
             </div>
         </div>
     </div>
+
+    @if (Session::has('success'))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                positionClass: 'toast-top-right',
+            }
+            toastr.success("{{ Session::get('success') }}");
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                positionClass: 'toast-top-right',
+            }
+            toastr.error();
+            ("{{ Session::get('error') }}");
+        </script>
+    @endif
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>

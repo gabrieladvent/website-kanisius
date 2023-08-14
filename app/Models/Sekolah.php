@@ -18,4 +18,12 @@ class Sekolah extends Model
     public function arship (){
         return $this->hasMany(Arship::class, 'NOMOR_S');
     }
+
+    public function TK_Siswa(){
+        return $this->hasMany(Siswa_TK::class, 'NOMOR_S');
+    }
+
+    public function TKK_Arsip (){
+        return $this->hasMany(Arsip_TK::class, 'NOMOR_S');
+    }
 }
