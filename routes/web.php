@@ -57,6 +57,9 @@ Route::group([
     // Masuk ke tampilan profile
     Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
 
+    // fungsi untuk update profile 
+    Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('update');
+
     Route::group([
         'middleware' => 'role:yayasan'
     ], function () {
@@ -140,9 +143,6 @@ Route::group([
 
         // Masuk ke tampilan data siswa
         Route::get('/sekolah/data/{slug}', [SiswaController::class, 'detailSiswa'])->name('data-siswa')->defaults('title', 'Data-Siswa');
-
-        // fungsi untuk update profile sekolah
-        Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('update');
 
         // Masuk ke halaman history
         Route::get('/riwayat-kirim/sekolah/{slug}/', [SekolahController::class, 'history'])->name('riwayat-kirim')->defaults('title', 'Riwayat Kirim');

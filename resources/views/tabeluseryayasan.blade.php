@@ -40,10 +40,10 @@
                                     Perempuan
                                 @endif
                             </td>
-                            <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
+                            <td>{{ $item->sekolah->NAMASEKOLAH}}</td>
                             <td>{{ $item->Rombel_Set_Ini }}</td>
                             <td>
-                                <a href="{{ route('detail-siswa-personal', ['nisn' => $item->NISN, 'namasekolah' => $item->NOMOR_S]) }}"
+                                <a href="{{ route('detail-siswa-personal', ['nisn' => $item->NISN, 'namasekolah' => $item->sekolah->NAMASEKOLAH]) }}"
                                     class="btn btn-primary">Detail</a>
                             </td>
                         </tr>
@@ -99,7 +99,7 @@
                                     Perempuan
                                 @endif
                             </td>
-                            <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
+                            <td>{{ $item->sekolah->NAMASEKOLAH}}</td>
                             <td>{{ $item->status }}</td>
                             <td>
                                 <a href="{{ route('detail-siswa-personal', ['nisn' => $item->NISN, 'namasekolah' => $item->sekolah->NAMASEKOLAH]) }}"

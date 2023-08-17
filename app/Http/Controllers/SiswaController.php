@@ -448,7 +448,7 @@ class SiswaController extends Controller
                 $cellIterator->setIterateOnlyExistingCells(false);
 
                 foreach ($cellIterator as $cell) {
-                    if ($cell->getColumn() == 'BO') { // Assuming NOMOR_S is in column N
+                    if ($cell->getColumn() == 'BO') { 
                         // Hapus kolom NOMOR_S dari setiap baris
                         $colIndex = Coordinate::columnIndexFromString($cell->getColumn());
                         $worksheet->removeColumnByIndex($colIndex);

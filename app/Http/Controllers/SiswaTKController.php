@@ -256,7 +256,7 @@ class SiswaTKController extends Controller
                 $cellIterator->setIterateOnlyExistingCells(false);
 
                 foreach ($cellIterator as $cell) {
-                    if ($cell->getColumn() == 'W') { // Assuming NOMOR_S is in column N
+                    if ($cell->getColumn() == 'W') {
                         // Hapus kolom NOMOR_S dari setiap baris
                         $colIndex = Coordinate::columnIndexFromString($cell->getColumn());
                         $worksheet->removeColumnByIndex($colIndex);
@@ -271,7 +271,7 @@ class SiswaTKController extends Controller
             $writer->save($tempFilePath);
 
             Session::flash('success', 'Data berhasil disimpan.');
-
+            
             // Continue to download the file
             return response()->download($tempFilePath, $tempFileName, [
                 'Content-Disposition' => 'attachment; filename="' . $kirim->nama_file . '"',

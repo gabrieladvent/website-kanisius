@@ -61,7 +61,7 @@ class KirimController extends Controller
             
             if (strpos($sekolah, 'TK') === 0) {
                 $newColumnIndex = $lastColumnIndex;
-            } else {
+            } elseif(strpos($sekolah, 'SD') === 0 || strpos($sekolah, 'SMP') === 0) {
                 $newColumnIndex = $lastColumnIndex + 1;
             }
 
