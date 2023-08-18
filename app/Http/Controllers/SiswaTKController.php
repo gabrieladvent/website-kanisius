@@ -119,7 +119,7 @@ class SiswaTKController extends Controller
                     'NOMOR_S' => $rowData[22],
                 ]);
             }
-            $data['status'] = 1;
+            $data['status'] = 2;
             Kirim::where('id_kirim', $id)->update($data);
             // Commit transaksi database
             DB::commit();
@@ -237,7 +237,7 @@ class SiswaTKController extends Controller
                     'NOMOR_S' => $rowData[22],
                 ]);
             }
-            $data['status'] = 1;
+            $data['status'] = 2;
             Kirim::where('id_kirim', $id)->update($data);
             // Commit transaksi database
             DB::commit();

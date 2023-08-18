@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kirim;
+use App\Models\Portal;
 use App\Models\User;
 use App\Notifications\KirimNotification;
 use Illuminate\Http\Request;
@@ -23,7 +24,10 @@ class KirimController extends Controller
     {
         $user = Auth::user();
         $title = 'Upload File';
-        return view('uploadfile', compact('user', 'title'));
+        
+        $upload_start = Portal::all()->value('upload_start');
+        $upload_end = Portal::all()->value('upload_end');
+        return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
     }
 
     // Fungsi untuk memproses file yang diupload
@@ -89,11 +93,14 @@ class KirimController extends Controller
             $data->ID = $nomor_s;
             $komentar = $request->input('komentar');
             $data->Komentar = !empty($komentar) ? $komentar : '';
-            $data->status = 0;
+            $status = 1;
+            $data->status = $status;
 
             $komen = !empty($komentar) ? $komentar : '';
+            $stt  = $status;
 
-            Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen));
+
+            Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen, $stt));
             $data->save();
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session

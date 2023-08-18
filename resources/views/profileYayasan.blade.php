@@ -78,7 +78,7 @@
                         <a href="akun-yayasan" class="btn bg-dark text-white">Daftar Akun Operator</a>
                 </div>
                 <div class="col-3 mt-3 mb-3  text-center">
-                        <a href="#" class="btn bg-white text-dark border border-2">Portal Upload File</a>
+                        <a href="{{ route('portal-view') }}" class="btn bg-white text-dark border border-2">Portal Upload File</a>
                 </div>
             </div>
 

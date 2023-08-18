@@ -59,7 +59,7 @@ class SiswaController extends Controller
         $TK = Siswa_TK::where('NOMOR_S', $id)->paginate(5);
 
         if ($data) {
-            return view('homeSekolah', compact('data','isTK', 'TK', 'title', 'user'));
+            return view('homeSekolah', compact('data', 'isTK', 'TK', 'title', 'user'));
         } else {
             return response('Siswa tidak ditemukan', 404);
         }
@@ -210,8 +210,10 @@ class SiswaController extends Controller
                     'NOMOR_S' => $rowData[65],
                 ]);
             }
-            $data['status'] = 1;
-            Kirim::where('id_kirim', $id)->update($data);
+            $data['status'] = 2;
+            $affectedRows = Kirim::where('id_kirim', $id)->update($data);
+            $kirim = Kirim::where('id_kirim', $id)->first();
+
             // Commit transaksi database
             DB::commit();
             // dd('bisa commit');
@@ -433,8 +435,9 @@ class SiswaController extends Controller
                 ]);
             }
 
-            $data['status'] = 1;
-            Kirim::where('id_kirim', $id)->update($data);
+            $data['status'] = 2;
+            $affectedRows = Kirim::where('id_kirim', $id)->update($data);
+
 
             DB::commit();
         } catch (\Exception $e) {
@@ -448,7 +451,7 @@ class SiswaController extends Controller
                 $cellIterator->setIterateOnlyExistingCells(false);
 
                 foreach ($cellIterator as $cell) {
-                    if ($cell->getColumn() == 'BO') { 
+                    if ($cell->getColumn() == 'BO') {
                         // Hapus kolom NOMOR_S dari setiap baris
                         $colIndex = Coordinate::columnIndexFromString($cell->getColumn());
                         $worksheet->removeColumnByIndex($colIndex);
@@ -479,15 +482,15 @@ class SiswaController extends Controller
     {
         // dd($namasekolah);
         $user = Auth::user();
-        if(strpos($namasekolah, 'TK') === 0){
+        if (strpos($namasekolah, 'TK') === 0) {
             $isTK = true;
             $data = Siswa_TK::where('NISN', $nisn)->get();
-        }else{
+        } else {
             $isTK = false;
             $data = Siswa::where('NISN', $nisn)->get();
         }
         // dd($data);
-        
+
         return view('detailSiswa', compact('data', 'user', 'isTK', 'title'));
     }
 }

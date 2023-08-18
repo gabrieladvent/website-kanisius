@@ -119,6 +119,11 @@ Route::group([
 
         // Untuk masuk ke daftar sekolah
         Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah');
+
+        // Testing 
+        Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view');
+
+        Route::post('/post', [DashboardController::class, 'setPortal'])->name('set-portal');
     });
 
     Route::group([
