@@ -5,3 +5,53 @@ body{
 i{
     color: #072A40;
 }
+th {
+    font-weight: bold; 
+}
+.special-col{
+    /* background-image: url("../image/bgLogin.png"); */
+    border-radius: 15px;
+    border: 1px solid #434242;
+    background: linear-gradient(to bottom right, #33528F 4%, #7387AE 27%, #A3ACBD 40%) bottom right / 50% 50% no-repeat, linear-gradient(to bottom left, #33528F 4%, #7387AE 27%, #A3ACBD 40%) bottom left / 50% 50% no-repeat, linear-gradient(to top left, #33528F 4%, #7387AE 27%, #A3ACBD 40%) top left / 50% 50% no-repeat, linear-gradient(to top right, #33528F 4%, #7387AE 27%, #A3ACBD 40%) top right / 50% 50% no-repeat;
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 20px;
+}
+.col-1 {
+    /* Gaya CSS yang sudah ada */
+    margin-top: 4px;
+}
+
+.col-1 p, th.col-3,th.col-4, th.col-2 {
+    font-weight: bold; 
+}
+
+.table-container {
+    position: relative;
+}
+
+.see-more-link {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    margin: 10px; /* Sesuaikan margin sesuai kebutuhan */
+}
+
+.custom-text-style {
+    color: #244076;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.custom-table {
+    background-color: #ffffff;
+    border-radius: 10px; /* Sesuaikan radius sudut sesuai kebutuhan */
+}
+.centered-message {
+    text-align: center;
+    background-color: yellow; /* Ganti dengan warna kuning yang Anda inginkan */
+}
+
+

@@ -1,25 +1,28 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
-    <div class="isi-main px-5">
-        <div class="row">
-            <div class="col fw-bold mt-5 px-5">
-                <p class="px-3 h2 mt-4 fw-bold">File Submissions</p>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col">
-                <p class="float-end me-3">Maximum file size: 20 MB</p>
+    <div class="data-siswa py-3 " style="background: #f1f1f1; margin-top: 6%;">
+        <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
+            <div class="isi-main px-5">
+                <div class="row ">
+                    <div class="col ">
+                        <p class="h1 fw-bold">File Submissions</p>
+                    </div>
+                    <div class="col text-end align-self-end">
+                        <p class="h9  mb-0">Maximum file size: 20 MB</p>
+                    </div>
+                </div>
             </div>
-        </div>
+
 
         <div class="first-box px-4 ms-4">
             <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+                
                 <div class="col">
                     <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
                     <form action="{{ route('upload',['slug' => $user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <fieldset class="upload_dropZone text-center mb-3 p-4">
+                        <fieldset class="upload_dropZone text-center mb-2 p-4" style="margin: auto;">
                             <legend class="visually-hidden">Image uploader</legend>
                             <i class="fa-solid fa-file-excel fa-2xl"></i>
                             <p class="small my-2 mt-4">You can drag and drop files here to add them <br><i>or</i>
@@ -64,12 +67,14 @@
 
         <div class="row mt-3 pb-2 d-flex justify-content-center">
             <div class="col-2">
-                <button type="submit" class="w-75 btn bg-dark text-white">Submit</button>
+                <button type="submit" class="w-75 btn bg-success text-white">Submit</button>
             </div>
             <div class="col-2">
-                <a href="" class="w-75 text-dark btn bg-light">Cancel</a>
+                <a href="" class="w-75 text-white btn bg-danger">Cancel</a>
             </div>
         </div>
         </form>
     </div>
+</div>
+{{-- </div> --}}
 @endsection

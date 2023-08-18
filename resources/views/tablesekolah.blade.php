@@ -3,7 +3,7 @@
     <div class="">
         <div class="judul">
             <div class="judul-container">
-                <p class="fs-3 fw-bold text-wrap">Data Siswa-Siswi SD Sengken </p>
+                <p class="fs-3 fw-bold text-wrap">Data Siswa-Siswi {{ $user->namasekolah}} </p>
                 <p class="fs-3 fw-bold text-wrap">Tahun Ajaran 2023/2024</p>
             </div>
         </div>

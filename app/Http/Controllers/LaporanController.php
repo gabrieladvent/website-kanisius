@@ -19,44 +19,71 @@ class LaporanController extends Controller
     $data_siswa = $siswa->load('sekolah');
     $sekolah = Sekolah::all();
     return view('laporan', compact('data_siswa', 'sekolah', 'title', 'user'));
-    }
-
    
-
+    }
+    
     public function laporanFilter(Request $request, $title)
     {
         return $request->all();
-        $siswa = Siswa::all();
-        $data_siswa = $siswa->load('sekolah');
-        $data_siswa1 = $data_siswa::query(); // Change User::query() to Siswa::query()
-
-        //filter by tingkatan
-        $data_siswa1->when($request->tingkatan, function ($query) use ($request) {
-            return $query->where('tingkatan', 'like', '%' . $request->tingkatan . '%');
-        });
-
-        //filter by namasekolah
-        $data_siswa1->when($request->namasekolah, function ($query) use ($request) {
-            return $query->where('namasekolah', 'like', '%' . $request->namasekolah . '%');
-        });
-
-        //filter by kelasTK
-        $data_siswa1->when($request->kelasTK, function ($query) use ($request) {
-            return $query->where('kelasTK', 'like', '%' . $request->kelasTK . '%');
-        });
-        //filter by kelasSD
-        $data_siswa1->when($request->kelasSD, function ($query) use ($request) {
-            return $query->where('kelasSD', 'like', '%' . $request->kelasSD . '%');
-        });
-        //filter by kelasSMP
-        $data_siswa1->when($request->kelasSMP, function ($query) use ($request) {
-            return $query->where('kelasSMP', 'like', '%' . $request->kelasSMP . '%');
-        });
-        return view('laporan', compact('data_siswa1', 'sekolah', 'title', 'user'));
-        // return view('laporan', ['data_siswa' => $data_siswa1->paginate(10)]);
     }
 
+    //laporanType : Agama
+    public function laporanAgama(Request $request, $title)
+    {
+        $user = Auth::user();
+
+        // Bangun kueri dasar untuk mengambil model Siswa dengan relasi sekolah yang sudah dimuat eager
+        $query = Siswa::with('sekolah');
+
+        // Filter data siswa berdasarkan kriteria yang dipilih
+        if ($request->has('namaSekolah')) {
+            $query->whereHas('sekolah', function ($subQuery) use ($request) {
+                $subQuery->where('NAMASEKOLAH', $request->namaSekolah);
+            });
+        }
+
+        if ($request->has('namaSekolah')){
+            $kelasSD = $request->input('kelasSD');
+            $detailKelas = $request->input('detailKelas');
+            $rombelSetIni = $kelasSD . '' . $detailKelas;
+            $query->where('Rombel_Set_Ini', $rombelSetIni);
+        }
+
+        $results = $query-> get();
+
+        // // Filter berdasarkan kelasSD dan detailKelas
+        // $kelasSD = $request->input('kelasSD');
+        // $detailKelas = $request->input('detailKelas');
+        // $rombelSetIni = $kelasSD . '' . $detailKelas;
+        // $query->where('Rombel_Set_Ini', $rombelSetIni);
+        
+
+        // Dapatkan hasil kueri akhir
+        $data_siswa = $query->get();
+
+        // Dapatkan model-model Sekolah
+        $sekolah = Sekolah::all();
+
+        // Kembalikan tampilan dengan data yang sudah difilter
+        // return view('laporan', compact('data_siswa', 'sekolah', 'title', 'user'));
+        return view('laporan', compact('results', 'data_siswa', 'sekolah', 'title', 'user'));
+
+    }
+
+    // cetak laporan (Download)
     public function cetakLaporan(Request $request, $title){
         return $request->all();
+    }
+
+
+    // ShowTable
+    public function showTable(Request $request, $title){
+        $user = Auth::user();
+        $kolom = ['NISN', 'Nama', 'JK', 'Rombel_Set_Ini'];
+        if($request-> has('laporanType')){
+            $kolom[] = 'Agama'; 
+        }
+        $data_siswa = Siswa::select($kolom)->get();
+        return view('laporan', compact('results', 'data_siswa', 'sekolah', 'title', 'user'));
     }
 }

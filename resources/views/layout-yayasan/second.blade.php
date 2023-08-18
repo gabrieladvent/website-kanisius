@@ -24,6 +24,9 @@
     @push('js')
         <script src="{{ asset('js/js.js') }}"></script>
     @endpush
+    @push('laporan')
+        <script src="{{ asset('js/laporan.js') }}"></script> 
+    @endpush
     @push('table')
         <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
     @endpush
@@ -149,6 +152,7 @@
 
     @stack('js')
     @stack('table')
+    @stack('laporan')
 </body>
 
 </html>

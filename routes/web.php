@@ -48,20 +48,24 @@ Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('
 Route::get('/dashboard', [LoginController::class, 'dashboard'])->name('dashboard')->defaults('title', 'Dashboard');
 
 // Masuk ke tampil data
-Route::get('dashboard/data/', [SiswaController::class, 'index'])->name('dashboard.data')->defaults('title', 'Data Siswa')->middleware('role:yayasan');
-
+Route::get('dashboard/data', [SiswaController::class, 'index'])->name('dashboard.data')->defaults('title', 'Data Siswa')->middleware('role:yayasan');
 // Masuk ke tampilan update file
+
 Route::get('/dashboard/kiriman-data', [YayasanController::class, 'kiriman'])->name('kiriman-data')->defaults('title', 'Update Data')->middleware('role:yayasan');
 
 // Masuk ke tampilan notifikasi
 Route::get('dashboard/notifikasi', [DashboardController::class, 'showNotifikasi'])->name('notifikasi')->defaults('title', 'Pesan')->middleware('role:yayasan');
 
 // Masuk ke tampilan Laporan data siswa siswi 
-Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa')->middleware('role:yayasan');
+Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa');
 
 // Masuk ke tampilan Laporan penghasilan,Agama,JK,KPS data siswa siswi 
 Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
 Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
+
+// Show Table 
+Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanAgama', 'showTable'])->name('laporanFilter');
+
 // cetak laporan
 Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
 

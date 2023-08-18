@@ -22,18 +22,18 @@
                         <p>Message</p>
                     </div>
 
-                    <div class="col">
-                        <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                    <div class="col special-col">
+                        <table class="table table-borderless mt-3 w-100">
                             <tbody class="mt-5">
                                 @if ($notifikasi->isEmpty())
                                     <tr>
-                                        <th></th>
-                                        <td></td>
+                                        {{-- <th></th>
+                                        <td></td> --}}
+                                        <td class="centered-message" colspan="2">Tidak Ada Pesan</td>
                                     </tr>
                                     <tr>
-                                        <th></th>
-                                        <td></td>
-                                        <td class="text-secondary">Tidak Ada Pesan</td>
+                                        <td class="centered-message" colspan="2">Tidak Ada Pesan</td>
+
                                     </tr>
                                 @else
                                     @foreach ($notifikasi as $index => $notif)
@@ -41,8 +41,7 @@
                                             <th></th>
                                             <td>{{ $notif->user->namasekolah }} mengirimkan file</td>
                                             <td>
-                                                <a
-                                                    href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}">Lihat</a>
+                                                <a href="{{ route('show-notifikasi', ['id' => $notif->id_kirim]) }}">Lihat</a>
                                             </td>
                                             <td>
                                                 <a href="{{ route('update-and-download', ['id' => $notif->id_kirim]) }}" class="text-primary">Download dan Update</a>
@@ -110,9 +109,9 @@
                     @endforeach
 
                     {{-- Tampilkan data yang sudah disimpan dalam array dengan batasan 5 data --}}
-                    <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                    <table class="table table-borderless mt-3 w-100 custom-table">
                         <thead>
-                            <th>Yayasan Kanisius:</th>
+                            <th class="col-2">Yayasan Kanisius:</th>
                             <th class="col-3">Taman Kanak (TK)</th>
                             <th class="col-3">Sekolah Dasar (SD)</th>
                             <th class="col-4">Sekolah Menengah Pertama (SMP)</th>
@@ -147,21 +146,26 @@
                                         @endforeach
                                     </ol>
                                 </td>
+                                <td>
+                                    <a href="{{ route('daftar-sekolah') }}" class="see-more-link">
+                                        <p class="fs-6 custom-text-style">See More...</p>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div class="col-1">
+                {{-- <div class="col-1">
                     <div class="row mt-5"></div>
                     <div class="row mt-5"></div>
                     <div class="row mt-5"></div>
                     <div class="row mt-5"></div>
                     <div class="row">
                         <a href="{{ route('daftar-sekolah') }}">
-                            <p class="fs-6">see More...</p>
+                            <p class="fs-10">see More...</p>
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
