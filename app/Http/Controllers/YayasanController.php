@@ -96,7 +96,6 @@ class YayasanController extends Controller
     // Method untuk menampilkan message di dashboard yayasan
     public function showNotifikasi($id, $title)
     {
-
         $idLoginNotif = '';
         $nmFile = '';
         $status = '';
@@ -104,7 +103,6 @@ class YayasanController extends Controller
                         ->select('data')
                         ->where('id', $id)
                         ->first();
-        // dd($notification);
         
         if ($notification) {
             $data = json_decode($notification->data, true);
@@ -112,7 +110,6 @@ class YayasanController extends Controller
             $nmFile = $data['name'];
             $status = $data['status'];
         } else {
-            // Notifikasi dengan ID tersebut tidak ditemukan
             return redirect()->back()->with('gagal', 'Data Tidak Ditemukan');
         }
 

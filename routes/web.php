@@ -121,7 +121,7 @@ Route::group([
         Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah');
 
         // Testing 
-        Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view');
+        Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view')->defaults('title', 'Portal Upload');
 
         Route::post('/post', [DashboardController::class, 'setPortal'])->name('set-portal');
     });
@@ -131,7 +131,7 @@ Route::group([
     ], function () {
         // Yang login adalah sekolah/operator sekolah
         // Masuk ke dashboard sekolah
-        Route::get('/sekolah/{slug}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Sekolah Dashoard');
+        Route::get('/sekolah/{slug}', [SekolahController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Sekolah Dashoard');
 
         // Masuk ke tampilan upload file
         Route::get('/sekolah/upload/{slug}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
@@ -152,7 +152,7 @@ Route::group([
         // Masuk ke halaman history
         Route::get('/riwayat-kirim/sekolah/{slug}/', [SekolahController::class, 'history'])->name('riwayat-kirim')->defaults('title', 'Riwayat Kirim');
 
-        Route::get('/dokumentas', [SekolahController::class, 'showGoogleDriveLink'])->name('dokumentasi');
+        Route::get('/template-excel', [SekolahController::class, 'downloadTemplate'])->name('template-excel');
     });
 
     Auth::routes();

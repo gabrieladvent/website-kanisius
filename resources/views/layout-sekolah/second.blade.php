@@ -294,7 +294,7 @@
             toastr.success("{{ Session::get('success') }}");
         </script>
     @endif
-    @if (Session::has('gagal'))
+    @if (Session::has('error'))
         <script>
             toastr.options = {
                 "closeButton": true,

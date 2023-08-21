@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col fw-bold mt-5 px-5">
                     <p class="px-3 h2 mt-4 fw-bold">File Submissions
-                        <a href="#" target="_blank" rel="noopener noreferrer">
+                        <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
                         </a>
                     </p>
@@ -88,12 +88,12 @@
             <div class="row">
                 <div class="col fw-bold mt-5 px-5">
                     <p class="px-3 h2 mt-4 fw-bold">Portal Belum Dibuka
-                        <a href="#" target="_blank" rel="noopener noreferrer">
+                        <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
                         </a>
                     </p>
+                    <p href="#" class="px-3 h3 fw-bold">Silahkan Hubungi Admin</p>
                 </div>
-                <div class="mt-5 px-5">Hubungi Admin</div>
             </div>
         </div>
     @endif

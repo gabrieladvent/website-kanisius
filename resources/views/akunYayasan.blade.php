@@ -7,20 +7,22 @@
         </div>
 
     </div>
+    <div class="ms-5">
+        <a href="{{ route('tambah-akun') }}" class="btn btn-primary ms-5"><i class="fas fa-pen"></i>Tambah Akun</a>
 
-    <div>
-        <a href="{{ route('tambah-akun') }}" class="btn btn-primary float-end me-5 mt-4 mb-3"><i class="fas fa-pen"></i>Tambah Akun</a>
+        <button type="button" class="btn btn-info float-end me-4" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Kembali</button>
     </div>  
-    <div class="data-siswa py-3 ">        
-        <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
-            <table id="example" class="table table-bordered" style="width:100%">
+    <div class="data-siswa py-3" style=" margin-top:1%;">        
+        <div class="table-data" style="margin-left: 1%; margin-right:1%; ">
+            <table id="example" class="table table-bordered" style="width:100% ">
                 <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pegawai</th>
-                        <th>Username</th>
-                        <th>Nama Sekolah</th>
-                        <th>Action</th>
+                    <tr class="text-center">
+                        <th class="fw-bold fs-5">No</th>
+                        <th class="fw-bold fs-5">Nama Pegawai</th>
+                        <th class="fw-bold fs-5">Username</th>
+                        <th class="fw-bold fs-5">Nama Sekolah</th>
+                        <th class="fw-bold fs-5" colspan="2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,38 +35,36 @@
                                 <td>{{ $item->namasekolah }}</td>
                                 <td>
                                     <a href="{{ route('dashboard.edit', ['id' => $item->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-
+                                </td>
+                                <td>
                                     <a href="{{ route('dashboard.delete', ['id' => $item->id]) }}" class="btn btn-danger"
                                         onclick="event.preventDefault(); if (confirm('Anda yakin ingin menghapus data ini?')) document.getElementById('delete-form-{{ $item->id }}').submit();">
                                         <i class="fas fa-trash-alt"></i> Hapus
                                     </a>
-
+                                </td>
+                                
                                     <form id="delete-form-{{ $item->id }}"
                                         action="{{ route('dashboard.delete', ['id' => $item->id]) }}" method="POST"
                                         style="display: none;">
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                </td>
                             </tr>
                         @endif
                     @endforeach
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama Pegawai</th>
-                        <th>Username</th>
-                        <th>Nama Sekolah</th>
-                        <th>Action</th>
+                    <tr class="text-center">
+                        <th class="fw-bold fs-5">No</th>
+                        <th class="fw-bold fs-5">Nama Pegawai</th>
+                        <th class="fw-bold fs-5">Username</th>
+                        <th class="fw-bold fs-5">Nama Sekolah</th>
+                        <th class="fw-bold fs-5" colspan="2">Action</th>
                     </tr>
                 </tfoot>
             </table>
         </div>
-        <div class="px-5 mt-4">
-            <button type="button" class="btn btn-info" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i> Kembali</button>
-        </div>
+        
     </div>
     </div>
 @endsection

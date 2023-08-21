@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('layout-yayasan.second')
 
-@section('content')
-    <div class="container mx-auto">
-        <h1>Create Admin File</h1>
-        @if(session('success'))
+@section('isi-content')
+    <div class="container px-5 ms-5 mt-5">
+        <div class="mt-5"><h1>Pengaturan Portal Upload</h1></div>
+        
+        @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         <form action="{{ route('set-portal') }}" method="POST">
@@ -29,17 +30,15 @@
 
 
     @php
-        if(\Session::get('upload_start')){
-            $uploadStart = \Carbon\Carbon::
-                createFromFormat('Y-m-d\TH:i', Session::get('upload_start'));
+        if (\Session::get('upload_start')) {
+            $uploadStart = \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', Session::get('upload_start'));
             $uploadEnd = \Carbon\Carbon::createFromFormat('Y-m-d\TH:i', Session::get('upload_end'));
             $currentDateTime = date('Y-m-d\TH:i:s');
-            if(\Carbon\Carbon::now()->between($uploadStart, $uploadEnd)){
+            if (\Carbon\Carbon::now()->between($uploadStart, $uploadEnd)) {
                 echo 'ada upload';
             } else {
                 echo 'Upload tidak tersedia saat ini.';
             }
         }
     @endphp
-
 @endsection
