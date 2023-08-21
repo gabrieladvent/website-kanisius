@@ -32,7 +32,6 @@ Route::group([
     Route::get('/regis', function () {
         return view('auth.regis');
     });
-
     Route::get('/tema', function () {
         return view('postTemaPertamaTemp');
     });
@@ -41,10 +40,10 @@ Route::group([
 
     // Route untuk login
     Route::get('/', [LoginController::class, 'index'])->name('login');
- 
+
     // Registrasi akun
     Route::post('/store', [UserController::class, 'create'])->name('store');
-    
+
     // Logouttablesekolah
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -124,6 +123,7 @@ Route::group([
         Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view')->defaults('title', 'Portal Upload');
 
         Route::post('/post', [DashboardController::class, 'setPortal'])->name('set-portal');
+        Route::get('/gettime', [KirimController::class, 'getendtime']);
     });
 
     Route::group([

@@ -156,3 +156,81 @@ console.clear();
   }
 
 })();
+
+const Years = document.getElementById("Years");
+const Days = document.getElementById("Days");
+const Hours = document.getElementById("Hours");
+const Minutes = document.getElementById("Minutes");
+const Seconds = document.getElementById("Seconds");
+const countdownContainer = document.getElementById("countdown-container");
+const expiredMessage = document.getElementById("expired-message");
+
+const inputButton = document.getElementById("select-button");
+inputButton.addEventListener("click", pressButton);
+
+function pressButton() {
+    console.log("button pressed");
+};
+
+const inputEvent = document.getElementById("file_name");
+const logEvent = document.getElementById("span-event");
+inputEvent.addEventListener("input", changeEvent);
+
+function changeEvent(e) {
+    logEvent.innerHTML = e.target.value;
+};
+
+const inputDateTime = document.getElementById("upload_end");
+const logDateTime = document.getElementById("span-datetime");
+inputDateTime.addEventListener("input", changeDateTime);
+
+function changeDateTime(dt) {
+    logDateTime.innerHTML = dt.target.value;
+};
+
+/* open func */
+var timer = setInterval(function() {
+
+    var eventHappening = inputEvent.value;
+
+    var countdownDate = new Date(Date.parse(inputDateTime.value));
+    var countdownTime = countdownDate.getTime();
+
+    // logDateTime.innerHTML = `on ${countdownDate.toDateString()} at ${countdownDate.toLocaleTimeString()}`;
+
+    var currentDate = new Date();
+    var currentTime = currentDate.getTime();
+
+    var diff = countdownTime - currentTime;
+
+    if (diff <= 0) {
+        clearInterval(timer);
+        Years.innerHTML = "0";
+        Days.innerHTML = "0";
+        Hours.innerHTML = "0";
+        Minutes.innerHTML = "0";
+        Seconds.innerHTML = "0";
+        countdownContainer.style.display = "none";
+        expiredMessage.style.display = "block";
+    } else {
+        var years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+        var days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        Years.innerHTML = `${years}`;
+        Days.innerHTML = `${days}`;
+        Hours.innerHTML = `${hours}`;
+        Minutes.innerHTML = `${minutes}`;
+        Seconds.innerHTML = `${seconds}`;
+
+        console.log("");
+        console.log(years + " Year(s), " + days + " Day(s), " + hours + " Hour(s), " + minutes +
+            " Minute(s), and " + seconds + " Second(s)");
+        console.log("remaining until " + eventHappening + " on " + countdownDate.toDateString() + " at " +
+            countdownDate.toLocaleTimeString());
+    }
+
+    /* close func */
+}, 1000);

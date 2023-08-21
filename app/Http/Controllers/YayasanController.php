@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Yayasan;
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class YayasanController extends Controller
@@ -158,4 +159,68 @@ class YayasanController extends Controller
 
         return view('tableSekolah', compact('notifikasi', 'data_siswa', 'userKirim', 'title'));
     }
+
+        public function showportal($title){
+        $user = Auth::user();
+        return view('portal', compact('title','user'));
+        }
+
+    // public function checkButton(Request $request)
+    // {
+    //      $user = Auth::user();
+
+    //     $inputStartYear = $request->input('start-year');
+    //     $inputStartMonth = $request->input('start-month');
+    //     $inputStartDay = $request->input('start-day');
+    //     $inputStartHour = $request->input('start-hour');
+    //     $inputStartMinute = $request->input('start-minute');
+
+    //     $inputEndYear = $request->input('end-year');
+    //     $inputEndMonth = $request->input('end-month');
+    //     $inputEndDay = $request->input('end-day');
+    //     $inputEndHour = $request->input('end-hour');
+    //     $inputEndMinute = $request->input('end-minute');
+
+    //     $activeStartTime = Carbon::create($inputStartYear, $inputStartMonth, $inputStartDay, $inputStartHour, $inputStartMinute);
+    //     $activeEndTime = Carbon::create($inputEndYear, $inputEndMonth, $inputEndDay, $inputEndHour, $inputEndMinute);
+
+    //     $currentTime = Carbon::now();
+    //      $disableButton = false;
+
+    //      Session::put([
+    //         'disableButton' => $disableButton,
+    //         'activeStartTime' => $activeStartTime,
+    //         'activeEndTime' => $activeEndTime,
+    //         'currentTime' => $currentTime,
+    //     ]);
+
+      
+
+    //     if ($currentTime < $activeStartTime || $currentTime > $activeEndTime) {
+    //         $disableButton = true;
+    //     }
+        
+    //     // dd($disableButton);
+
+    //      return redirect()->route('upload-view',['slug' => $user->slug])->with([ 
+    //         'activeStartTime' => $activeStartTime,
+    //          'activeEndTime' => $activeEndTime,
+    //          'currentTime' => $currentTime,
+    //         ]);
+
+            
+    
+    //         // return redirect()->route('upload-view',[
+    //         //     'disableButton' => $disableButton,
+    //         //     'slug' => 'slug',
+    //         //     // 'title' => 'title',
+    //         //     // 'user' => $user,
+    //         //     'activeStartTime' => $activeStartTime,
+    //         //     'activeEndTime' => $activeEndTime,
+    //         //     'currentTime' => $currentTime,
+    //         // ]);
+    //         }
+
+    
+
 }

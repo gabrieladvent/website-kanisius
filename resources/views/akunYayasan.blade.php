@@ -53,7 +53,7 @@
                         @endif
                     @endforeach
                 </tbody>
-                <tfoot>
+                {{-- <tfoot>
                     <tr class="text-center">
                         <th class="fw-bold fs-5">No</th>
                         <th class="fw-bold fs-5">Nama Pegawai</th>
@@ -61,7 +61,7 @@
                         <th class="fw-bold fs-5">Nama Sekolah</th>
                         <th class="fw-bold fs-5" colspan="2">Action</th>
                     </tr>
-                </tfoot>
+                </tfoot> --}}
             </table>
         </div>
         

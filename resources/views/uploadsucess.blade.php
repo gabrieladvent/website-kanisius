@@ -54,18 +54,22 @@
 
     <div class="mb-5 ms-5">
         <div class="row mt-5 mb-5 ms-5 d-flex justify-content-center">
-            <div class="col-2 mb-5">
+            {{-- <div class="col-2 mb-5">
                 <a href="/sekolah/2032/upload?edit=true" class="btn bg-dark text-white mb-5">Edit Submission</a>
-            </div>
+            </div> --}}
             <div class="col-3">
-                <form action="#" method="POST">
+                {{-- @foreach($files as $file) --}}
+               
+                <form action="/delete/{{session('filename')}}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <!-- Input hidden untuk menyimpan ID file yang akan dihapus -->
-                    <input type="hidden" name="id_kirim" value="{{ session('id_kirim') }}">
                     <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button>
                 </form>
+                {{-- @endforeach --}}
+             
             </div>
         </div>
     </div>
 @endsection
+
+

@@ -12,31 +12,26 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use Illuminate\Support\Facades\File;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Models\Countdown;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Illuminate\Support\Facades\Notification;
 
 
 class KirimController extends Controller
 {
-    /*
-        Method untuk menampilkan halaman upload dari sekolah
-    */
-    public function kirim_file()
-    {
-        $user = Auth::user();
-        $title = 'Upload File';
 
-        // Mengambil nilai waktu portal untuk mengecek apakah sedang ada portal atau tidak
-        $upload_start = Portal::all()->value('upload_start');
-        $upload_end = Portal::all()->value('upload_end');
+        // public function kirim_file(Request $request)
+        // {
+        //     $user = Auth::user();
+        //     $title = 'Upload File';
+        //     return view('uploadfile', compact('user', 'title'));
+        
+        // }    
 
-        return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
-    }
-
-    /*
-        Method untuk mengupload file ke server dan database
-    */
     public function postFile(Request $request, $nomor_s)
     {
         $user = User::all();
@@ -115,41 +110,54 @@ class KirimController extends Controller
             ])->with('success', 'File berhasil diunggah.');
         } catch (\Exception $e) {
             // Jika gagal maka laman tidak akan berubah
+
+
+            return redirect()->route('sukses')->with([
+                'filename' => $filename,
+                'komentar' => $komentar,
+                'id_kirim' => $data->id_kirim,
+            ])->with('success', 'File berhasil diunggah.');
+
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.');
+
         }
     }
 
-    public function showdelete()
+    public function deleteFile($filename)
     {
+
+        // dd(Storage::exists('public/simpanFile/'.$filename));
+        // Hapus file dengan nama yang diberikan
+        // return redirect()->back()->with('gagal', 'Terjadi kesalahan saat mengunggah file.')->withInput();
+        if (Storage::exists('public/simpanFile/'.$filename)) {
+            Storage::delete('public/simpanFile/'.$filename);
+    
+            DB::delete("DELETE FROM kirim WHERE nama_file = ? AND ID = ?", [$filename, Auth::user()->id]);
+            return redirect()->route('upload-view',['slug' => 'slug'])->with('success', 'File berhasil dihapus.');
+        } else {
+            return redirect()->back()->with('error', 'File tidak ditemukan.');
+
         $data = Auth::Kirim();
         // $title = 'Upload File';
         return view('uploadfile', compact('data', 'title'));
+     }
     }
 
-    /*
-        Method untuk menghapus file yang sudah dikirim
-    */
-    public function deleteFile($id)
+    public function kirim_file()
     {
-        // Cari data berdasarkan ID
-        $data = Kirim::find($id);
+        $user = Auth::user();
+        $title = 'Upload File';
 
-        // Jika data tidak ditemukan, kembalikan respons atau lakukan sesuai kebutuhan Anda
-        if (!$data) {
-            return response()->json(['message' => 'Data not found'], 404);
-        }
+        // Mengambil nilai waktu portal untuk mengecek apakah sedang ada portal atau tidak
+        $upload_start = Portal::all()->value('upload_start');
+        $upload_end = Portal::all()->value('upload_end');
 
-        // Hapus data
-        $data->delete();
-
-        // Berikan respons yang sesuai
-        return response()->json(['message' => 'Data deleted successfully'], 200);
+        return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
     }
 
-    /*
-        Method untuk mengupdate file yang sudah dikirim (kirim ulang)
-    */
-    public function updateFile()
-    {
+        // public function getendtime(){
+        //     $countdown = Countdown::Portal('upload_end')->find(1); // Ganti dengan query yang sesuai
+        //     return view('countdown', ['countdownDatetime' => $countdown->upload_end]);
+        // }
     }
-}
+    

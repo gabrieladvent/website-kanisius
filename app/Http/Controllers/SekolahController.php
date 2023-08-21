@@ -57,7 +57,7 @@ class SekolahController extends Controller
 
             return Redirect::to($template);
         } else{
-            dd('yayasan');
+            // dd('yayasan');
         }
 
 

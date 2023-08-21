@@ -27,10 +27,12 @@
 
     <nav class="main-menu" style="margin-top: 4.5%">
         <ul>
+
             <li style="margin-bottom: 30px;">
                 <a href="{{ route('sekolah', ['slug' => $user->slug]) }}">
                     <img src="{{ asset('/icon/house-solid.svg') }}" alt="" class="fa fa-2x">
                     <span class="nav-text">Dashboard</span>
+
                 </a>
             </li>
             <li style="margin-bottom: 30px;" class="has-subnav">

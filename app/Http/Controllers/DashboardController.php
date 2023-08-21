@@ -9,8 +9,12 @@ use App\Models\Sekolah;
 use App\Models\Yayasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Storage;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
 
 class DashboardController extends Controller
 {
@@ -64,13 +68,15 @@ class DashboardController extends Controller
     */
     public function sukses($title)
     {
-        $user = Auth::user();
-        return view('uploadsucess', compact('title', 'user'));
+         $user = Auth::user();
+         $files = Storage::files('simpanFile');
+        return view('uploadsucess',['files' => $files], compact('title','user'));
     }
 
     public function portal_view($title)
     {
-        return view('portal', compact('title'));
+        $time =  DB::table('portal')->get();
+        return view('portal', compact('title','time'));
     }
 
     /*
