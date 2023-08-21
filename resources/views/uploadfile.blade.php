@@ -1,5 +1,14 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
+
+@php
+        $disableButton = session('disableButton');
+        $activeStartTime = session('activeStartTime');
+        $activeEndTime = session('activeEndTime');
+        $currentTime = session('currentTime');
+        
+@endphp
+
     <div class="isi-main px-5">
         <div class="row">
             <div class="col fw-bold mt-5 px-5">
@@ -17,7 +26,8 @@
             <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
                 <div class="col">
                     <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
-                    <form action="{{ route('upload',['slug' => $user->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('upload', ['slug' => $user->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <fieldset class="upload_dropZone text-center mb-3 p-4">
                             <legend class="visually-hidden">Image uploader</legend>
@@ -52,24 +62,47 @@
         </div>
 
         <div class="second-box ms-4">
-        <div class="p-3 px-5" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
-            <div class="row ">
-                <div class="col">
-                    <input type="text" class="w-100 pb-5 border border-dark container-fluid shadow-3-strong"
-                        name="komentar" style="height: 150px;" placeholder="Silahkan masukan komentar atau pesan...">
+            <div class="p-3 px-5" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+                <div class="row ">
+                    <div class="col">
+                        <input type="text" class="w-100 pb-5 border border-dark container-fluid shadow-3-strong"
+                            name="komentar" style="height: 150px;" placeholder="Silahkan masukan komentar atau pesan...">
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
 
         <div class="row mt-3 pb-2 d-flex justify-content-center">
-            <div class="col-2">
-                <button type="submit" class="w-75 btn bg-dark text-white">Submit</button>
-            </div>
+                @if ($disableButton)
+                    <div id="information">
+                        <p>Tombol Dinonaktifkan karena belum mencapai waktu aktif.</p>
+                         <p>Waktu Mulai Aktif: {{ $activeStartTime->format('Y-m-d H:i') }}</p>
+                    <p>Batas Waktu Nonaktif: {{ $activeEndTime->format('Y-m-d H:i') }}</p>
+                    </div>
+                @else
+                    @if (now() >= $activeStartTime && now() <= $activeEndTime)
+                        <div id="submit" class="col-2">
+                            <button type="submit" class="w-75 btn bg-dark text-white">Submit</button>
+                        </div>
+                    @endif
+                @endif
+                
             <div class="col-2">
                 <a href="" class="w-75 text-dark btn bg-light">Cancel</a>
             </div>
         </div>
         </form>
     </div>
+    {{-- <script>
+        console.log(Date.now());
+        if(Date.now() > {{session('activeEndTime')}}){
+            let information = document.getElementById('information');
+            let submit = document.getElementById('submit');
+
+            information.style.visibility = "visible";
+            submit.style.visibility = "hidden";
+
+        }
+    </script> --}}
+    {{-- @endif --}}
 @endsection

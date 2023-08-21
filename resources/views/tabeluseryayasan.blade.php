@@ -1,36 +1,9 @@
 @extends('layout-yayasan.second')
 @section('isi-content')
-    <div class="">
         <div class="judul" style="margin-top: 8%;">
             <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi</p>
             <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran 2023/2024</p>
         </div>
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="dropdown" style="margin-left: 12vw;">
-                <select id="dropdown1" class="dropdown-select">
-                    <option selected>Bulan</option>
-                    <option value="opsi1">Januari</option>
-                    <option value="opsi2">Februari</option>
-                    <option value="opsi4">Maret</option>
-                    <option value="opsi5">April</option>
-                    <option value="opsi6">Mei</option>
-                    <option value="opsi7">Juni</option>
-                    <option value="opsi8">Juli</option>
-                    <option value="opsi9">Agustus</option>
-                    <option value="opsi10">September</option>
-                    <option value="opsi11">November</option>
-                    <option value="opsi12">Desember</option>
-                </select>
-                <select id="dropdown2" class="dropdown-select">
-                    <option selected>Tahun</option>
-                    <option value="pilihan1">2022</option>
-                    <option value="pilihan2">2023</option>
-                    <option value="pilihan3">2024</option>
-                </select>
-            </div>
-        </div>
-
-    </div>
 
 
     <div class="data-siswa py-3 ">
@@ -64,7 +37,7 @@
                             </td>
                             <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
                             <td>{{ $item->Rombel_Set_Ini }}</td>
-                            <td><a href="#" class="btn btn-primary">Detail</a></td>
+                            <td><a href="{{ route('detail-siswa-personal', ['nisn' => $item->NISN]) }}" class="btn btn-primary">Detail</a></td>
                         </tr>
                     @endforeach
                 </tbody>

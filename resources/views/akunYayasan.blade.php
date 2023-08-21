@@ -45,7 +45,6 @@
                                         @csrf
                                         @method('DELETE')
                                     </form>
-
                                 </td>
                             </tr>
                         @endif

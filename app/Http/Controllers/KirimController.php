@@ -14,7 +14,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use Illuminate\Support\Facades\File;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 
 // use Illuminate\Notifications\Notification;
 
@@ -24,19 +24,20 @@ use Illuminate\Support\Facades\Notification;
 
 class KirimController extends Controller
 {
-    public function kirim_file()
-    {
-        $user = Auth::user();
-        $title = 'Upload File';
-        return view('uploadfile', compact('user', 'title'));
-    }
+        public function kirim_file(Request $request)
+        {
+            $user = Auth::user();
+            $title = 'Upload File';
+            return view('uploadfile', compact('user', 'title'));
+        
+        }
 
 
     //Fungsi untuk memproses file yang diupload
     public function showdelete()
     {
         $data = Auth::Kirim();
-        // $title = 'Upload File';
+        $title = 'Upload File';
         return view('uploadfile', compact('data', 'title'));
     }
     
