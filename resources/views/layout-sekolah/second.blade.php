@@ -40,11 +40,13 @@
                     <span class="nav-text">Dashboard</span>
                 </a>
             </li>
+
             <li style="margin-bottom: 30px;" class="has-subnav">
                 <a href="{{ route('upload-view', ['slug' => $user->slug]) }}">
                     <img src="{{ asset('/icon/paper-plane-solid.svg') }}" alt="" class="fa fa-2x">
                     <span class="nav-text">Kirim File</span>
                 </a>
+
             </li>
             <li style="margin-bottom: 30px;" class="has-subnav">
                 <a href="{{ route('data-siswa', ['slug' => $user->slug]) }}">
@@ -294,7 +296,7 @@
             toastr.success("{{ Session::get('success') }}");
         </script>
     @endif
-    @if (Session::has('gagal'))
+    @if (Session::has('error'))
         <script>
             toastr.options = {
                 "closeButton": true,

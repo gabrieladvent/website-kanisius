@@ -16,12 +16,18 @@ use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
+    /*
+        Method untuk menampilkan halaman login
+    */
     public function index()
     {
         $poto = DB::table('yayasan')->first();
         return view('auth.login', compact('poto'));
     }
 
+    /*
+        Method untuk menampilkan dashboard berdasarkan user yang login 
+    */
     public function dashboard($title)
     {
         try {
@@ -29,6 +35,9 @@ class LoginController extends Controller
             $dataSekolah = Sekolah::all();
             $kirim = Kirim::all();
 
+            /*
+                Jika yang login mempunyai status berupa yayasan, maka akan dibawa ke dashboard yayasan. dan sebaliknya
+            */
             if ($user->status == 'sekolah') {
                 $sekolahId = $user->id;
                 return $this->sekolah($sekolahId);
@@ -36,9 +45,7 @@ class LoginController extends Controller
                 return view('dashboard', compact('kirim', 'user', 'title', 'dataSekolah'));
             }
         } catch (\Exception $e) {
-            dd('eror');
-            dd($e)->message();
-            return redirect()->back()->with('error', 'Gagal Login. Silahkan Login Ulang');
+            abort(401, 'Silahkan Melakukan Login Terlebih Dahulu');
         }
     }
 
@@ -51,6 +58,9 @@ class LoginController extends Controller
         return view('homeSekolah', compact('user', 'isTK', 'TK', 'data'));
     }
 
+    /*
+        Method untuk mengeksekusi permintaan logout
+    */
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

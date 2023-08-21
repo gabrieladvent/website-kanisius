@@ -13,24 +13,25 @@ use Spatie\Sluggable\SlugOptions;
 
 class UserController extends Controller
 {
-    public function index(Request $request, $title)
-    {
-        $user = Auth::user();
-        return view('profile', compact('user', 'title'));
-    }
-
+    /* 
+        Method untuk menampilkan daftar akun operator
+    */
     public function akun_yayasan($title)
     {
-        $data = User::paginate(10);
+        $data = User::where('status', 'sekolah')->get();
         return view('akunYayasan', compact('data', 'title'));
     }
 
+    /* 
+        Method untuk menampilkan view edit akun
+    */
     public function edit(Request $request, $id, $title)
     {
         $data = User::find($id);
         $user = Auth::user();
         return view('editAkun', compact('data', 'title', 'user'));
     }
+
 
     public function validator(array $data)
     {
@@ -44,6 +45,9 @@ class UserController extends Controller
         ]);
     }
 
+    /* 
+        Method untuk create akun oleh yayasan
+    */
     public function create(Request $request)
     {
         // Validasi data input
@@ -62,7 +66,6 @@ class UserController extends Controller
         }
 
         // Membuat data user dari input
-        
         $data = [
             'id' => $request->id,
             'name' => $request->name,
@@ -79,6 +82,9 @@ class UserController extends Controller
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
+    /* 
+        Method untuk update akun operator oleh yayasan
+    */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -102,6 +108,9 @@ class UserController extends Controller
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Diupdate');
     }
 
+    /* 
+        Method untuk hapus akun operator oleh yayasan
+    */
     public function delete($id)
     {
         $data = User::find($id);
@@ -114,6 +123,9 @@ class UserController extends Controller
         }
     }
 
+    /* 
+        Method untuk update akun operator
+    */
     public function update_sekolah(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [

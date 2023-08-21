@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Kirim extends Model
 {
     use HasFactory;
     
     protected $table = 'kirim';
-    protected $fillable = ['nama_file', 'ID', 'Komentar', 'status'];
+
+    protected $fillable = ['nama_file', 'ID','id_kirim', 'Komentar'];
+
 
     public function getUrl()
     {
@@ -26,4 +29,5 @@ class Kirim extends Model
     {
         return $this->belongsTo(User::class, 'ID');
     }
+    
 }

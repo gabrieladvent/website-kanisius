@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Siswa;
@@ -18,16 +19,16 @@ use Illuminate\Notifications\DatabaseNotification;
 
 class SiswaTKController extends Controller
 {
+    /*
+        Method untuk mengupdate file excel
+    */
     public function updateDataTK($id)
     {
-        // Mulai transaksi database untuk memastikan konsistensi data
-        DB::beginTransaction();
-        try {
-            // Ambil data dari tabel Kirim berdasarkan id
-            $kirim = Kirim::where('id_kirim', $id)->first();
-
+        DB::beginTransaction(); // Mulai transaksi database untuk memastikan konsistensi data
+        try {       
+            $kirim = Kirim::where('id_kirim', $id)->first(); // Ambil data dari tabel Kirim berdasarkan id
             if (!$kirim) {
-                throw new \Exception('Data tidak ditemukan');
+                return redirect()->back()->with('error', 'Data Tidak temukan');
             }
 
             $filename = $kirim->nama_file;
@@ -38,11 +39,9 @@ class SiswaTKController extends Controller
                 ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
                 ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
                 ->pluck('id');
-            // dd($notifications);
             if (!$notifications) {
-                dd('Data kosong');
+                return redirect()->back()->with('error', 'Data Tidak Ditmukan');
             }
-            // dd('keluar if');
             DB::table('notifications')
                 ->whereIn('id', $notifications)
                 ->delete();
@@ -60,22 +59,15 @@ class SiswaTKController extends Controller
                 array_shift($dataExcel);
             }
 
-            // Pesan sebelum pemindahan data
-            echo "Memulai pemindahan data...\n";
-
             // Cek data di tabel siswa, apakah ada di tabel siswa yang sama.
             foreach ($dataExcel as $rowData) {
                 // Cek apakah data memiliki NOMOR_S
-                // dd($rowData[22]);
                 if (isset($rowData[22]) && !empty($rowData[22])) {
-                    // dd('masuk if');
                     // Cari data siswa dengan NOMOR_S yang sama di tabel Siswa
                     $siswa = Siswa_TK::where('NOMOR_S', $rowData[22])->get();
-                    // dd($siswa);
                     if ($siswa->isNotEmpty()) {
                         // Memindahkan data siswa ke tabel Arship dan hapus dari tabel Siswa
                         foreach ($siswa as $siswaItem) {
-                            // dd($siswaItem);
                             Arsip_TK::create($siswaItem->toArray());
                             $siswaItem->delete();
                         }
@@ -85,14 +77,12 @@ class SiswaTKController extends Controller
 
             // Memasukkan data dari file Excel ke tabel Siswa
             foreach ($dataExcel as $rowData) {
-                // Ubah format
-                $tanggal_lahir = $rowData[9];                
+                // Ubah format tanggal lahir dan tanggal masuk
+                $tanggal_lahir = $rowData[9];
                 $tanggal_masuk = $rowData[19];
                 $tanggal_lahir_formatted = date('Y-m-d', strtotime($tanggal_lahir));
                 $tanggal_masuk_formatted = date('Y-m-d', strtotime($tanggal_masuk));
 
-
-                // dd('masuk perulangan kedua');
                 Siswa_TK::create([
                     'no_siswa' => $rowData[0],
                     'nama_siswa' => $rowData[1],
@@ -119,30 +109,27 @@ class SiswaTKController extends Controller
                     'NOMOR_S' => $rowData[22],
                 ]);
             }
-            $data['status'] = 1;
+            $data['status'] = 2;
             Kirim::where('id_kirim', $id)->update($data);
             // Commit transaksi database
             DB::commit();
-            // dd('bisa commit');
-
-            // Pesan setelah commit
-            echo "Transaksi berhasil di-commit.\n";
 
             return redirect()->route('dashboard.data')->with('success', 'Data Siswa Berhasil Di Update');
         } catch (\Exception $e) {
             // Rollback transaksi database jika terjadi error
             DB::rollback();
-            // Tampilkan pesan error
-            dd($e->getMessage());
-            return redirect()->back()->with('gagal', 'Gagal Mengupdate Data');
+            return redirect()->back()->with('error', 'Gagal Mengeksekusi File');
         }
     }
 
+    /*
+        Method untuk mengupdate sekaligus mengdownload file excel
+    */
     public function downloadAndUpdateTK($id)
     {
         $kirim = Kirim::where('id_kirim', $id)->first();
         if (!$kirim) {
-            abort(404, 'Data Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Tidak temukan');
         }
 
         $filename = $kirim->nama_file;
@@ -155,7 +142,7 @@ class SiswaTKController extends Controller
             ->pluck('id');
 
         if (!$notifications) {
-            abort(404, 'Data Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Tidak temukan');
         }
 
         DB::table('notifications')
@@ -164,7 +151,7 @@ class SiswaTKController extends Controller
 
         $filepath = public_path('storage/simpanFile/' . $kirim->nama_file);
         if (!file_exists($filepath)) {
-            abort(404, 'Data Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Tidak temukan');
         }
 
         $spreadsheet = IOFactory::load($filepath);
@@ -178,22 +165,15 @@ class SiswaTKController extends Controller
                 array_shift($dataExcel);
             }
 
-            // Pesan sebelum pemindahan data
-            echo "Memulai pemindahan data...\n";
-
             // Cek data di tabel siswa, apakah ada di tabel siswa yang sama.
             foreach ($dataExcel as $rowData) {
                 // Cek apakah data memiliki NOMOR_S
-                // dd($rowData[22]);
                 if (isset($rowData[22]) && !empty($rowData[22])) {
-                    // dd('masuk if');
                     // Cari data siswa dengan NOMOR_S yang sama di tabel Siswa
                     $siswa = Siswa_TK::where('NOMOR_S', $rowData[22])->get();
-                    // dd($siswa);
                     if ($siswa->isNotEmpty()) {
                         // Memindahkan data siswa ke tabel Arship dan hapus dari tabel Siswa
                         foreach ($siswa as $siswaItem) {
-                            // dd($siswaItem);
                             Arsip_TK::create($siswaItem->toArray());
                             $siswaItem->delete();
                         }
@@ -204,13 +184,11 @@ class SiswaTKController extends Controller
             // Memasukkan data dari file Excel ke tabel Siswa
             foreach ($dataExcel as $rowData) {
                 // Ubah format
-                $tanggal_lahir = $rowData[9];                
+                $tanggal_lahir = $rowData[9];
                 $tanggal_masuk = $rowData[19];
                 $tanggal_lahir_formatted = date('Y-m-d', strtotime($tanggal_lahir));
                 $tanggal_masuk_formatted = date('Y-m-d', strtotime($tanggal_masuk));
 
-
-                // dd('masuk perulangan kedua');
                 Siswa_TK::create([
                     'no_siswa' => $rowData[0],
                     'nama_siswa' => $rowData[1],
@@ -237,16 +215,13 @@ class SiswaTKController extends Controller
                     'NOMOR_S' => $rowData[22],
                 ]);
             }
-            $data['status'] = 1;
+            $data['status'] = 2;
             Kirim::where('id_kirim', $id)->update($data);
             // Commit transaksi database
             DB::commit();
-            // dd('bisa commit');
 
-            // Pesan setelah commit
-            echo "Transaksi berhasil di-commit.\n";
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            return redirect()->back()->with('error', 'Gagal Mengeksekusi Perintah');
         }
 
         try {
@@ -271,7 +246,7 @@ class SiswaTKController extends Controller
             $writer->save($tempFilePath);
 
             Session::flash('success', 'Data berhasil disimpan.');
-            
+
             // Continue to download the file
             return response()->download($tempFilePath, $tempFileName, [
                 'Content-Disposition' => 'attachment; filename="' . $kirim->nama_file . '"',
@@ -279,7 +254,7 @@ class SiswaTKController extends Controller
                 'Pragma' => 'no-cache',
             ])->deleteFileAfterSend();
         } catch (\Exception $e) {
-            abort(404, 'Data Invalid');
+            return redirect()->back()->with('error', 'Gagal Mengeksekusi Perintah');
         }
     }
 }

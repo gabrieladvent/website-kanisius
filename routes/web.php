@@ -33,7 +33,6 @@ Route::group([
     Route::get('/regis', function () {
         return view('auth.regis');
     });
-
     Route::get('/tema', function () {
         return view('postTemaPertamaTemp');
     });
@@ -42,10 +41,10 @@ Route::group([
 
     // Route untuk login
     Route::get('/', [LoginController::class, 'index'])->name('login');
- 
+
     // Registrasi akun
     Route::post('/store', [UserController::class, 'create'])->name('store');
-    
+
     // Logouttablesekolah
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -124,9 +123,14 @@ Route::group([
         // Untuk masuk ke daftar sekolah
         Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah');
 
-        // untul get post laporan yayasan  
+          
         Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
         Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
+        // set Portal
+        Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view')->defaults('title', 'Portal Upload');
+
+        Route::post('/post', [DashboardController::class, 'setPortal'])->name('set-portal');
+        Route::get('/gettime', [KirimController::class, 'getendtime']);
     });
 
     Route::group([
@@ -134,7 +138,7 @@ Route::group([
     ], function () {
         // Yang login adalah sekolah/operator sekolah
         // Masuk ke dashboard sekolah
-        Route::get('/sekolah/{slug}', [SiswaController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Sekolah Dashoard');
+        Route::get('/sekolah/{slug}', [SekolahController::class, 'dashboardSekolah'])->name('sekolah')->defaults('title', 'Sekolah Dashoard');
 
         // Masuk ke tampilan upload file
         Route::get('/sekolah/upload/{slug}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
@@ -155,7 +159,7 @@ Route::group([
         // Masuk ke halaman history
         Route::get('/riwayat-kirim/sekolah/{slug}/', [SekolahController::class, 'history'])->name('riwayat-kirim')->defaults('title', 'Riwayat Kirim');
 
-        Route::get('/dokumentas', [SekolahController::class, 'showGoogleDriveLink'])->name('dokumentasi');
+        Route::get('/template-excel', [SekolahController::class, 'downloadTemplate'])->name('template-excel');
     });
 
     Auth::routes();

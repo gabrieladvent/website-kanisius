@@ -16,10 +16,7 @@ class Yayasan extends Model
     use HasFactory;
     
     protected $table = 'yayasan';
-    protected $fillable = [
-        'id',
-        'nama_foto',
-    ];
+    
 
     protected $hidden = [
         // ... Kolom yang ingin disembunyikan ...

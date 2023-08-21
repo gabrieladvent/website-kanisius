@@ -36,7 +36,7 @@
                             $false = [];
                         @endphp
                         @foreach ($notifikasi as $notif)
-                            @if ($notif->status == 0)
+                            @if ($notif->status == 1)
                                 @php $false[] = $notif; @endphp
                             @else
                                 @php $true[] = $notif; @endphp

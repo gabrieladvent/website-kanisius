@@ -22,7 +22,7 @@
                         <a class="inter nav-link active" style="color : #FFF000" aria-current="page" href="#">Video Tutorial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="inter nav-link " style="color :#FFF000" href="{{ route('dokumentasi') }}" target="_blank">Dokumentasi</a>
+                        <a class="inter nav-link text-dark" href="#" target="_blank">Dokumentasi</a>
                     </li>
                     <li class="nav-item">
                         <a class="inter nav-link " style="color : #FFF000" href="https://wa.me/6285820876251">Kontak Admin</a>
