@@ -14,6 +14,7 @@ class DashboardController extends Controller
 {
     public function showNotifikasi($title)
     {
+
         $notifikasi = Kirim::all();
         $users = User::pluck('namasekolah', 'id');
 

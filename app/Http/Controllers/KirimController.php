@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kirim;
+use App\Models\User;
+use App\Notifications\KirimNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -10,7 +12,10 @@ use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+// use Illuminate\Notifications\Notification;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use Illuminate\Support\Facades\Notification;
+
 
 class KirimController extends Controller
 {
@@ -24,6 +29,14 @@ class KirimController extends Controller
     // Fungsi untuk memproses file yang diupload
     public function postFile(Request $request, $nomor_s)
     {
+        $user = User::all();
+        $namasekolah = User::where('id', $nomor_s)->value('namasekolah');
+
+        $userId = Auth::user();
+        $userLogin = $userId->id;
+        $users = User::where('status', 'yayasan')->get();
+        $sekolah = User::where('id', $nomor_s)->value('namasekolah');
+
         // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv|max:20480',
@@ -45,7 +58,14 @@ class KirimController extends Controller
             $lastColumnIndex = Coordinate::columnIndexFromString($lastColumn);
 
             // Menyimpan data nomor_s di kolom terakhir yang terisi pada baris pertama (header)
-            $newColumnIndex = $lastColumnIndex + 1;
+            
+            if (strpos($sekolah, 'TK') === 0) {
+                $newColumnIndex = $lastColumnIndex;
+            } elseif(strpos($sekolah, 'SD') === 0 || strpos($sekolah, 'SMP') === 0) {
+                $newColumnIndex = $lastColumnIndex + 1;
+            }
+
+            
             $newColumn = Coordinate::stringFromColumnIndex($newColumnIndex);
             $sheet->setCellValue($newColumn . '5', 'nomor_s');
 
@@ -69,6 +89,11 @@ class KirimController extends Controller
             $data->ID = $nomor_s;
             $komentar = $request->input('komentar');
             $data->Komentar = !empty($komentar) ? $komentar : '';
+            $data->status = 0;
+
+            $komen = !empty($komentar) ? $komentar : '';
+
+            Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen));
             $data->save();
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session

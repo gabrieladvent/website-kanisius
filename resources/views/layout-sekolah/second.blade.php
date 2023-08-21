@@ -28,7 +28,7 @@
     @endpush
 </head>
 
-<body style="background-color: #2f256d;">
+<body style="background-color: #244076;;">
     @include('navbar.navbar-second')
 
     <!-- sidebar -->
@@ -53,9 +53,9 @@
                 </a>
             </li>
             <li style="margin-bottom: 30px;" class="has-subnav">
-                <a href="#notif">
+                <a href="{{ route('riwayat-kirim', ['slug' => $user->slug]) }}">
                     <img src="{{ asset('/icon/bell-solid.svg') }}" alt="" class="fa fa-2x">
-                    <span class="nav-text">Notifikasi</span>
+                    <span class="nav-text">Riwayat</span>
                 </a>
             </li>
         </ul>
@@ -304,6 +304,12 @@
             ("{{ Session::get('gagal') }}");
         </script>
     @endif
-</body>
 
+    @yield("script")
+
+
+    <!-- Tambahkan ini sebelum </body> -->
+
+
+</body>
 </html>

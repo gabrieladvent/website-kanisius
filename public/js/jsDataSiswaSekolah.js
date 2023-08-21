@@ -75,6 +75,10 @@ function closePopup() {
 }
 
 $(document).ready(function () {
+    $('#data').DataTable();
+});
+
+$(document).ready(function () {
     $('#example').DataTable();
 });
 

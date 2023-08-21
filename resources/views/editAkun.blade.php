@@ -64,7 +64,3 @@
     </div>
 </section>
 @endsection
-
-{{-- @section('isi-content')
-    
-@endsection --}}

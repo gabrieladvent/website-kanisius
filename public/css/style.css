@@ -67,7 +67,7 @@ ul li span:hover {
   body {
     margin: 24px;
     z-index: -1;
-    background-color: #0D1282; /* Ganti dengan warna background yang diinginkan */
+    background-color: #244076;; /* Ganti dengan warna background yang diinginkan */
   }
   
   
@@ -130,11 +130,14 @@ ul li span:hover {
   font-weight: bold;
   margin: 0; /* Menghilangkan margin default dari teks agar tidak ada ruang tambahan di sekitar teks */
 }
-.svg-container {
+/* .svg-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: -1;
+} */
+.see-more-link {
+  margin-top: -10px; /* Sesuaikan dengan margin yang diinginkan */
 }

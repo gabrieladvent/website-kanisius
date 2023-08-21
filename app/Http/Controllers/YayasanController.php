@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
@@ -97,10 +98,26 @@ class YayasanController extends Controller
     // Method untuk menampilkan message di dashboard yayasan
     public function showNotifikasi($id, $title)
     {
-        $notifikasi = Kirim::where('id_kirim', $id)->with('user')->first();
-        if(!$notifikasi){
-            return redirect()->route('profile')->with('gagal', 'INI YANG MANA?');
+
+        $idLoginNotif = '';
+        $notification = DB::table('notifications')
+                        ->select('data')
+                        ->where('id', $id)
+                        ->first();
+
+        if ($notification) {
+            $data = json_decode($notification->data, true);
+            $idLoginNotif = $data['userLogin'];
+        } else {
+            // Notifikasi dengan ID tersebut tidak ditemukan
+            return redirect()->back()->with('gagal', 'Data Tidak Ditemukan');
         }
+
+        $notifikasi = Kirim::where('ID', $idLoginNotif)->with('user')->first();
+        if (!$notifikasi) {
+            return redirect()->route('profile')->with('gagal', 'Data tidak ditemukan');
+        }
+        $userKirim = User::where('id', $idLoginNotif)->value('namasekolah');
         // Pastikan file Excel ada pada path yang sesuai
         $excelPath = public_path('storage/simpanFile/' . $notifikasi->nama_file);
 
@@ -133,6 +150,6 @@ class YayasanController extends Controller
             $currentRow++;
         }
 
-        return view('tableSekolah', compact('notifikasi', 'data_siswa', 'title'));
+        return view('tableSekolah', compact('notifikasi', 'data_siswa', 'userKirim', 'title'));
     }
 }

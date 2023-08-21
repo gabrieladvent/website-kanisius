@@ -6,7 +6,11 @@
             <div class="isi-main px-5">
                 <div class="row ">
                     <div class="col ">
-                        <p class="h1 fw-bold">File Submissions</p>
+                        <p class="h1 fw-bold">File Submissions
+                            <a href="#" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
+                            </a>
+                        </p>
                     </div>
                     <div class="col text-end align-self-end">
                         <p class="h9  mb-0">Maximum file size: 20 MB</p>

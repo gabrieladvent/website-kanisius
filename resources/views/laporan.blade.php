@@ -163,7 +163,7 @@
         
                     <td>
                         <button type="submit" onclick="getValue()" class="btn btn-primary float-center mt-3">Tampil <i class="fa-solid fa-eye"></i></button>
-                        <a href="{{ route('cetakLaporan',  ['title' => 'cetak Laporan'])}}" target="blank" class="btn btn-success float-center mt-3">Download <i class="fa-solid fa-download"></i></a>
+                        <a href="#cetak" target="blank" class="btn btn-success float-center mt-3">Download <i class="fa-solid fa-download"></i></a>
                     </td>
                     
                 </form>
