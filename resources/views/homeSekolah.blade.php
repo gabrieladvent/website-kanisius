@@ -19,50 +19,89 @@
             </div>
             <div class=" table-data" style="margin-top: -1%; margin-left: 1%; margin-right:1%;">
                 <table id="example" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>NISN</th>
-                            <th>Nama Siswa</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Kelas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data as $item)
+                    @if (strpos($isTK, 'TK') === 0)
+                        <thead>
                             <tr>
-                                <td>{{ $item->NISN }}</td>
-                                <td>{{ $item->Nama }}</td>
-                                <td>{{ $item->Tanggal_Lahir }}</td>
-                                <td>
-                                    @if ($item->JK == 'L')
-                                        Laki-Laki
-                                    @elseif ($item->JK == 'P')
-                                        Perempuan
-                                    @endif
-                                </td>
-                                <td>{{ $item->Rombel_Set_Ini }}</td>
+                                <th>No.</th>
+                                <th>NISN</th>
+                                <th>Nama Siswa</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
                             </tr>
-                        @endforeach
-                        <tr>
-                            <td>NISN</td>
-                            <td>Nama Siswa</td>
-                            <td>Tanggal Lahir</td>
-                            <td>Jenis Kelamin</td>
-                            <td>Kelas</td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <center><a href="{{ route('data-siswa', ['slug' => $user->slug]) }}">Lihat Lengkap</a></center>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="5" class="text-center">
-                            </th>
-                        </tr>
-                    </tfoot>
+                        </thead>
+                        <tbody>
+                            @foreach ($TK as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->NISN }}</td>
+                                    <td>{{ $item->nama_siswa }}</td>
+                                    <td>{{ $item->tanggal_lahir }}</td>
+                                    <td>
+                                        @if ($item->gender == '1')
+                                            Laki-Laki
+                                        @elseif ($item->gender == '2')
+                                            Perempuan
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>No.</th>
+                                <th>NISN</th>
+                                <th>Nama Siswa</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <center><a href="{{ route('data-siswa', ['slug' => $user->slug]) }}">Lihat Lengkap</a></center>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    @else
+                        <thead>
+                            <tr>
+                                <th>NISN</th>
+                                <th>Nama Siswa</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Kelas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($data as $item)
+                                <tr>
+                                    <td>{{ $item->NISN }}</td>
+                                    <td>{{ $item->Nama }}</td>
+                                    <td>{{ $item->Tanggal_Lahir }}</td>
+                                    <td>
+                                        @if ($item->JK == 'L')
+                                            Laki-Laki
+                                        @elseif ($item->JK == 'P')
+                                            Perempuan
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->Rombel_Set_Ini }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td>NISN</td>
+                                <td>Nama Siswa</td>
+                                <td>Tanggal Lahir</td>
+                                <td>Jenis Kelamin</td>
+                                <td>Kelas</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <center><a href="{{ route('data-siswa', ['slug' => $user->slug]) }}">Lihat Lengkap</a>
+                                    </center>
+                                </td>
+                            </tr>
+                        </tbody>
+                    @endif
+
                 </table>
             </div>
         </div>

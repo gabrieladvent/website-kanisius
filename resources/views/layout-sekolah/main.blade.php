@@ -69,7 +69,7 @@
                 </a>
             </li>
         </ul>
-    </nav>
+    </nav>  
 
     <div>
         @yield('isi-content')

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Kirim;
 use App\Models\Siswa;
 use App\Models\Arship;
+use App\Models\Siswa_TK;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,61 +18,56 @@ use Illuminate\Notifications\DatabaseNotification;
 
 class SiswaController extends Controller
 {
+    /*
+        Method untuk menampilkan seluruh data siswa yang ingin dilihat oleh yayasan
+    */
     public function index($title)
     {
         $user = Auth::user();
-        $siswa = Siswa::all();
+        $siswa = Siswa::all(); // Mengambil data siswa (SD dan SMP)
+        $tk = Siswa_TK::all(); // Mengambil data siswa (TK)
+
         // Lakukan eager loading untuk data sekolah terkait
         $data_siswa = $siswa->load('sekolah');
-        return view('tabeluseryayasan', compact('data_siswa', 'title', 'user'));
+        $data_tk = $tk->load('sekolah');
+
+        return view('tabeluseryayasan', compact('data_siswa', 'data_tk', 'title', 'user'));
     }
 
+    /*
+        Method untuk menampilkan data siswa untuk sekolah berdasarkan sekolah yang login
+    */
     public function detailSiswa($slug, $title)
     {
-        // Dapatkan id siswa berdasarkan slug dari tabel User
-        $id = User::where('slug', $slug)->value('id');
-
-        // Dapatkan siswa-siswa dari tabel siswa yang memiliki nomor_s yang sama dengan id
-        $data = Siswa::where('nomor_s', $id)->get();
+        $id = User::where('slug', $slug)->value('id'); // Dapatkan id siswa berdasarkan slug dari tabel User
+        $data = Siswa::where('nomor_s', $id)->get(); // Dapatkan siswa-siswa dari tabel siswa yang memiliki nomor_s yang sama dengan id
 
         $user = Auth::user();
+        $isTK = $user->namasekolah;
+        $TK = Siswa_TK::where('NOMOR_S', $id)->get();
+
         if ($data) {
-            return view('dataSiswaSekolah', compact('data', 'user', 'title'));
+            return view('dataSiswaSekolah', compact('data', 'isTK', 'TK', 'user', 'title'));
         } else {
-            return response('Siswa tidak ditemukan', 404);
+            abort(404, 'Siswa Tidak Ditemukan');
         }
     }
 
-    public function dashboardSekolah($slug, $title)
-    {
-        // Dapatkan id siswa berdasarkan slug dari tabel User
-        $id = User::where('slug', $slug)->value('id');
-
-        // Dapatkan siswa-siswa dari tabel siswa yang memiliki nomor_s yang sama dengan id
-        $data = Siswa::where('nomor_s', $id)->paginate(5);
-        $user = Auth::user();
-
-        if ($data) {
-            return view('homeSekolah', compact('data', 'title', 'user'));
-        } else {
-            return response('Siswa tidak ditemukan', 404);
-        }
-    }
-
-    // Method untuk update data siswa
+    /* 
+        Method untuk update data siswa 
+    */
     public function updateData($id)
     {
-        // Mulai transaksi database untuk memastikan konsistensi data
-        DB::beginTransaction();
+        DB::beginTransaction(); // Mulai transaksi database untuk memastikan konsistensi data
         try {
-            // Ambil data dari tabel Kirim berdasarkan id
-            $kirim = Kirim::where('id_kirim', $id)->first();
+            $kirim = Kirim::where('id_kirim', $id)->first(); // Ambil data dari tabel Kirim berdasarkan id
 
+            // Mengecek file di database
             if (!$kirim) {
-                throw new \Exception('Data tidak ditemukan');
+                return redirect()->back()->with('error', 'Data Tidak temukan');
             }
 
-            $filename = $kirim->nama_file;
+            $filename = $kirim->nama_file; // Mengambil nama file excel
             $user = Kirim::where('id_kirim', $id)->value('ID');
             $name = User::where('id', $user)->value('namasekolah');
             $notifications = DB::table('notifications')
@@ -79,17 +75,16 @@ class SiswaController extends Controller
                 ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
                 ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
                 ->pluck('id');
-            // dd($notifications);
+            
             if (!$notifications) {
-                dd('Data kosong');
+                return redirect()->back()->with('error', 'Data Tidak Ditmukan');
             }
-            // dd('keluar if');
+            
             DB::table('notifications')
                 ->whereIn('id', $notifications)
                 ->delete();
 
-            // Ambil path file Excel
-            $file = public_path('storage/simpanFile/' . $kirim->nama_file);
+            $file = public_path('storage/simpanFile/' . $kirim->nama_file); // Ambil path file Excel
 
             // Baca data dari file Excel
             $spreadsheet = IOFactory::load($file);
@@ -108,24 +103,17 @@ class SiswaController extends Controller
             }
             unset($rowData);
 
-            // Pesan sebelum pemindahan data
-            echo "Memulai pemindahan data...\n";
-
             // Cek data di tabel siswa, apakah ada di tabel siswa yang sama.
             foreach ($dataExcel as $rowData) {
                 // Cek apakah data memiliki NOMOR_S
                 if (isset($rowData[65]) && !empty($rowData[65])) {
-                    // dd('masuk if');
                     // Cari data siswa dengan NOMOR_S yang sama di tabel Siswa
                     $siswa = Siswa::where('NOMOR_S', $rowData[65])->get();
-                    // dd($siswa);
                     if ($siswa->isNotEmpty()) {
                         // Memindahkan data siswa ke tabel Arship dan hapus dari tabel Siswa
                         foreach ($siswa as $siswaItem) {
-                            // dd($siswaItem);
                             Arship::create($siswaItem->toArray());
                             $siswaItem->delete();
-                            // dd($siswaItem);
                         }
                     }
                 }
@@ -133,7 +121,6 @@ class SiswaController extends Controller
 
             // Memasukkan data dari file Excel ke tabel Siswa
             foreach ($dataExcel as $rowData) {
-                // dd('masuk perulangan kedua');
                 Siswa::create([
                     'Nama' => $rowData[0],
                     'NIPD' => $rowData[1],
@@ -203,44 +190,35 @@ class SiswaController extends Controller
                     'NOMOR_S' => $rowData[65],
                 ]);
             }
-            $data['status'] = 1;
-            Kirim::where('id_kirim', $id)->update($data);
+            // Mengubah status menjadi sudah dibaca
+            $data['status'] = 2;
+            $affectedRows = Kirim::where('id_kirim', $id)->update($data);
+            $kirim = Kirim::where('id_kirim', $id)->first();
+
             // Commit transaksi database
             DB::commit();
-            // dd('bisa commit');
-
-            // Pesan setelah commit
-            echo "Transaksi berhasil di-commit.\n";
-
+            
             return redirect()->route('dashboard.data')->with('success', 'Data Siswa Berhasil Di Update');
+            
         } catch (\Exception $e) {
             // Rollback transaksi database jika terjadi error
             DB::rollback();
-            // Tampilkan pesan error
-            dd($e->getMessage());
-            return redirect()->back()->with('gagal', 'Gagal Mengupdate Data');
+            return redirect()->back()->with('error', 'Gagal Mengupdate Data');
         }
     }
 
     public function download($id)
     {
         try {
-            // dd('id download', $id);
             $kirim = Kirim::where('id_kirim', $id)->first();
-            // dd($kirim->nama_file);
-
             if (!$kirim) {
                 throw new \Exception('Data tidak ditemukan');
             }
-
             // Mendapatkan path file Excel
             $filePath = storage_path('app/public/simpanFile/' . $kirim->nama_file);
-            // dd($filePath);
-
             if (!file_exists($filePath)) {
                 abort(404, 'File not found');
             }
-
             // Baca data dari file Excel
             $spreadsheet = IOFactory::load($filePath);
             $worksheet = $spreadsheet->getActiveSheet();
@@ -286,11 +264,14 @@ class SiswaController extends Controller
         }
     }
 
+    /*
+        Method untuk mengupdate sekaligus mengdownload file excel
+    */
     public function downloadAndUpdate($id)
     {
         $kirim = Kirim::where('id_kirim', $id)->first();
         if (!$kirim) {
-            abort(404, 'Data Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Tidak temukan');
         }
 
         $filename = $kirim->nama_file;
@@ -301,11 +282,11 @@ class SiswaController extends Controller
             ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
             ->orWhere('data', 'LIKE', '%"namasekolah":" ' . $name . ' "%')
             ->pluck('id');
-            
+
         if (!$notifications) {
-            abort(404, 'Data Tidak Ditemukan');
+            return redirect()->back()->with('error', 'Data Tidak temukan');
         }
-        
+
         DB::table('notifications')
             ->whereIn('id', $notifications)
             ->delete();
@@ -337,17 +318,13 @@ class SiswaController extends Controller
             foreach ($dataExcel as $rowData) {
                 // Cek apakah data memiliki NOMOR_S
                 if (isset($rowData[65]) && !empty($rowData[65])) {
-                    // dd('masuk if ketiga');
                     // Cari data siswa dengan NOMOR_S yang sama di tabel Siswa
                     $siswa = Siswa::where('NOMOR_S', $rowData[65])->get();
-                    // dd($siswa);
                     if ($siswa->isNotEmpty()) {
                         // Memindahkan data siswa ke tabel Arship dan hapus dari tabel Siswa
                         foreach ($siswa as $siswaItem) {
-                            // dd($siswaItem);
                             Arship::create($siswaItem->toArray());
                             $siswaItem->delete();
-                            // dd($siswaItem);
                         }
                     }
                 }
@@ -355,7 +332,6 @@ class SiswaController extends Controller
 
             // Memasukkan data dari file Excel ke tabel Siswa
             foreach ($dataExcel as $rowData) {
-                // dd('masuk perulangan kedua');
                 Siswa::create([
                     'Nama' => $rowData[0],
                     'NIPD' => $rowData[1],
@@ -426,12 +402,13 @@ class SiswaController extends Controller
                 ]);
             }
 
-            $data['status'] = 1;
-            Kirim::where('id_kirim', $id)->update($data);
-            
+            $data['status'] = 2;
+            $affectedRows = Kirim::where('id_kirim', $id)->update($data);
+
             DB::commit();
         } catch (\Exception $e) {
-            dd($e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Gagal Mengeksekusi Perintah');
         }
 
         try {
@@ -441,7 +418,7 @@ class SiswaController extends Controller
                 $cellIterator->setIterateOnlyExistingCells(false);
 
                 foreach ($cellIterator as $cell) {
-                    if ($cell->getColumn() == 'BO') { // Assuming NOMOR_S is in column N
+                    if ($cell->getColumn() == 'BO') {
                         // Hapus kolom NOMOR_S dari setiap baris
                         $colIndex = Coordinate::columnIndexFromString($cell->getColumn());
                         $worksheet->removeColumnByIndex($colIndex);
@@ -468,9 +445,22 @@ class SiswaController extends Controller
         }
     }
 
-    public function SiswaPersonal($nisn, $title){
-        $data = Siswa::where('NISN', $nisn)->get();
+    /*
+        Method untuk melihat data siswa secara rinci
+    */
+    public function SiswaPersonal($nisn, $namasekolah, $title)
+    {
+        // dd($namasekolah);
+        $user = Auth::user();
+        if (strpos($namasekolah, 'TK') === 0) {
+            $isTK = true;
+            $data = Siswa_TK::where('NISN', $nisn)->get();
+        } else {
+            $isTK = false;
+            $data = Siswa::where('NISN', $nisn)->get();
+        }
         // dd($data);
-        return view('detailSiswa', compact('data','title'));
+
+        return view('detailSiswa', compact('data', 'user', 'isTK', 'title'));
     }
 }

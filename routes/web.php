@@ -9,8 +9,11 @@ use App\Http\Controllers\KirimController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SiswaTKController;
 use App\Http\Controllers\YayasanController;
 use App\Models\Sekolah;
+use Detection\MobileDetect;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +26,13 @@ use App\Models\Sekolah;
 |
 */
 
-Route::get('/regis', function () {
-    return view('auth.regis');
-});
+Route::group([
+    'middleware' => \App\Http\Middleware\DeniedMobile::class
+], function () {
+    Route::get('/regis', function () {
+        return view('auth.regis');
+    });
+
 Route::get('/tema', function () {
     return view('postTemaPertamaTemp');
 });
@@ -99,15 +106,20 @@ Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekol
 
 
 //akses halaman portal 
-Route:: get('/portal', [YayasanController::class, 'showportal'])->name('portal-date')->defaults('title','showportal')->middleware('role:yayasan');
+// Route:: get('/portal', [YayasanController::class, 'showportal'])->name('portal-date')->defaults('title','showportal')->middleware('role:yayasan');
 
 // Route::post('/button/{slug}', [YayasanController::class, 'checkButton'])->name('check-button');
+
+// set Portal
+Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view')->defaults('title', 'Portal Upload');
+
+Route::post('/post', [DashboardController::class, 'setPortal'])->name('set-portal');
 
 
 // Untuk masuk ke tampilan detail siswa
 Route::get('/detail-siswa/personal/{nisn}', [SiswaController::class, 'SiswaPersonal'])->name('detail-siswa-personal')->defaults('title', 'Detail')->middleware('role:yayasan');
 
-
+Route::get('/template-excel', [SekolahController::class, 'downloadTemplate'])->name('template-excel');
 
 // Yang login adalah sekolah/operator sekolah
 // Masuk ke dashboard sekolah
@@ -115,6 +127,9 @@ Route::get('/sekolah/{slug}', [SiswaController::class, 'dashboardSekolah'])->nam
 
 // Masuk ke tampilan upload file
 Route::get('/sekolah/upload/{slug}', [KirimController::class, 'kirim_file'])->name('upload-view')->defaults('title', 'Upload File');
+
+Route::get('/gettime', [KirimController::class, 'getendtime']);
+
 
 // Fungsi untuk post file
 Route::post('/uploadFile/{slug}', [KirimController::class, 'postFile'])->name('upload');
@@ -141,5 +156,4 @@ Route::get('/riwayat-kirim/sekolah/{slug}/', [SekolahController::class, 'history
 Route::get('/dokumentas', [SekolahController::class, 'showGoogleDriveLink'])->name('dokumentasi');
 
 Auth::routes();
-
-
+});

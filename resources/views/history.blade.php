@@ -28,6 +28,7 @@
                         <thead class="text-center">
                             <th>Nomor</th>
                             <th>Nama File</th>
+                            <th>Komentar</th>
                             <th>Tanggal Upload</th>
                             <th>Status</th>
                         </thead>
@@ -36,6 +37,13 @@
                                 <tr class="">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $item->nama_file}}</td>
+                                    <td>
+                                        @unless (empty($item->Komentar))
+                                            {{ $item->Komentar }}
+                                        @else
+                                            <i>Tidak ada komentar</i>
+                                        @endunless    
+                                    </td>
                                     <td>{{ $item->created_at->format('Y-m-d')}}</td>
                                     <td class="text-dark" style="background-color: #A9E9A9">Sukses</td>
                                 </tr>
