@@ -1,3 +1,9 @@
+@php
+    $currentYear = date('Y'); // Mengambil tahun saat ini
+    $nextYear = $currentYear + 1; // Menambahkan 1 tahun untuk tahun berikutnya
+
+    $tahunAjaran = $currentYear . '/' . $nextYear;
+@endphp
 @extends('layout-sekolah.main')
 @section('isi-content')
     <div class="content">
@@ -15,7 +21,7 @@
         <div class="data-siswa">
             <div class="judul" style="margin-top: 4%;">
                 <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi {{ $user->namasekolah }}</p>
-                <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran 2023/2024</p>
+                <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran {{ $tahunAjaran }}</p>
             </div>
             <div class=" table-data" style="margin-top: -1%; margin-left: 1%; margin-right:1%;">
                 <table id="example" class="table table-striped" style="width:100%">

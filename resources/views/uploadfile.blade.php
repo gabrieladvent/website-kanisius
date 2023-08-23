@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col fw-bold mt-5 px-5">
                     <p class="px-3 h2 mt-4 fw-bold">File Submissions
-                        <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
+                        <a href="{{ route('template-excel') }}" target="_b" rel="noopener noreferrer">
                             <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
                         </a>
                     </p>
