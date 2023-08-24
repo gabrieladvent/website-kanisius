@@ -57,6 +57,18 @@ Route::group([
     // untuk masuk laporan yayasan 
     Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa');
 
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanAgama','showTable'])->name('laporanFilter');
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanJenisKelamin'])->name('laporanFilter');
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanZonasi'])->name('laporanFilter');
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter');
+    Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter');
+
+    Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
+
+    Route::post('dashboard/laporan/hasil-pilih', [LaporanController::class, 'laporan_hasil'])->name('laporan-hasil');
+
+
+
     // Masuk ke tampilan profile
     Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');
 
@@ -123,9 +135,6 @@ Route::group([
         // Untuk masuk ke daftar sekolah
         Route::get('dashboard/daftar-sekolah', [DashboardController::class, 'daftarSekolah'])->name('daftar-sekolah')->defaults('title', 'Daftar Sekolah');
 
-          
-        Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
-        Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter')->middleware('role:yayasan');
         // set Portal
         Route::get('dashboard/portal-upload', [DashboardController::class, 'portal_view'])->name('portal-view')->defaults('title', 'Portal Upload');
 

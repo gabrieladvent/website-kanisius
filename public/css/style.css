@@ -168,6 +168,8 @@ ul li span:hover {
   }
   .grid-container {
     border: 0px dashed Navy; 
+    border-radius: 20px 20px 0px 0px;
+    border-radius: 15px;
     margin: auto; 
     width: 100%; 
     transform: translate(-50px, 0px); 
@@ -182,13 +184,13 @@ ul li span:hover {
     align-content: space-evenly;  
     justify-content: space-evenly; 
     padding: 20px 50px; 
-    background-color: LightGray; 
+    background-color: #D9D9D9; 
   }
   .grid-item {
     border: 0px solid Purple; 
     display: flex; 
     justify-content: space-evenly; 
-    color: #404080; 
+    color: #000000; 
     text-transform: uppercase; 
     font-family: 'Roboto Mono', monospace; 
     font-weight: 400;

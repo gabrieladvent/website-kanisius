@@ -9,10 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Siswa_TK extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
+
+    protected $table = 'tk_siswa';
     protected $primaryKey = 'NOMOR_S'; 
-    protected $table = 'TK_Siswa';
 
     protected function serializeDate(DateTimeInterface $date): string
     {
@@ -20,6 +20,7 @@ class Siswa_TK extends Model
     }
 
     public function sekolah(){
-        return $this->belongsTo(Sekolah::class, 'NOMOR_S', 'NOMOR_S');
+        return $this->belongsTo(Sekolah::class, 'NOMOR_S','NOMOR_S');
     }
+
 }

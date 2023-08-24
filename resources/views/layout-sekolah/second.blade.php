@@ -28,7 +28,7 @@
     @endpush
 </head>
 
-<body style="background-color: #244076;;">
+<body style="background-color: #244076;">
     @include('navbar.navbar-second')
 
     <!-- sidebar -->
