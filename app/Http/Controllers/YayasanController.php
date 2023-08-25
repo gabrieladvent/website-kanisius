@@ -99,6 +99,7 @@ class YayasanController extends Controller
     // Method untuk menampilkan message di dashboard yayasan
     public function showNotifikasi($id, $title)
     {
+        $user = Auth::user();
         $idLoginNotif = '';
         $nmFile = '';
         $status = '';
@@ -159,7 +160,7 @@ class YayasanController extends Controller
             $currentRow++;
         }
 
-        return view('tableSekolah', compact('notifikasi', 'data_siswa', 'userKirim', 'title'));
+        return view('tableSekolah', compact('notifikasi', 'data_siswa', 'userKirim', 'title', 'user'));
     }
 
         public function showportal($title){

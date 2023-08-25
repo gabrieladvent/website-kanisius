@@ -146,7 +146,7 @@
                             <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank"
                                 class="btn btn-success float-center mt-3">Download <i
                                     class="fa-solid fa-download"></i></a>
-                            //cek DD namaSekolah != null
+                            {{--    cek DD namaSekolah != null --}}
                             <script>
                                 $(document).ready(function() {
                                     $('form').submit(function(event) {
@@ -757,7 +757,7 @@
                                     <div>
                                         <p style="texttext-align: left;  margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Ayah: <span id="rataRataAyah"></span></p>
-                                        <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
+                                     <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Ibu: <span id="rataRataIbu"></span></p>
                                         <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Wali: <span id="rataRataWali"></span></p>

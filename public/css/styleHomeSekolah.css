@@ -12,7 +12,8 @@ strong.datasiswadas{
     font-weight: 700; /* Bold font weight */
     line-height: normal;
 
-    background: conic-gradient(#244076, #2f2e2e, #0d0c5f);
+    /* background: conic-gradient(#244076, #2f2e2e, #0d0c5f); */
+    color: #000;
     background-clip: text;
     background-size: 75px 75px ;
     animation: rgb 10s infinite linear;
@@ -226,7 +227,15 @@ font-size:20px;
 
 .toast-top-right {
   margin-top: 5%;
+  /* background-color: #000 */
 }
+
+.toast {
+  background-color: rgb(14, 181, 59) !important;
+  color: #000; 
+  position: relative !important;
+}
+
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
@@ -394,6 +403,7 @@ nav.main-menu li.active>a,
   border-radius: 15px;
   border: 1px solid #000;
   background-color: #ffffff;
+  /* position: relative; */
 
   display: flex;
   flex-direction: column;
@@ -401,18 +411,18 @@ nav.main-menu li.active>a,
   align-items: center;
 }
   .border {
-    background-color: aqua;
+    /* background-color: aqua;
     display: inline; 
     padding: 5px;
     display: block;
-    width: 100%;
+    width: 100%; */
     /* padding: 10px; */
-    text-align: start;
+    /* text-align: start;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #ffffff;
     text-decoration: none;
-    color: #333;
+    color: #333; */
   }
 
   

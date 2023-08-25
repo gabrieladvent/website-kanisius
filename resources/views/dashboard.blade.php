@@ -8,13 +8,13 @@
     <div class="col" style="margin-left: 5%; margin-top:5.6%">
         <div class="row mt-3 px-3 ">
             <div class="col-3 ms-3">
-                <img src="{{ asset('/image/logo baru.png') }}" class="w-50">
+                <img src="{{ asset('/image/logo-kapal-fix.png') }}" class="w-50">
             </div>
             <div class="col-5 mt-5 ms-4 me-1">
-                <img src="{{ asset('/image/alamat.png') }}" class="w-75 ms-5" alt="">
+                <img src="{{ asset('/image/logo-tengah-fix-.png') }}" class="w-100 ms-2" alt="" loading="lazy">
             </div>
             <div class="col-3 ms-5">
-                <img src="{{ asset('/image/IHS_Logo.png') }}" class="w-75 ms-5" alt="">
+                <img src="{{ asset('/image/logo-ihs-fix.png') }}" class="w-75 ms-5" alt="">
             </div>
             <div style="position: relative;">
                 <div class="row d-flex justify-content-center border-2 border-top border-primary mt-3 container-fluid shadow-6-strong"
