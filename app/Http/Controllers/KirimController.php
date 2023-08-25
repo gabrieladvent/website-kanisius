@@ -23,15 +23,6 @@ use Illuminate\Support\Facades\Notification;
 
 class KirimController extends Controller
 {
-
-        // public function kirim_file(Request $request)
-        // {
-        //     $user = Auth::user();
-        //     $title = 'Upload File';
-        //     return view('uploadfile', compact('user', 'title'));
-        
-        // }    
-
     public function postFile(Request $request, $nomor_s)
     {
         $user = User::all();
@@ -102,6 +93,7 @@ class KirimController extends Controller
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session
             Session::put('id_kirim', $data->id_kirim);
+            session(['variableName' => $stt]);
 
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
@@ -119,28 +111,46 @@ class KirimController extends Controller
             ])->with('success', 'File berhasil diunggah.');
 
             return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.');
-
         }
     }
 
     public function deleteFile($filename)
     {
+        try {
 
-        // dd(Storage::exists('public/simpanFile/'.$filename));
-        // Hapus file dengan nama yang diberikan
-        // return redirect()->back()->with('gagal', 'Terjadi kesalahan saat mengunggah file.')->withInput();
-        if (Storage::exists('public/simpanFile/'.$filename)) {
-            Storage::delete('public/simpanFile/'.$filename);
-    
-            DB::delete("DELETE FROM kirim WHERE nama_file = ? AND ID = ?", [$filename, Auth::user()->id]);
-            return redirect()->route('upload-view',['slug' => 'slug'])->with('success', 'File berhasil dihapus.');
-        } else {
-            return redirect()->back()->with('error', 'File tidak ditemukan.');
+            if (Storage::exists('public/simpanFile/' . $filename)) {
+                $fileToDelete = DB::table('kirim')
+                    ->where('nama_file', $filename)
+                    ->where('ID', Auth::user()->id)
+                    ->first();
 
-        $data = Auth::Kirim();
-        // $title = 'Upload File';
-        return view('uploadfile', compact('data', 'title'));
-     }
+                if ($fileToDelete) {
+                    session(['fileDelete' => $fileToDelete]);
+                    $notif = DB::table('notifications')
+                        ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
+                        ->latest()
+                        ->first();
+
+                    // dd($notif);
+                    if ($notif) {
+                        DB::table('notifications')
+                            ->where('id', $notif->id)
+                            ->delete();
+                    }
+
+                    DB::table('kirim')
+                        ->where('nama_file', $filename)
+                        ->where('ID', Auth::user()->id)
+                        ->delete();
+                    Storage::delete('public/simpanFile/' . $filename);
+                    return redirect()->route('upload-view', ['slug' => Auth::user()->slug])->with('success', 'File berhasil dihapus.');
+                } else {
+                    abort(404, 'Kesalahan Menghapus');
+                }
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e);
+        }
     }
 
     public function kirim_file()
@@ -152,12 +162,14 @@ class KirimController extends Controller
         $upload_start = Portal::all()->value('upload_start');
         $upload_end = Portal::all()->value('upload_end');
 
-        return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
+        if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false || Session::get('fileDelete')) {
+            Session::forget('variableName');
+            Session::forget('fileDelete');
+        }
+        if (Session::get('variableName')) {
+            return redirect()->route('sukses');
+        } else {
+            return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
+        }
     }
-
-        // public function getendtime(){
-        //     $countdown = Countdown::Portal('upload_end')->find(1); // Ganti dengan query yang sesuai
-        //     return view('countdown', ['countdownDatetime' => $countdown->upload_end]);
-        // }
-    }
-    
+}

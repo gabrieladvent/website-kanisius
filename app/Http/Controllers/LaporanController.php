@@ -8,91 +8,19 @@ use App\Models\User as user;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Siswa_Tk as Tk_Siswa;
-use App\Models\Arship as arship;
-use App\Models\Arsip_Tk;
+use App\Models\Siswa_Tk;
+use App\Models\Arship;
+use App\Models\Arsip_TK;
 use Alert;
+
 
 class LaporanController extends Controller
 {
-    public function laporan_hasil(Request $request)
-    {
-        $tipeLaporan = $request->laporanType;
-        $tingkatan = $request->tingkatan;
-        $namasekolah = $request->namaSekolah;
-        $kelasTK = $request->input('kelasTK', 'all');
-        $kelasSD = $request->kelasSD;
-        $kelasSMP = $request->kelasSMP;
-        $detail = $request->detailKelas;
-        // dd($request->all());
-        $sekolahname = '';
-        $queryKelas = '';
-
-        if ($tipeLaporan == 'agama') {
-            $user = Auth::user();
-
-            // Bangun kueri dasar untuk mengambil model Siswa dengan relasi sekolah yang sudah dimuat eager
-            $query = Siswa::with('sekolah')->get();
-            $querytk = Tk_Siswa::with('sekolah')->get();
-
-            // Filter data siswa berdasarkan kriteria yang dipilih
-            if (strpos($namasekolah, 'SD') === 0) {
-                // dd('sd');
-                $sekolahname = Sekolah::where('NAMASEKOLAH', $namasekolah)->first();
-
-                if ($kelasSD && $detail) {
-                    $rombelSetIni = $kelasSD . '' . $detail;
-                    $queryKelas = Siswa::where('Rombel_Set_Ini', $rombelSetIni);
-                } else if ($kelasSD) {
-                    $queryKelas = Siswa::where('Rombel_Set_Ini', 'LIKE', '%' . $kelasSD . '%')->get();
-                }
-            } elseif (strpos($namasekolah, 'TK') === 0) {
-                // dd('tk');
-                $sekolahname = Sekolah::where('NAMASEKOLAH', $namasekolah)->first();
-            } elseif (strpos($namasekolah, 'SMP') === 0) {
-                // dd('smp');
-                $sekolahname = Sekolah::where('NAMASEKOLAH', $namasekolah)->first();
-                if ($kelasSMP && $detail) {
-                    $rombelSetIni = $kelasSMP . '' . $detail;
-                    $queryKelas = Siswa::where('Rombel_Set_Ini', $rombelSetIni);
-                } else if ($kelasSMP) {
-                    $queryKelas = Siswa::where('Rombel_Set_Ini', 'LIKE', '%' . $kelasSMP . '%')->get();
-                }
-            } else {
-                dd('data invalid');
-            }
-
-            $sekolah = Sekolah::all();
-
-            dd($query, $querytk, $queryKelas, $sekolahname, $sekolah, $user);
-            return view('laporan', compact(
-                'query',
-                'querytk',
-                'queryKelas',
-                'sekolahname',
-                'sekolah',
-                'user'
-            ));
-        } elseif ($tipeLaporan == 'jk') {
-            dd('jk');
-        } elseif ($tipeLaporan == 'penghasilan') {
-            dd('penghasilan');
-        } elseif ($tipeLaporan == 'kps') {
-            dd('kps');
-        } elseif ($tipeLaporan == 'zonasi') {
-            dd('zonasi');
-        } elseif ($tipeLaporan == 'js') {
-            dd('js');
-        } else {
-            dd('salah filter');
-        }
-    }
-
     public function laporan($title)
     {
         $user = Auth::user();
         $siswa = Siswa::all();
-        $siswaTK = TK_Siswa::all();
+        $siswaTK = Siswa_TK::all();
         $data_siswa = $siswa->load('sekolah');
         $data_siswatk = $siswaTK->load('sekolah');
         $data_siswa = $data_siswa->concat($siswaTK->load('sekolah'));
@@ -121,12 +49,6 @@ class LaporanController extends Controller
 
         return view('laporan', compact('kolom', 'data_siswa', 'title', 'user'));
     }
-    public function cetakLaporan(Request $request, $title)
-    {
-        return $request->all();
-    }
-
-
 
     public function filter(Request $request)
     {
@@ -134,7 +56,7 @@ class LaporanController extends Controller
             'laporanType' => 'required'
         ]);
         $query = Siswa::with('sekolah');
-        $querytk = Tk_Siswa::with('sekolah');
+        $querytk = Siswa_TK::with('sekolah');
         if ($request->has('namaSekolah')) {
             $query = $query->whereHas('sekolah', function ($subQuery) use ($request) {
                 $subQuery->where('NAMASEKOLAH', $request->namaSekolah);
@@ -370,7 +292,7 @@ class LaporanController extends Controller
     private function filterJS(Request $request, $data_siswa, $data_siswatk)
     {
         $dataArsipSiswa = Arship::with('sekolah');
-        $dataArsipTk = Arsip_Tk::with('sekolah');
+        $dataArsipTk = Arsip_TK::with('sekolah');
 
         if ($request->has('namaSekolah')) {
             $dataArsipSiswa  =  $dataArsipSiswa->whereHas('sekolah', function ($subQuery) use ($request) {

@@ -37,7 +37,8 @@
                     <h2 class="card-title"> Form Laporan </h2>
                 </div>
                 <div class="col-md-12">
-                    <form action="{{ route('laporanFilter') }}" method="post" style="margin-left: 15vw; margin-right: 10vw;" id="formContainer">
+
+                    <form action="{{ route('laporanFilter') }}" method="post" style="margin-left: 18vw;" id="formContainer">
                         @csrf
                         <input type="hidden" name="title" value="Judul Laporan">
                         <table class="ms-5 mt-4">
@@ -146,21 +147,6 @@
                             <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank"
                                 class="btn btn-success float-center mt-3">Download <i
                                     class="fa-solid fa-download"></i></a>
-                            //cek DD namaSekolah != null
-                            <script>
-                                $(document).ready(function() {
-                                    $('form').submit(function(event) {
-                                        var laporanType = $('[name="laporanType"]:checked').val();
-                                        var tingkatan = $('[name="tingkatan"]').val();
-                                        var namaSekolah = $('[name="namaSekolah"]').val();
-                                        
-                                        if (laporanType === 'zonasi' && tingkatan && !namaSekolah) {
-                                            event.preventDefault();
-                                            alert('Nama Sekolah Belum di isi silakan di isi !');
-                                        }
-                                    });
-                                });
-                            </script>
                         </td>
 
                     </form>
@@ -300,7 +286,6 @@
                                 </script>
                             </div>
                         @elseif ($laporanType === 'zonasi')
-                        
                             <div class="data-siswa py-3">
                                 @php
                                     $rataRataJarak = isset($rataRataJarak) ? $rataRataJarak : [];
@@ -309,13 +294,13 @@
                                 <html>
 
                                 <head>
-                                    <title> Data Siswa per Kelas dan Jarak</title>
+                                    <title>Data Siswa per Kelas dan Jarak</title>
                                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                                 </head>
 
                                 <body>
-                                    <h1 class="px-3">Data Siswa per Kelas dan Jarak</h1>
-                                    <div style="width: 100%; max-width: 500px; margin: auto;">
+                                    <h1>Data Siswa per Kelas dan Jarak</h1>
+                                    <div style="width: 80%; margin: auto;">
                                         <canvas id="laporan"></canvas>
                                     </div>
                                     <script>
@@ -755,7 +740,7 @@
                                     </script>
 
                                     <div>
-                                        <p style="texttext-align: left;  margin-left: 3%; margin-right:3%;">Rata-rata
+                                        <p style="text-align: left;  margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Ayah: <span id="rataRataAyah"></span></p>
                                         <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Ibu: <span id="rataRataIbu"></span></p>

@@ -103,6 +103,27 @@ ul li span:hover {
     width: calc(33.333% - (2rem / 3));
     object-fit: contain;
   }
+  .btn-group {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-group {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .col-md-12 {
+    position: relative;
+  }
+  canvas{
+    position: relative;
+    display: block; 
+    box-sizing: border-box; 
+    height: 600px; 
+    width: 500px;
+  }
+  
+
   
 .item-bar{
   margin-bottom: -2%;

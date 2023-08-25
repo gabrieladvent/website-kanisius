@@ -1,3 +1,9 @@
+@php
+    $currentYear = date('Y'); // Mengambil tahun saat ini
+    $nextYear = $currentYear + 1; // Menambahkan 1 tahun untuk tahun berikutnya
+
+    $tahunAjaran = $currentYear . '/' . $nextYear;
+@endphp
 @extends('layout-sekolah.main')
 @section('isi-content')
     <div class="content">

@@ -82,6 +82,10 @@ $(document).ready(function () {
     $('#example').DataTable();
 });
 
+$(document).ready(function(){
+    $('table[data-tampil]').DataTable();
+});
+
 // from submit file
 $(document).ready(function () {
     $('#dtBasicExample').DataTable();

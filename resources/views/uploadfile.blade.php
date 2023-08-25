@@ -5,16 +5,17 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
 
-<div class="data-siswa " style="background: #e2e2e2; margin-top:6%;">
-    <div class="table-data justify-content-center align-items-center" style="margin-left: 1%; margin-right: 1%;">
-        <div>
-            <p class="h1 fw-bold">File Submissions
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
-                </a>
-            </p>
-        </div>                                
-    </div>
+    @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)))
+        <div class="isi-main px-5">
+            <div class="row">
+                <div class="col fw-bold mt-5 px-5">
+                    <p class="px-3 h2 mt-4 fw-bold">File Submissions
+                        <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
+                        </a>
+                    </p>
+                </div>
+            </div>
 
         <div class="row">
             <div class="col">

@@ -11,7 +11,6 @@ use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\SiswaTKController;
 use App\Http\Controllers\YayasanController;
-
 use App\Http\Controllers\LaporanController;
 use App\Models\Sekolah;
 use Detection\MobileDetect;
@@ -140,6 +139,11 @@ Route::group([
 
         Route::post('/post', [DashboardController::class, 'setPortal'])->name('set-portal');
         Route::get('/gettime', [KirimController::class, 'getendtime']);
+
+        // route laporan
+        Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
+        Route::post('/dashboard/laporan', [LaporanController::class, 'filter', 'laporanAgama', 'showTable'])->name('laporanFilter');
+        Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa');
     });
 
     Route::group([
