@@ -84,7 +84,7 @@
                                 </tr>
                             @endforeach
                         </tbody>
-                        <tfoot>
+                        {{-- <tfoot>
                             <tr>
                                 <th>No.</th>
                                 <th>NISN</th>
@@ -93,7 +93,7 @@
                                 <th>Jenis Kelamin</th>
                                 <th>Kelas</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> --}}
                     </table>
                     <div class="row d-flex justify-content-center mt-3 ms-5">
                         <div class="col-3 justify-content-center ms-5">

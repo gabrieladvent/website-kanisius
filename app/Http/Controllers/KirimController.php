@@ -49,6 +49,7 @@ class KirimController extends Controller
         try {
             // Membaca file Excel yang diupload oleh user
             $uploadedFile = $request->file('file');
+            
             $filename = $uploadedFile->getClientOriginalName();
             $filePath = $uploadedFile->getPathname();
 
@@ -95,7 +96,8 @@ class KirimController extends Controller
 
             // Menyimpan komentar dan status yang disimpan ke dalam variabel supaya nantinya bisa dilempar ke kirimNotifikasi untuk dibuat databasenya
             $komen = !empty($komentar) ? $komentar : '';
-            $stt  = $status;
+            $stt  = $data->status; // Mengambil status dari objek $data yang baru disimpan
+            
 
             Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen, $stt)); // Mengirim data ke KirimNotifikasi
             $data->save(); // Menyimpan data excel  di database
@@ -109,16 +111,13 @@ class KirimController extends Controller
                 'id_kirim' => $data->id_kirim,
             ])->with('success', 'File berhasil diunggah.');
         } catch (\Exception $e) {
-            // Jika gagal maka laman tidak akan berubah
-
-
+          // Jika gagal maka laman tidak akan berubah
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
                 'komentar' => $komentar,
                 'id_kirim' => $data->id_kirim,
             ])->with('success', 'File berhasil diunggah.');
 
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.');
 
         }
     }

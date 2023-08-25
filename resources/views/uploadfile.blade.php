@@ -28,21 +28,17 @@
                         <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
                         <form action="{{ route('upload', ['slug' => $user->id]) }}" method="POST"
                             enctype="multipart/form-data">
-                            @csrf
-                            <fieldset class="upload_dropZone text-center mb-3 p-4">
-                                <legend class="visually-hidden">Image uploader</legend>
-                                <i class="fa-solid fa-file-excel fa-2xl"></i>
-                                <p class="small my-2 mt-4">You can drag and drop files here to add them <br><i>or</i>
-                                </p>
-
-                                <input id="upload_image_background" name="file" data-post-name="image_background"
-                                    data-post-url="https://someplace.com/image/uploads/backgrounds/"
-                                    class="position-absolute invisible" type="file" multiple
-                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-
-                                <label class="btn btn-upload mb-3" for="upload_image_background">Choose file(s)</label>
-                                <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
-                            </fieldset>
+                          @csrf
+                          <fieldset class="upload_dropZone text-center mb-3 p-4">
+                            <legend class="visually-hidden">Excel uploader</legend>
+                            <i class="fa-solid fa-file-excel fa-2xl"></i>
+                            <p class="small my-2 mt-4">You can drag and drop Excel files here to add them <br><i>or</i></p>
+                            <input id="upload_excel" name="file" data-post-name="excel_file"      
+                                   class="position-absolute invisible upload_dropZone text-center" type="file" multiple 
+                                   accept=".xlsx, .xls" />
+                            <label class="btn btn-upload mb-3" for="upload_excel">Choose Excel file(s)</label>
+                            <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+                          </fieldset>
                             <svg style="display:none">
                                 <defs>
                                     <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
@@ -54,6 +50,8 @@
                     </div>
                 </div>
             </div>
+            
+
 
             <div class="row ms-4">
                 <div class="col ps-2">

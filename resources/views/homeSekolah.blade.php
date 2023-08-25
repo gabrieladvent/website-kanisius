@@ -86,13 +86,13 @@
                                     <td>{{ $item->Rombel_Set_Ini }}</td>
                                 </tr>
                             @endforeach
-                            <tr>
+                            {{-- <tr>
                                 <td>NISN</td>
                                 <td>Nama Siswa</td>
                                 <td>Tanggal Lahir</td>
                                 <td>Jenis Kelamin</td>
                                 <td>Kelas</td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td colspan="5">
                                     <center><a href="{{ route('data-siswa', ['slug' => $user->slug]) }}">Lihat Lengkap</a>

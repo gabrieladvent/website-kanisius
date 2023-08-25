@@ -97,7 +97,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot>
+                    {{-- <tfoot>
                         <tr>
                             <th>No.</th>
                             <th>NISN</th>
@@ -107,7 +107,7 @@
                             <th>Kelas</th>
                             <th>Action</th>
                         </tr>
-                    </tfoot>
+                    </tfoot> --}}
                 @endif
 
             </table>

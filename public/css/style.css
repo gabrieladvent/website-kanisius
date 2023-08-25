@@ -68,6 +68,26 @@ ul li span:hover {
   body {
     margin: 24px;
   }
+
+  .upload_gambar {
+    margin-left: 3%;
+    color: #0f3c4b;
+    background-color: var(--colorPrimaryPale, #c8dadf);
+    outline: 2px dashed var(--colorPrimaryHalf, #000000);
+    outline-offset: -12px;
+    /* width: 1000px;
+    height: 800px; */
+    transition:
+      outline-offset 0.2s ease-out,
+      outline-color 0.3s ease-in-out,
+      background-color 0.2s ease-out;
+  }
+  .upload_gambar.highlight {
+    outline-offset: -4px;
+    outline-color: var(--colorPrimaryNormal, #0576bd);
+    background-color: var(--colorPrimaryEighth, #c8dadf);
+    
+  }
   
   
   .upload_dropZone {
@@ -76,6 +96,8 @@ ul li span:hover {
     background-color: var(--colorPrimaryPale, #c8dadf);
     outline: 2px dashed var(--colorPrimaryHalf, #000000);
     outline-offset: -12px;
+    /* width: 1000px;
+    height: 800px; */
     transition:
       outline-offset 0.2s ease-out,
       outline-color 0.3s ease-in-out,
@@ -85,6 +107,7 @@ ul li span:hover {
     outline-offset: -4px;
     outline-color: var(--colorPrimaryNormal, #0576bd);
     background-color: var(--colorPrimaryEighth, #c8dadf);
+    
   }
   .upload_svg {
     fill: var(--colorPrimaryNormal, #0576bd);
