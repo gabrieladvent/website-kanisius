@@ -6,10 +6,18 @@
 @endphp
 @extends('layout-yayasan.second')
 @section('isi-content')
-    <div class="judul" style="margin-top: 8%;">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<div style="background-color: #244076;">
+<div class="data-siswa1 py-4">
+    <div class="table-data1 d-flex justify-content-center align-items-center" style="margin-left: 1%; margin-right: 1%; height: 100%;">
+        <div>
         <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi</p>
         <p class="fs-3 fw-bold text-wrap text-center">Sekolah Dasar dan Sekolah Menengah Pertama</p>
         <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran {{ $tahunAjaran }}</p>
+    </div>
+</div>
+
     </div>
     <div class="data-siswa py-3 ">
         <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
@@ -65,10 +73,14 @@
         </div>
     </div>
 
-    <div class="judul" style="margin-top: 5%;">
+    <div class="data-siswa1 py-4">
+        <div class="table-data1 d-flex justify-content-center align-items-center" style="margin-left: 1%; margin-right: 1%; height: 100%;">
+            <div>
         <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi</p>
-        <p class="fs-3 fw-bold text-wrap text-center">Taman Kanak</p>
+        <p class="fs-3 fw-bold text-wrap text-center">Taman Kanak-Kanak</p>
         <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran {{ $tahunAjaran }}</p>
+    </div>
+</div>
     </div>
     <div class="data-siswa py-3 ">
         <div class=" table-data" style="margin-left: 1%; margin-right:1%;">

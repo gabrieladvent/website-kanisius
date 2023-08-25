@@ -1,7 +1,7 @@
 @extends('layout-yayasan.second')
 @section('isi-content')
-    <div class="row px-5">
-        <div class="col-4  mt-5 ms-4">
+   <div class="row px-5">
+        <div class="col-4  mt-2 ms-4">
             <div class="row mt-5 shadow-3-strong bg-light">
                 <div class="col mt-3 ms-1">
                     <div>
@@ -72,17 +72,17 @@
             </div>
         </div>
 
-        <div class="col ms-5 mt-5">
-            <div class="row mt-5 mb-5 ms-5 d-flex justify-content-center shadow-3-strong bg-light">
+        <div class="col mt-2">
+            <div class="row mt-5  ms-5 justify-content-center shadow-3-strong bg-light">
                 <div class="col-3 mt-3 mb-3  text-center">
-                        <a href="akun-yayasan" class="btn bg-dark text-white">Daftar Akun Operator</a>
+                        <a href="akun-yayasan" class="btn bg-primary text-white">Daftar Akun Operator</a>
                 </div>
                 <div class="col-3 mt-3 mb-3  text-center">
-                        <a href="{{ route('portal-view') }}" class="btn bg-white text-dark border border-2">Portal Upload File</a>
+                        <a href="{{ route('portal-view') }}" class="btn bg-success text-white ">Portal Upload File</a>
                 </div>
             </div>
 
-            <div class="row mt-5 ms-5 py-5 shadow-3-strong bg-light">
+            <div class="row mt-3 mb-5 ms-5 d-flex shadow-3-strong bg-light ">
                 <p class="text-center fs-5">Upload Tema Disini</p>
                 <form action="{{ route('update.profile') }}" method="post" enctype="multipart/form-data">
                     @csrf
@@ -102,7 +102,7 @@
                         <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
                     </fieldset>
                     <div class="row">
-                        <div class="col mt-1">
+                        <div class="col mt-1 mb-3">
                             <button type="submit" class=" float-end fs-6 btn bg-primary text-white">Submit</button>
                         </div>
                     </div>

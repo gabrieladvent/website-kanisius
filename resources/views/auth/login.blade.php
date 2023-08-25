@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link href="{{ asset('/image/logo.png') }}" rel="icon">
-
+    <link href="{{ asset('/img/logo.png') }}" rel="icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
@@ -83,14 +82,13 @@
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
-
-                                <div class="password-container">
+                                
                                     <input type="password" name="password"
                                         class="form-control @error('password') is-invalid @enderror"
                                         placeholder="Password" id="password" autocomplete="current-password">
+                                <div class="password-container">
                                     <i class="fa fa-eye-slash" id="togglePassword"></i>
                                 </div>
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -114,6 +112,7 @@
             </div>
         </div>
     </div>
+
 
     @if (Session::has('success'))
         <script>

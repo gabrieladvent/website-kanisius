@@ -1,8 +1,21 @@
 @extends('layout-yayasan.second')
 @section('isi-content')
-    @if ($isFromShow && isset($notifikasi) && count($notifikasi) > 0)
-        <div class="toper">
-            <h2>Message</h2>
+
+@if ($isFromShow && isset($notifikasi) && count($notifikasi) > 0)
+<div class="data-siswa py-5 " style="background: #244076;">
+    <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
+    <div class="card">
+        <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
+            <h2 style="margin: 0;">Message</h2>
+            <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+            <lord-icon
+                src="https://cdn.lordicon.com/msetysan.json"
+                trigger="hover"
+                colors="primary:#121331"
+                style="width: 45px; height: 30px; margin-left: 10px;">
+            </lord-icon>
+        </div>
+        
             <div class="message-box" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);padding:1%">
 
                 <table class="table table-bordered">
@@ -71,6 +84,8 @@
                 </table>
             </div>
         </div>
+    </div>
+</div>
     @elseif(!$isFromShow && !$dataSekolah->isEmpty())
         <div class="ms-5 mt-5">
             <div class="mt-5">
@@ -78,67 +93,46 @@
             </div>
             <div class="message-box p-3" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
 
-                @php
-                    $tempTK = [];
-                    $tempSD = [];
-                    $tempSMP = [];
-                @endphp
-
-                @foreach ($dataSekolah as $item)
-                    @if (strpos($item->NAMASEKOLAH, 'TK') !== false)
-                        @php
-                            $tempTK[] = $item->NAMASEKOLAH;
-                        @endphp
-                    @elseif (strpos($item->NAMASEKOLAH, 'SD') !== false)
-                        @php
-                            $tempSD[] = $item->NAMASEKOLAH;
-                        @endphp
+                                <table class="table table-bordered border border-secondary" style="background-color: #ffffff;">
+                                    <thead class="">
+                                        <th class="h4 fw-bold">Yayasan Kanisius:</th>
+                                        <th class="h4 fw-bold text-center col-3">Taman Kanak (TK)</th>
+                                        <th class="h4 fw-bold text-center col-3">Sekolah Dasar (SD)</th>
+                                        <th class="h4 fw-bold text-center col-4">Sekolah Menengah Pertama (SMP)</th>
+                                    </thead>
+                                    <tbody class=" mt-5 table-group-divider">
+                                        <tr class="">
+                                            <td></td>
+                                            <td>
+                                                <ol>
+                                                    @foreach ($tempTK as $index => $namaTK)
+                                                        <li>{{ $namaTK }}</li>
+                                                    @endforeach
+                                                </ol>
+                                            </td>
+                                            <td>
+                                                <ol>
+                                                    @foreach ($tempSD as $index => $namaSD)
+                                                        <li>{{ $namaSD }}</li>
+                                                    @endforeach
+                                                </ol>
+                                            </td>
+                                            <td>
+                                                <ol>
+                                                    @foreach ($tempSMP as $index => $namaSMP)
+                                                        <li>{{ $namaSMP }}</li>
+                                                    @endforeach
+                                                </ol>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     @else
-                        @php
-                            $tempSMP[] = $item->NAMASEKOLAH;
-                        @endphp
+                        <div class="toper text-center mt-5">
+                            <h2>TIDAK ADA PESAN</h2>
+                        </div>
                     @endif
-                @endforeach
-
-                <table class="table table-bordered border border-secondary" style="background-color: #ffffff;">
-                    <thead class="">
-                        <th class="h4 fw-bold">Yayasan Kanisius:</th>
-                        <th class="h4 fw-bold text-center col-3">Taman Kanak (TK)</th>
-                        <th class="h4 fw-bold text-center col-3">Sekolah Dasar (SD)</th>
-                        <th class="h4 fw-bold text-center col-4">Sekolah Menengah Pertama (SMP)</th>
-                    </thead>
-                    <tbody class=" mt-5 table-group-divider">
-                        <tr class="">
-                            <td></td>
-                            <td>
-                                <ol>
-                                    @foreach ($tempTK as $index => $namaTK)
-                                        <li>{{ $namaTK }}</li>
-                                    @endforeach
-                                </ol>
-                            </td>
-                            <td>
-                                <ol>
-                                    @foreach ($tempSD as $index => $namaSD)
-                                        <li>{{ $namaSD }}</li>
-                                    @endforeach
-                                </ol>
-                            </td>
-                            <td>
-                                <ol>
-                                    @foreach ($tempSMP as $index => $namaSMP)
-                                        <li>{{ $namaSMP }}</li>
-                                    @endforeach
-                                </ol>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    @else
-        <div class="toper text-center mt-5">
-            <h2>TIDAK ADA PESAN</h2>
-        </div>
-    @endif
+                    {{-- @endforeach   --}}
 @endsection

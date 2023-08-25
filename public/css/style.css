@@ -1,7 +1,6 @@
 body {
   font-family: "Inter" !important;
 }
-
 i {
   color: #072a40;
 }
@@ -67,6 +66,8 @@ ul li span:hover {
   
   body {
     margin: 24px;
+    z-index: -1;
+    background-color: #244076;; /* Ganti dengan warna background yang diinginkan */
   }
   
   
@@ -102,6 +103,27 @@ ul li span:hover {
     width: calc(33.333% - (2rem / 3));
     object-fit: contain;
   }
+  .btn-group {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-group {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .col-md-12 {
+    position: relative;
+  }
+  canvas{
+    position: relative;
+    display: block; 
+    box-sizing: border-box; 
+    height: 600px; 
+    width: 500px;
+  }
+  
+
   
 .item-bar{
   margin-bottom: -2%;
@@ -111,9 +133,9 @@ ul li span:hover {
 .items{
   margin-right: 1% ;
 }
-/* .badan{
-  
-} */
+.see-more-link {
+  margin-top: -10px; /* Sesuaikan dengan margin yang diinginkan */
+}
 
 #select-day{
     padding-left: 20px;
@@ -167,6 +189,8 @@ ul li span:hover {
   }
   .grid-container {
     border: 0px dashed Navy; 
+    border-radius: 20px 20px 0px 0px;
+    border-radius: 15px;
     margin: auto; 
     width: 100%; 
     transform: translate(-50px, 0px); 
@@ -181,13 +205,13 @@ ul li span:hover {
     align-content: space-evenly;  
     justify-content: space-evenly; 
     padding: 20px 50px; 
-    background-color: LightGray; 
+    background-color: #D9D9D9; 
   }
   .grid-item {
     border: 0px solid Purple; 
     display: flex; 
     justify-content: space-evenly; 
-    color: #404080; 
+    color: #000000; 
     text-transform: uppercase; 
     font-family: 'Roboto Mono', monospace; 
     font-weight: 400;

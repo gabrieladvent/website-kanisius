@@ -24,12 +24,15 @@
     @push('js')
         <script src="{{ asset('js/js.js') }}"></script>
     @endpush
+    @push('laporan')
+        <script src="{{ asset('js/laporan.js') }}"></script> 
+    @endpush
     @push('table')
         <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
     @endpush
 </head>
 
-<body style="background-color: #fcf2fc;">
+<body style="background-color: #244076">
     @include('navbar.navbar-second')
     <!-- sidebar -->
     @include('navbar.sidebar')
@@ -101,6 +104,7 @@
 
     @stack('js')
     @stack('table')
+    @stack('laporan')
 </body>
 
 </html>

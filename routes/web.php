@@ -15,7 +15,6 @@ use App\Http\Controllers\LaporanController;
 use App\Models\Sekolah;
 use Detection\MobileDetect;
 use GuzzleHttp\Middleware;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,6 +52,21 @@ Route::group([
 
     // Untuk masuk ke tampilan detail siswa
     Route::get('/detail-siswa/personal/{nisn}/{namasekolah}', [SiswaController::class, 'SiswaPersonal'])->name('detail-siswa-personal')->defaults('title', 'Detail');
+
+    // untuk masuk laporan yayasan 
+    Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa');
+
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanAgama','showTable'])->name('laporanFilter');
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanJenisKelamin'])->name('laporanFilter');
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanZonasi'])->name('laporanFilter');
+    // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter');
+    Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter');
+
+    Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
+
+    Route::post('dashboard/laporan/hasil-pilih', [LaporanController::class, 'laporan_hasil'])->name('laporan-hasil');
+
+
 
     // Masuk ke tampilan profile
     Route::get('dashboard/profile', [DashboardController::class, 'profile'])->name('profile');

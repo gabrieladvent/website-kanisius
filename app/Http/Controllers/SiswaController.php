@@ -33,6 +33,7 @@ class SiswaController extends Controller
 
         return view('tabeluseryayasan', compact('data_siswa', 'data_tk', 'title', 'user'));
     }
+    
 
     /*
         Method untuk menampilkan data siswa untuk sekolah berdasarkan sekolah yang login

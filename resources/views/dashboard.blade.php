@@ -23,16 +23,25 @@
                         <p>Message</p>
                     </div>
 
-                    <div class="col">
-                        <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                    <div class="col special-col">
+                        <table class="table table-borderless mt-3 w-100">
                             <tbody class="mt-5">
                                 @forelse ($user->notifications as $notification)
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}">
+                                                <span class="border border-secondary" style="background-color: #ffffff">
+                                                <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}" style="color: black">
                                                     {{ $notification->data['namasekolah'] }} Mengirimkan File
                                                 </a>
+                                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/pkmkagva.json"
+                                                    trigger="hover"
+                                                    colors="primary:#66a1ee"
+                                                    style="width:25px;height:25px; float:right;margin-left:10px;">
+                                                </lord-icon>
+                                            </span>
                                             </td>
                                         </tr>
                                         @php
@@ -41,9 +50,10 @@
                                     @endif
                                 @empty
                                     <tr>
-                                        <th></th>
-                                        <td></td>
-                                        <td class="text-secondary">Tidak Ada Pesan</td>
+                                        {{-- <th></th>
+                                        <td></td> --}}
+                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak Ada Pesan</td>
+
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -74,7 +84,7 @@
                             @endif
                         </div>
                     </div>
-                </div>
+                </div> 
 
 
                 <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
@@ -103,9 +113,9 @@
                         @endforeach
 
                         {{-- Tampilkan data yang sudah disimpan dalam array dengan batasan 5 data --}}
-                        <table class="table table-borderless mt-3 w-100" style="background-color: #ffffff;">
+                        <table class="table table-borderless mt-3 w-100 custom-table" style="background-color: #ffffff;">
                             <thead>
-                                <th>Yayasan Kanisius:</th>
+                                <th class="col-2">Yayasan Kanisius:</th>
                                 <th class="col-3">Taman Kanak (TK)</th>
                                 <th class="col-3">Sekolah Dasar (SD)</th>
                                 <th class="col-4">Sekolah Menengah Pertama (SMP)</th>
@@ -113,7 +123,7 @@
                             <tbody class="mt-5 table-group-divider">
                                 <tr class="">
                                     <td></td>
-                                    <td>
+                                    <td style="padding-top: 0;">
                                         <ol>
                                             @foreach ($tempTK as $index => $namaTK)
                                                 @if ($loop->iteration <= 5)
@@ -122,7 +132,7 @@
                                             @endforeach
                                         </ol>
                                     </td>
-                                    <td>
+                                    <td style="padding-top: 0;">
                                         <ol>
                                             @foreach ($tempSD as $index => $namaSD)
                                                 @if ($loop->iteration <= 5)
@@ -131,7 +141,7 @@
                                             @endforeach
                                         </ol>
                                     </td>
-                                    <td>
+                                    <td style="padding-top: 0;">
                                         <ol>
                                             @foreach ($tempSMP as $index => $namaSMP)
                                                 @if ($loop->iteration <= 5)
@@ -141,24 +151,18 @@
                                         </ol>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td style="vertical-align: top;">
+                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link" style="padding-top: -10px;">
+                                            <p class="fs-10">See More &gt;&gt;&gt;</p>
+                                        </a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-1">
-                        <div class="row mt-5"></div>
-                        <div class="row mt-5"></div>
-                        <div class="row mt-5"></div>
-                        <div class="row mt-5"></div>
-                        <div class="row">
-                            <a href="{{ route('daftar-sekolah') }}">
-                                <p class="fs-6">see More...</p>
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <script></script>
 @endsection
