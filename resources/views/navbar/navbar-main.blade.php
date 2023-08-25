@@ -19,10 +19,10 @@
                 <!-- Left links -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-nowrap">
                     <li class="nav-item">
-                        <a class="inter nav-link active" aria-current="page" href="#">Video Tutorial</a>
+                        <a class="inter nav-link active" aria-current="page" href="{{ route('tutorial') }}">Video Tutorial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="inter nav-link text-dark" href="#" target="_blank">Dokumentasi</a>
+                        <a class="inter nav-link text-dark" href="{{ route('panduan-buku') }}" target="_blank">Dokumentasi</a>
                     </li>
                     <li class="nav-item">
                         <a class="inter nav-link text-dark" href="#">Kontak Admin</a>
