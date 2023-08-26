@@ -11,10 +11,10 @@
                 <img src="{{ asset('/image/logo baru.png') }}" class="w-50">
             </div>
             <div class="col-5 mt-5 ms-4 me-1">
-                <img src="{{ asset('/image/alamat.png') }}" class="w-75 ms-5" alt="">
+                <img src="{{ asset('/image/kani_biru1.png') }}" class="w-100 ms-1" alt="">
             </div>
             <div class="col-3 ms-5">
-                <img src="{{ asset('/image/IHS_Logo.png') }}" class="w-75 ms-5" alt="">
+                <img src="{{ asset('/image/logoihsbar.png') }}" class="w-75 ms-5" alt="">
             </div>
             <div style="position: relative;">
                 <div class="row d-flex justify-content-center border-2 border-top border-primary mt-3 container-fluid shadow-6-strong"

@@ -113,6 +113,7 @@ class LaporanController extends Controller
                     'title' => 'Judul Laporan',
                     'sekolah' => Sekolah::all(),
                     'data_siswa' => $data_siswa,
+                    'data_siswatk' => $data_siswatk,
                     'jumlahLakiLaki' => $data['jumlah_cwo'],
                     'jumlahPerempuan' => $data['jumlah_cwe'],
                     'totalJL' => $data['total']

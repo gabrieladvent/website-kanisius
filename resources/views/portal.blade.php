@@ -1,9 +1,7 @@
 @extends('layout-yayasan.second')
 @section('isi-content')
 
-
-<div class="data-siswa py-5 mt-5" style="background: #244076;">
-    <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
+<div class="data-siswa py-5" style="background: #244076;">
     <div class="card">
         <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
             <h2 style="margin: 0; display: flex; align-items: center;"> Portal Upload 
@@ -66,6 +64,5 @@
                     <span id="span-datetime" hidden></span>
                 </p>
         </div>
-    </div>
 </div>
 @endsection

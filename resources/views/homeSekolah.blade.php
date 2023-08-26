@@ -10,11 +10,13 @@
         <div class="logo-banner">
             <table>
                 <tr>
-                    <th> <i><img src="{{ asset('/image/logo.png') }}" class="img-kanisius-baru"></i></th>
-                    <th>
-                        <i><img src="{{ asset('/image/alamat.png') }}" class="branding-baru"> <span></span></i>
+                    <th> <i><img src="{{ asset('/image/logo.png') }}" class="img-kanisius-baru"></i>
                     </th>
-                    <th><i><img src="{{ asset('/image/ihs-baru.png') }}" class="ihs-logo-baru"></i></th>
+                    <th><i><img src="{{ asset('/image/kani_biru1.png') }}" class="branding-baru"> <span></span></i>
+                    </th>
+                    <th><i><img src="{{ asset('/image/logoihsbar.png') }}" class="ihs-logo-baru"></i>
+                    </th>
+
                 </tr>
             </table>
         </div>
