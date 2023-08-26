@@ -42,9 +42,9 @@
         <script>
             toastr.options = {
                 "closeButton": true,
-                positionClass: 'toast-top-right',
+                positionClass: 'toast-top-left',
             }
-            toastr.success("{{ Session::get('success') }}");
+            toastr.info("{{ Session::get('success') }}");
         </script>
     @endif
     @if (Session::has('gagal'))
@@ -53,7 +53,7 @@
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.error();
+            toastr.warning();
             ("{{ Session::get('gagal') }}");
         </script>
     @endif

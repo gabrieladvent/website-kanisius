@@ -57,12 +57,34 @@ class SekolahController extends Controller
 
             return Redirect::to($template);
         } else{
-            // dd('yayasan');
+            abort(404, 'Gagal Mengeksekusi Perintah');
         }
+    }
 
+    public function panduan(){
+        $user = Auth::user();
+        if($user->status == 'sekolah'){
+            $template = 'https://docs.google.com/spreadsheets/d/1VgZBJ4l7tjCDRkaiy-IgLaYKDShBS78F/edit?usp=drive_link&ouid=115074841835460332215&rtpof=true&sd=true';
 
-        // $googleDriveLink = 'https://docs.google.com/document/d/1ovqEj16HJIwraspkz8b0HMr_50w9HKrPAh-8AemoOOA/edit?usp=drive_link'; // Ganti dengan link Google Drive yang sesuai
+            return Redirect::to($template);
+        }elseif($user->status == 'yayasan'){
+            
+        }else{
+            abort(404, 'Gagal Mengeksekusi Perintah');
+        }
+    }
 
-        // return Redirect::to($googleDriveLink);
+    public function youTube(){
+        $user = Auth::user();
+        $user = Auth::user();
+        if($user->status == 'sekolah'){
+            $template = 'https://docs.google.com/spreadsheets/d/1VgZBJ4l7tjCDRkaiy-IgLaYKDShBS78F/edit?usp=drive_link&ouid=115074841835460332215&rtpof=true&sd=true';
+
+            return Redirect::to($template);
+        }elseif($user->status == 'yayasan'){
+            
+        }else{
+            abort(404, 'Gagal Mengeksekusi Perintah');
+        }
     }
 }

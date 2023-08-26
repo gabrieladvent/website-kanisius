@@ -12,6 +12,6 @@ class Arship extends Model
     protected $table = 'arship';
     
     public function sekolah() {
-        return $this->belongsTo(Sekolah::class, 'NOMOR_S');
+        return $this->belongsTo(Sekolah::class, 'NOMOR_S','NOMOR_S');
     }
 }

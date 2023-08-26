@@ -74,6 +74,9 @@ Route::group([
     // fungsi untuk update profile 
     Route::put('/update/{id}', [UserController::class, 'update_sekolah'])->name('update');
 
+    Route::get('buku-panduan', [SekolahController::class, 'panduan'])->name('panduan-buku');
+    Route::get('tutorial-youTube', [SekolahController::class, 'youTube'])->name('tutorial');
+
     Route::group([
         'middleware' => 'role:yayasan'
     ], function () {

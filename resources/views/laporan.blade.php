@@ -168,8 +168,7 @@
 </div>      
 
     @if (!empty(count($data_siswa)))
-
-        {{-- <div class="data-siswa py-3"> --}}
+    {{-- <div class="data-siswa py-3"> --}}
             <div class="data-siswa py-3">
                 <div class="table-data" style="margin-left: 1%; margin-right: 1%;">
                     <table id="example" data-tampil class="table table-bordered" style="width: 100%">
@@ -747,7 +746,7 @@
                                     <div>
                                         <p style="texttext-align: left;  margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Ayah: <span id="rataRataAyah"></span></p>
-                                        <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
+                                     <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Ibu: <span id="rataRataIbu"></span></p>
                                         <p style="text-align: left;   margin-left: 3%; margin-right:3%;">Rata-rata
                                             Penghasilan Wali: <span id="rataRataWali"></span></p>

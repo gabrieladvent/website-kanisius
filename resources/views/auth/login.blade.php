@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
-    <link href="{{ asset('/img/logo.png') }}" rel="icon">
+    <link href="{{ asset('/image/logo.png') }}" rel="icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
@@ -28,8 +28,8 @@
                     <div class="row">
                         <div class="col-lg-12 mx-2">
                             <img src="{{ asset('/image/logo.png') }}" style="width: 3%;">
-                            <img src="{{ asset('/image/HITAM.png') }}"
-                                style="width: 15%; margin-left: 1%; margin-top: 1%">
+                            <img src="{{ asset('/image/logo-tengah-fix-.png') }}"
+                                style="width: 15%; margin-left: 1%;">
                         </div>
                     </div>
                     <!-- Left links -->
@@ -98,7 +98,7 @@
 
                             <div class="row">
                                 <div class="col-4">
-                                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Masuk</button>
                                 </div>
                             </div>
                         </form>

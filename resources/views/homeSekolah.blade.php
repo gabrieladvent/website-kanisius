@@ -14,7 +14,7 @@
                     </th>
                     <th><i><img src="{{ asset('/image/kani_biru1.png') }}" class="branding-baru"> <span></span></i>
                     </th>
-                    <th><i><img src="{{ asset('/image/logoihsbar.png') }}" class="ihs-logo-baru"></i>
+                    <th><i><img src="{{ asset('/image/!.png') }}" class="ihs-logo-baru"></i>
                     </th>
 
                 </tr>

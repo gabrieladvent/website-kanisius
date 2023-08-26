@@ -17,8 +17,9 @@ class DeniedMobile
     public function handle(Request $request, Closure $next): Response
     {
         $detect = new MobileDetect();
-        if( $detect->isMobile() || $detect->isTablet() ){
-            abort(404);
+        if ($detect->isMobile() || $detect->isTablet()) {
+            $deviceType = $detect->isMobile() ? 'Mobile Device' : 'Tablet';
+            abort(404, 'Sorry, your ' . $deviceType . ' is not supported. Please access via computer');
         }
         return $next($request);
     }
