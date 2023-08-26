@@ -5,18 +5,11 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
     @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)))
-<<<<<<< HEAD
 
     <div class="data-siswa py-5 " style="background: #221e6c;">
             <div class="card">
                 <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
                     <p class="px-1 h1 fw-bold">File Submissions
-=======
-        <div class="isi-main px-5">
-            <div class="row">
-                <div class="col fw-bold mt-5 px-5">
-                    <p class="px-3 h2 mt-4 fw-bold text-white">File Submissions
->>>>>>> 0770bde68a9d112b37fef8bfe89051bd9ec7260c
                         <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-exclamation-circle" style="font-size: 16px; color: aliceblue"
                                 title="Download Template"></i>
@@ -29,12 +22,8 @@
                 
                 
 
-<<<<<<< HEAD
         <div class="first-box px-4 py-4 ms-4">
             <div class="row p-1" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
-=======
-            <div class="row">
->>>>>>> 0770bde68a9d112b37fef8bfe89051bd9ec7260c
                 <div class="col">
                     <p class="float-end me-3">Maximum file size: 20 MB</p>
                 </div>
@@ -91,11 +80,6 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
-        <div class="row mt-3 pb-4 d-flex justify-content-center">
-            <div class="col-2">
-                <button type="submit" class="w-75 btn bg-success text-white">Submit</button>
-=======
             <div class="row mt-3 pb-2 d-flex justify-content-center">
                 <div class="col-2">
                     <button type="submit" class="w-75 btn bg-success text-white">Submit</button>
@@ -103,30 +87,9 @@
                 <div class="col-2">
                     <a href="" class="w-75 text-white btn bg-danger">Cancel</a>
                 </div>
->>>>>>> 0770bde68a9d112b37fef8bfe89051bd9ec7260c
             </div>
             </form>
         </div>
-    @else
-        <div class="row">
-            <div class="col fw-bold mt-5 px-5">
-                <p class="px-3 h2 mt-4 fw-bold text-white">File Submissions
-                    <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-exclamation-circle" style="font-size: 16px; color: aliceblue"
-                            title="Download Template"></i>
-                    </a>
-                </p>
-            </div>
-            <div class="row">
-                <div class="col ms-2">
-                    <p class="ms-5 h5 text-white">Silahkan Hubungi Admin Untuk Mengaktifkan Portal</p>
-                </div>
-            </div>
-        </div>
-<<<<<<< HEAD
-        </form>
-</div>
-</div>
 
     @else
     <div class="data-siswa py-5 " style="background: #221e6c;">
@@ -145,7 +108,5 @@
 
         </div>        
     </div>
-=======
->>>>>>> 0770bde68a9d112b37fef8bfe89051bd9ec7260c
     @endif
 @endsection

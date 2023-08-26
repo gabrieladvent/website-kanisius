@@ -30,7 +30,7 @@
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <span class="border border-secondary" style="background-color: #ffffff">
+                                                <span class="border border-secondary">
                                                 <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}" style="color: black">
                                                     {{ $notification->data['namasekolah'] }} Mengirimkan File
                                                 </a>
@@ -78,7 +78,7 @@
                         <div class="row">
                             <p></p>
                         </div>
-                        <div class="row">
+                        <div class="row ">
                             @if ($notificationCount > 2)
                                 <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
                             @endif
