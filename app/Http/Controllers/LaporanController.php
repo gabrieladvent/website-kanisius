@@ -24,15 +24,15 @@ class LaporanController extends Controller
         $siswaTK = Siswa_TK::all();
         $siswaArship = Arship::all();
         $siswaArshipTK = Arsip_TK::all();
+
         $data_siswa = $siswa->load('sekolah');
         $data_siswatk = $siswaTK->load('sekolah');
         $data_siswa = $data_siswa->concat($siswaTK->load('sekolah'));
         $sekolah = Sekolah::all();
-        $data_siswa_arsip = $siswaArship->load('sekolah');
-        $data_siswa_arsipTK =  $siswaArshipTK->load('sekolah');
 
         $data_siswa_arsip = $siswaArship->load('sekolah');
         $data_siswa_arsipTK =  $siswaArshipTK->load('sekolah');
+
         return view('laporan', compact('data_siswa', 'sekolah', 'title', 'user', 'data_siswatk','data_siswa_arsip','data_siswa_arsipTK'));
     }
 
@@ -201,6 +201,7 @@ class LaporanController extends Controller
                     ]);
 
             default:
+            // dd($request->laporanType);
                 abort(404);
         }
         abort(404);
@@ -318,85 +319,76 @@ class LaporanController extends Controller
 
     private function filterJS(Request $request,$data_siswa_arsip, $data_siswa_arsipTK)
     {
-        $data_siswa_arsip = Arship::with('sekolah');
-        $data_siswa_arsipTK = Arsip_TK::with('sekolah');
+        $query2= Arship::with('sekolah');
+        $queryTkArsip = Arsip_TK::with('sekolah');
+        
 
-        if ($request->has('namaSekolah')) {
-            $data_siswa_arsip  =  $data_siswa_arsip->whereHas('sekolah', function ($subQuery) use ($request) {
-                $subQuery->where('NAMASEKOLAH', $request->namaSekolah);
-            });
-            $data_siswa_arsipTK =   $data_siswa_arsipTK->whereHas('sekolah', function ($subQuery) use ($request) {
-                $subQuery->where('NAMASEKOLAH', $request->namaSekolah);
-            });
-        } else if ($request->has('tingkatan')) {
-            $data_siswa_arsip = $data_siswa_arsip->whereHas('sekolah', function ($subQuery) use ($request) {
-                $subQuery->where('NAMASEKOLAH', 'LIKE', $request->tingkatan . '%');
-            });
-        } else if ($request->has('tingkatan')) {
-            $data_siswa_arsipTK = $data_siswa_arsipTK->whereHas('sekolah', function ($subQuery) use ($request) {
-                $subQuery->where('NAMASEKOLAH', 'LIKE', $request->tingkatan . '%');
-            });
-        }
+        $namaSekolah = $request->input('namaSekolah');
+        $tingkatan = $request->input('tingkatan');
+        $detailKelas = $request->input('detailKelas');
 
-        if ($request->has('detailKelas') || $request->hasAny(['kelasSD', 'kelasSMP', 'kelasTK'])) {
-            $data_siswa_arsip->where(function ($query) use ($request) {
-                $selectedKelas = null;
-                $detailKelas = $request->input('detailKelas');
 
-                if ($request->has('kelasSD')) {
-                    $selectedKelas = $request->input('kelasSD');
-                } elseif ($request->has('kelasSMP')) {
-                    $selectedKelas = $request->input('kelasSMP');
-                } elseif ($request->has('kelasTK')) {
-                    $selectedKelas = $request->input('kelasTK');
+        if ($namaSekolah) {
+                    $query2->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
+                        $subQuery->where('NAMASEKOLAH', $namaSekolah);
+                    });
+                    $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
+                        $subQuery->where('NAMASEKOLAH', $namaSekolah);
+                    });
+                } elseif ($tingkatan) {
+                    $query2->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
+                        $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
+                    });
+                    $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
+                        $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
+                    });
                 }
 
-                if ($selectedKelas) {
-                    if ($detailKelas) {
-                        $rombelSetIni = $selectedKelas . $detailKelas;
-                    } else {
-                        $rombelSetIni = $selectedKelas . '%';
-                    }
-                } else {
-                    $rombelSetIni = '%' . $detailKelas . '%';
+        if ($detailKelas || $request->hasAny(['kelasSD', 'kelasSMP', 'kelasTK'])) {
+                    $kelasType = $request->input('kelasSD') ?? $request->input('kelasSMP') ?? $request->input('kelasTK');
+                    $rombelSetIni = ($kelasType) ? $kelasType . $detailKelas : '%' . $detailKelas . '%';
+                    
+                    $query2->where(function ($subQuery) use ($rombelSetIni) {
+                        $subQuery->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
+                    });
                 }
 
-                $query->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
-            });
+            $query2->get();
+            $queryTkArsip->get();
+
+
+
+            $data_js_arship = $query2
+                ->select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as jumlah'))
+                ->groupBy(DB::raw('YEAR(created_at)'))
+                ->orderBy('year')
+                ->get();
+            
+            $data_js_arshipTK = $queryTkArsip
+                ->select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as jumlah'))
+                ->groupBy(DB::raw('YEAR(created_at)'))
+                ->orderBy('year')
+                ->get();
+            
+            $combined_data = [];
+            foreach ($data_js_arship as $key => $val) {
+                $year = $val->year;
+                $combined_data[$year]['arship'] = $val->jumlah;
+            }
+            
+            foreach ($data_js_arshipTK as $key => $val) {
+                $year = $val->year;
+                $combined_data[$year]['tkk_arsip'] = $val->jumlah;
+            }
+            
+            $temp = [[], []];
+            foreach ($combined_data as $year => $data) {
+                $years[] = $year;
+                $arship_data[] = $data['arship'] ?? 0;
+                $arshipTk_data[] = $data['tkk_arsip'] ?? 0;
+            }
+            
+            return $combined_data;
+            
         }
-        $data_siswa_Arship =  $data_siswa_arsip->get();
-        // $data_siswatk_Arship =  $data_siswa_arsip->get();
-
-
-        $data_siswa = DB::table('siswa')->select(
-            DB::raw('YEAR(created_at) as year'),
-            DB::raw('count(*) as jumlah')
-        )->groupBy('year')
-            ->orderByDesc('year')
-            ->get();
-
-        $data_siswa_Arship  = DB::table('arship')->select(
-            DB::raw('YEAR(created_at) as year'),
-            DB::raw('count(*) as jumlah')
-        )->groupBy('year')
-            ->orderByDesc('year')
-            ->get();
-
-        // Menggabungkan data siswa dan data arship
-        $data_siswa_combined = $data_siswa->concat($data_siswa_Arship);
-
-        // Mengubah data menjadi koleksi dengan grup tahun dan jumlah siswa
-        $data_js_siswa_combined = $data_siswa_combined->groupBy(function ($item) {
-            return $item->year;
-        })->map(function ($group) {
-            return [
-                'year' => $group[0]->year,
-                'jumlah' => $group->sum('jumlah')
-            ];
-        });
-
-        $data_js = $data_js_siswa_combined;
-
-        return $data_js;
     }
-}

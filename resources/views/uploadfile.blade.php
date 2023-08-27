@@ -20,14 +20,6 @@
                     </div>
                 </div>
                 
-                
-
-        <div class="first-box px-4 py-4 ms-4">
-            <div class="row p-1" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
-                <div class="col">
-                    <p class="float-end me-3">Maximum file size: 20 MB</p>
-                </div>
-            </div>
 
             <div class="first-box px-4 ms-4">
                 <div class="row p-1" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
@@ -102,7 +94,7 @@
                 </p>  
             </div>
                 <div class="col ms-2">
-                    <p class="ms-2 h5 text-danger" style="font-style: italic" >! Overdue !</p>
+                    <p class="ms-2 h5 text-danger" style="font-style: italic" >! Portal Ditutup</p>
                     <p class="ms-2 mt-1 h5 text-black-50" > Silahkan Hubungi Admin Untuk Mengaktifkan Portal</p>
                 </div>
 
