@@ -30,18 +30,19 @@
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <span class="border border-secondary" style="background-color: #ffffff">
-                                                <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}" style="color: black">
-                                                    {{ $notification->data['namasekolah'] }} Mengirimkan File
-                                                </a>
-                                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                                <lord-icon
-                                                    src="https://cdn.lordicon.com/pkmkagva.json"
-                                                    trigger="hover"
-                                                    colors="primary:#66a1ee"
-                                                    style="width:25px;height:25px; float:right;margin-left:10px;">
-                                                </lord-icon>
-                                            </span>
+                                                <span class="" style=" width: 100%; padding: 1%">
+                                                    <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}"
+                                                        style="color: black">
+                                                        {{ $notification->data['namasekolah'] }} Mengirimkan File
+
+                                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                                        <lord-icon src="https://cdn.lordicon.com/pkmkagva.json"
+                                                            trigger="hover" colors="primary:#66a1ee"
+                                                            style="width:25px;height:25px;margin-left:10px;float: right; ">
+                                                        </lord-icon>
+                                                    </a>
+                                                </span>
+
                                             </td>
                                         </tr>
                                         @php
@@ -52,7 +53,8 @@
                                     <tr>
                                         {{-- <th></th>
                                         <td></td> --}}
-                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak Ada Pesan</td>
+                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak
+                                            Ada Pesan</td>
 
                                     </tr>
                                 @endforelse
@@ -84,7 +86,7 @@
                             @endif
                         </div>
                     </div>
-                </div> 
+                </div>
 
 
                 <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
@@ -153,7 +155,8 @@
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: top;">
-                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link" style="padding-top: -10px;">
+                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link"
+                                            style="padding-top: -10px;">
                                             <p class="fs-10">See More &gt;&gt;&gt;</p>
                                         </a>
                                     </td>

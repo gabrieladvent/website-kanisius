@@ -30,7 +30,7 @@
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 @stack('scripts')
 @section('isi-content')
-    <div class="data-siswa py-5 ">
+    <div class="data-siswa py-5" style=" margin-top:5.9%">
         <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
             <div class="card">
                 <div class="card-header">
@@ -300,7 +300,6 @@
                                 </script>
                             </div>
                         @elseif ($laporanType === 'zonasi')
-                        
                             <div class="data-siswa py-3">
                                 @php
                                     $rataRataJarak = isset($rataRataJarak) ? $rataRataJarak : [];
