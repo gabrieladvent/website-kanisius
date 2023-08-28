@@ -17,6 +17,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Countdown;
+use App\Models\SaveSession;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Illuminate\Support\Facades\Notification;
 
@@ -95,11 +96,13 @@ class KirimController extends Controller
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session
             Session::put('id_kirim', $data->id_kirim);
-            session(['idLogin' => $userLogin]);
-            session(['variableName' => $stt]);
-            session(['kirim_tanggal' => $lastSend]);
+            $newSaveSession = SaveSession::create([
+                'variabel' => $filename,
+                'id_login' => $userLogin,
+                'tanggalkirim' => $lastSend,
+            ]);
+            // dd($newSaveSession);            
             
-
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
                 'komentar' => $komentar,
@@ -120,7 +123,6 @@ class KirimController extends Controller
     public function deleteFile($filename)
     {
         try {
-
             if (Storage::exists('public/simpanFile/' . $filename)) {
                 $fileToDelete = DB::table('kirim')
                     ->where('nama_file', $filename)
@@ -129,6 +131,7 @@ class KirimController extends Controller
 
                 if ($fileToDelete) {
                     session(['fileDelete' => $fileToDelete]);
+                    
                     $notif = DB::table('notifications')
                         ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
                         ->latest()
@@ -165,16 +168,27 @@ class KirimController extends Controller
         $upload_start = Portal::all()->value('upload_start');
         $upload_end = Portal::all()->value('upload_end');
 
-        if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false || Session::get('fileDelete')) {
-            Session::forget('variableName');
-            Session::forget('fileDelete');
-            Session::forget('kirim_tanggal');
-            Session::forget('idLogin');
+
+
+        if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false) {
+            DB::table('save_sessions')->delete(); 
         }
-        if (Session::get('variableName') && Session::get('kirim_tanggal')->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) && Session::get('idLogin') == $user->id){
+
+        $session = SaveSession::where('id_login', $user->id)
+            ->latest()
+            ->first();
+        // dd($session);
+        if (($session && $session->created_at->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) && $session->id_login == $user->id)) {
+            if(Session::get('fileDelete') != null){
+                // dd('itu');
+                return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
+            }
+            // dd('ini');
             return redirect()->route('sukses');
         } else {
-            // dd('masuk else');
+            if(Session::get('fileDelete')){
+                Session::forget('fileDelete');
+            }
             return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
         }
     }
