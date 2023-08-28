@@ -3166,6 +3166,7 @@ return array(
     'Maatwebsite\\Excel\\Validators\\RowValidator' => $vendorDir . '/maatwebsite/excel/src/Validators/RowValidator.php',
     'Maatwebsite\\Excel\\Validators\\ValidationException' => $vendorDir . '/maatwebsite/excel/src/Validators/ValidationException.php',
     'Maatwebsite\\Excel\\Writer' => $vendorDir . '/maatwebsite/excel/src/Writer.php',
+
     'Masterminds\\HTML5' => $vendorDir . '/masterminds/html5/src/HTML5.php',
     'Masterminds\\HTML5\\Elements' => $vendorDir . '/masterminds/html5/src/HTML5/Elements.php',
     'Masterminds\\HTML5\\Entities' => $vendorDir . '/masterminds/html5/src/HTML5/Entities.php',
@@ -3186,6 +3187,7 @@ return array(
     'Masterminds\\HTML5\\Serializer\\OutputRules' => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
     'Masterminds\\HTML5\\Serializer\\RulesInterface' => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
     'Masterminds\\HTML5\\Serializer\\Traverser' => $vendorDir . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
+
     'Matrix\\Builder' => $vendorDir . '/markbaker/matrix/classes/src/Builder.php',
     'Matrix\\Decomposition\\Decomposition' => $vendorDir . '/markbaker/matrix/classes/src/Decomposition/Decomposition.php',
     'Matrix\\Decomposition\\LU' => $vendorDir . '/markbaker/matrix/classes/src/Decomposition/LU.php',

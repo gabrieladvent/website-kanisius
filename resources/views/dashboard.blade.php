@@ -8,13 +8,13 @@
     <div class="col" style="margin-left: 5%; margin-top:5.6%">
         <div class="row mt-3 px-3 ">
             <div class="col-3 ms-3">
-                <img src="{{ asset('/image/logo baru.png') }}" class="w-50">
+                <img src="{{ asset('/image/logo-kapal-fix.png') }}" class="w-50">
             </div>
             <div class="col-5 mt-5 ms-4 me-1">
-                <img src="{{ asset('/image/alamat.png') }}" class="w-75 ms-5" alt="">
+                <img src="{{ asset('/image/logo-tengah-fix-.png') }}" class="w-100 ms-2" alt="" loading="lazy">
             </div>
             <div class="col-3 ms-5">
-                <img src="{{ asset('/image/IHS_Logo.png') }}" class="w-75 ms-5" alt="">
+                <img src="{{ asset('/image/logo-ihs-fix.png') }}" class="w-75 ms-5" alt="">
             </div>
             <div style="position: relative;">
                 <div class="row d-flex justify-content-center border-2 border-top border-primary mt-3 container-fluid shadow-6-strong"
@@ -30,7 +30,7 @@
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <span class="border border-secondary" style="background-color: #ffffff">
+                                                <span class="border border-secondary"  style="display: flex; background-color: white; padding: 5px;">
                                                 <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}" style="color: black">
                                                     {{ $notification->data['namasekolah'] }} Mengirimkan File
                                                 </a>
@@ -39,7 +39,7 @@
                                                     src="https://cdn.lordicon.com/pkmkagva.json"
                                                     trigger="hover"
                                                     colors="primary:#66a1ee"
-                                                    style="width:25px;height:25px; float:right;margin-left:10px;">
+                                                    style="width:25px;height:25px; float:right;margin-left:67%;">
                                                 </lord-icon>
                                             </span>
                                             </td>
@@ -52,7 +52,8 @@
                                     <tr>
                                         {{-- <th></th>
                                         <td></td> --}}
-                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak Ada Pesan</td>
+                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak
+                                            Ada Pesan</td>
 
                                     </tr>
                                 @endforelse
@@ -78,13 +79,13 @@
                         <div class="row">
                             <p></p>
                         </div>
-                        <div class="row">
+                        <div class="row ">
                             @if ($notificationCount > 2)
-                                <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
+                                <a href="{{ route('notifikasi') }}" class="see-more">See More>></a>
                             @endif
                         </div>
                     </div>
-                </div> 
+                </div>
 
 
                 <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
@@ -153,7 +154,8 @@
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: top;">
-                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link" style="padding-top: -10px;">
+                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link"
+                                            style="padding-top: -10px;">
                                             <p class="fs-10">See More &gt;&gt;&gt;</p>
                                         </a>
                                     </td>

@@ -93,6 +93,7 @@ ul li span:hover {
   
   .upload_dropZone {
     margin-left: 3%;
+    margin-right: 3%;
     color: #0f3c4b;
     background-color: var(--colorPrimaryPale, #c8dadf);
     outline: 2px dashed var(--colorPrimaryHalf, #000000);
@@ -135,6 +136,17 @@ ul li span:hover {
     text-align: center;
     margin: 0 auto;
   }
+  /* Ganti ukuran font sesuai kebutuhan */
+/* .btn-secondary {
+  font-size: 14px;
+} */
+
+/* Agar teks tetap dalam satu baris dan menghindari pemotongan */
+.btn-secondary {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
   .col-md-12 {
     position: relative;
   }

@@ -100,7 +100,7 @@
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.error();
+            toastr.warning();
             ("{{ Session::get('gagal') }}");
         </script>
     @endif

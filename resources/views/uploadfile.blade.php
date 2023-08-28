@@ -4,18 +4,23 @@
 
 @extends('layout-sekolah.second')
 @section('isi-content')
-
     @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)))
-        <div class="isi-main px-5">
-            <div class="row">
-                <div class="col fw-bold mt-5 px-5">
-                    <p class="px-3 h2 mt-4 fw-bold">File Submissions
+
+    <div class="data-siswa py-5 " style="background: #221e6c;">
+            <div class="card">
+                <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
+                    <p class="px-1 h1 fw-bold">File Submissions
                         <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
+                            <i class="fas fa-exclamation-circle" style="font-size: 16px; color: aliceblue"
+                                title="Download Template"></i>
                         </a>
-                    </p>
+                    </p>  
+                    <div class="col" style="margin-top: auto;">
+                        <p class="float-end me-3">Maximum file size: 20 MB</p>
+                    </div>
                 </div>
-            </div>
+                
+
 
         <div class="row">
             <div class="col">
@@ -25,6 +30,10 @@
 
             <div class="first-box px-4 ms-4">
                 <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+
+            <div class="first-box px-4 ms-4">
+                <div class="row p-1" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+
                     <div class="col">
                         <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
                         <form action="{{ route('upload', ['slug' => $user->id]) }}" method="POST"
@@ -65,25 +74,44 @@
             </div>
 
             <div class="second-box px-3 ms-4">
-                <div class="p-3 px-5" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+                <div class="p-3 px-3" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
                     <div class="row ">
                         <div class="col">
                             <input type="text" class="w-100 pb-5 border border-dark container-fluid shadow-3-strong"
-                                name="komentar" style="height: 150px;"
+                                name="komentar" style="height: 100px;"
                                 placeholder="Silahkan masukan komentar atau pesan...">
                         </div>
                     </div>
                 </div>
             </div>
 
-        <div class="row mt-3 pb-2 d-flex justify-content-center">
-            <div class="col-2">
-                <button type="submit" class="w-75 btn bg-success text-white">Submit</button>
+            <div class="row mt-3 pb-2 d-flex justify-content-center">
+                <div class="col-2">
+                    <button type="submit" class="w-75 btn bg-success text-white">Submit</button>
+                </div>
+                <div class="col-2">
+                    <a href="" class="w-75 text-white btn bg-danger">Cancel</a>
+                </div>
             </div>
-            <div class="col-2">
-                <a href="" class="w-75 text-white btn bg-danger">Cancel</a>
-            </div>
+            </form>
         </div>
-        </form>
+
+    @else
+    <div class="data-siswa py-5 " style="background: #221e6c;">
+        <div class="card">
+            <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
+                <p class="px-1 h1 fw-bold">File Submissions
+                    <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
+                        <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
+                    </a>
+                </p>  
+            </div>
+                <div class="col ms-2">
+                    <p class="ms-2 h5 text-danger" style="font-style: italic" >! Portal Ditutup</p>
+                    <p class="ms-2 mt-1 h5 text-black-50" > Silahkan Hubungi Admin Untuk Mengaktifkan Portal</p>
+                </div>
+
+        </div>        
     </div>
+    @endif
 @endsection
