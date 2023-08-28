@@ -52,7 +52,8 @@
                                     <tr>
                                         {{-- <th></th>
                                         <td></td> --}}
-                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak Ada Pesan</td>
+                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak
+                                            Ada Pesan</td>
 
                                     </tr>
                                 @endforelse
@@ -84,7 +85,7 @@
                             @endif
                         </div>
                     </div>
-                </div> 
+                </div>
 
 
                 <div class="row d-flex justify-content-center  border-top border-primary border-2 mt-3 container-fluid shadow-6-strong"
@@ -153,7 +154,8 @@
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: top;">
-                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link" style="padding-top: -10px;">
+                                        <a href="{{ route('daftar-sekolah') }}" class="d-block text-center see-more-link"
+                                            style="padding-top: -10px;">
                                             <p class="fs-10">See More &gt;&gt;&gt;</p>
                                         </a>
                                     </td>

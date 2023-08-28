@@ -30,19 +30,20 @@
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 @stack('scripts')
 @section('isi-content')
-<div class="data-siswa py-5  " style="background: #221e6c;">
-<div class="card2">
-    <div class="card-header" style="background-color: #c3c1e8">
-        <h2 class="card-title"> Form Laporan </h2>
-    </div>
-    <div class="col">
-        <form action="{{ route('laporanFilter') }}" method="post" class="center-form" id="formContainer">
-            @csrf
-            <input type="hidden" name="title" value="Judul Laporan">
-            <table class="ms-5 mt-2">
-                <div class="btn-group">
-                    <input type="radio" class="btn-check" name="laporanType" id="agama" value="agama" />
-                    <label class="btn btn-secondary" for="agama">Agama</label>
+    <div class="data-siswa py-5 ">
+        <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"> Form Laporan </h2>
+                </div>
+                <div class="col-md-12">
+                    <form action="{{ route('laporanFilter') }}" method="post" style="margin-left: 15vw; margin-right: 10vw;" id="formContainer">
+                        @csrf
+                        <input type="hidden" name="title" value="Judul Laporan">
+                        <table class="ms-5 mt-4">
+                            <div class="btn-group">
+                                <input type="radio" class="btn-check" name="laporanType" id="agama" value="agama" />
+                                <label class="btn btn-secondary" for="agama">Agama</label>
 
                     <input type="radio" class="btn-check" name="laporanType" id="jk" value="jk" />
                     <label class="btn btn-secondary" for="jk">Jenis Kelamin</label>
@@ -238,72 +239,72 @@
 
             @if (request()->has('laporanType'))
                 @if ($laporanType === 'jk')
-                <div class="data-siswa py-3">
-                    <div class="text-left" style="margin-bottom: 15px; padding-left: 10px;">
-                        @isset($jumlahLakiLaki)
-                            <p1>Jumlah Laki-laki : {{ $jumlahLakiLaki }}<br></p1>
-                        @endisset
-                        @isset($jumlahPerempuan)
-                            <p1>Jumlah Perempuan : {{ $jumlahPerempuan }}<br></p2>
+                    <div class="data-siswa py-3">
+                        <div class="text-left" style="margin-bottom: 15px; padding-left: 10px;">
+                            @isset($jumlahLakiLaki)
+                                <p1>Jumlah Laki-laki : {{ $jumlahLakiLaki }}<br></p1>
                             @endisset
-                            @isset($totalJL)
-                                <p1>Total Jumlah Laki-laki dan Perempuan : {{ $totalJL }}<br></p3>
+                            @isset($jumlahPerempuan)
+                                <p1>Jumlah Perempuan : {{ $jumlahPerempuan }}<br></p2>
                                 @endisset
-                    </div>
-                    <div>
-                        <div class="chart-container"
-                            style="width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-                            <canvas id="genderChart"></canvas>
+                                @isset($totalJL)
+                                    <p1>Total Jumlah Laki-laki dan Perempuan : {{ $totalJL }}<br></p3>
+                                    @endisset
                         </div>
-                        <div class="text-center mt-1">
-                            <!-- Tampilkan hasil data -->
-                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                            <script>
-                            var ctx = document.getElementById('genderChart').getContext('2d');
-                            var genderChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: ['Jumlah Laki-Laki dan Perempuan'],
-                                    datasets: [{
-                                        label: 'Laki-laki', // Label dataset Laki-laki
-                                        data: [{{ $jumlahLakiLaki }}],
-                                        backgroundColor: 'rgb(135, 206, 250)', // Warna biru terang
-                                        borderColor: 'rgb(70, 130, 180)', // Warna garis biru terang
-                                        borderWidth: 1
-                                    }, {
-                                        label: 'Perempuan', // Label dataset Perempuan
-                                        data: [{{ $jumlahPerempuan }}],
-                                        backgroundColor: 'rgb(255, 99, 132)', // Warna merah terang
-                                        borderColor: 'rgb(178, 34, 34)', // Warna garis merah terang
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                stepSize: 1,
-                                                callback: function(value, index, values) {
-                                                    if (Number.isInteger(value)) {
-                                                        return value;
+                        <div>
+                            <div class="chart-container"
+                                style="width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                                <canvas id="genderChart"></canvas>
+                            </div>
+                            <div class="text-center mt-1">
+                                <!-- Tampilkan hasil data -->
+                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                <script>
+                                    var ctx = document.getElementById('genderChart').getContext('2d');
+                                    var genderChart = new Chart(ctx, {
+                                        type: 'bar',
+                                        data: {
+                                            labels: ['Laki-laki', 'Perempuan'],
+                                            datasets: [{
+                                                label: 'Jumlah Siswa',
+                                                data: [{{ $jumlahLakiLaki }}, {{ $jumlahPerempuan }}],
+                                                backgroundColor: [
+                                                    'rgba(255, 99, 132, 0.2)',
+                                                    'rgba(54, 162, 235, 0.2)'
+                                                ],
+                                                borderColor: [
+                                                    'rgba(255, 99, 132, 1)',
+                                                    'rgba(54, 162, 235, 1)'
+                                                ],
+                                                borderWidth: 1
+                                            }]
+                                        },
+                                        options: {
+                                            scales: {
+                                                y: {
+                                                    beginAtZero: true,
+                                                    ticks: {
+                                                        stepSize: 1,
+                                                        callback: function(value, index, values) {
+                                                            if (Number.isInteger(value)) {
+                                                                return value;
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
                                         }
-                                    }
-                                }
-                            });
-                        </script>
-                        </div>
-
-                @elseif ($laporanType === 'zonasi')
-                    <div class="data-siswa py-3">
-                        @php
-                            $rataRataJarak = isset($rataRataJarak) ? $rataRataJarak : [];
-                        @endphp
-                        <!DOCTYPE html>
-                        <html>
+                                    });
+                                </script>
+                            </div>
+                        @elseif ($laporanType === 'zonasi')
+                        
+                            <div class="data-siswa py-3">
+                                @php
+                                    $rataRataJarak = isset($rataRataJarak) ? $rataRataJarak : [];
+                                @endphp
+                                <!DOCTYPE html>
+                                <html>
 
                         <head>
                             <title> Data Siswa per Kelas dan Jarak</title>

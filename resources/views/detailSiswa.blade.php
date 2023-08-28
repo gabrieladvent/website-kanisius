@@ -3,6 +3,7 @@
     @foreach ($data as $item)
         <div class="row gutters-sm px-5 mt-5">
             @if ($isTK === true)
+            {{-- Detail data TK --}}
                 <div class="col-md-4 mb-3 mt-5">
                     <div class="card">
                         <div class="card-body">
@@ -29,7 +30,19 @@
                                     </p>
                                     <p class="text-secondary mb-1">NIK: {{ $item->NIK }}</p>
                                     <p class="text-secondary mb-1">Nomor Siswa: {{ $item->no_siswa }}</p>
-                                    <p class="text-secondary mb-1">Agama: {{ $item->agama }}</p>
+                                    @if ($item->agama === '1')
+                                        <p class="text-secondary mb-1">Agama: Islam</p>
+                                    @elseif($item->agama === '2')
+                                        <p class="text-secondary mb-1">Agama: Kristen</p>
+                                    @elseif($item->agama === '3')
+                                        <p class="text-secondary mb-1">Agama: Katolik</p>
+                                    @elseif($item->agama === '4')
+                                        <p class="text-secondary mb-1">Agama: Hindu</p>
+                                    @elseif($item->agama === '5')
+                                        <p class="text-secondary mb-1">Agama: Budha</p>
+                                    @else
+                                        <p class="text-secondary mb-1">Agama: Konghucu</p>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -149,6 +162,7 @@
                     </div>
                 </div>
             @else
+            {{-- Detail data sd/smp --}}
                 <div class="col-md-4 mb-3 mt-5">
                     <div class="card">
                         <div class="card-body">
@@ -608,10 +622,6 @@
                     </div>
                 </div>
             @endif
-
-
-
-
             <div>
                 <button type="button" class="btn btn-info px-5" onclick="goBack()">
                     <i class="fas fa-arrow-left"></i> Kembali</button>
