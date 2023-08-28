@@ -61,17 +61,6 @@
                                 </span>
                             @enderror
                         </div>
-                        {{-- <script>
-                            const passwordInput = document.querySelector('input[name="password"]');
-                            const togglePasswordButton = document.getElementById('togglePassword');
-                        
-                            togglePasswordButton.addEventListener('click', function () {
-                                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-                                passwordInput.setAttribute('type', type);
-                                togglePasswordButton.classList.toggle('fa-eye-slash');
-                                togglePasswordButton.classList.toggle('fa-eye');
-                            });
-                        </script> --}}
 
                         <label for="password-confirm">Konfirmasi Password</label>
                         <input disabled id="password-confirm" type="password" class="form-control"

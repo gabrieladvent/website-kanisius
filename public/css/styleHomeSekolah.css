@@ -251,6 +251,11 @@ strong.datasiswadas{
   cursor: pointer;
     
 }
+.password-container {
+  position: relative;
+  cursor: pointer;
+}
+
 
 
 .main-menu:hover,
