@@ -62,7 +62,7 @@ Route::group([
     // Route::post('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter');
     Route::get('dashboard/laporan/{title}', [LaporanController::class, 'laporanFilter'])->name('laporanFilter');
 
-    Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
+    // Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
 
     Route::post('dashboard/laporan/hasil-pilih', [LaporanController::class, 'laporan_hasil'])->name('laporan-hasil');
 
@@ -144,9 +144,10 @@ Route::group([
         Route::get('/gettime', [KirimController::class, 'getendtime']);
 
         // route laporan
-        Route::get('dashboard/laporan/{title}', [LaporanController::class, 'cetakLaporan'])->name('cetakLaporan');
+       // Route::get('dashboard/laporan', [LaporanController::class, 'cetakLaporan'])->name('cetak');
         Route::post('/dashboard/laporan', [LaporanController::class, 'filter', 'laporanAgama', 'showTable'])->name('laporanFilter');
         Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa');
+        Route::get ('/dahboard/laporan', [LaporanController::class,'cetakLaporan'])->name('cetak');
     });
 
     Route::group([

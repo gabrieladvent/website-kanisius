@@ -9,8 +9,10 @@
     $tempSD = [];
     $tempSMP = [];
     $laporanType = request('laporanType');
-    
+
 @endphp
+@if ((!is_null($data_siswa)))
+
 
 @foreach ($sekolah as $item)
     @if (strpos($item->NAMASEKOLAH, 'TK') !== false)
@@ -27,6 +29,7 @@
         @endphp
     @endif
 @endforeach
+@endif
 
 @extends('layout-yayasan.second')
 
@@ -151,7 +154,8 @@
                             <button type="submit" id="submit" onclick="getValue()"
                                 class="btn btn-primary float-center mt-3">Tampil
                                 <i class="fa-solid fa-eye"></i></button>
-                            <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank"
+                            {{-- <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank" --}}
+                            <a href="#" target="blank"
                                 class="btn btn-success float-center mt-3">Download <i
                                     class="fa-solid fa-download"></i></a>
 

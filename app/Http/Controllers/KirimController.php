@@ -40,6 +40,7 @@ class KirimController extends Controller
         try {
             // Membaca file Excel yang diupload oleh user
             $uploadedFile = $request->file('file');
+            
             $filename = $uploadedFile->getClientOriginalName();
             $filePath = $uploadedFile->getPathname();
 
@@ -113,7 +114,6 @@ class KirimController extends Controller
                 'id_kirim' => $data->id_kirim,
             ])->with('success', 'File berhasil diunggah.');
 
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengunggah file.');
         }
     }
 

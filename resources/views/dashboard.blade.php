@@ -82,7 +82,7 @@
                         </div>
                         <div class="row ">
                             @if ($notificationCount > 2)
-                                <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
+                                <a href="{{ route('notifikasi') }}" class="see-more">See More>></a>
                             @endif
                         </div>
                     </div>

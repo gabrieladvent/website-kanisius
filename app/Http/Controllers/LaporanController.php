@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Sekolah;
 use Illuminate\Http\Request;
-use App\Models\User as user;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa_Tk;
-use App\Models\Arship;
-// use App\Models\Arsip_TK;
 use App\Models\Arsip_TK;
-use Alert;
+use App\Models\Arship;
+use PDF;
 
 
 class LaporanController extends Controller
@@ -207,6 +205,23 @@ class LaporanController extends Controller
         abort(404);
     }
 
+
+    public function cetakLaporan(Request $request)
+{
+    // $data_siswa = $request->data_siswa;
+    // $sekolah = $request->sekolah;
+    // $user = $request->user;
+    // $data_siswatk = $request->data_siswatk;
+
+    // $pdf = PDF::loadView('laporan', compact('data_siswa', 'sekolah', 'user', 'data_siswatk'));
+    // return $pdf->download('hasilLaporan.pdf');
+    return redirect()->back();
+}
+
+    
+
+
+
     private function filterAgama(Request $request, $data_siswa, $data_siswatk)
     {
         // Menghitung jumlah siswa berdasarkan jenis kelamin dan agama
@@ -316,7 +331,6 @@ class LaporanController extends Controller
     }
 
 
-
     private function filterJS(Request $request,$data_siswa_arsip, $data_siswa_arsipTK)
     {
         $query2= Arship::with('sekolah');
@@ -391,4 +405,7 @@ class LaporanController extends Controller
             return $combined_data;
             
         }
+    
+
     }
+

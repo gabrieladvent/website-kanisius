@@ -53,8 +53,8 @@
                             <div class="password-container">
                                 <input disabled type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 170%">
-                                <i class="fa fa-eye-slash" id="togglePassword" style="margin-left: 86%"></i>
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 24vw; position: flex;">
+                                    <i class="fa fa-eye-slash password-toggle" id="togglePassword" style="cursor: pointer;"></i>
                             </div>
 
                             @error('password')

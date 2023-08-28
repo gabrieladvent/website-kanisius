@@ -53,5 +53,12 @@ th {
     text-align: center;
     background-color: yellow; /* Ganti dengan warna kuning yang Anda inginkan */
 }
+.see-more {
+    position: absolute;
+    font-size: 14px; /* atau ukuran font yang Anda inginkan */
+    white-space: nowrap; /* agar teks tetap dalam satu baris */
+    overflow: hidden; /* menghindari pemotongan teks */
+    text-overflow: ellipsis; /* menampilkan elipsis jika terpotong */
+}
 
 
