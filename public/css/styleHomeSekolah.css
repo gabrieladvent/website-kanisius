@@ -243,6 +243,14 @@ strong.datasiswadas{
   vertical-align: middle;
   font-size: 20px;
 }
+.password-toggle {
+  position: absolute;
+  top: 62%;
+  right: 5px;
+  transform: translateY(-50%);
+  cursor: pointer;
+    
+}
 
 
 .main-menu:hover,

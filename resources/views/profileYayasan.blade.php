@@ -51,8 +51,8 @@
                             <div class="password-container">
                                 <input disabled type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28.8vw;">
-                                <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28vw;">
+                                <i class="fa fa-eye-slash password-toggle" id="togglePassword" style="cursor: pointer;"></i>
                             </div>
 
                             @error('password')
@@ -61,6 +61,17 @@
                                 </span>
                             @enderror
                         </div>
+                        {{-- <script>
+                            const passwordInput = document.querySelector('input[name="password"]');
+                            const togglePasswordButton = document.getElementById('togglePassword');
+                        
+                            togglePasswordButton.addEventListener('click', function () {
+                                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                                passwordInput.setAttribute('type', type);
+                                togglePasswordButton.classList.toggle('fa-eye-slash');
+                                togglePasswordButton.classList.toggle('fa-eye');
+                            });
+                        </script> --}}
 
                         <label for="password-confirm">Konfirmasi Password</label>
                         <input disabled id="password-confirm" type="password" class="form-control"

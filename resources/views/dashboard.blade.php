@@ -30,7 +30,7 @@
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <span class="border border-secondary">
+                                                <span class="border border-secondary"  style="display: flex; background-color: white; padding: 5px;">
                                                 <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}" style="color: black">
                                                     {{ $notification->data['namasekolah'] }} Mengirimkan File
                                                 </a>
@@ -39,7 +39,7 @@
                                                     src="https://cdn.lordicon.com/pkmkagva.json"
                                                     trigger="hover"
                                                     colors="primary:#66a1ee"
-                                                    style="width:25px;height:25px; float:right;margin-left:10px;">
+                                                    style="width:25px;height:25px; float:right;margin-left:67%;">
                                                 </lord-icon>
                                             </span>
                                             </td>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="row ">
                             @if ($notificationCount > 2)
-                                <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
+                                <a href="{{ route('notifikasi') }}" class="see-more">See More>></a>
                             @endif
                         </div>
                     </div>
