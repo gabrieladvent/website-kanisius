@@ -11,8 +11,8 @@ class Arsip_TK extends Model
     use HasFactory;
     protected $guarded = [];
 
-    protected $table = 'tkk_siswa';
+    protected $table = 'tkk_arsip';
     public function sekolah() {
-        return $this->belongsTo(Sekolah::class, 'NOMOR_S');
+        return $this->belongsTo(Sekolah::class, 'NOMOR_S','NOMOR_S');
     }
 }

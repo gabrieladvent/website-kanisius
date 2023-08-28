@@ -82,13 +82,13 @@
                                         <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
+                                <input type="password" name="password"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Password" id="password" autocomplete="current-password">
                                 
-                                    <input type="password" name="password"
-                                        class="form-control @error('password') is-invalid @enderror"
-                                        placeholder="Password" id="password" autocomplete="current-password">
-                                <div class="password-container">
-                                    <i class="fa fa-eye-slash" id="togglePassword"></i>
-                                </div>
+                                    <div class="input-group-text password-toggle-container">
+                                        <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                    </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

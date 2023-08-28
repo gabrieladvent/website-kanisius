@@ -80,7 +80,7 @@
                         <div class="row">
                             <p></p>
                         </div>
-                        <div class="row">
+                        <div class="row ">
                             @if ($notificationCount > 2)
                                 <a href="{{ route('notifikasi') }}" class="fs-6">See More...</a>
                             @endif

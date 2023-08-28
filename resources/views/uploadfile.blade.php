@@ -5,23 +5,21 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
     @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)))
-        <div class="isi-main px-5">
-            <div class="row">
-                <div class="col fw-bold mt-5 px-5">
-                    <p class="px-3 h2 mt-4 fw-bold text-white">File Submissions
+
+    <div class="data-siswa py-5 " style="background: #221e6c;">
+            <div class="card">
+                <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
+                    <p class="px-1 h1 fw-bold">File Submissions
                         <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
                             <i class="fas fa-exclamation-circle" style="font-size: 16px; color: aliceblue"
                                 title="Download Template"></i>
                         </a>
-                    </p>
+                    </p>  
+                    <div class="col" style="margin-top: auto;">
+                        <p class="float-end me-3">Maximum file size: 20 MB</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <p class="float-end me-3">Maximum file size: 20 MB</p>
-                </div>
-            </div>
+                
 
             <div class="first-box px-4 ms-4">
                 <div class="row p-1" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
@@ -63,11 +61,11 @@
             </div>
 
             <div class="second-box px-3 ms-4">
-                <div class="p-3 px-5" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+                <div class="p-3 px-3" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
                     <div class="row ">
                         <div class="col">
                             <input type="text" class="w-100 pb-5 border border-dark container-fluid shadow-3-strong"
-                                name="komentar" style="height: 150px;"
+                                name="komentar" style="height: 100px;"
                                 placeholder="Silahkan masukan komentar atau pesan...">
                         </div>
                     </div>
@@ -84,21 +82,23 @@
             </div>
             </form>
         </div>
+
     @else
-        <div class="row">
-            <div class="col fw-bold mt-5 px-5">
-                <p class="px-3 h2 mt-4 fw-bold text-white">File Submissions
+    <div class="data-siswa py-5 " style="background: #221e6c;">
+        <div class="card">
+            <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
+                <p class="px-1 h1 fw-bold">File Submissions
                     <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-exclamation-circle" style="font-size: 16px; color: aliceblue"
-                            title="Download Template"></i>
+                        <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
                     </a>
-                </p>
+                </p>  
             </div>
-            <div class="row">
                 <div class="col ms-2">
-                    <p class="ms-5 h5 text-white">Silahkan Hubungi Admin Untuk Mengaktifkan Portal</p>
+                    <p class="ms-2 h5 text-danger" style="font-style: italic" >! Portal Ditutup</p>
+                    <p class="ms-2 mt-1 h5 text-black-50" > Silahkan Hubungi Admin Untuk Mengaktifkan Portal</p>
                 </div>
-            </div>
-        </div>
+
+        </div>        
+    </div>
     @endif
 @endsection
