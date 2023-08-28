@@ -4,6 +4,7 @@
 
 @extends('layout-sekolah.second')
 @section('isi-content')
+
     @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)))
         <div class="isi-main px-5">
             <div class="row">
@@ -16,11 +17,11 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <p class="float-end me-3">Maximum file size: 20 MB</p>
-                </div>
+        <div class="row">
+            <div class="col">
+                <p class="float-end me-3">Maximum file size: 20 MB</p>
             </div>
+        </div>
 
             <div class="first-box px-4 ms-4">
                 <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
@@ -28,17 +29,21 @@
                         <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
                         <form action="{{ route('upload', ['slug' => $user->id]) }}" method="POST"
                             enctype="multipart/form-data">
-                          @csrf
-                          <fieldset class="upload_dropZone text-center mb-3 p-4">
-                            <legend class="visually-hidden">Excel uploader</legend>
-                            <i class="fa-solid fa-file-excel fa-2xl"></i>
-                            <p class="small my-2 mt-4">You can drag and drop Excel files here to add them <br><i>or</i></p>
-                            <input id="upload_excel" name="file" data-post-name="excel_file"      
-                                   class="position-absolute invisible upload_dropZone text-center" type="file" multiple 
-                                   accept=".xlsx, .xls" />
-                            <label class="btn btn-upload mb-3" for="upload_excel">Choose Excel file(s)</label>
-                            <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
-                          </fieldset>
+                            @csrf
+                            <fieldset class="upload_dropZone text-center mb-3 p-4">
+                                <legend class="visually-hidden">Image uploader</legend>
+                                <i class="fa-solid fa-file-excel fa-2xl"></i>
+                                <p class="small my-2 mt-4">You can drag and drop files here to add them <br><i>or</i>
+                                </p>
+
+                                <input id="upload_image_background" name="file" data-post-name="image_background"
+                                    data-post-url="https://someplace.com/image/uploads/backgrounds/"
+                                    class="position-absolute invisible" type="file" multiple
+                                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+
+                                <label class="btn btn-upload mb-3" for="upload_image_background">Choose file(s)</label>
+                                <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
+                            </fieldset>
                             <svg style="display:none">
                                 <defs>
                                     <symbol id="icon-imageUpload" clip-rule="evenodd" viewBox="0 0 96 96">
@@ -50,17 +55,17 @@
                     </div>
                 </div>
             </div>
-            
 
 
-            <div class="row ms-4">
+
+            <div class="row ms-4 px-4">
                 <div class="col ps-2">
                     <p class="">Accepted file type: xlsx, xls, csv</p>
                 </div>
             </div>
 
-            <div class="second-box ms-4">
-                <div class="p-3 px-5" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+            <div class="second-box px-3 ms-4">
+                <div class="p-3 px-5" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
                     <div class="row ">
                         <div class="col">
                             <input type="text" class="w-100 pb-5 border border-dark container-fluid shadow-3-strong"
@@ -71,28 +76,14 @@
                 </div>
             </div>
 
-            <div class="row mt-3 pb-2 d-flex justify-content-center">
-                <div class="col-2">
-                    <button type="submit" class="w-75 btn bg-dark text-white">Submit</button>
-                </div>
-                <div class="col-2">
-                    <a href="" class="w-75 text-dark btn bg-light">Cancel</a>
-                </div>
+        <div class="row mt-3 pb-2 d-flex justify-content-center">
+            <div class="col-2">
+                <button type="submit" class="w-75 btn bg-success text-white">Submit</button>
             </div>
-            </form>
-        </div>
-    @else
-        <div class="isi-main px-5">
-            <div class="row">
-                <div class="col fw-bold mt-5 px-5">
-                    <p class="px-3 h2 mt-4 fw-bold">Portal Belum Dibuka
-                        <a href="{{ route('template-excel') }}" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-exclamation-circle" style="font-size: 16px;" title="Download Template"></i>
-                        </a>
-                    </p>
-                    <p href="#" class="px-3 h3 fw-bold">Silahkan Hubungi Admin</p>
-                </div>
+            <div class="col-2">
+                <a href="" class="w-75 text-white btn bg-danger">Cancel</a>
             </div>
         </div>
-    @endif
+        </form>
+    </div>
 @endsection

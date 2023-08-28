@@ -33,8 +33,11 @@
                         <p class="text-dark h5 mt-2">File Submissions</p>
                     </div>
                     <div class="col py-2">
-                        <p class="h5 mt-2"><i class="fa-solid fa-file-excel fa-xl me-3"></i>{{ session('filename') }}
-                        </p>
+                        @if (session('filename'))
+                            <p class="h5 mt-2"><i class="fa-solid fa-file-excel fa-xl me-3"></i>{{ session('filename') }}</p>
+                        @else
+                            <p class="h5 mt-2"><i class="fa-solid fa-file-excel fa-xl me-3"></i>{{ $kirim->nama_file }}</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -45,7 +48,12 @@
                         <p class="text-dark h5 mt-2">Comments Submissions</p>
                     </div>
                     <div class="col py-2">
-                        <p class="h5 mt-1"><i class="fa-xl me-2"></i>{{ session('komentar') }}</p>
+                        @if (session('komentar'))
+                            <p class="h5 mt-1"><i class="fa-xl me-2"></i>{{ session('komentar') }}</p>
+                        @else
+                            <p class="h5 mt-1"><i class="fa-xl me-2"></i>{{ $kirim->Komentar }}</p>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -60,7 +68,7 @@
             <div class="col-3">
                 {{-- @foreach($files as $file) --}}
                
-                <form action="/delete/{{session('filename')}}" method="POST">
+                <form action="{{ route('hapus-file', ['id' => session('filename') ? session('filename') : $kirim->nama_file]) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn bg-light border-1 text-dark">Remove Submission</button>

@@ -6,10 +6,18 @@
 @endphp
 @extends('layout-sekolah.second')
 @section('isi-content')
-    <div class="judul" style="margin-top: 8%;">
-        <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi {{ $user->namasekolah }}</p>
-        <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran {{ $tahunAjaran }}</p>
+
+<div class="data-siswa py-4" style="background: #fcfcfc; margin-top: 6%;">
+    <div class="table-data d-flex justify-content-center align-items-center" style="margin-left: 1%; margin-right: 1%; height: 100%;">
+        <div>
+            <p class="fs-3 fw-bold text-wrap text-center">Data Siswa-Siswi {{ $user->namasekolah }}</p>
+            <p class="fs-3 fw-bold text-wrap text-center">Tahun Ajaran {{ $tahunAjaran }}</p>
+        </div>
     </div>
+</div>
+
+
+
 
 
     <div class="data-siswa py-3 ">

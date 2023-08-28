@@ -21,7 +21,9 @@ class YayasanController extends Controller
 {
     public function kiriman($title)
     {
-        return view('tablesekolah', compact('title'));
+        $user = Auth::user();
+        $users = User::pluck('namasekolah', 'id');
+        return view('tablesekolah', compact('title','users', 'user'));
     }
 
     public function showUpdateForm($id)

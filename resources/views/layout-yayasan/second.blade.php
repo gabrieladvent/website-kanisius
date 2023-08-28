@@ -3,7 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('/image/logo.png') }}" rel="icon">
     {{-- <title>Yayasan | {{ $title }}</title> --}}
 
@@ -24,12 +27,15 @@
     @push('js')
         <script src="{{ asset('js/js.js') }}"></script>
     @endpush
+    @push('laporan')
+        <script src="{{ asset('js/laporan.js') }}"></script>
+    @endpush
     @push('table')
         <script src="{{ asset('js/jsDataSiswaSekolah.js') }}"></script>
     @endpush
 </head>
 
-<body style="background-color: #fcf2fc;">
+<body style="background-color: #244076">
     @include('navbar.navbar-second')
     <!-- sidebar -->
     @include('navbar.sidebar')
@@ -46,38 +52,38 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script>
-            const togglePassword = document.querySelector('#togglePassword');
-            const password = document.querySelector('#exampleInputPassword1');
-            const password2 = document.querySelector('#password-confirm');
-        
-            togglePassword.addEventListener('click', function (e) {
-                // toggle the type attribute for password field
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                // toggle the eye slash icon for password field
-                if (type === 'password') {
-                    this.classList.remove('fa-eye');
-                    this.classList.add('fa-eye-slash');
-                } else {
-                    this.classList.remove('fa-eye-slash');
-                    this.classList.add('fa-eye');
-                }
-        
-                // toggle the type attribute for password2 field
-                const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
-                password2.setAttribute('type', type2);
-                // toggle the eye slash icon for password2 field
-                if (type2 === 'password') {
-                    togglePassword2.classList.remove('fa-eye');
-                    togglePassword2.classList.add('fa-eye-slash');
-                } else {
-                    togglePassword2.classList.remove('fa-eye-slash');
-                    togglePassword2.classList.add('fa-eye');
-                }
-            });
-        </script>
-        
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#exampleInputPassword1');
+        const password2 = document.querySelector('#password-confirm');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute for password field
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon for password field
+            if (type === 'password') {
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+
+            // toggle the type attribute for password2 field
+            const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+            password2.setAttribute('type', type2);
+            // toggle the eye slash icon for password2 field
+            if (type2 === 'password') {
+                togglePassword2.classList.remove('fa-eye');
+                togglePassword2.classList.add('fa-eye-slash');
+            } else {
+                togglePassword2.classList.remove('fa-eye-slash');
+                togglePassword2.classList.add('fa-eye');
+            }
+        });
+    </script>
+
 
     @if (Session::has('success'))
         <script>
@@ -101,6 +107,7 @@
 
     @stack('js')
     @stack('table')
+    @stack('laporan')
 </body>
 
 </html>

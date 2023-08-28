@@ -7,6 +7,7 @@ use App\Models\Kirim;
 use App\Models\Siswa;
 use App\Models\Sekolah;
 use App\Models\Siswa_TK;
+
 use App\Models\Yayasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,21 +29,29 @@ class LoginController extends Controller
     /*
         Method untuk menampilkan dashboard berdasarkan user yang login 
     */
-    public function dashboard($title)
+    public function dashboard($title, Request $request)
     {
         try {
+            $poto = DB::table('yayasan')->first();
             $user = Auth::user();
             $dataSekolah = Sekolah::all();
             $kirim = Kirim::all();
+            $sekolah = Sekolah::where('NOMOR_S', $user->id)->value('NAMASEKOLAH');
+            $temp = Sekolah::where('NOMOR_S', $user->id)->value('NOMOR_S');
 
             /*
-                Jika yang login mempunyai status berupa yayasan, maka akan dibawa ke dashboard yayasan. dan sebaliknya
+                Jika yang login mempunyai status berupa yayasan, maka akan dibawa ke dashboard yayasan. dan sebaliknya validasi dengan nama sekolah yang ada di sekolah
             */
-            if ($user->status == 'sekolah') {
+            // dd($sekolah);
+            if ($user->status == 'sekolah' && $user->namasekolah == $sekolah) {
                 $sekolahId = $user->id;
                 return $this->sekolah($sekolahId);
-            } else {
+            } elseif($user->status == 'yayasan') {
                 return view('dashboard', compact('kirim', 'user', 'title', 'dataSekolah'));
+            } else{
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return view('auth.login', compact('poto'));
             }
         } catch (\Exception $e) {
             abort(401, 'Silahkan Melakukan Login Terlebih Dahulu');
@@ -64,8 +73,8 @@ class LoginController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // $request->session()->invalidate();
+        // $request->session()->regenerateToken();
 
         return redirect('/');
     }

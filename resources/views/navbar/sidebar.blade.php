@@ -27,7 +27,7 @@
         </li>
         
             <li style="margin-bottom: 30px;" class="has-subnav">
-                <a href="#Laporan">
+                <a href="{{ route('laporan-data') }}">
                     <img src="{{ asset('/icon/book-solid.svg') }}" alt="" class="fa fa-2x">
                     <span class="nav-text">Laporan</span>
                 </a>
