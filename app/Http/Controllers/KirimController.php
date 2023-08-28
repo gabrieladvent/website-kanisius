@@ -87,13 +87,17 @@ class KirimController extends Controller
             // Menyimpan komentar dan status yang disimpan ke dalam variabel supaya nantinya bisa dilempar ke kirimNotifikasi untuk dibuat databasenya
             $komen = !empty($komentar) ? $komentar : '';
             $stt  = $status;
+            $lastSend = now();
 
             Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen, $stt)); // Mengirim data ke KirimNotifikasi
             $data->save(); // Menyimpan data excel  di database
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session
             Session::put('id_kirim', $data->id_kirim);
+            session(['idLogin' => $userLogin]);
             session(['variableName' => $stt]);
+            session(['kirim_tanggal' => $lastSend]);
+            
 
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
@@ -102,7 +106,6 @@ class KirimController extends Controller
             ])->with('success', 'File berhasil diunggah.');
         } catch (\Exception $e) {
             // Jika gagal maka laman tidak akan berubah
-
 
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
@@ -165,10 +168,13 @@ class KirimController extends Controller
         if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false || Session::get('fileDelete')) {
             Session::forget('variableName');
             Session::forget('fileDelete');
+            Session::forget('kirim_tanggal');
+            Session::forget('idLogin');
         }
-        if (Session::get('variableName')) {
+        if (Session::get('variableName') && Session::get('kirim_tanggal')->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) && Session::get('idLogin') == $user->id){
             return redirect()->route('sukses');
         } else {
+            // dd('masuk else');
             return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
         }
     }

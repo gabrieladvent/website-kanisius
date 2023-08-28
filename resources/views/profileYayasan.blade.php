@@ -10,7 +10,7 @@
                     </div>
                     <div class="">
                         <label class="ms-2">Nama User</label>
-                        <p class="ms-2 border border-secondary-subtle fw-bold fs-5"> {{ $user->name }} </p>
+                        <p class="ms-2 fw-bold fs-5"> {{ $user->name }} </p>
                     </div>
                     <div class="">
                         <label class="ms-2">Nama Sekolah</label>

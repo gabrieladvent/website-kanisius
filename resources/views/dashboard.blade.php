@@ -32,7 +32,7 @@
                                             <td>
                                                 <span class="" style=" width: 100%; padding: 1%">
                                                     <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}"
-                                                        style="color: black">
+                                                        style="color: black" class="fw-bold h5">
                                                         {{ $notification->data['namasekolah'] }} Mengirimkan File
 
                                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>

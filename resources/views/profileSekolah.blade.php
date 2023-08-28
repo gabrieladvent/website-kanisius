@@ -1,7 +1,7 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
     <div class="row px-5">
-        <div class="col-8  mt-5 py-4 px-5">
+        <div class="col-8 mt-5 py-4 px-5">
             <div class="row mt-5 shadow-3-strong ms-5 bg-white">
                 <div class="col-8 mt-3">
                     <div>
@@ -10,7 +10,7 @@
                     </div>
                     <div class="">
                         <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama User</label>
-                        <p class="text-p ms-2 border border-secondary-subtle"> {{ $user->name }} </p>
+                        <p class="text-p ms-2"> {{ $user->name }} </p>
                     </div>
                     <div class="">
                         <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama Sekolah</label>
