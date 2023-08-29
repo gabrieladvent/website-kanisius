@@ -919,6 +919,14 @@
             @endif
         @endif
 
+        {{-- @if (empty(count($data_siswatk)) && empty(count($data_siswa)))
+            <div class="ms-3 me-3 rounded-4 py-3 bg-white mt-3">
+            <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
+                <p class="text-danger text-center h2 fw-bold">DATA TIDAK DITEMUKAN <br> SILAHKAN COBA LAGI</p> 
+            </div>
+        </div>
+        @endif --}}
+
         @if (request()->has('laporanType'))
             @if ($laporanType === 'agama')
                 @if (!empty(count($data_siswatk)))

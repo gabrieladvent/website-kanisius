@@ -47,7 +47,7 @@ class SiswaTKController extends Controller
                 ->delete();
 
             // Ambil path file Excel
-            $file = public_path('storage/simpanFile/' . $kirim->nama_file);
+            $file = storage_path('app/public/simpanFile/' . $kirim->nama_file); // Ambil path file Excel
 
             // Baca data dari file Excel
             $spreadsheet = IOFactory::load($file);
@@ -149,7 +149,7 @@ class SiswaTKController extends Controller
             ->whereIn('id', $notifications)
             ->delete();
 
-        $filepath = public_path('storage/simpanFile/' . $kirim->nama_file);
+        $filepath = storage_path('app/public/simpanFile/' . $kirim->nama_file); // Ambil path file Excel
         if (!file_exists($filepath)) {
             return redirect()->back()->with('error', 'Data Tidak temukan');
         }
