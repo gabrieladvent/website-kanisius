@@ -18,7 +18,7 @@
                 <form action="{{ route('set-portal') }}" method="POST"  style="margin-left: 10vw";>
                     @csrf
                     <div class="form-group col-5 mt-3 justify-content-center">
-                        <label for="file_name">File Name</label>
+                        <label for="file_name">Portal Name</label>
                         <input type="text" name="file_name" id="file_name" class="form-control" required>
                     </div>
 

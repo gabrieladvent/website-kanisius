@@ -30,14 +30,14 @@
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
 @stack('scripts')
 @section('isi-content')
-    <div class="data-siswa py-5 ">
-        <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
+
+    <div class="data-siswa py-5 " style="background: #221e6c;">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
                     <h2 class="card-title"> Form Laporan </h2>
                 </div>
                 <div class="col-md-12">
-                    <form action="{{ route('laporanFilter') }}" method="post" style="margin-left: 15vw; margin-right: 10vw;" id="formContainer">
+                    <form action="{{ route('laporanFilter') }}" method="post" style="margin-right: 10vw;" id="formContainer">
                         @csrf
                         <input type="hidden" name="title" value="Judul Laporan">
                         <table class="ms-5 mt-4">
@@ -164,15 +164,14 @@
             </td>
 
         </form>
-    </div>
+    </div>     
 </div>     
-</div>      
+</div>  
 
     @if (!empty(count($data_siswa)))
-    {{-- <div class="data-siswa py-3"> --}}
             <div class="data-siswa py-3">
-                <div class="table-data" style="margin-left: 1%; margin-right: 1%;">
-                    <table id="example" data-tampil class="table table-bordered" style="width: 100%">
+                <div class="table-data" style="margin-left:1%; margin-right:1%;">
+                    <table id="example" class="table table-bordered" style="width: 100%">
                         <thead>
                             <tr>
                                 <th>NISN</th>
@@ -239,64 +238,67 @@
 
             @if (request()->has('laporanType'))
                 @if ($laporanType === 'jk')
-                    <div class="data-siswa py-3">
-                        <div class="text-left" style="margin-bottom: 15px; padding-left: 10px;">
-                            @isset($jumlahLakiLaki)
-                                <p1>Jumlah Laki-laki : {{ $jumlahLakiLaki }}<br></p1>
-                            @endisset
-                            @isset($jumlahPerempuan)
-                                <p1>Jumlah Perempuan : {{ $jumlahPerempuan }}<br></p2>
-                                @endisset
-                                @isset($totalJL)
-                                    <p1>Total Jumlah Laki-laki dan Perempuan : {{ $totalJL }}<br></p3>
-                                    @endisset
-                        </div>
-                        <div>
-                            <div class="chart-container"
-                                style="width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-                                <canvas id="genderChart"></canvas>
-                            </div>
-                            <div class="text-center mt-1">
-                                <!-- Tampilkan hasil data -->
-                                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                                <script>
-                                    var ctx = document.getElementById('genderChart').getContext('2d');
-                                    var genderChart = new Chart(ctx, {
-                                        type: 'bar',
-                                        data: {
-                                            labels: ['Laki-laki', 'Perempuan'],
-                                            datasets: [{
-                                                label: 'Jumlah Siswa',
-                                                data: [{{ $jumlahLakiLaki }}, {{ $jumlahPerempuan }}],
-                                                backgroundColor: [
-                                                    'rgba(255, 99, 132, 0.2)',
-                                                    'rgba(54, 162, 235, 0.2)'
-                                                ],
-                                                borderColor: [
-                                                    'rgba(255, 99, 132, 1)',
-                                                    'rgba(54, 162, 235, 1)'
-                                                ],
-                                                borderWidth: 1
-                                            }]
-                                        },
-                                        options: {
-                                            scales: {
-                                                y: {
-                                                    beginAtZero: true,
-                                                    ticks: {
-                                                        stepSize: 1,
-                                                        callback: function(value, index, values) {
-                                                            if (Number.isInteger(value)) {
-                                                                return value;
-                                                            }
-                                                        }
-                                                    }
+                <div class="data-siswa py-3">
+                    <div class="text-left" style="margin-bottom: 15px; padding-left: 10px;">
+                        @isset($jumlahLakiLakiGeneral)
+                            <p>Jumlah Laki-laki : {{ $jumlahLakiLakiGeneral }}</p>
+                        @endisset
+                        @isset($jumlahPerempuanGeneral)
+                            <p>Jumlah Perempuan : {{ $jumlahPerempuanGeneral }}</p>
+                        @endisset
+                        @isset($totalGeneral)
+                            <p>Total Jumlah Laki-laki dan Perempuan : {{ $totalGeneral }}</p>
+                        @endisset
+                    </div>
+                    <div class="chart-container"
+                        style="width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                        <canvas id="genderChartSiswa"></canvas>
+                    </div>
+                    <div class="text-center mt-1">
+                        <!-- Chart.js script for the general students gender chart -->
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script>
+                        var ctxSiswa = document.getElementById('genderChartSiswa').getContext('2d');
+                        var genderChartSiswa = new Chart(ctxSiswa, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Jumlah Laki-Laki dan Perempuan (Siswa)'],
+                                datasets: [
+                                    {
+                                        label: 'Laki-laki', // Label dataset Laki-laki (Siswa)
+                                        data: [{{ $jumlahLakiLakiGeneral }}],
+                                        backgroundColor: 'rgb(135, 206, 250)', // Light blue color
+                                        borderColor: 'rgb(70, 130, 180)', // Light blue border color
+                                        borderWidth: 1
+                                    },
+                                    {
+                                        label: 'Perempuan', // Label dataset Perempuan (Siswa)
+                                        data: [{{ $jumlahPerempuanGeneral }}],
+                                        backgroundColor: 'rgb(255, 99, 132)', // Light red color
+                                        borderColor: 'rgb(178, 34, 34)', // Light red border color
+                                        borderWidth: 1
+                                    }
+                                ]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1,
+                                            callback: function(value, index, values) {
+                                                if (Number.isInteger(value)) {
+                                                    return value;
                                                 }
                                             }
                                         }
-                                    });
-                                </script>
-                            </div>
+                                    }
+                                }
+                            }
+                        });
+                        </script>
+                    </div>
+                    </div>
                         @elseif ($laporanType === 'zonasi')
                         
                             <div class="data-siswa py-3">
@@ -1143,154 +1145,148 @@
     @endif
     @endif
 
-    @if (request()->has('laporanType'))
-        @if ($laporanType === 'jk')
-            @if (!empty(count($data_siswatk)))
-                <div class="data-siswa py-3 " id="datasiswatk">
-                    <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
-                        <table id="example" data-tampil class="table table-bordered" style="width:100%">
-                            <thead>
+    @if (request()->has('laporanType') && $laporanType === 'jk')
+    @if (!empty(count($data_siswatk)))
+        <div class="data-siswa py-3 " id="datasiswatk">
+            <div class="table-data" style="margin-left: 1%; margin-right:1%;">
+                <table id="example" data-tampil class="table table-bordered" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>NISN</th>
+                        <th>Nama Siswa</th>
+                        <th>Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Nama Sekolah</th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                            @foreach ($data_siswatk as $item)
                                 <tr>
-                                    <th>NISN</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Tanggal Lahir</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Nama Sekolah</th>
+                                    <td>{{ $item->NISN }}</td>
+                                    <td>{{ $item->nama_siswa }}</td>
+                                    <td>{{ $item->tanggal_lahir }}</td>
+                                    <td>
+                                        @if ($item->gender == '1')
+                                            Laki-Laki
+                                        @elseif ($item->gender == '2')
+                                            Perempuan
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($data_siswatk as $item)
-                                    <tr>
-                                        <td>{{ $item->NISN }}</td>
-                                        <td>{{ $item->nama_siswa }}</td>
-                                        <td>{{ $item->tanggal_lahir }}</td>
-                                        <td>
-                                            @if ($item->gender == '1')
-                                                Laki-Laki
-                                            @elseif ($item->gender == '2')
-                                                Perempuan
-                                            @endif
-                                        </td>
-                                        <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-        @if (request()->has('laporanType'))
-            @if ($laporanType === 'jk')
-                <div class="data-siswa py-3">
-                    <div class="text-left" style="margin-bottom: 15px; padding-left: 10px;">
-                        @isset($jumlahLakiLaki)
-                            <p1>Jumlah Laki-laki : {{ $jumlahLakiLaki }}<br></p1>
-                        @endisset
-                        @isset($jumlahPerempuan)
-                            <p1>Jumlah Perempuan : {{ $jumlahPerempuan }}<br></p2>
-                            @endisset
-                            @isset($totalJL)
-                                <p1>Total Jumlah Laki-laki dan Perempuan : {{ $totalJL }}<br></p3>
-                                @endisset
-                    </div>
-                    <div>
-                        <div class="chart-container"
-                            style="width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-                            <canvas id="genderChart"></canvas>
-                        </div>
-                        <div class="text-center mt-1">
-                            <!-- Tampilkan hasil data -->
-                            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                            <script>
-                            var ctx = document.getElementById('genderChart').getContext('2d');
-                            var genderChart = new Chart(ctx, {
-                                type: 'bar',
-                                data: {
-                                    labels: ['Jumlah Laki-Laki dan Perempuan'],
-                                    datasets: [{
-                                        label: 'Laki-laki', // Label dataset Laki-laki
-                                        data: [{{ $jumlahLakiLaki }}],
-                                        backgroundColor: 'rgb(135, 206, 250)', // Warna biru terang
-                                        borderColor: 'rgb(70, 130, 180)', // Warna garis biru terang
-                                        borderWidth: 1
-                                    }, {
-                                        label: 'Perempuan', // Label dataset Perempuan
-                                        data: [{{ $jumlahPerempuan }}],
-                                        backgroundColor: 'rgb(255, 99, 132)', // Warna merah terang
-                                        borderColor: 'rgb(178, 34, 34)', // Warna garis merah terang
-                                        borderWidth: 1
-                                    }]
-                                },
-                                options: {
-                                    scales: {
-                                        y: {
-                                            beginAtZero: true,
-                                            ticks: {
-                                                stepSize: 1,
-                                                callback: function(value, index, values) {
-                                                    if (Number.isInteger(value)) {
-                                                        return value;
-                                                    }
-                                                }
-                                            }
+                            @endforeach
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="data-siswa py-3">
+            <div class="text-left" style="margin-bottom: 15px; padding-left: 10px;">
+                @isset($jumlahLakiLakiTk)
+                    <p>Jumlah Laki-laki : {{ $jumlahLakiLakiTk }}</p>
+                @endisset
+                @isset($jumlahPerempuanTk)
+                    <p>Jumlah Perempuan : {{ $jumlahPerempuanTk }}</p>
+                @endisset
+                @isset($totalTk)
+                    <p>Total Jumlah Laki-laki dan Perempuan : {{ $totalTk }}</p>
+                @endisset
+            </div>
+            <div class="chart-container"
+                style="width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
+                <canvas id="genderChartTk"></canvas>
+            </div>
+            <div class="text-center mt-1">
+                <!-- Chart.js script for the kindergarten gender chart -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                var ctxTk = document.getElementById('genderChartTk').getContext('2d');
+                var genderChartTk = new Chart(ctxTk, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jumlah Laki-Laki dan Perempuan (TK)'],
+                        datasets: [
+                            {
+                                label: 'Laki-laki', // Label dataset Laki-laki (TK)
+                                data: [{{ $jumlahLakiLakiTk }}],
+                                backgroundColor: 'rgb(135, 206, 250)', // Light blue color
+                                borderColor: 'rgb(70, 130, 180)', // Light blue border color
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Perempuan', // Label dataset Perempuan (TK)
+                                data: [{{ $jumlahPerempuanTk }}],
+                                backgroundColor: 'rgb(255, 99, 132)', // Light red color
+                                borderColor: 'rgb(178, 34, 34)', // Light red border color
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value, index, values) {
+                                        if (Number.isInteger(value)) {
+                                            return value;
                                         }
                                     }
                                 }
-                            });
-                        </script>
-                        </div>
+                            }
+                        }
+                    }
+                });
+                </script>
+            </div>
+        </div>
+    @endif
+@endif
 
-                        @endif
-                    @endif
-
-    @endif
-    @endif
-    @endif
   
     @if (request()->has('laporanType'))
-    @if ($laporanType === 'jumlah_siswa')
-        @if (!empty(count($data_siswa_arsip)))
-        <div class="data-siswa py-3">
-            <div class="table-data" style="margin-left: 1%; margin-right: 1%;">
-            <h2>Tabel Arsip siswa</h2>
-                <table id="example" data-tampil class="table table-bordered" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th>NISN</th>
-                            <th>Nama Siswa</th>
-                            <th>Tanggal Lahir</th>
-                            <th>Jenis Kelamin</th>
-                            <th>Nama Sekolah</th>
-                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data_siswa_arsip as $item)
+        @if ($laporanType === 'jumlah_siswa')
+            @if (!empty(count($data_siswa_arsip)))
+            <div class="data-siswa py-3">
+                <div class="table-data" style="margin-left: 1%; margin-right: 1%;">
+                <h2>Tabel Arsip siswa</h2>
+                    <table id="example" data-tampil class="table table-bordered" style="width: 100%">
+                        <thead>
                             <tr>
-                                <td>{{ $item->NISN }}</td>
-                                <td>{{ $item->Nama ?? $item->nama_siswa }}</td>
-                                <td>{{ $item->Tanggal_Lahir ?? $item->tanggal_lahir }}</td>
-                                <td>
-                                    @if ($item->JK == 'L' || $item->gender == '1')
-                                        Laki-Laki
-                                    @elseif ($item->JK == 'P' || $item->gender == '2')
-                                        Perempuan
-                                    @endif
-                                </td>
-                                <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
-                               
+                                <th>NISN</th>
+                                <th>Nama Siswa</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Nama Sekolah</th>
+                            
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>  
+                        </thead>
+                        <tbody>
+                            @foreach ($data_siswa_arsip as $item)
+                                <tr>
+                                    <td>{{ $item->NISN }}</td>
+                                    <td>{{ $item->Nama ?? $item->nama_siswa }}</td>
+                                    <td>{{ $item->Tanggal_Lahir ?? $item->tanggal_lahir }}</td>
+                                    <td>
+                                        @if ($item->JK == 'L' || $item->gender == '1')
+                                            Laki-Laki
+                                        @elseif ($item->JK == 'P' || $item->gender == '2')
+                                            Perempuan
+                                        @endif
+                                    </td>
+                                    <td>{{ $item->sekolah->NAMASEKOLAH }}</td>
+                                
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
 
 
-@endif
-@endif
-@endif
+            @endif
+        @endif
+    @endif
 
 @if (request()->has('laporanType'))
     @if ($laporanType === 'jumlah_siswa')

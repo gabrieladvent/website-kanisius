@@ -68,11 +68,13 @@
                                     </div>
                                 </div>
                                 <input type="text" id="email" name="email"
-                                    class="form-control  @error('email') is-invalid @enderror" placeholder="Email">
+                                    class="form-control1  @error('email') is-invalid @enderror" placeholder="Email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Nama pengguna atau kata sandi salah</strong>
                                     </span>
+                                    <div class="input-group-text password-toggle-container">
+                                    </div>
                                 @enderror
                             </div>
 

@@ -57,7 +57,7 @@
             <li style="margin-bottom: 30px;" class="has-subnav">
                 <a href="{{ route('riwayat-kirim', ['slug' => $user->slug]) }}">
                     <img src="{{ asset('/icon/bell-solid.svg') }}" alt="" class="fa fa-2x">
-                    <span class="nav-text">Riwayat</span>
+                    <span class="nav-text">Notifikasi</span>
                 </a>
             </li>
         </ul>

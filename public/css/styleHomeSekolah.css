@@ -47,11 +47,16 @@ strong.datasiswadas{
   box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
   margin-left: 6%;
   margin-right: 1%;
+  margin-top: 2%;
 }
 
-.data-siswa {
+.data-siswa3 {
+  border-radius: 15px;
+  background-color: #ffff;
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
+  margin-left: 6%;
+  margin-right: 1%;
   margin-top: 2%;
-  /* margin-bottom: 1% !important; */
 }
 
 .container {
@@ -450,11 +455,25 @@ nav.main-menu li.active>a,
   overflow: hidden;
   text-overflow: ellipsis;
 } 
+.data-siswa5 {
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
+  margin-left: 6%;
+  margin-top: 6%;
+  margin-right: 1%;
+  border-radius: 20px 20px 0px 0px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  background-color: #ffffff;
+  /* position: relative; */
 
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .table-data{
-  display: flex;
+  border-radius: 15px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -511,7 +530,7 @@ nav.main-menu li.active>a,
 /* Gaya untuk pilihan kelas */
 .col-mt-3 {
   margin-top: 5px;
-  justify-content: center;
+  /* justify-content: center; */
 }x  
 
 /* Gaya untuk tombol submit dan download */

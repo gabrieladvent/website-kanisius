@@ -49,7 +49,7 @@ function enableDropdowns() {
         // Enable the desired dropdowns
         document.getElementById("tingkatan").disabled = false;
         document.getElementById("namaSekolah").disabled = false;
-        document.getElementById("tingkatan-tk").removeAttribute("disabled");
+        document.getElementById("tingkatan-tk").setAttribute("disabled", true);
         // Add other dropdowns here that you want to enable
     } else if (selectedRadio.id === "agama") {
         // Enable other dropdowns based on Agama selection, if necessary
