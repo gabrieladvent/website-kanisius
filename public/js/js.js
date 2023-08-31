@@ -3,13 +3,13 @@ $(document).ready(function () {
     $('.dataTables_length').addClass('bs-select');
 });
 
-console.clear();
-('use strict');
+// console.clear();
+// ('use strict');
 
 
-// Drag and drop - single or multiple image files
-// https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
-// https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
+// // Drag and drop - single or multiple image files
+// // https://www.smashingmagazine.com/2018/01/drag-drop-file-uploader-vanilla-js/
+// // https://codepen.io/joezimjs/pen/yPWQbd?editors=1000
 (function () {
 
   'use strict';
@@ -157,6 +157,85 @@ console.clear();
 
 })();
 
+
+
+// file excel
+document.addEventListener("DOMContentLoaded", function () {
+    const dropZone = document.querySelector('.upload_dropZone');
+    const uploadInput = document.getElementById('upload_excel');
+    const gallery = document.querySelector('.upload_gallery');
+
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('dragover');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('dragover');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      const files = e.dataTransfer.files;
+      uploadInput.files = files; // Assign files to the input element
+      handleFiles(files);
+    });
+
+    uploadInput.addEventListener('change', (e) => {
+      const files = e.target.files;
+      handleFiles(files);
+    });
+
+    function handleFiles(files) {
+      for (const file of files) {
+        const fileNameElement = document.createElement('div');
+        // fileNameElement.textContent = file.name;
+        gallery.appendChild(fileNameElement);
+      }
+    }
+  });
+  
+//   document.addEventListener("DOMContentIMG", function () {
+//     const gambar = document.querySelector('.upload_gambar');
+//     const uploadGambar = document.getElementById('.upload_image_background');
+//     const img = document.querySelector('.upload_img');
+
+//     gambar.addEventListener('dragover', (e) => {
+//       e.preventDefault();
+//       gambar.classList.add('dragover');
+//     });
+
+//     gambar.addEventListener('dragleave', () => {
+//         gambar.classList.remove('dragover');
+//     });
+
+//     gambar.addEventListener('drop', (e) => {
+//       e.preventDefault();
+//       gambar.classList.remove('dragover');
+//       const files = e.dataTransfer.files;
+//       uploadGambar.files = files; // Assign files to the input element
+//       handleFiles(files);
+//     });
+
+//     uploadGambar.addEventListener('change', (e) => {
+//       const files = e.target.files;
+//       handleFiles(files);
+//     });
+
+//     function handleFiles(files) {
+//       for (const file of files) {
+//         const fileNameElement = document.createElement('div');
+//         // fileNameElement.textContent = file.name;
+//         img.appendChild(fileNameElement);
+//       }
+//     }
+//   });
+
+
+
+
+// script untuk time pada portal 
 const Years = document.getElementById("Years");
 const Days = document.getElementById("Days");
 const Hours = document.getElementById("Hours");

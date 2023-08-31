@@ -21,8 +21,19 @@
                 </div>
                 
 
+
+        <div class="row">
+            <div class="col">
+                <p class="float-end me-3">Maximum file size: 20 MB</p>
+            </div>
+        </div>
+
+            <div class="first-box px-4 ms-4">
+                <div class="row p-2" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+
             <div class="first-box px-4 ms-4">
                 <div class="row p-1" style="background-color: rgb(242, 242, 242); box-shadow:4px 7px 10px rgba(0,0,0,.4);">
+
                     <div class="col">
                         <h1 class="h4 text-center ">Drag &amp; drop file upload</h1>
                         <form action="{{ route('upload', ['slug' => $user->id]) }}" method="POST"
@@ -53,6 +64,8 @@
                     </div>
                 </div>
             </div>
+
+
 
             <div class="row ms-4 px-4">
                 <div class="col ps-2">

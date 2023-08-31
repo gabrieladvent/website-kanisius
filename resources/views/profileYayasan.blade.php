@@ -10,7 +10,7 @@
                     </div>
                     <div class="">
                         <label class="ms-2">Nama User</label>
-                        <p class="ms-2 border border-secondary-subtle fw-bold fs-5"> {{ $user->name }} </p>
+                        <p class="ms-2 fw-bold fs-5"> {{ $user->name }} </p>
                     </div>
                     <div class="">
                         <label class="ms-2">Nama Sekolah</label>
@@ -51,7 +51,7 @@
                             <div class="password-container">
                                 <input disabled type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28vw;">
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28.8vw;">
                                 <i class="fa fa-eye-slash password-toggle" id="togglePassword" style="cursor: pointer;"></i>
                             </div>
 
@@ -94,10 +94,10 @@
                         </svg>
                         <p class="small my-2">Drag &amp; Drop tema gambar(s) dengan format png<br><i>or</i>
                         </p>
-                        <input id="upload_image_background" data-post-name="image_background"
+                        <input id="upload_excel" data-post-name="image_background"
                             data-post-url="{{ route('update.profile') }}" class="position-absolute invisible" type="file"
                             name="photo" multiple accept="image/png" />
-                        <label class="btn btn-upload mb-3" for="upload_image_background">Choose
+                        <label class="btn btn-upload mb-3" for="upload_excel">Choose
                             file(s)</label>
                         <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>
                     </fieldset>

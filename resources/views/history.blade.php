@@ -49,7 +49,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td>No Record</td>
+                                    <td class="text-center fw-bold h3" style="color: red;" colspan="5">BELUM ADA FILE YANG DIKIRIM!</td>
                                 </tr>
                             @endforelse
                         </tbody>

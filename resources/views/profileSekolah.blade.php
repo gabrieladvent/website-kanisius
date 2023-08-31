@@ -54,7 +54,7 @@
                             <div class="password-container">
                                 <input disabled type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 29vw; position: flex;">
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28vw; position: relative;">
                                     <i class="fa fa-eye-slash password-toggle" id="togglePassword" style="cursor: pointer;"></i>
                             </div>
 

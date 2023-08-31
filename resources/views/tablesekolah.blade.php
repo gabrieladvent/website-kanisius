@@ -120,7 +120,9 @@
                             </div>
                         </div>
                     @endif
-                @else
+            @else
+                <div class="px-5 mt-5">
+
                     <p class="h3">TIDAK ADA DATA YANG DIPILIH</p>
                     <p class="h3">SILAHKAN PILIH DATA</p>
                     <p>Halaman akan secara otomatis dialihkan....</p>
@@ -130,7 +132,7 @@
                             window.location.href = "{{ route('notifikasi') }}";
                         }, 2000);
                     </script>
-                @endif
+            @endif
             </div>
         </div>
     </div>

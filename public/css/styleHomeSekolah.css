@@ -5,14 +5,14 @@ p {
   padding-top: 1%;
 }
 strong.datasiswadas{
-    color: transparent; 
+    /* color: transparent;  */
     font-family: Inter, sans-serif;
     font-size: 35px;
     font-style: normal;
     font-weight: 700; /* Bold font weight */
     line-height: normal;
 
-    background-color:#091d45;
+    /* background-color:#091d45; */
     background-clip: text;
     background-size: 75px 75px ;
     animation: rgb 10s infinite linear;
@@ -476,9 +476,8 @@ nav.main-menu li.active>a,
   border-radius: 15px;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
-
 
 
   .border {
@@ -509,7 +508,7 @@ nav.main-menu li.active>a,
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 100%;
+  /* width: 100%; */
   /* margin: 0 auto; */
 }
 /* Style untuk tombol-tombol */

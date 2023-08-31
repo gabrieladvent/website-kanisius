@@ -37,7 +37,7 @@
                     <h2 class="card-title"> Form Laporan </h2>
                 </div>
                 <div class="col-md-12">
-                    <form action="{{ route('laporanFilter') }}" method="post" style="margin-right: 10vw;" id="formContainer">
+                    <form action="{{ route('laporanFilter') }}" method="post" id="formContainer">
                         @csrf
                         <input type="hidden" name="title" value="Judul Laporan">
                         <table class="ms-5 mt-4">
@@ -143,7 +143,7 @@
             <td>
                 <button type="submit" id="submit" onclick="getValue()" class="btn btn-primary float-center mt-3">Tampil
                     <i class="fa-solid fa-eye"></i></button>
-                <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank"
+                <a href="#" target="blank"
                     class="btn btn-success float-center mt-3">Download <i
                         class="fa-solid fa-download"></i></a>
 
@@ -299,6 +299,7 @@
                         </script>
                     </div>
                     </div>
+        
                         @elseif ($laporanType === 'zonasi')
                         
                             <div class="data-siswa py-3">
@@ -1242,7 +1243,6 @@
         </div>
     @endif
 @endif
-
   
     @if (request()->has('laporanType'))
         @if ($laporanType === 'jumlah_siswa')

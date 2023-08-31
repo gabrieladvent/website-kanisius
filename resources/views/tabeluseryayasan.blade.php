@@ -120,7 +120,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
+                {{-- <tfoot>
                     <tr>
                         <th>No.</th>
                         <th>NISN</th>
@@ -131,7 +131,7 @@
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
-                </tfoot>
+                </tfoot> --}}
             </table>
         </div>
     </div>

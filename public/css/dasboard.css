@@ -60,5 +60,17 @@ th {
     overflow: hidden; /* menghindari pemotongan teks */
     text-overflow: ellipsis; /* menampilkan elipsis jika terpotong */
 }
+.school-name {
+    background-color: #fefefe; 
+
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+.notification-row {
+    display: block;
+    padding: 10px;
+    background-color: #f4f4f4; /* Ganti dengan warna latar belakang yang Anda inginkan */
+}
+
 
 

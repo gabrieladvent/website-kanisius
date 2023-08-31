@@ -17,7 +17,7 @@
         <a href="{{ route('tambah-akun') }}" class="btn btn-success ms-5">Tambah Akun <i class="fas fa-pen"></i>
         </a>
 
-        <button type="button" class="btn btn-danger float-statrt ms-2" onclick="goBack()">Kembali <i class="fas fa-arrow-left"></i></button>
+        <button type="button" class="btn btn-danger float-statrt ms-2 mt-4" onclick="goBack()">Kembali <i class="fas fa-arrow-left"></i></button>
         </div>  
     </div>
 
