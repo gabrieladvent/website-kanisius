@@ -147,9 +147,12 @@ class LaporanController extends Controller
                     'sekolah' => Sekolah::all(),
                     'data_siswa' => $data_siswa,
                     'data_siswatk' => $data_siswatk,
-                    'jumlahLakiLaki' => $data['jumlah_cwo'],
-                    'jumlahPerempuan' => $data['jumlah_cwe'],
-                    'totalJL' => $data['total']
+                    'jumlahLakiLakiGeneral' => $data['jumlah_cwo_general'],
+                    'jumlahPerempuanGeneral' => $data['jumlah_cwe_general'],
+                    'totalGeneral' => $data['total_general'],
+                    'jumlahLakiLakiTk' => $data['jumlah_cwo_tk'],
+                    'jumlahPerempuanTk' => $data['jumlah_cwe_tk'],
+                    'totalTk' => $data['total_tk']
                 ]);
             case 'agama':
                 $data = self::filterAgama($request, $query, $querytk);
@@ -261,15 +264,12 @@ class LaporanController extends Controller
         // Menghitung jumlah laki-laki dan perempuan tk
         $jumlahLakiLaki2 = $data_siswatk->where('gender', '1')->count();
         $jumlahPerempuan2 = $data_siswatk->where('gender', '2')->count();
-        // Menghitung total jumlah laki-laki dan perempuan
 
-        if ($request->tingkatan === 'TK') {
-            $totalJL = $jumlahLakiLaki2 + $jumlahPerempuan2;
-        } else if ($request->tingkatan === 'SD' || $request->tingkatan === 'SMP') {
-            $totalJL = $jumlahLakiLaki + $jumlahPerempuan;
-        } else {
-            $totalJL = $jumlahLakiLaki + $jumlahPerempuan + $jumlahLakiLaki2 + $jumlahPerempuan2;
-        }
+        // INI CODE BARU KARENA CODE SEBELUMNYA ITU PAKAI REQUEST TINGKATAN == TK JADI INI DIUBAH AGAR BISA TAMPIL 2 DIAGRAM
+        
+        // Menghitung total jumlah laki-laki dan perempuan untuk masing-masing data set
+        $totalJLGeneral = $jumlahLakiLaki + $jumlahPerempuan;
+        $totalJLTk = $jumlahLakiLaki2 + $jumlahPerempuan2;
 
         // Pastikan jumlah laki-laki dan perempuan selalu terdefinisi, bahkan jika data_siswa kosong
         if (!isset($jumlahLakiLaki)) {
@@ -279,20 +279,13 @@ class LaporanController extends Controller
             $jumlahPerempuan = 0;
         }
 
-        if ($request->tingkatan === 'TK') {
-            $jumlahLakiLaki = isset($jumlahLakiLaki) || isset($jumlahLakiLaki2) ? $jumlahLakiLaki2 : 0;
-            $jumlahPerempuan = isset($jumlahPerempuan) || isset($$jumlahPerempuan2) ? $jumlahPerempuan2 : 0;
-        } else if ($request->tingkatan === 'SD' || $request->tingkatan === 'SMP') {
-            $jumlahLakiLaki = isset($jumlahLakiLaki) || isset($jumlahLakiLaki2) ? $jumlahLakiLaki : 0;
-            $jumlahPerempuan = isset($jumlahPerempuan) || isset($$jumlahPerempuan2) ? $jumlahPerempuan : 0;
-        } else {
-            $jumlahLakiLaki = isset($jumlahLakiLaki) || isset($jumlahLakiLaki2) ? $jumlahLakiLaki + $jumlahLakiLaki2 : 0;
-            $jumlahPerempuan = isset($jumlahPerempuan) || isset($$jumlahPerempuan2) ? $jumlahPerempuan + $jumlahPerempuan2 : 0;
-        }
         return [
-            'jumlah_cwo' => $jumlahLakiLaki,
-            'jumlah_cwe' => $jumlahPerempuan,
-            'total' => $totalJL
+            'jumlah_cwo_general' => $jumlahLakiLaki,
+            'jumlah_cwe_general' => $jumlahPerempuan,
+            'total_general' => $totalJLGeneral,
+            'jumlah_cwo_tk' => $jumlahLakiLaki2,
+            'jumlah_cwe_tk' => $jumlahPerempuan2,
+            'total_tk' => $totalJLTk,
         ];
     }
 

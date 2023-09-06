@@ -30,11 +30,14 @@
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <span class="" style=" width: 100%; padding: 1%">
+                                                <span class="notification-row" style="padding: 1%">
                                                     <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}"
                                                         style="color: black" class="fw-bold h5">
-                                                        {{ $notification->data['namasekolah'] }} Mengirimkan File
-
+                                                        <span class="">
+                                                            {{ $notification->data['namasekolah'] }}
+                                                        </span>
+                                                        Mengirimkan File
+                        
                                                         <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
                                                         <lord-icon src="https://cdn.lordicon.com/pkmkagva.json"
                                                             trigger="hover" colors="primary:#66a1ee"
@@ -42,7 +45,6 @@
                                                         </lord-icon>
                                                     </a>
                                                 </span>
-
                                             </td>
                                         </tr>
                                         @php
@@ -51,11 +53,7 @@
                                     @endif
                                 @empty
                                     <tr>
-                                        {{-- <th></th>
-                                        <td></td> --}}
-                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak
-                                            Ada Pesan</td>
-
+                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak Ada Pesan</td>
                                     </tr>
                                 @endforelse
                             </tbody>

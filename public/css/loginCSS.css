@@ -13,26 +13,38 @@ body {
 }
 
 
-.password-container {
+/* .password-container {
   position: relative;
   cursor: pointer;
-}
+} */
 
-.password-container input[type="password"] {
+/* .password-container input[type="password"] {
   padding-right: 40px; 
-}
+} */
 
-.password-container i {
-  position: absolute;
-  top: 50%;
-  right: 30px;
-  transform: translateY(-50%);
-  cursor: pointer;
-}
+  /* .password-container i {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  } */
 
   
-  .form-control{
-    width: 29.6vw
+  .form-control1{
+      display: block;
+      width: 80%;
+      height: calc(1.5em + 0.75rem + 2px);
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #0f0f10;
+      background-color: #ffffff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      /* border-radius: 0.25rem; */
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
   .input-group-append{
     background-color: #A2A2A2
@@ -54,13 +66,7 @@ body {
     cursor: pointer;
     background-color: #fff;
 }
-/* #togglePassword {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-} */
+
 
   
 
