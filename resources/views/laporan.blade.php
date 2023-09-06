@@ -1,34 +1,26 @@
-{{-- @else
-        <div class="ms-3 me-3 rounded-4 py-3 bg-white mt-3">
-            <div class=" table-data" style="margin-left: 1%; margin-right:1%;">
-                <p class="text-danger text-center h2 fw-bold">DATA TIDAK DITEMUKAN <br> SILAHKAN COBA LAGI</p> 
-            </div>
-        </div> --}}
 @php
     $tempTK = [];
     $tempSD = [];
     $tempSMP = [];
     $laporanType = request('laporanType');
-
+    
 @endphp
-@if ((!is_null($data_siswa)))
-
-
-@foreach ($sekolah as $item)
-    @if (strpos($item->NAMASEKOLAH, 'TK') !== false)
-        @php
-            $tempTK[] = $item->NAMASEKOLAH;
-        @endphp
-    @elseif (strpos($item->NAMASEKOLAH, 'SD') !== false)
-        @php
-            $tempSD[] = $item->NAMASEKOLAH;
-        @endphp
-    @else
-        @php
-            $tempSMP[] = $item->NAMASEKOLAH;
-        @endphp
-    @endif
-@endforeach
+@if (!is_null($data_siswa))
+    @foreach ($sekolah as $item)
+        @if (strpos($item->NAMASEKOLAH, 'TK') !== false)
+            @php
+                $tempTK[] = $item->NAMASEKOLAH;
+            @endphp
+        @elseif (strpos($item->NAMASEKOLAH, 'SD') !== false)
+            @php
+                $tempSD[] = $item->NAMASEKOLAH;
+            @endphp
+        @else
+            @php
+                $tempSMP[] = $item->NAMASEKOLAH;
+            @endphp
+        @endif
+    @endforeach
 @endif
 
 @extends('layout-yayasan.second')
@@ -155,8 +147,7 @@
                                 class="btn btn-primary float-center mt-3">Tampil
                                 <i class="fa-solid fa-eye"></i></button>
                             {{-- <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank" --}}
-                            <a href="#" target="blank"
-                                class="btn btn-success float-center mt-3">Download <i
+                            <a href="#" target="blank" class="btn btn-success float-center mt-3">Download <i
                                     class="fa-solid fa-download"></i></a>
 
                             <script>

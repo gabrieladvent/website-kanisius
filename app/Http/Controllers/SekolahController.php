@@ -49,11 +49,11 @@ class SekolahController extends Controller
     {
         $user = Auth::user();
         if($user->status == "sekolah" && (strpos($user->namasekolah, 'SD') === 0 || strpos($user->namasekolah, 'SMP') === 0)){
-            $template = 'https://docs.google.com/spreadsheets/d/1VgZBJ4l7tjCDRkaiy-IgLaYKDShBS78F/edit?usp=drive_link&ouid=115074841835460332215&rtpof=true&sd=true';
+            $template = 'https://docs.google.com/spreadsheets/d/1VgZBJ4l7tjCDRkaiy-IgLaYKDShBS78F/edit?usp=sharing&ouid=115074841835460332215&rtpof=true&sd=true';
 
             return Redirect::to($template);
         } elseif($user->status == "sekolah" && (strpos($user->namasekolah, 'TK') === 0)){
-            $template = 'https://docs.google.com/spreadsheets/d/1B7wiOVOrhwQXKvyH7Bk-GuMjKRGnQqLb/edit?usp=drive_link&ouid=115074841835460332215&rtpof=true&sd=true';
+            $template = 'https://docs.google.com/spreadsheets/d/1B7wiOVOrhwQXKvyH7Bk-GuMjKRGnQqLb/edit?usp=sharing&ouid=115074841835460332215&rtpof=true&sd=true';
 
             return Redirect::to($template);
         } else{
@@ -64,11 +64,13 @@ class SekolahController extends Controller
     public function panduan(){
         $user = Auth::user();
         if($user->status == 'sekolah'){
-            $template = 'https://docs.google.com/spreadsheets/d/1VgZBJ4l7tjCDRkaiy-IgLaYKDShBS78F/edit?usp=drive_link&ouid=115074841835460332215&rtpof=true&sd=true';
+            $template = 'https://drive.google.com/file/d/1y8gGTZkyrwhXf2iAPKSGbhBkcB2aVT5b/view?usp=sharing';
 
             return Redirect::to($template);
         }elseif($user->status == 'yayasan'){
-            
+            $template = 'https://drive.google.com/file/d/1A_vU2UGD4y1q9KZc-A-Fp6RPE5XnLB_R/view?usp=sharing';
+
+            return Redirect::to($template);
         }else{
             abort(404, 'Gagal Mengeksekusi Perintah');
         }

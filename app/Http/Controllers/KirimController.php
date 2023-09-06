@@ -21,11 +21,15 @@ use App\Models\SaveSession;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Illuminate\Support\Facades\Notification;
 
+use function PHPUnit\Framework\isEmpty;
 
 class KirimController extends Controller
 {
     public function postFile(Request $request, $nomor_s)
     {
+        $lastColumn = '';
+        $lastColumnIndex = 0;
+        $newColumn = '';
         $user = User::all();
         $namasekolah = User::where('id', $nomor_s)->value('namasekolah');
 
@@ -33,7 +37,11 @@ class KirimController extends Controller
         $userLogin = $userId->id; // Mengambil id dari user yang sedang login
         $users = User::where('status', 'yayasan')->get(); // Mengambil data user yang mempunyai status sebagai yayasan
         $sekolah = User::where('id', $nomor_s)->value('namasekolah');
-
+        // dd($request->file); 
+        if($request->file == null){
+            return redirect()->back()->with('error', 'Gagal Mengupload File.');
+        }
+        
         $request->validate([
             'file' => 'required|mimes:xlsx|max:20480',
         ]); // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
@@ -41,6 +49,11 @@ class KirimController extends Controller
         try {
             // Membaca file Excel yang diupload oleh user
             $uploadedFile = $request->file('file');
+
+            if(!$uploadedFile){
+                dd('ini');
+                return redirect()->back()->with('error', 'Gagal Mengupload File');
+            }
             
             $filename = $uploadedFile->getClientOriginalName();
             $filePath = $uploadedFile->getPathname();
@@ -89,7 +102,7 @@ class KirimController extends Controller
             // Menyimpan komentar dan status yang disimpan ke dalam variabel supaya nantinya bisa dilempar ke kirimNotifikasi untuk dibuat databasenya
             $komen = !empty($komentar) ? $komentar : '';
             $stt  = $status;
-            $lastSend = now();
+            $lastSend = 'kirim';
 
             Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen, $stt)); // Mengirim data ke KirimNotifikasi
             $data->save(); // Menyimpan data excel  di database
@@ -99,7 +112,7 @@ class KirimController extends Controller
             $newSaveSession = SaveSession::create([
                 'variabel' => $filename,
                 'id_login' => $userLogin,
-                'tanggalkirim' => $lastSend,
+                'status_kirim' => $lastSend,
             ]);
             // dd($newSaveSession);            
             
@@ -130,7 +143,15 @@ class KirimController extends Controller
                     ->first();
 
                 if ($fileToDelete) {
-                    session(['fileDelete' => $fileToDelete]);
+                    $newSaveSession = SaveSession::create([
+                        'variabel' => $filename,
+                        'id_login' => Auth::user()->id,
+                        'status_kirim' => 'hapus',
+                    ]);
+
+                    $deletedSessions = SaveSession::where('id_login', Auth::user()->id)
+                        ->where('status_kirim', 'kirim')
+                        ->delete();
                     
                     $notif = DB::table('notifications')
                         ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
@@ -175,20 +196,14 @@ class KirimController extends Controller
         }
 
         $session = SaveSession::where('id_login', $user->id)
+            ->where('status_kirim', 'kirim')
             ->latest()
             ->first();
+
         // dd($session);
         if (($session && $session->created_at->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) && $session->id_login == $user->id)) {
-            if(Session::get('fileDelete') != null){
-                // dd('itu');
-                return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
-            }
-            // dd('ini');
             return redirect()->route('sukses');
         } else {
-            if(Session::get('fileDelete')){
-                Session::forget('fileDelete');
-            }
             return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));
         }
     }

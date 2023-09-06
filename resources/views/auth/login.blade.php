@@ -38,7 +38,7 @@
                             <a class="inter nav-link active" aria-current="page" href="#">Video Tutorial</a>
                         </li>
                         <li class="nav-item">
-                            <a class="inter nav-link text-dark" href="#">Dokumentasi</a>
+                            <a class="inter nav-link text-dark" href="#">Buku Panduan</a>
                         </li>
                         <li class="nav-item">
                             <a class="inter nav-link text-dark" href="#">Kontak Admin</a>

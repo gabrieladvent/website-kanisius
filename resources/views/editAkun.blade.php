@@ -17,11 +17,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="nomorID">Nomor ID</label>
-                                <input type="text" class="form-control" id="nomorID" placeholder="Masukan ID"
-                                    name="id" value="{{ $data->id }}">
+                                <input disabled type="text" class="form-control" id="" placeholder="Masukan ID"
+                                    name="" value="{{ $data->id }}">
                                 @error('id')
                                     <small>{{ $message }}</small>
                                 @enderror
+                                <input hidden type="text" name="id" id="nomorId" value="{{ $data->id }}">
                             </div>
 
                             <div class="form-group">

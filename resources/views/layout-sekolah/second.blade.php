@@ -70,10 +70,19 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('logout') }}">
+                <a href="#logout" onclick="confirmLogout()">
                     <img src="{{ asset('/icon/power-off-solid.svg') }}" alt="" class="fa fa-2x">
                     <span class="nav-text">Logout</span>
                 </a>
+
+                <script>
+                    function confirmLogout() {
+                        if (confirm('Anda yakin ingin logout?')) {
+                            window.location.href = "{{ route('logout') }}";
+                        }
+                    }
+                </script>
+
             </li>
         </ul>
     </nav>
@@ -256,35 +265,35 @@
             }
         })();
 
-            const togglePassword = document.querySelector('#togglePassword');
-            const password = document.querySelector('#exampleInputPassword1');
-            const password2 = document.querySelector('#password-confirm');
-        
-            togglePassword.addEventListener('click', function (e) {
-                // toggle the type attribute for password field
-                const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                password.setAttribute('type', type);
-                // toggle the eye slash icon for password field
-                if (type === 'password') {
-                    this.classList.remove('fa-eye');
-                    this.classList.add('fa-eye-slash');
-                } else {
-                    this.classList.remove('fa-eye-slash');
-                    this.classList.add('fa-eye');
-                }
-        
-                // toggle the type attribute for password2 field
-                const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
-                password2.setAttribute('type', type2);
-                // toggle the eye slash icon for password2 field
-                if (type2 === 'password') {
-                    togglePassword2.classList.remove('fa-eye');
-                    togglePassword2.classList.add('fa-eye-slash');
-                } else {
-                    togglePassword2.classList.remove('fa-eye-slash');
-                    togglePassword2.classList.add('fa-eye');
-                }
-            });
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#exampleInputPassword1');
+        const password2 = document.querySelector('#password-confirm');
+
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute for password field
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon for password field
+            if (type === 'password') {
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+            } else {
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+            }
+
+            // toggle the type attribute for password2 field
+            const type2 = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+            password2.setAttribute('type', type2);
+            // toggle the eye slash icon for password2 field
+            if (type2 === 'password') {
+                togglePassword2.classList.remove('fa-eye');
+                togglePassword2.classList.add('fa-eye-slash');
+            } else {
+                togglePassword2.classList.remove('fa-eye-slash');
+                togglePassword2.classList.add('fa-eye');
+            }
+        });
     </script>
 
     @if (Session::has('success'))
@@ -293,25 +302,26 @@
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.success("{{ Session::get('success') }}");
+            toastr.success("{{ Session::get('success') }}").addClass('toast-success');
         </script>
     @endif
+
     @if (Session::has('error'))
         <script>
             toastr.options = {
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.error();
-            ("{{ Session::get('gagal') }}");
+            toastr.error("{{ Session::get('error') }}").addClass('toast-error');
         </script>
     @endif
 
-    @yield("script")
+    @yield('script')
 
 
     <!-- Tambahkan ini sebelum </body> -->
 
 
 </body>
+
 </html>

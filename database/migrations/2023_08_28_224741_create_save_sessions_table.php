@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id')->start_from(1);
             $table->string('variabel');
             $table->string('id_login');
-            $table->string('tanggalkirim');
+            $table->string('status_kirim');
             $table->timestamps();
         });
     }

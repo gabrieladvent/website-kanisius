@@ -218,11 +218,25 @@ strong.datasiswadas{
   /* background-color: #000 */
 }
 
-.toast {
+/* Toast dengan latar belakang sesuai jenis */
+.toast-success {
   background-color: rgb(14, 181, 59) !important;
-  color: #000; 
+  color: #000;
   position: relative !important;
 }
+
+.toast-warning {
+  background-color: #ffcc00 !important;
+  color: #000;
+  position: relative !important;
+}
+
+.toast-error {
+  background-color: #ff0000 !important;
+  color: #fff;
+  position: relative !important;
+}
+
 
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);

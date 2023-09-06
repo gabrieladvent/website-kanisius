@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Kirim;
@@ -23,7 +24,7 @@ class YayasanController extends Controller
     {
         $user = Auth::user();
         $users = User::pluck('namasekolah', 'id');
-        return view('tablesekolah', compact('title','users', 'user'));
+        return view('tablesekolah', compact('title', 'users', 'user'));
     }
 
     public function showUpdateForm($id)
@@ -38,14 +39,30 @@ class YayasanController extends Controller
         $request->validate([
             'photo' => 'required|image|mimes:png|max:2048',
         ]);
-
         $photo = Yayasan::find(1);
 
         if ($request->hasFile('photo')) {
             // Hapus foto lama dari storage jika ada
-            File::delete(public_path('public/img/' . $photo->nama_foto));
+            $foto = Yayasan::where('id', 1)->value('nama_foto');
+            $directory = dirname($foto) . '/';
+            $namaTanpaImg = str_replace('img/', '', $foto);
+            $files = Storage::disk('public')->files($directory);
+            echo ('1:' . $namaTanpaImg . '<br>');
+            foreach ($files as $file) {
+                $namaFile = pathinfo($file, PATHINFO_FILENAME);
+                $ekstensi = pathinfo($file, PATHINFO_EXTENSION);
+                $namaFileLengkap = $namaFile . '.' . $ekstensi;
 
+                if ($namaFileLengkap != $namaTanpaImg) {
+                    echo (':' . $namaFileLengkap . '<br>');
+                    
+                    Storage::disk('public')->delete('img/'.$namaFileLengkap);
+                }
+            }
+
+            // update
             $file = $request->file('photo');
+            // dd('ha');
             $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
             // Simpan gambar ke 'public/storage/img'
             $file->StoreAs('/public/img', $filename);
@@ -64,7 +81,7 @@ class YayasanController extends Controller
             }
         }
 
-        return redirect()->back()->with('gagal', 'Gagal mengupdate foto.');
+        return redirect()->back()->with('error', 'Gagal mengupdate foto.');
     }
 
     // Method untuk upload foto tema
@@ -104,10 +121,10 @@ class YayasanController extends Controller
         $nmFile = '';
         $status = '';
         $notification = DB::table('notifications')
-                        ->select('data')
-                        ->where('id', $id)
-                        ->first();
-        
+            ->select('data')
+            ->where('id', $id)
+            ->first();
+
         if ($notification) {
             $data = json_decode($notification->data, true);
             $idLoginNotif = $data['userLogin'];
@@ -118,10 +135,10 @@ class YayasanController extends Controller
         }
 
         $notifikasi = Kirim::where('ID', $idLoginNotif)
-                   ->where('nama_file', $nmFile)
-                   ->where('status', $status)
-                   ->with('user')
-                   ->first();
+            ->where('nama_file', $nmFile)
+            ->where('status', $status)
+            ->with('user')
+            ->first();
 
         // dd($notifikasi);
         if (!$notifikasi) {
@@ -163,10 +180,11 @@ class YayasanController extends Controller
         return view('tableSekolah', compact('notifikasi', 'data_siswa', 'userKirim', 'title', 'user'));
     }
 
-        public function showportal($title){
+    public function showportal($title)
+    {
         $user = Auth::user();
-        return view('portal', compact('title','user'));
-        }
+        return view('portal', compact('title', 'user'));
+    }
 
     // public function checkButton(Request $request)
     // {
@@ -197,12 +215,12 @@ class YayasanController extends Controller
     //         'currentTime' => $currentTime,
     //     ]);
 
-      
+
 
     //     if ($currentTime < $activeStartTime || $currentTime > $activeEndTime) {
     //         $disableButton = true;
     //     }
-        
+
     //     // dd($disableButton);
 
     //      return redirect()->route('upload-view',['slug' => $user->slug])->with([ 
@@ -211,8 +229,8 @@ class YayasanController extends Controller
     //          'currentTime' => $currentTime,
     //         ]);
 
-            
-    
+
+
     //         // return redirect()->route('upload-view',[
     //         //     'disableButton' => $disableButton,
     //         //     'slug' => 'slug',
@@ -224,6 +242,6 @@ class YayasanController extends Controller
     //         // ]);
     //         }
 
-    
+
 
 }

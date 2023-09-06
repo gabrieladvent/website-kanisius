@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\HapusKirimanDibaca' => $baseDir . '/app/Console/Commands/HapusKirimanDibaca.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\ExcelExport' => $baseDir . '/app/Exports/ExcelExport.php',
@@ -44,6 +45,7 @@ return array(
     'App\\Models\\Arsip_TK' => $baseDir . '/app/Models/Arsip_TK.php',
     'App\\Models\\Kirim' => $baseDir . '/app/Models/Kirim.php',
     'App\\Models\\Portal' => $baseDir . '/app/Models/Portal.php',
+    'App\\Models\\SaveSession' => $baseDir . '/app/Models/SaveSession.php',
     'App\\Models\\Sekolah' => $baseDir . '/app/Models/Sekolah.php',
     'App\\Models\\Siswa' => $baseDir . '/app/Models/Siswa.php',
     'App\\Models\\Siswa_TK' => $baseDir . '/app/Models/Siswa_TK.php',
@@ -2276,6 +2278,7 @@ return array(
     'Illuminate\\Queue\\Events\\Looping' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Events/Looping.php',
     'Illuminate\\Queue\\Events\\QueueBusy' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Events/QueueBusy.php',
     'Illuminate\\Queue\\Events\\WorkerStopping' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Events/WorkerStopping.php',
+    'Illuminate\\Queue\\Failed\\CountableFailedJobProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Failed/CountableFailedJobProvider.php',
     'Illuminate\\Queue\\Failed\\DatabaseFailedJobProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Failed/DatabaseFailedJobProvider.php',
     'Illuminate\\Queue\\Failed\\DatabaseUuidFailedJobProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Failed/DatabaseUuidFailedJobProvider.php',
     'Illuminate\\Queue\\Failed\\DynamoDbFailedJobProvider' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/Failed/DynamoDbFailedJobProvider.php',
@@ -2671,6 +2674,7 @@ return array(
     'Laravel\\Sanctum\\Guard' => $vendorDir . '/laravel/sanctum/src/Guard.php',
     'Laravel\\Sanctum\\HasApiTokens' => $vendorDir . '/laravel/sanctum/src/HasApiTokens.php',
     'Laravel\\Sanctum\\Http\\Controllers\\CsrfCookieController' => $vendorDir . '/laravel/sanctum/src/Http/Controllers/CsrfCookieController.php',
+    'Laravel\\Sanctum\\Http\\Middleware\\AuthenticateSession' => $vendorDir . '/laravel/sanctum/src/Http/Middleware/AuthenticateSession.php',
     'Laravel\\Sanctum\\Http\\Middleware\\CheckAbilities' => $vendorDir . '/laravel/sanctum/src/Http/Middleware/CheckAbilities.php',
     'Laravel\\Sanctum\\Http\\Middleware\\CheckForAnyAbility' => $vendorDir . '/laravel/sanctum/src/Http/Middleware/CheckForAnyAbility.php',
     'Laravel\\Sanctum\\Http\\Middleware\\CheckForAnyScope' => $vendorDir . '/laravel/sanctum/src/Http/Middleware/CheckForAnyScope.php',
@@ -5682,6 +5686,7 @@ return array(
     'SebastianBergmann\\CodeCoverage\\Driver\\XdebugNotAvailableException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/XdebugNotAvailableException.php',
     'SebastianBergmann\\CodeCoverage\\Driver\\XdebugNotEnabledException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/XdebugNotEnabledException.php',
     'SebastianBergmann\\CodeCoverage\\Exception' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/Exception.php',
+    'SebastianBergmann\\CodeCoverage\\FileCouldNotBeWrittenException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/FileCouldNotBeWrittenException.php',
     'SebastianBergmann\\CodeCoverage\\Filter' => $vendorDir . '/phpunit/php-code-coverage/src/Filter.php',
     'SebastianBergmann\\CodeCoverage\\InvalidArgumentException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/InvalidArgumentException.php',
     'SebastianBergmann\\CodeCoverage\\NoCodeCoverageDriverAvailableException' => $vendorDir . '/phpunit/php-code-coverage/src/Exception/NoCodeCoverageDriverAvailableException.php',

@@ -11,6 +11,6 @@ class SaveSession extends Model
     protected $fillable = [
         'variabel',
         'id_login',
-        'tanggalkirim',
+        'status_kirim',
     ];
 }
