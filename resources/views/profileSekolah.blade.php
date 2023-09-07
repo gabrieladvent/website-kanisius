@@ -66,7 +66,7 @@
                         </div>
 
                         <label for="password-confirm">Konfirmasi Password</label>
-                        <input disabled id="password-confirm" name="password-confirm" type="password" class="form-control"
+                        <input disabled id="password-confirm" type="password" class="form-control"
                             name="password_confirmation"autocomplete="new-password" placeholder="Konfirmasi Password">
 
                         <button type="submit" class="btn btn-primary float-end mt-3 mb-3">Update Profile</button>

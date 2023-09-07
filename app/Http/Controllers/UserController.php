@@ -82,46 +82,31 @@ class UserController extends Controller
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
-    /* 
-        Method untuk update akun operator oleh yayasan
-    */
-    public function update(Request $request, $id)
-    {
+    /* Method untuk update akun operator oleh yayasan*/
+    public function update(Request $request, $id){
         $validator = Validator::make($request->all(), [
             'id' => 'required',
-            'name' => 'required',
+            'name'  => 'required',
             'email' => 'required|email',
-            'password' => 'nullable|min:8',
-            'password-confirm' => 'nullable|same:password|required_with:password|min:8',
-        ], [
-            'password-confirm.required_with' => 'Konfirmasi password harus diisi jika password diisi.',
-            'password-confirm.same' => 'Konfirmasi password harus sama dengan password.',
+            'password' => 'nullable|min:8|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'nullable|min:8'
         ]);
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-    
-        $user = User::findOrFail($id);
-    
-        $data = [
-            'id' => $request->id,
-            'name' => $request->name,
-            'email' => $request->email,
-        ];
-    
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+        $data['id'] = $request->id;
+        $data['name'] = $request->name;
+        $data['email'] = $request->email;
+
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
-    
-        $user->update($data);
-    
+
+        User::whereId($id)->update($data);
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Diupdate');
     }
 
-    /* 
-        Method untuk hapus akun operator oleh yayasan
-    */
+    /*  Method untuk hapus akun operator oleh yayasan*/
     public function delete($id)
     {
         $data = User::find($id);
@@ -134,17 +119,18 @@ class UserController extends Controller
         }
     }
 
-    /* 
-        Method untuk update akun operator
-    */
+    /* Method untuk update akun operator*/
     public function update_sekolah(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'name'  => 'required',
             'password' => 'nullable',
+            'password' => 'nullable|min:8|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'nullable|min:8',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
 
         $data['name'] = $request->name;
 
@@ -153,6 +139,6 @@ class UserController extends Controller
         }
 
         User::whereId($id)->update($data);
-        return redirect()->route('profile')->with('success', 'Akun Berhasil Diupdate');
+        return redirect()->route('profile')->with('success', 'Akun Berhasil DiUpdate');
     }
 }
