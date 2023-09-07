@@ -102,9 +102,6 @@ Route::group([
         // Fungsi untuk hapus akun
         Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete');
 
-        // Fungsi untuk update tema
-        Route::post('/updateaction/{id}', [YayasanController::class, 'update'])->name('update.profile');
-
         // Route tambah akun
         Route::get('/dashboard/tambah-akun', function () {
             return view('auth.register', [

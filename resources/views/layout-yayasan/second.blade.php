@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     {{-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> --}}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="{{ asset('/image/logo.png') }}" rel="icon">
     {{-- <title>Yayasan | {{ $title }}</title> --}}
@@ -91,17 +92,17 @@
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.success("{{ Session::get('success') }}");
+            toastr.success("{{ Session::get('success') }}").addClass('toast-success');
         </script>
     @endif
-    @if (Session::has('gagal'))
+
+    @if (Session::has('error'))
         <script>
             toastr.options = {
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.warning();
-            ("{{ Session::get('gagal') }}");
+            toastr.error("{{ Session::get('error') }}").addClass('toast-error');
         </script>
     @endif
 

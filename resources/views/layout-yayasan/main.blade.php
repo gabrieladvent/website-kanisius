@@ -38,25 +38,25 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    @if (Session::has('success'))
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                positionClass: 'toast-top-left',
-            }
-            toastr.info("{{ Session::get('success') }}");
-        </script>
-    @endif
-    @if (Session::has('gagal'))
+        @if (Session::has('success'))
         <script>
             toastr.options = {
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.warning();
-            ("{{ Session::get('gagal') }}");
+            toastr.success("{{ Session::get('success') }}").addClass('toast-success');
         </script>
-    @endif
+        @endif
+    
+        @if (Session::has('error'))
+            <script>
+                toastr.options = {
+                    "closeButton": true,
+                    positionClass: 'toast-top-right',
+                }
+                toastr.error("{{ Session::get('error') }}").addClass('toast-error');
+            </script>
+        @endif
 </body>
 
 </html>

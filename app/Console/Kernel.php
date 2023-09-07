@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('kirim:hapus_kiriman_dibaca')->cron('0 0 1 */6 *');
     }
 
     /**

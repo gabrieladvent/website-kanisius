@@ -63,13 +63,21 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('logout') }}">
+                <a href="#logout" onclick="confirmLogout()">
                     <img src="{{ asset('/icon/power-off-solid.svg') }}" alt="" class="fa fa-2x">
                     <span class="nav-text">Logout</span>
                 </a>
+
+                <script>
+                    function confirmLogout() {
+                        if (confirm('Anda yakin ingin logout?')) {
+                            window.location.href = "{{ route('logout') }}";
+                        }
+                    }
+                </script>
             </li>
         </ul>
-    </nav>  
+    </nav>
 
     <div>
         @yield('isi-content')
@@ -91,17 +99,17 @@
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.success("{{ Session::get('success') }}");
+            toastr.success("{{ Session::get('success') }}").addClass('toast-success');
         </script>
     @endif
-    @if (Session::has('gagal'))
+
+    @if (Session::has('error'))
         <script>
             toastr.options = {
                 "closeButton": true,
                 positionClass: 'toast-top-right',
             }
-            toastr.error();
-            ("{{ Session::get('gagal') }}");
+            toastr.error("{{ Session::get('error') }}").addClass('toast-error');
         </script>
     @endif
 </body>
