@@ -89,22 +89,33 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required',
-            'name'  => 'required',
+            'name' => 'required',
             'email' => 'required|email',
-            'password' => 'nullable',
+            'password' => 'nullable|min:8',
+            'password-confirm' => 'nullable|same:password|required_with:password|min:8',
+        ], [
+            'password-confirm.required_with' => 'Konfirmasi password harus diisi jika password diisi.',
+            'password-confirm.same' => 'Konfirmasi password harus sama dengan password.',
         ]);
-
-        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
-
-        $data['id'] = $request->id;
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+    
+        $user = User::findOrFail($id);
+    
+        $data = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'email' => $request->email,
+        ];
+    
         if ($request->password) {
             $data['password'] = Hash::make($request->password);
         }
-
-        User::whereId($id)->update($data);
+    
+        $user->update($data);
+    
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Diupdate');
     }
 

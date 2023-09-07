@@ -114,6 +114,7 @@ Route::group([
 
         // Route untuk ganti tema
         Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+        // Route untuk ganti nama & pass profile yayasan
 
         // Route untuk tampil data yang sudah dikirim
         Route::get('/show-notifikasi/{id}', [YayasanController::class, 'showNotifikasi'])->name('show-notifikasi')->defaults('title', 'Update Data');
