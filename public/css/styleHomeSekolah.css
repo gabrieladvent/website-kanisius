@@ -264,12 +264,19 @@ strong.datasiswadas{
 }
 .password-toggle {
   position: absolute;
-  top: 62%;
-  right: 5px;
+  top: 65%;
+  right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-    
 }
+.password-toggle1 {
+  position: absolute;
+  top: 72%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 .password-container {
   position: relative;
   cursor: pointer;
