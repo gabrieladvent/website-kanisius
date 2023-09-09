@@ -20,9 +20,54 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="{{ '/css/styleHomeSekolah.css' }}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @keyframes moveText {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(10px);
+                /* Atur pergeseran horizontal yang diinginkan */
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        #loader {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Mengatur elemen-elemen menjadi tumpukan vertikal */
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.685);
+        }
+
+        #loader img {
+            width: 150px;
+        }
+
+        #loader p {
+            margin-top: 15px;
+            /* Mengatur jarak atas antara gambar dan teks */
+            animation: moveText 2s infinite;
+        }
+    </style>
 </head>
 
 <body style="background-color: #fcf2fc;">
+    <div id="loader">
+        <img src="{{ asset('/icon/loading2.gif') }}" alt="">
+        <p class="h4">Mohon Tunggu...</p>
+    </div>
+
     @include('navbar.navbar-main')
 
     <nav class="main-menu" style="margin-top: 4.5%">
@@ -112,6 +157,13 @@
             toastr.error("{{ Session::get('error') }}").addClass('toast-error');
         </script>
     @endif
+    <script>
+        $(window).on('load', () => {
+            $('#loader').slideUp(500, () => {
+                $(this).hide();
+            });
+        });
+    </script>
 </body>
 
 </html>

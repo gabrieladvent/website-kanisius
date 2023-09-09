@@ -18,13 +18,13 @@
                 <!-- Left links -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-nowrap">
                     <li class="nav-item">
-                        <a class="inter nav-link active" aria-current="page" href="{{ route('tutorial') }}">Video Tutorial</a>
+                        <a class="inter nav-link active" aria-current="page" href="{{ route('tutorial') }}" target="_blank">Video Tutorial</a>
                     </li>
                     <li class="nav-item">
-                        <a class="inter nav-link text-dark" href="{{ route('panduan-buku') }}">Buku Panduan</a>
+                        <a class="inter nav-link text-dark" target="_blank" href="{{ route('panduan-buku') }}">Buku Panduan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="inter nav-link text-dark" href="mailto:yayasankanisiusbintaran@gmail.com?subject=Keluhan%20WEBSITE%20DATA%20SISWA%20&body=NAMA%20LENGKAP%20%3A%0D%0ANAMA%20SEKOLAH%20%3A%0D%0AISI%20KELUHAN%20%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A">Kontak Admin</a>
+                        <a class="inter nav-link text-dark" href="mailto:yayasankanisiusbintaran@gmail.com?subject=Keluhan%20WEBSITE%20DATA%20SISWA%20&body=NAMA%20LENGKAP%20%3A%0D%0ANAMA%20SEKOLAH%20%3A%0D%0AISI%20KELUHAN%20%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" target="_blank">Kontak Admin</a>
                     </li>
                 </ul>
                 <!-- Left links -->

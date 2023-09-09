@@ -19,13 +19,13 @@
                 <!-- Left links -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-nowrap">
                     <li class="nav-item">
-                        <a class="inter nav-link active" style="color : #FFF000" aria-current="page" href="{{ route('tutorial') }}">Video Tutorial</a>
+                        <a class="inter nav-link active" style="color : #FFF000" aria-current="page" target="_blank" href="{{ route('tutorial') }}">Video Tutorial</a>
                     </li>
                     <li class="nav-item">
                         <a class="inter nav-link" style="color : #FFF000" href="{{ route('panduan-buku') }}" target="_blank">Buku Panduan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="inter nav-link " style="color : #FFF000" href="mailto:yayasankanisiusbintaran@gmail.com?subject=Keluhan%20WEBSITE%20DATA%20SISWA%20&body=NAMA%20LENGKAP%20%3A%0D%0ANAMA%20SEKOLAH%20%3A%0D%0AISI%20KELUHAN%20%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A">Kontak Admin</a>
+                        <a class="inter nav-link " style="color : #FFF000" href="mailto:yayasankanisiusbintaran@gmail.com?subject=Keluhan%20WEBSITE%20DATA%20SISWA%20&body=NAMA%20LENGKAP%20%3A%0D%0ANAMA%20SEKOLAH%20%3A%0D%0AISI%20KELUHAN%20%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A" target="_blank">Kontak Admin</a>
                     </li>
                     
                 </ul>
