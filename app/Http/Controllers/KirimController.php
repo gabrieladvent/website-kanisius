@@ -51,7 +51,6 @@ class KirimController extends Controller
             $uploadedFile = $request->file('file');
 
             if(!$uploadedFile){
-                dd('ini');
                 return redirect()->back()->with('error', 'Gagal Mengupload File');
             }
             
@@ -124,11 +123,7 @@ class KirimController extends Controller
         } catch (\Exception $e) {
             // Jika gagal maka laman tidak akan berubah
 
-            return redirect()->route('sukses')->with([
-                'filename' => $filename,
-                'komentar' => $komentar,
-                'id_kirim' => $data->id_kirim,
-            ])->with('success', 'File berhasil diunggah.');
+            return redirect()->back()->with('error', 'Gagal Mengirimkan File');
 
         }
     }
@@ -188,8 +183,6 @@ class KirimController extends Controller
         // Mengambil nilai waktu portal untuk mengecek apakah sedang ada portal atau tidak
         $upload_start = Portal::all()->value('upload_start');
         $upload_end = Portal::all()->value('upload_end');
-
-
 
         if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false) {
             DB::table('save_sessions')->delete(); 

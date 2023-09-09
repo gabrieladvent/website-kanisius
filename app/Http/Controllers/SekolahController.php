@@ -80,11 +80,13 @@ class SekolahController extends Controller
         $user = Auth::user();
         $user = Auth::user();
         if($user->status == 'sekolah'){
-            $template = 'https://docs.google.com/spreadsheets/d/1VgZBJ4l7tjCDRkaiy-IgLaYKDShBS78F/edit?usp=drive_link&ouid=115074841835460332215&rtpof=true&sd=true';
+            $template = 'https://youtube.com/playlist?list=PLzqOhXLoR0dUEYwsuj4l7wBpGyOfvRIrp&si=FCTYRugo3aGzV9we';
 
             return Redirect::to($template);
         }elseif($user->status == 'yayasan'){
-            
+            $template = 'https://youtube.com/playlist?list=PLzqOhXLoR0dVNaW39dzfyd69b60U82T01&si=-EIiSQQyWEzOx1bQ';
+
+            return Redirect::to($template);
         }else{
             abort(404, 'Gagal Mengeksekusi Perintah');
         }

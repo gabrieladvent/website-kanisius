@@ -142,7 +142,7 @@ class YayasanController extends Controller
 
         // dd($notifikasi);
         if (!$notifikasi) {
-            return redirect()->route('profile')->with('gagal', 'Data tidak ditemukan');
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
         }
         $userKirim = User::where('id', $idLoginNotif)->value('namasekolah');
         // Pastikan file Excel ada pada path yang sesuai
@@ -185,63 +185,4 @@ class YayasanController extends Controller
         $user = Auth::user();
         return view('portal', compact('title', 'user'));
     }
-
-    // public function checkButton(Request $request)
-    // {
-    //      $user = Auth::user();
-
-    //     $inputStartYear = $request->input('start-year');
-    //     $inputStartMonth = $request->input('start-month');
-    //     $inputStartDay = $request->input('start-day');
-    //     $inputStartHour = $request->input('start-hour');
-    //     $inputStartMinute = $request->input('start-minute');
-
-    //     $inputEndYear = $request->input('end-year');
-    //     $inputEndMonth = $request->input('end-month');
-    //     $inputEndDay = $request->input('end-day');
-    //     $inputEndHour = $request->input('end-hour');
-    //     $inputEndMinute = $request->input('end-minute');
-
-    //     $activeStartTime = Carbon::create($inputStartYear, $inputStartMonth, $inputStartDay, $inputStartHour, $inputStartMinute);
-    //     $activeEndTime = Carbon::create($inputEndYear, $inputEndMonth, $inputEndDay, $inputEndHour, $inputEndMinute);
-
-    //     $currentTime = Carbon::now();
-    //      $disableButton = false;
-
-    //      Session::put([
-    //         'disableButton' => $disableButton,
-    //         'activeStartTime' => $activeStartTime,
-    //         'activeEndTime' => $activeEndTime,
-    //         'currentTime' => $currentTime,
-    //     ]);
-
-
-
-    //     if ($currentTime < $activeStartTime || $currentTime > $activeEndTime) {
-    //         $disableButton = true;
-    //     }
-
-    //     // dd($disableButton);
-
-    //      return redirect()->route('upload-view',['slug' => $user->slug])->with([ 
-    //         'activeStartTime' => $activeStartTime,
-    //          'activeEndTime' => $activeEndTime,
-    //          'currentTime' => $currentTime,
-    //         ]);
-
-
-
-    //         // return redirect()->route('upload-view',[
-    //         //     'disableButton' => $disableButton,
-    //         //     'slug' => 'slug',
-    //         //     // 'title' => 'title',
-    //         //     // 'user' => $user,
-    //         //     'activeStartTime' => $activeStartTime,
-    //         //     'activeEndTime' => $activeEndTime,
-    //         //     'currentTime' => $currentTime,
-    //         // ]);
-    //         }
-
-
-
 }
