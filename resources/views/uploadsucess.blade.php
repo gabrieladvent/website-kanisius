@@ -68,13 +68,20 @@
             <div class="mb-1 ms-2">
                 <div class="row mt-5 mb-3 ms-5 d-flex justify-content-center">
                     <div class="col-3">
+                    @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === true && $kirim->status === 2)
+                        <script>
+                            alert('File Sudah Diupdate');
+                        </script>
+                        <button type="button" class="btn bg-danger border-1 text-dark" onclick="confirmDelete()" disabled>Remove Submission</button>
+                    @else
+                        
+                    @endif
                         <form
                             action="{{ route('hapus-file', ['id' => session('filename') ? session('filename') : $kirim->nama_file]) }}"
                             method="POST" id="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="button" class="btn bg-danger border-1 text-dark" onclick="confirmDelete()">Remove
-                                Submission</button>
+                            <button type="button" class="btn bg-danger border-1 text-dark" onclick="confirmDelete()">Remove Submission</button>
                         </form>
 
                         <script>
