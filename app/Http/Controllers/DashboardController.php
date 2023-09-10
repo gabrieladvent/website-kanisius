@@ -70,10 +70,12 @@ class DashboardController extends Controller
     {
          $user = Auth::user();
          $files = Storage::files('simpanFile');
+         $upload_start = Portal::all()->value('upload_start');
+         $upload_end = Portal::all()->value('upload_end');
 
          $user_kirim = $user->id;
         $kirim = Kirim::where('ID', $user_kirim)->latest()->first();
-        return view('uploadsucess',['files' => $files], compact('kirim','title','user'));
+        return view('uploadsucess',['files' => $files], compact('kirim','title','user', 'upload_end', 'upload_start'));
     }
 
     public function portal_view($title)
