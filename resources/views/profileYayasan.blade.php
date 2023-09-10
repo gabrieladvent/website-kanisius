@@ -1,6 +1,6 @@
 @extends('layout-yayasan.second')
 @section('isi-content')
-   <div class="row px-5">
+    <div class="row px-5">
         <div class="col-4  mt-2 ms-4">
             <div class="row mt-5 shadow-3-strong bg-light">
                 <div class="col mt-3 ms-1">
@@ -10,7 +10,7 @@
                     </div>
                     <div class="">
                         <label class="ms-2">Nama User</label>
-                        <p class="ms-2 border border-secondary-subtle fw-bold fs-5"> {{ $user->name }} </p>
+                        <p class="ms-2 fw-bold fs-5"> {{ $user->name }} </p>
                     </div>
                     <div class="">
                         <label class="ms-2">Nama Sekolah</label>
@@ -51,7 +51,7 @@
                             <div class="password-container">
                                 <input disabled type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28vw;">
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28.8vw;">
                                 <i class="fa fa-eye-slash password-toggle" id="togglePassword" style="cursor: pointer;"></i>
                             </div>
 
@@ -75,10 +75,10 @@
         <div class="col mt-2">
             <div class="row mt-5  ms-5 justify-content-center shadow-3-strong bg-light">
                 <div class="col-3 mt-3 mb-3  text-center">
-                        <a href="akun-yayasan" class="btn bg-primary text-white">Daftar Akun Operator</a>
+                    <a href="akun-yayasan" class="btn bg-primary text-white">Daftar Akun Operator</a>
                 </div>
                 <div class="col-3 mt-3 mb-3  text-center">
-                        <a href="{{ route('portal-view') }}" class="btn bg-success text-white ">Portal Upload File</a>
+                    <a href="{{ route('portal-view') }}" class="btn bg-success text-white ">Portal Upload File</a>
                 </div>
             </div>
 
@@ -95,8 +95,8 @@
                         <p class="small my-2">Drag &amp; Drop tema gambar(s) dengan format png<br><i>or</i>
                         </p>
                         <input id="upload_excel" data-post-name="image_background"
-                            data-post-url="{{ route('update.profile') }}" class="position-absolute invisible" type="file"
-                            name="photo" multiple accept="image/png" />
+                            data-post-url="{{ route('update.profile') }}" class="position-absolute invisible"
+                            type="file" name="photo" multiple accept="image/png" />
                         <label class="btn btn-upload mb-3" for="upload_excel">Choose
                             file(s)</label>
                         <div class="upload_gallery d-flex flex-wrap justify-content-center gap-3 mb-0"></div>

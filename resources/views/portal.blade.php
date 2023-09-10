@@ -18,24 +18,24 @@
                 <form action="{{ route('set-portal') }}" method="POST"  style="margin-left: 10vw";>
                     @csrf
                     <div class="form-group col-5 mt-3 justify-content-center">
-                        <label for="file_name">File Name</label>
+                        <label for="file_name">Nama Portal</label>
                         <input type="text" name="file_name" id="file_name" class="form-control" required>
                     </div>
 
                     <div class="form-group col-5">
-                        <label for="upload_start">Upload Start</label>
+                        <label for="upload_start">Waktu Mulai</label>
                         <input type="datetime-local" name="upload_start"class="form-control" required>
                     </div>
 
                     @foreach ($time as $s)
                         <div class="form-group col-5">
-                            <label for="upload_end">Upload End</label>
+                            <label for="upload_end">Waktu Berakhir</label>
                             <input type="datetime-local" name="upload_end" class="form-control" required>
                         </div>
                         <input type="text" id="upload_end" value="{{ $s->upload_end }}" hidden>
                     @endforeach
 
-                    <button id="submit" type="submit" class="btn btn-success mt-4">Create</button>
+                    <button id="submit" type="submit" class="btn btn-success mt-4">Submit</button>
                 </form>
 
                 <div id="selection">

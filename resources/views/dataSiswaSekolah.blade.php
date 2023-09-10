@@ -15,7 +15,9 @@
         </div>
     </div>
 </div>
-    <div class="data-siswa py-3 ">
+
+<div class="data-siswa py-3">
+    <div class="table-data" style="margin-left:1%; margin-right:1%;">
             <table id="example" class="table table-bordered" style="width:100%">
                 @if (strpos($isTK, 'TK') === 0)
                     <thead>
@@ -99,7 +101,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    {{-- <tfoot>
+                    <tfoot>
                         <tr>
                             <th>No.</th>
                             <th>NISN</th>
@@ -109,12 +111,13 @@
                             <th>Kelas</th>
                             <th>Action</th>
                         </tr>
-                    </tfoot> --}}
+                    </tfoot>
                 @endif
 
             </table>
         </div>
     </div>
+</div>
 
     <!-- pop up -->
     <div class="filter-popup" id="filterPopup">

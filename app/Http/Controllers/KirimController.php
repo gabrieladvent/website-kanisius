@@ -17,14 +17,19 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Countdown;
+use App\Models\SaveSession;
 use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use Illuminate\Support\Facades\Notification;
 
+use function PHPUnit\Framework\isEmpty;
 
 class KirimController extends Controller
 {
     public function postFile(Request $request, $nomor_s)
     {
+        $lastColumn = '';
+        $lastColumnIndex = 0;
+        $newColumn = '';
         $user = User::all();
         $namasekolah = User::where('id', $nomor_s)->value('namasekolah');
 
@@ -32,7 +37,11 @@ class KirimController extends Controller
         $userLogin = $userId->id; // Mengambil id dari user yang sedang login
         $users = User::where('status', 'yayasan')->get(); // Mengambil data user yang mempunyai status sebagai yayasan
         $sekolah = User::where('id', $nomor_s)->value('namasekolah');
-
+        // dd($request->file); 
+        if($request->file == null){
+            return redirect()->back()->with('error', 'Gagal Mengupload File.');
+        }
+        
         $request->validate([
             'file' => 'required|mimes:xlsx|max:20480',
         ]); // Membuat validasi supaya file yang diupload cuma file excel dengan maksimal 20 mb
@@ -40,6 +49,10 @@ class KirimController extends Controller
         try {
             // Membaca file Excel yang diupload oleh user
             $uploadedFile = $request->file('file');
+
+            if(!$uploadedFile){
+                return redirect()->back()->with('error', 'Gagal Mengupload File');
+            }
             
             $filename = $uploadedFile->getClientOriginalName();
             $filePath = $uploadedFile->getPathname();
@@ -87,28 +100,30 @@ class KirimController extends Controller
 
             // Menyimpan komentar dan status yang disimpan ke dalam variabel supaya nantinya bisa dilempar ke kirimNotifikasi untuk dibuat databasenya
             $komen = !empty($komentar) ? $komentar : '';
-            $stt  = $data->status; // Mengambil status dari objek $data yang baru disimpan
-            
+            $stt  = $status;
+            $lastSend = 'kirim';
 
             Notification::send($users, new KirimNotification($filename, $sekolah, $userLogin, $komen, $stt)); // Mengirim data ke KirimNotifikasi
             $data->save(); // Menyimpan data excel  di database
 
             // Simpan id_kirim yang baru saja di-generate ke dalam session
             Session::put('id_kirim', $data->id_kirim);
-            session(['variableName' => $stt]);
-
+            $newSaveSession = SaveSession::create([
+                'variabel' => $filename,
+                'id_login' => $userLogin,
+                'status_kirim' => $lastSend,
+            ]);
+            // dd($newSaveSession);            
+            
             return redirect()->route('sukses')->with([
                 'filename' => $filename,
                 'komentar' => $komentar,
                 'id_kirim' => $data->id_kirim,
             ])->with('success', 'File berhasil diunggah.');
         } catch (\Exception $e) {
-          // Jika gagal maka laman tidak akan berubah
-            return redirect()->route('sukses')->with([
-                'filename' => $filename,
-                'komentar' => $komentar,
-                'id_kirim' => $data->id_kirim,
-            ])->with('success', 'File berhasil diunggah.');
+            // Jika gagal maka laman tidak akan berubah
+
+            return redirect()->back()->with('error', 'Gagal Mengirimkan File');
 
         }
     }
@@ -116,7 +131,6 @@ class KirimController extends Controller
     public function deleteFile($filename)
     {
         try {
-
             if (Storage::exists('public/simpanFile/' . $filename)) {
                 $fileToDelete = DB::table('kirim')
                     ->where('nama_file', $filename)
@@ -124,7 +138,16 @@ class KirimController extends Controller
                     ->first();
 
                 if ($fileToDelete) {
-                    session(['fileDelete' => $fileToDelete]);
+                    $newSaveSession = SaveSession::create([
+                        'variabel' => $filename,
+                        'id_login' => Auth::user()->id,
+                        'status_kirim' => 'hapus',
+                    ]);
+
+                    $deletedSessions = SaveSession::where('id_login', Auth::user()->id)
+                        ->where('status_kirim', 'kirim')
+                        ->delete();
+                    
                     $notif = DB::table('notifications')
                         ->where('data', 'LIKE', '%"name":"' . $filename . '"%')
                         ->latest()
@@ -161,11 +184,17 @@ class KirimController extends Controller
         $upload_start = Portal::all()->value('upload_start');
         $upload_end = Portal::all()->value('upload_end');
 
-        if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false || Session::get('fileDelete')) {
-            Session::forget('variableName');
-            Session::forget('fileDelete');
+        if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === false) {
+            DB::table('save_sessions')->delete(); 
         }
-        if (Session::get('variableName')) {
+
+        $session = SaveSession::where('id_login', $user->id)
+            ->where('status_kirim', 'kirim')
+            ->latest()
+            ->first();
+
+        // dd($session);
+        if (($session && $session->created_at->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) && $session->id_login == $user->id)) {
             return redirect()->route('sukses');
         } else {
             return view('uploadfile', compact('user', 'upload_start', 'upload_end', 'title'));

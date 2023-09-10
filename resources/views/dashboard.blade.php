@@ -30,18 +30,21 @@
                                     @if ($shownNotifications < 2)
                                         <tr>
                                             <td>
-                                                <span class="border border-secondary"  style="display: flex; background-color: white; padding: 5px;">
-                                                <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}" style="color: black">
-                                                    {{ $notification->data['namasekolah'] }} Mengirimkan File
-                                                </a>
-                                                <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
-                                                <lord-icon
-                                                    src="https://cdn.lordicon.com/pkmkagva.json"
-                                                    trigger="hover"
-                                                    colors="primary:#66a1ee"
-                                                    style="width:25px;height:25px; float:right;margin-left:67%;">
-                                                </lord-icon>
-                                            </span>
+                                                <span class="notification-row" style="padding: 1%">
+                                                    <a href="{{ route('show-notifikasi', ['id' => $notification->id]) }}"
+                                                        style="color: black" class="fw-bold h5">
+                                                        <span class="">
+                                                            {{ $notification->data['namasekolah'] }}
+                                                        </span>
+                                                        Mengirimkan File
+                        
+                                                        <script src="https://cdn.lordicon.com/bhenfmcm.js"></script>
+                                                        <lord-icon src="https://cdn.lordicon.com/pkmkagva.json"
+                                                            trigger="hover" colors="primary:#66a1ee"
+                                                            style="width:25px;height:25px;margin-left:10px;float: right; ">
+                                                        </lord-icon>
+                                                    </a>
+                                                </span>
                                             </td>
                                         </tr>
                                         @php
@@ -50,11 +53,7 @@
                                     @endif
                                 @empty
                                     <tr>
-                                        {{-- <th></th>
-                                        <td></td> --}}
-                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak
-                                            Ada Pesan</td>
-
+                                        <td class="centered-message" style="color :rgb(246, 255, 0)" colspan="2">Tidak Ada Pesan</td>
                                     </tr>
                                 @endforelse
                             </tbody>

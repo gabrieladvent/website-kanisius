@@ -11,9 +11,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('/css/loginCSS.css') }}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
+    <div id="loader">
+        <img src="{{ asset('/icon/loading2.gif') }}" alt="">
+        <p class="h4">Mohon Tunggu...</p>
+    </div>
     <section>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -28,20 +34,23 @@
                     <div class="row">
                         <div class="col-lg-12 mx-2">
                             <img src="{{ asset('/image/logo.png') }}" style="width: 3%;">
-                            <img src="{{ asset('/image/logo-tengah-fix-.png') }}"
-                                style="width: 15%; margin-left: 1%;">
+                            <img src="{{ asset('/image/logo-tengah-fix-.png') }}" style="width: 15%; margin-left: 1%;">
                         </div>
                     </div>
                     <!-- Left links -->
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-nowrap">
                         <li class="nav-item">
-                            <a class="inter nav-link active" aria-current="page" href="#">Video Tutorial</a>
+                            <a class="inter nav-link active" aria-current="page" href="{{ route('tutorial') }}"
+                                target="_blank">Video Tutorial</a>
                         </li>
                         <li class="nav-item">
-                            <a class="inter nav-link text-dark" href="#">Dokumentasi</a>
+                            <a class="inter nav-link text-dark" href="{{ route('panduan-buku') }}" target="_blank">Buku
+                                Panduan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="inter nav-link text-dark" href="#">Kontak Admin</a>
+                            <a class="inter nav-link text-dark"
+                                href="mailto:yayasankanisiusbintaran@gmail.com?subject=Keluhan%20WEBSITE%20DATA%20SISWA%20&body=NAMA%20LENGKAP%20%3A%0D%0ANAMA%20SEKOLAH%20%3A%0D%0AISI%20KELUHAN%20%3A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A%0D%0A"
+                                target="_blank">Kontak Admin</a>
                         </li>
                     </ul>
                     <!-- Left links -->
@@ -68,11 +77,13 @@
                                     </div>
                                 </div>
                                 <input type="text" id="email" name="email"
-                                    class="form-control  @error('email') is-invalid @enderror" placeholder="Email">
+                                    class="form-control1  @error('email') is-invalid @enderror" placeholder="Email">
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>Nama pengguna atau kata sandi salah</strong>
                                     </span>
+                                    <div class="input-group-text password-toggle-container">
+                                    </div>
                                 @enderror
                             </div>
 
@@ -83,12 +94,12 @@
                                     </div>
                                 </div>
                                 <input type="password" name="password"
-                                    class="form-control @error('password') is-invalid @enderror"
-                                    placeholder="Password" id="password" autocomplete="current-password">
-                                
-                                    <div class="input-group-text password-toggle-container">
-                                        <i class="fa fa-eye-slash" id="togglePassword"></i>
-                                    </div>
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                    id="password" autocomplete="current-password">
+
+                                <div class="input-group-text password-toggle-container">
+                                    <i class="fa fa-eye-slash" id="togglePassword"></i>
+                                </div>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -153,8 +164,12 @@
                 this.classList.add('fa-eye');
             }
         });
+
+        $(window).on('load', () => {
+            $('#loader').slideUp(500, () => {
+                $(this).hide();
+            });
+        });
     </script>
-
 </body>
-
 </html>

@@ -1,8 +1,6 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
-
-
-<div class="data-siswa py-5 " style="background: #244076;">
+    <div class="data-siswa py-5 " style="background: #244076;">
         <div class="card">
             <div class="card-header" style="background: #89a5dd; display: flex; align-items: center;">
                 <p class="text-dark h2 fw-bold">Submission Status</p>
@@ -39,9 +37,11 @@
                             </div>
                             <div class="col py-2">
                                 @if (session('filename'))
-                                    <p class="h5 mt-1"><i class="fa-solid fa-file-excel fa-xl me-3"></i>{{ session('filename') }}</p>
+                                    <p class="h5 mt-1"><i
+                                            class="fa-solid fa-file-excel fa-xl me-3"></i>{{ session('filename') }}</p>
                                 @else
-                                    <p class="h5 mt-1"><i class="fa-solid fa-file-excel fa-xl me-3"></i>{{ $kirim->nama_file }}</p>
+                                    <p class="h5 mt-1"><i
+                                            class="fa-solid fa-file-excel fa-xl me-3"></i>{{ $kirim->nama_file }}</p>
                                 @endif
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 @else
                                     <p class="h5 mt-1"><i class="fa-xl me-2"></i>{{ $kirim->Komentar }}</p>
                                 @endif
-                                
+
                             </div>
                         </div>
                     </div>
@@ -68,16 +68,25 @@
             <div class="mb-1 ms-2">
                 <div class="row mt-5 mb-3 ms-5 d-flex justify-content-center">
                     <div class="col-3">
-                        <form action="{{ route('hapus-file', ['id' => session('filename') ? session('filename') : $kirim->nama_file]) }}" method="POST">
+                        <form
+                            action="{{ route('hapus-file', ['id' => session('filename') ? session('filename') : $kirim->nama_file]) }}"
+                            method="POST" id="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn bg-danger border-1 text-dark">Remove Submission</button>
+                            <button type="button" class="btn bg-danger border-1 text-dark" onclick="confirmDelete()">Remove
+                                Submission</button>
                         </form>
+
+                        <script>
+                            function confirmDelete() {
+                                if (confirm('Anda yakin ingin menghapus data ini?')) {
+                                    document.getElementById('delete-form').submit();
+                                }
+                            }
+                        </script>
                     </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 @endsection
-
-

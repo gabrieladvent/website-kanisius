@@ -5,14 +5,14 @@ p {
   padding-top: 1%;
 }
 strong.datasiswadas{
-    color: transparent; 
+    /* color: transparent;  */
     font-family: Inter, sans-serif;
     font-size: 35px;
     font-style: normal;
     font-weight: 700; /* Bold font weight */
     line-height: normal;
 
-    background-color:#091d45;
+    /* background-color:#091d45; */
     background-clip: text;
     background-size: 75px 75px ;
     animation: rgb 10s infinite linear;
@@ -47,11 +47,16 @@ strong.datasiswadas{
   box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
   margin-left: 6%;
   margin-right: 1%;
+  margin-top: 2%;
 }
 
-.data-siswa {
+.data-siswa3 {
+  border-radius: 15px;
+  background-color: #ffff;
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
+  margin-left: 6%;
+  margin-right: 1%;
   margin-top: 2%;
-  /* margin-bottom: 1% !important; */
 }
 
 .container {
@@ -218,11 +223,25 @@ strong.datasiswadas{
   /* background-color: #000 */
 }
 
-.toast {
+/* Toast dengan latar belakang sesuai jenis */
+.toast-success {
   background-color: rgb(14, 181, 59) !important;
-  color: #000; 
+  color: #000;
   position: relative !important;
 }
+
+.toast-warning {
+  background-color: #ffcc00 !important;
+  color: #000;
+  position: relative !important;
+}
+
+.toast-error {
+  background-color: #ff0000 !important;
+  color: #fff;
+  position: relative !important;
+}
+
 
 
 @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
@@ -245,12 +264,19 @@ strong.datasiswadas{
 }
 .password-toggle {
   position: absolute;
-  top: 62%;
-  right: 5px;
+  top: 65%;
+  right: 10px;
   transform: translateY(-50%);
   cursor: pointer;
-    
 }
+.password-toggle1 {
+  position: absolute;
+  top: 72%;
+  right: 20px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
 .password-container {
   position: relative;
   cursor: pointer;
@@ -450,16 +476,29 @@ nav.main-menu li.active>a,
   overflow: hidden;
   text-overflow: ellipsis;
 } 
+.data-siswa5 {
+  box-shadow: 4px 7px 10px rgba(0, 0, 0, .4);
+  margin-left: 6%;
+  margin-top: 6%;
+  margin-right: 1%;
+  border-radius: 20px 20px 0px 0px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  background-color: #ffffff;
+  /* position: relative; */
 
-
-
-.table-data{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.table-data{
+  border-radius: 15px;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
 
 
   .border {
@@ -490,7 +529,7 @@ nav.main-menu li.active>a,
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 100%;
+  /* width: 100%; */
   /* margin: 0 auto; */
 }
 /* Style untuk tombol-tombol */
@@ -511,7 +550,7 @@ nav.main-menu li.active>a,
 /* Gaya untuk pilihan kelas */
 .col-mt-3 {
   margin-top: 5px;
-  justify-content: center;
+  /* justify-content: center; */
 }x  
 
 /* Gaya untuk tombol submit dan download */

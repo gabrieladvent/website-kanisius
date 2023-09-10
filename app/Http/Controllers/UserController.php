@@ -82,16 +82,14 @@ class UserController extends Controller
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Ditambahkan');
     }
 
-    /* 
-        Method untuk update akun operator oleh yayasan
-    */
-    public function update(Request $request, $id)
-    {
+    /* Method untuk update akun operator oleh yayasan*/
+    public function update(Request $request, $id){
         $validator = Validator::make($request->all(), [
             'id' => 'required',
             'name'  => 'required',
             'email' => 'required|email',
-            'password' => 'nullable',
+            'password' => 'nullable|min:8|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'nullable|min:8'
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -108,9 +106,7 @@ class UserController extends Controller
         return redirect()->route('akun-yayasan')->with('success', 'Data Berhasil Diupdate');
     }
 
-    /* 
-        Method untuk hapus akun operator oleh yayasan
-    */
+    /*  Method untuk hapus akun operator oleh yayasan*/
     public function delete($id)
     {
         $data = User::find($id);
@@ -123,17 +119,18 @@ class UserController extends Controller
         }
     }
 
-    /* 
-        Method untuk update akun operator
-    */
+    /* Method untuk update akun operator*/
     public function update_sekolah(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'name'  => 'required',
             'password' => 'nullable',
+            'password' => 'nullable|min:8|required_with:password_confirmation|same:password_confirmation',
+            'password_confirmation' => 'nullable|min:8',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
 
         $data['name'] = $request->name;
 
@@ -142,6 +139,6 @@ class UserController extends Controller
         }
 
         User::whereId($id)->update($data);
-        return redirect()->route('profile')->with('success', 'Akun Berhasil Diupdate');
+        return redirect()->route('profile')->with('success', 'Akun Berhasil DiUpdate');
     }
 }

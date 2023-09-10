@@ -4,18 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Sekolah;
 use Illuminate\Http\Request;
-use App\Models\User as user;
 use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa_Tk;
-use App\Models\Arship;
-// use App\Models\Arsip_TK;
 use App\Models\Arsip_TK;
-use Alert;
-use App\Exports\ExcelExport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\TableExport;
+use App\Models\Arship;
 use PDF;
 use Dompdf\Dompdf;
 use Symfony\Component\HttpFoundation\Response; 
@@ -41,7 +35,7 @@ class LaporanController extends Controller
         $data_siswa_arsip = $siswaArship->load('sekolah');
         $data_siswa_arsipTK =  $siswaArshipTK->load('sekolah');
 
-        return view('laporan', compact('data_siswa', 'sekolah', 'title', 'user', 'data_siswatk','data_siswa_arsip','data_siswa_arsipTK'));
+        return view('laporan', compact('data_siswa', 'sekolah', 'title', 'user', 'data_siswatk', 'data_siswa_arsip', 'data_siswa_arsipTK'));
     }
 
 
@@ -74,7 +68,7 @@ class LaporanController extends Controller
         ]);
         $query = Siswa::with('sekolah');
         $querytk = Siswa_TK::with('sekolah');
-        $query2= Arship::with('sekolah');
+        $query2 = Arship::with('sekolah');
         $queryTkArsip = Arsip_TK::with('sekolah');
 
         $namaSekolah = $request->input('namaSekolah');
@@ -130,16 +124,16 @@ class LaporanController extends Controller
                         $rombelSetIni = $selectedKelas . $detailKelas;
                     }
                     $query->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
-                   }
-                });
-            }
-            
-        
+                }
+            });
+        }
+
+
 
         if ($detailKelas || $request->hasAny(['kelasSD', 'kelasSMP', 'kelasTK'])) {
             $kelasType = $request->input('kelasSD') ?? $request->input('kelasSMP') ?? $request->input('kelasTK');
             $rombelSetIni = ($kelasType) ? $kelasType . $detailKelas : '%' . $detailKelas . '%';
-            
+
             $query2->where(function ($subQuery) use ($rombelSetIni) {
                 $subQuery->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
             });
@@ -158,9 +152,18 @@ class LaporanController extends Controller
                     'sekolah' => Sekolah::all(),
                     'data_siswa' => $data_siswa,
                     'data_siswatk' => $data_siswatk,
-                    'jumlahLakiLaki' => $data['jumlah_cwo'],
-                    'jumlahPerempuan' => $data['jumlah_cwe'],
-                    'totalJL' => $data['total'],
+
+                    // 'jumlahLakiLaki' => $data['jumlah_cwo'],
+                    // 'jumlahPerempuan' => $data['jumlah_cwe'],
+                    // 'totalJL' => $data['total'],
+
+                    'jumlahLakiLakiGeneral' => $data['jumlah_cwo_general'],
+                    'jumlahPerempuanGeneral' => $data['jumlah_cwe_general'],
+                    'totalGeneral' => $data['total_general'],
+                    'jumlahLakiLakiTk' => $data['jumlah_cwo_tk'],
+                    'jumlahPerempuanTk' => $data['jumlah_cwe_tk'],
+                    'totalTk' => $data['total_tk']
+
                 ]);
               
             case 'agama':
@@ -199,23 +202,24 @@ class LaporanController extends Controller
                     'rataRataJarak' => $data
                 ]);
             case 'jumlah_siswa':
-                    $data = self::filterJS($request,$data_siswa_arsip,$data_siswa_arsipTK);
-                    return view('laporan', [
-                        'title' => 'Judul Laporan',
-                        'sekolah' => Sekolah::all(),
-                        'data_siswa' => $query->get(),
-                        'data_siswatk' => $querytk->get(),
-                        'data_siswa_arsip' => $query2->get(),
-                        'data_siswa_arsipTK' => $queryTkArsip->get(),
-                        'combined_data' => $data
-                    ]);
+                $data = self::filterJS($request, $data_siswa_arsip, $data_siswa_arsipTK);
+                return view('laporan', [
+                    'title' => 'Judul Laporan',
+                    'sekolah' => Sekolah::all(),
+                    'data_siswa' => $query->get(),
+                    'data_siswatk' => $querytk->get(),
+                    'data_siswa_arsip' => $query2->get(),
+                    'data_siswa_arsipTK' => $queryTkArsip->get(),
+                    'combined_data' => $data
+                ]);
 
             default:
-            // dd($request->laporanType);
+                // dd($request->laporanType);
                 abort(404);
         }
         abort(404);
     }
+
 
 
    
@@ -410,6 +414,7 @@ class LaporanController extends Controller
             'siswaCountstk' => $siswaCountstk,
         ]);
     }
+
     private function filterKPS(Request $request, $data_siswa)
     {
         if ($data_siswa->count() > 0) {
@@ -436,15 +441,12 @@ class LaporanController extends Controller
         // Menghitung jumlah laki-laki dan perempuan tk
         $jumlahLakiLaki2 = $data_siswatk->where('gender', '1')->count();
         $jumlahPerempuan2 = $data_siswatk->where('gender', '2')->count();
-        // Menghitung total jumlah laki-laki dan perempuan
 
-        if ($request->tingkatan === 'TK') {
-            $totalJL = $jumlahLakiLaki2 + $jumlahPerempuan2;
-        } else if ($request->tingkatan === 'SD' || $request->tingkatan === 'SMP') {
-            $totalJL = $jumlahLakiLaki + $jumlahPerempuan;
-        } else {
-            $totalJL = $jumlahLakiLaki + $jumlahPerempuan + $jumlahLakiLaki2 + $jumlahPerempuan2;
-        }
+        // INI CODE BARU KARENA CODE SEBELUMNYA ITU PAKAI REQUEST TINGKATAN == TK JADI INI DIUBAH AGAR BISA TAMPIL 2 DIAGRAM
+        
+        // Menghitung total jumlah laki-laki dan perempuan untuk masing-masing data set
+        $totalJLGeneral = $jumlahLakiLaki + $jumlahPerempuan;
+        $totalJLTk = $jumlahLakiLaki2 + $jumlahPerempuan2;
 
         // Pastikan jumlah laki-laki dan perempuan selalu terdefinisi, bahkan jika data_siswa kosong
         if (!isset($jumlahLakiLaki)) {
@@ -454,20 +456,13 @@ class LaporanController extends Controller
             $jumlahPerempuan = 0;
         }
 
-        if ($request->tingkatan === 'TK') {
-            $jumlahLakiLaki = isset($jumlahLakiLaki) || isset($jumlahLakiLaki2) ? $jumlahLakiLaki2 : 0;
-            $jumlahPerempuan = isset($jumlahPerempuan) || isset($$jumlahPerempuan2) ? $jumlahPerempuan2 : 0;
-        } else if ($request->tingkatan === 'SD' || $request->tingkatan === 'SMP') {
-            $jumlahLakiLaki = isset($jumlahLakiLaki) || isset($jumlahLakiLaki2) ? $jumlahLakiLaki : 0;
-            $jumlahPerempuan = isset($jumlahPerempuan) || isset($$jumlahPerempuan2) ? $jumlahPerempuan : 0;
-        } else {
-            $jumlahLakiLaki = isset($jumlahLakiLaki) || isset($jumlahLakiLaki2) ? $jumlahLakiLaki + $jumlahLakiLaki2 : 0;
-            $jumlahPerempuan = isset($jumlahPerempuan) || isset($$jumlahPerempuan2) ? $jumlahPerempuan + $jumlahPerempuan2 : 0;
-        }
         return [
-            'jumlah_cwo' => $jumlahLakiLaki,
-            'jumlah_cwe' => $jumlahPerempuan,
-            'total' => $totalJL
+            'jumlah_cwo_general' => $jumlahLakiLaki,
+            'jumlah_cwe_general' => $jumlahPerempuan,
+            'total_general' => $totalJLGeneral,
+            'jumlah_cwo_tk' => $jumlahLakiLaki2,
+            'jumlah_cwe_tk' => $jumlahPerempuan2,
+            'total_tk' => $totalJLTk,
         ];
     }
 
@@ -501,12 +496,11 @@ class LaporanController extends Controller
         return 'penghasilan';
     }
 
-
-    private function filterJS(Request $request,$data_siswa_arsip, $data_siswa_arsipTK)
+    private function filterJS(Request $request, $data_siswa_arsip, $data_siswa_arsipTK)
     {
-        $query2= Arship::with('sekolah');
+        $query2 = Arship::with('sekolah');
         $queryTkArsip = Arsip_TK::with('sekolah');
-        
+
 
         $namaSekolah = $request->input('namaSekolah');
         $tingkatan = $request->input('tingkatan');
@@ -514,69 +508,67 @@ class LaporanController extends Controller
 
 
         if ($namaSekolah) {
-                    $query2->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
-                        $subQuery->where('NAMASEKOLAH', $namaSekolah);
-                    });
-                    $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
-                        $subQuery->where('NAMASEKOLAH', $namaSekolah);
-                    });
-                } elseif ($tingkatan) {
-                    $query2->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
-                        $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
-                    });
-                    $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
-                        $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
-                    });
-                }
+            $query2->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
+                $subQuery->where('NAMASEKOLAH', $namaSekolah);
+            });
+            $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
+                $subQuery->where('NAMASEKOLAH', $namaSekolah);
+            });
+        } elseif ($tingkatan) {
+            $query2->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
+                $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
+            });
+            $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
+                $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
+            });
+        }
 
         if ($detailKelas || $request->hasAny(['kelasSD', 'kelasSMP', 'kelasTK'])) {
-                    $kelasType = $request->input('kelasSD') ?? $request->input('kelasSMP') ?? $request->input('kelasTK');
-                    $rombelSetIni = ($kelasType) ? $kelasType . $detailKelas : '%' . $detailKelas . '%';
-                    
-                    $query2->where(function ($subQuery) use ($rombelSetIni) {
-                        $subQuery->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
-                    });
-                }
+            $kelasType = $request->input('kelasSD') ?? $request->input('kelasSMP') ?? $request->input('kelasTK');
+            $rombelSetIni = ($kelasType) ? $kelasType . $detailKelas : '%' . $detailKelas . '%';
 
-            $query2->get();
-            $queryTkArsip->get();
-
-
-
-            $data_js_arship = $query2
-                ->select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as jumlah'))
-                ->groupBy(DB::raw('YEAR(created_at)'))
-                ->orderBy('year')
-                ->get();
-            
-            $data_js_arshipTK = $queryTkArsip
-                ->select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as jumlah'))
-                ->groupBy(DB::raw('YEAR(created_at)'))
-                ->orderBy('year')
-                ->get();
-            
-            $combined_data = [];
-            foreach ($data_js_arship as $key => $val) {
-                $year = $val->year;
-                $combined_data[$year]['arship'] = $val->jumlah;
-            }
-            
-            foreach ($data_js_arshipTK as $key => $val) {
-                $year = $val->year;
-                $combined_data[$year]['tkk_arsip'] = $val->jumlah;
-            }
-            
-            $temp = [[], []];
-            foreach ($combined_data as $year => $data) {
-                $years[] = $year;
-                $arship_data[] = $data['arship'] ?? 0;
-                $arshipTk_data[] = $data['tkk_arsip'] ?? 0;
-            }
-            
-            return $combined_data;
-            
-        }
-    
-
+            $query2->where(function ($subQuery) use ($rombelSetIni) {
+                $subQuery->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
+            });
 
 }
+
+        $query2->get();
+        $queryTkArsip->get();
+
+
+
+        $data_js_arship = $query2
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as jumlah'))
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->orderBy('year')
+            ->get();
+
+        $data_js_arshipTK = $queryTkArsip
+            ->select(DB::raw('YEAR(created_at) as year'), DB::raw('count(*) as jumlah'))
+            ->groupBy(DB::raw('YEAR(created_at)'))
+            ->orderBy('year')
+            ->get();
+
+        $combined_data = [];
+        foreach ($data_js_arship as $key => $val) {
+            $year = $val->year;
+            $combined_data[$year]['arship'] = $val->jumlah;
+        }
+
+        foreach ($data_js_arshipTK as $key => $val) {
+            $year = $val->year;
+            $combined_data[$year]['tkk_arsip'] = $val->jumlah;
+        }
+
+        $temp = [[], []];
+        foreach ($combined_data as $year => $data) {
+            $years[] = $year;
+            $arship_data[] = $data['arship'] ?? 0;
+            $arshipTk_data[] = $data['tkk_arsip'] ?? 0;
+        }
+
+        return $combined_data;
+    }
+}
+

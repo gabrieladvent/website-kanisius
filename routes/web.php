@@ -102,9 +102,6 @@ Route::group([
         // Fungsi untuk hapus akun
         Route::delete('dashboard/delete/{id}', [UserController::class, 'delete'])->name('dashboard.delete');
 
-        // Fungsi untuk update tema
-        Route::post('/updateaction/{id}', [YayasanController::class, 'update'])->name('update.profile');
-
         // Route tambah akun
         Route::get('/dashboard/tambah-akun', function () {
             return view('auth.register', [
@@ -114,6 +111,7 @@ Route::group([
 
         // Route untuk ganti tema
         Route::post('/updateaction', [YayasanController::class, 'update'])->name('update.profile');
+        // Route untuk ganti nama & pass profile yayasan
 
         // Route untuk tampil data yang sudah dikirim
         Route::get('/show-notifikasi/{id}', [YayasanController::class, 'showNotifikasi'])->name('show-notifikasi')->defaults('title', 'Update Data');

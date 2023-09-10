@@ -1,30 +1,31 @@
 @extends('layout-sekolah.second')
 @section('isi-content')
-    <div class="row px-5">
-        <div class="col-8  mt-5 py-4 px-5">
-            <div class="row mt-5 shadow-3-strong ms-5 bg-white">
-                <div class="col-8 mt-3">
-                    <div>
-                        <label class="ms-2 fw-bold" style="font-size: 1 vw">ID User</label>
-                        <p class="text-p ms-2"> {{ $user->id }} </p>
-                    </div>
-                    <div class="">
-                        <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama User</label>
-                        <p class="text-p ms-2 border border-secondary-subtle"> {{ $user->name }} </p>
-                    </div>
-                    <div class="">
+<div class="row px-5">
+    <div class="col py-4 px-5">
+        <div class="row mt-5 shadow-3-strong bg-light">
+            <div class="col mt-3">
+                <div>
+                    <label class="ms-2 fw-bold" style="font-size: 1 vw">ID User</label>
+                    <p class="text-p ms-2"> {{ $user->id }} </p>
+                </div>
+                <div class="">
+                    <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama User</label>
+                    <p class="text-p ms-2 border border-secondary-subtle"> {{ $user->name }} </p>
+                </div>
+                <div class="">
                         <label class="ms-2 fw-bold" style="font-size: 1 vw">Nama Sekolah</label>
                         <p class="text-p ms-2">{{ $user->namasekolah }}</p>
-                    </div>
+                </div>
                 </div>
                 <div class="col mt-4">
                     <img class="float-end mb-4" src="{{ asset('/image/foto-profile.png') }}" width="200px" alt="">
                 </div>
-            </div>
+            
         </div>
+    </div>
 
-        <div class="col mt-5 py-4 px-5">
-            <div class="row mt-5 d-flex justify-content-center shadow-3-strong bg-white">
+    <div class="col-4 mt-4 ms-4">
+        <div class="row mt-5 d-flex justify-content-center shadow-3-strong bg-white">
                 <table class="ms-5 mt-4">
                     <tr>
                         <td>
@@ -53,7 +54,7 @@
                             <div class="password-container">
                                 <input disabled type="password" name="password"
                                     class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 24vw; position: flex;">
+                                    id="exampleInputPassword1" autocomplete="current-password" style="width: 28vw; position: relative;">
                                     <i class="fa fa-eye-slash password-toggle" id="togglePassword" style="cursor: pointer;"></i>
                             </div>
 
