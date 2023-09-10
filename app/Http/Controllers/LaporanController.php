@@ -17,7 +17,11 @@ use App\Exports\ExcelExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\TableExport;
 use PDF;
-
+use Dompdf\Dompdf;
+use Symfony\Component\HttpFoundation\Response; 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use App\Exports\LaporanExport;
 
 class LaporanController extends Controller
 {
@@ -64,6 +68,7 @@ class LaporanController extends Controller
 
     public function filter(Request $request)
     {
+        $user = Auth::user();
         $request->validate([
             'laporanType' => 'required'
         ]);
@@ -148,15 +153,16 @@ class LaporanController extends Controller
         switch ($request->laporanType) {
             case 'jk':
                 $data = self::filterJenisKelamin($request, $data_siswa, $data_siswatk);
-                return view('laporan', [
+                return view ('laporan',[
                     'title' => 'Judul Laporan',
                     'sekolah' => Sekolah::all(),
                     'data_siswa' => $data_siswa,
                     'data_siswatk' => $data_siswatk,
                     'jumlahLakiLaki' => $data['jumlah_cwo'],
                     'jumlahPerempuan' => $data['jumlah_cwe'],
-                    'totalJL' => $data['total']
+                    'totalJL' => $data['total'],
                 ]);
+              
             case 'agama':
                 $data = self::filterAgama($request, $query, $querytk);
                 return view('laporan', [
@@ -212,20 +218,180 @@ class LaporanController extends Controller
     }
 
 
+   
+
     public function cetakLaporan(Request $request)
-{
-    $data_siswa = $request->data_siswa;
-    $sekolah = $request->sekolah;
-    $user = $request->user;
-    $data_siswatk = $request->data_siswatk;
+   {
+        $user = Auth::user();
+        $request->validate([
+            'laporanType' => 'required'
+        ]);
+        $query = Siswa::with('sekolah');
+        $querytk = Siswa_TK::with('sekolah');
+        $query2= Arship::with('sekolah');
+        $queryTkArsip = Arsip_TK::with('sekolah');
 
-    $pdf = PDF::loadView('laporan', compact('data_siswa', 'sekolah', 'user', 'data_siswatk'));
-    return $pdf->download('hasilLaporan.pdf');
-}
+        $namaSekolah = $request->input('namaSekolah');
+        $tingkatan = $request->input('tingkatan');
+        $detailKelas = $request->input('detailKelas');
 
+        if ($namaSekolah) {
+            $query = $query->whereHas('sekolah', function ($subQuery) use ($request) {
+                $subQuery->where('NAMASEKOLAH', $request->namaSekolah);
+            });
+            $querytk = $querytk->whereHas('sekolah', function ($subQuery) use ($request) {
+                $subQuery->where('NAMASEKOLAH', $request->namaSekolah);
+            });
+            $query2->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
+                $subQuery->where('NAMASEKOLAH', $namaSekolah);
+            });
+            $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($namaSekolah) {
+                $subQuery->where('NAMASEKOLAH', $namaSekolah);
+            });
+        } elseif ($tingkatan) {
+            $query2->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
+                $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
+            });
+            $queryTkArsip->whereHas('sekolah', function ($subQuery) use ($tingkatan) {
+                $subQuery->where('NAMASEKOLAH', 'LIKE', $tingkatan . '%');
+            });
+            $query = $query->whereHas('sekolah', function ($subQuery) use ($request) {
+                $subQuery->where('NAMASEKOLAH', 'LIKE', $request->tingkatan . '%');
+            });
+        }
+
+        //data siswa 
+        if ($request->has('detailKelas') || $request->hasAny(['kelasSD', 'kelasSMP', 'kelasTK'])) {
+            $query->where(function ($query) use ($request) {
+                $selectedKelas = null;
+                $detailKelas = $request->input('detailKelas');
+
+                if ($request->has('kelasSD')) {
+                    $selectedKelas = $request->input('kelasSD');
+                } elseif ($request->has('kelasSMP')) {
+                    $selectedKelas = $request->input('kelasSMP');
+                } elseif ($request->has('kelasTK')) {
+                    $selectedKelas = $request->input('kelasTK');
+                }
+
+
+                if ($selectedKelas) {
+                    if ($detailKelas === 'semua') {
+                        // Jika detailKelas adalah 'semua', maka gunakan pola '%' untuk mencocokkan semua
+                        $rombelSetIni = $selectedKelas . '%';
+                    } else {
+                        // Jika detailKelas bukan 'semua', maka gunakan pola tertentu
+                        $rombelSetIni = $selectedKelas . $detailKelas;
+                    }
+                    $query->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
+                   }
+                });
+            }
+            
+        
+
+        if ($detailKelas || $request->hasAny(['kelasSD', 'kelasSMP', 'kelasTK'])) {
+            $kelasType = $request->input('kelasSD') ?? $request->input('kelasSMP') ?? $request->input('kelasTK');
+            $rombelSetIni = ($kelasType) ? $kelasType . $detailKelas : '%' . $detailKelas . '%';
+            
+            $query2->where(function ($subQuery) use ($rombelSetIni) {
+                $subQuery->where('Rombel_Set_Ini', 'LIKE', $rombelSetIni);
+            });
+        }
+
+        $data_siswa = $query->get();
+        $data_siswatk = $querytk->get();
+        $data_siswa_arsip = $query2->get();
+        $data_siswa_arsipTK = $queryTkArsip->get();
+
+        switch ($request->laporanType) {
+            case 'jk':
+                $data = self::filterJenisKelamin($request, $data_siswa, $data_siswatk);
+                $export = new LaporanExport([
+                    'title' => 'Judul Laporan',
+                    'sekolah' => Sekolah::all()->toArray(),
+                    'data_siswa' => $data_siswa,
+                    'data_siswatk' => $data_siswatk,
+                    'jumlahLakiLaki' => $data['jumlah_cwo'],
+                    'jumlahPerempuan' => $data['jumlah_cwe'],
+                    'totalJL' => $data['total'],
+                    'laporanType' =>'jk',
+                ]);
     
+                // Export ke file Excel
+                return Excel::download($export, 'laporan.xlsx');
+               
+              
+            case 'agama':
+                $data = self::filterAgama($request, $query, $querytk);
+                $export = new LaporanExport([
+                    'title' => 'Judul Laporan',
+                    'sekolah' => Sekolah::all(),
+                    'data_siswa' => $data_siswa,
+                    'data_siswatk' => $data_siswatk,
+
+                    // 'layakPIPCounts ' => $data['layakPIPCounts'],
+                    'siswaCounts' => $data['siswaCounts'],
+                    'siswaCountstk' => $data['siswaCountstk'],
+                    'laporanType' =>'agama',
+                ]);
+                return Excel::download($export, 'laporan.xlsx');
+
+            case 'penghasilan':
+                $export = new LaporanExport([
+                        'title' => 'Judul Laporan',
+                        'sekolah' => Sekolah::all(),
+                        'data_siswa' => $query->get(),
+                        'laporanType' =>'penghasilan',
+                ]);
+                return Excel::download($export, 'laporan.xlsx');
 
 
+            case 'kps':
+                $data = self::filterKPS($request, $query);
+                $export =  new LaporanExport ([
+                    'title' => 'Judul Laporan',
+                    'sekolah' => Sekolah::all(),
+                    'data_siswa' => $data_siswa,
+                    'layakPIPCounts' => $data['layakPIPCounts'],
+                    'laporanType' =>'kps',
+                ]);
+                return Excel::download($export, 'laporan.xlsx');
+
+            case 'zonasi':
+                $data = self::filterZonasi($request, $data_siswa);
+                $export = new LapranExport([
+                    'title' => 'Judul Laporan',
+                    'sekolah' => Sekolah::all(),
+                    'data_siswa' => $query->get(),
+                    'rataRataJarak' => $data,
+                    'laporanType' =>'zonasi',
+                ]);
+                return Excel::download($export, 'laporan.xlsx');
+
+            case 'jumlah_siswa':
+                    $data = self::filterJS($request,$data_siswa_arsip,$data_siswa_arsipTK);
+                    $export =  new LaporanExport([
+                        'title' => 'Judul Laporan',
+                        'sekolah' => Sekolah::all(),
+                        'data_siswa' => $query->get(),
+                        'data_siswatk' => $querytk->get(),
+                        'data_siswa_arsip' => $query2->get(),
+                        'data_siswa_arsipTK' => $queryTkArsip->get(),
+                        'combined_data' => $data,
+                        'laporanType' =>'jumlah_siswa',
+                    ]);
+                    return Excel::download($export, 'laporan.xlsx');    
+
+            default:
+            // dd($request->laporanType);
+                abort(404);
+        }
+        abort(404);
+    
+     }
+
+   
 
     private function filterAgama(Request $request, $data_siswa, $data_siswatk)
     {
@@ -412,5 +578,5 @@ class LaporanController extends Controller
         }
     
 
-    }
 
+}

@@ -4,6 +4,7 @@
     $tempSMP = [];
     $laporanType = request('laporanType');
 
+
 @endphp
 @if ((!is_null($data_siswa)))
 
@@ -26,6 +27,19 @@
 @endif
 
 @extends('layout-yayasan.second')
+
+<style type="text/css" >
+    .table {
+        display: block;
+    }
+    .tr {
+        display: table-row;
+    }
+    .highlight {
+        background-color: greenyellow;
+        display: table-cell;
+    }
+</style>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -146,10 +160,10 @@
                         <td>
                             <button type="submit" id="submit" onclick="getValue()" class="btn btn-primary float-center mt-3">Tampil
                                 <i class="fa-solid fa-eye"></i></button>
-                            <a href="{{ route('cetakLaporan', ['title' => 'cetak Laporan']) }}" target="blank"
+                            <a href="/cetaklaporan" 
                                 class="btn btn-success float-center mt-3">Download <i
                                     class="fa-solid fa-download"></i></a>
-                            //cek DD namaSekolah != null
+                           
                             <script>
                                 $(document).ready(function() {
                                     $('form').submit(function(event) {
@@ -172,10 +186,10 @@
 </div>
 
     @if (!empty(count($data_siswa)))
-    {{-- <div class="data-siswa py-3"> --}}
+        {{-- <div class="data-siswa py-3"> --}}
             <div class="data-siswa py-3">
                 <div class="table-data" style="margin-left: 1%; margin-right: 1%;">
-                    <table id="example" data-tampil class="table table-bordered" style="width: 100%">
+                    <table id="example" data-tampil class="table table-bordered" style="width: 100%;  display: block;">
                         <thead>
                             <tr>
                                 <th>NISN</th>

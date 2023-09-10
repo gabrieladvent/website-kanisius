@@ -1,7 +1,7 @@
 <?php
 
 namespace Illuminate\Http\Concerns;
-
+set_time_limit(0);
 use Illuminate\Database\Eloquent\Model;
 
 trait InteractsWithFlashData

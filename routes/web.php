@@ -147,7 +147,7 @@ Route::group([
        // Route::get('dashboard/laporan', [LaporanController::class, 'cetakLaporan'])->name('cetak');
         Route::post('/dashboard/laporan', [LaporanController::class, 'filter', 'laporanAgama', 'showTable'])->name('laporanFilter');
         Route::get('dashboard/laporan', [LaporanController::class, 'laporan'])->name('laporan-data')->defaults('title', 'Laporan Siswa');
-        Route::get ('/dahboard/laporan', [LaporanController::class,'cetakLaporan'])->name('cetak');
+        Route::get ('dashboard/cetaklaporan', [LaporanController::class,'cetakLaporan'])->name('cetak');
     });
 
     Route::group([

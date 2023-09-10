@@ -41,26 +41,26 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
     );
 
     public static $prefixLengthsPsr4 = array (
-        'v' =>
+        'v' => 
         array (
             'voku\\' => 5,
         ),
-        'Z' =>
+        'Z' => 
         array (
             'ZipStream\\' => 10,
         ),
-        'W' =>
+        'W' => 
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
-        'T' =>
+        'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
             'Termwind\\' => 9,
         ),
-        'S' =>
+        'S' => 
         array (
             'Symfony\\Polyfill\\Uuid\\' => 22,
             'Symfony\\Polyfill\\Php83\\' => 23,
@@ -99,12 +99,12 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
             'Spatie\\Backtrace\\' => 17,
             'Sabberworm\\CSS\\' => 15,
         ),
-        'R' =>
+        'R' => 
         array (
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
-        'P' =>
+        'P' => 
         array (
             'Psy\\' => 4,
             'Psr\\SimpleCache\\' => 16,
@@ -117,17 +117,19 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
             'PhpOption\\' => 10,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
         ),
-        'N' =>
+        'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
         ),
-        'M' =>
+        'M' => 
         array (
             'Monolog\\' => 8,
             'Mockery\\' => 8,
             'Matrix\\' => 7,
+            'Masterminds\\' => 12,
+            'Maatwebsite\\Excel\\' => 18,
         ),
-        'L' =>
+        'L' => 
         array (
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\Local\\' => 23,
@@ -140,13 +142,13 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
         ),
-        'I' =>
+        'I' => 
         array (
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Foundation\\Auth\\' => 27,
             'Illuminate\\' => 11,
         ),
-        'G' =>
+        'G' => 
         array (
             'GuzzleHttp\\UriTemplate\\' => 23,
             'GuzzleHttp\\Psr7\\' => 16,
@@ -154,17 +156,17 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
             'GuzzleHttp\\' => 11,
             'GrahamCampbell\\ResultType\\' => 26,
         ),
-        'F' =>
+        'F' => 
         array (
             'Fruitcake\\Cors\\' => 15,
             'FontLib\\' => 8,
             'Faker\\' => 6,
         ),
-        'E' =>
+        'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
         ),
-        'D' =>
+        'D' => 
         array (
             'Dotenv\\' => 7,
             'Dompdf\\' => 7,
@@ -176,415 +178,423 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
             'Database\\Seeders\\' => 17,
             'Database\\Factories\\' => 19,
         ),
-        'C' =>
+        'C' => 
         array (
             'Cron\\' => 5,
             'Composer\\Semver\\' => 16,
             'Complex\\' => 8,
             'Carbon\\' => 7,
         ),
-        'B' =>
+        'B' => 
         array (
             'Brick\\Math\\' => 11,
             'Barryvdh\\DomPDF\\' => 16,
         ),
-        'A' =>
+        'A' => 
         array (
             'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'voku\\' =>
+        'voku\\' => 
         array (
             0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
         ),
-        'ZipStream\\' =>
+        'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
         ),
-        'Whoops\\' =>
+        'Whoops\\' => 
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
         ),
-        'Webmozart\\Assert\\' =>
+        'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
-        'TijsVerkoyen\\CssToInlineStyles\\' =>
+        'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
         ),
-        'Tests\\' =>
+        'Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),
-        'Termwind\\' =>
+        'Termwind\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/termwind/src',
         ),
-        'Symfony\\Polyfill\\Uuid\\' =>
+        'Symfony\\Polyfill\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-uuid',
         ),
-        'Symfony\\Polyfill\\Php83\\' =>
+        'Symfony\\Polyfill\\Php83\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
         ),
-        'Symfony\\Polyfill\\Php80\\' =>
+        'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
         ),
-        'Symfony\\Polyfill\\Php72\\' =>
+        'Symfony\\Polyfill\\Php72\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' =>
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
         ),
-        'Symfony\\Polyfill\\Intl\\Idn\\' =>
+        'Symfony\\Polyfill\\Intl\\Idn\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-idn',
         ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
         ),
-        'Symfony\\Polyfill\\Ctype\\' =>
+        'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Symfony\\Contracts\\Translation\\' =>
+        'Symfony\\Contracts\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation-contracts',
         ),
-        'Symfony\\Contracts\\Service\\' =>
+        'Symfony\\Contracts\\Service\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Contracts\\EventDispatcher\\' =>
+        'Symfony\\Contracts\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher-contracts',
         ),
-        'Symfony\\Component\\Yaml\\' =>
+        'Symfony\\Component\\Yaml\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
         ),
-        'Symfony\\Component\\VarDumper\\' =>
+        'Symfony\\Component\\VarDumper\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
         ),
-        'Symfony\\Component\\Uid\\' =>
+        'Symfony\\Component\\Uid\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/uid',
         ),
-        'Symfony\\Component\\Translation\\' =>
+        'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
         ),
-        'Symfony\\Component\\String\\' =>
+        'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
         ),
-        'Symfony\\Component\\Routing\\' =>
+        'Symfony\\Component\\Routing\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/routing',
         ),
-        'Symfony\\Component\\Process\\' =>
+        'Symfony\\Component\\Process\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\Mime\\' =>
+        'Symfony\\Component\\Mime\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mime',
         ),
-        'Symfony\\Component\\Mailer\\' =>
+        'Symfony\\Component\\Mailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mailer',
         ),
-        'Symfony\\Component\\HttpKernel\\' =>
+        'Symfony\\Component\\HttpKernel\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-kernel',
         ),
-        'Symfony\\Component\\HttpFoundation\\' =>
+        'Symfony\\Component\\HttpFoundation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/http-foundation',
         ),
-        'Symfony\\Component\\Finder\\' =>
+        'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
-        'Symfony\\Component\\EventDispatcher\\' =>
+        'Symfony\\Component\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/event-dispatcher',
         ),
-        'Symfony\\Component\\ErrorHandler\\' =>
+        'Symfony\\Component\\ErrorHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
         ),
-        'Symfony\\Component\\CssSelector\\' =>
+        'Symfony\\Component\\CssSelector\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/css-selector',
         ),
-        'Symfony\\Component\\Console\\' =>
+        'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Svg\\' =>
+        'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
         ),
-        'Spatie\\Sluggable\\' =>
+        'Spatie\\Sluggable\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-sluggable/src',
         ),
-        'Spatie\\Permission\\' =>
+        'Spatie\\Permission\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
         ),
-        'Spatie\\LaravelIgnition\\' =>
+        'Spatie\\LaravelIgnition\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
-        'Spatie\\Ignition\\' =>
+        'Spatie\\Ignition\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
-        'Spatie\\FlareClient\\' =>
+        'Spatie\\FlareClient\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/flare-client-php/src',
         ),
-        'Spatie\\Backtrace\\' =>
+        'Spatie\\Backtrace\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/backtrace/src',
         ),
-        'Sabberworm\\CSS\\' =>
+        'Sabberworm\\CSS\\' => 
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
-        'Ramsey\\Uuid\\' =>
+        'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
         ),
-        'Ramsey\\Collection\\' =>
+        'Ramsey\\Collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
-        'Psy\\' =>
+        'Psy\\' => 
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src',
         ),
-        'Psr\\SimpleCache\\' =>
+        'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
-        'Psr\\Log\\' =>
+        'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Psr\\Http\\Message\\' =>
+        'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
             1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
-        'Psr\\Http\\Client\\' =>
+        'Psr\\Http\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
-        'Psr\\EventDispatcher\\' =>
+        'Psr\\EventDispatcher\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/event-dispatcher/src',
         ),
-        'Psr\\Container\\' =>
+        'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-        'PhpParser\\' =>
+        'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
-        'PhpOption\\' =>
+        'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
-        'PhpOffice\\PhpSpreadsheet\\' =>
+        'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
         ),
-        'NunoMaduro\\Collision\\' =>
+        'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
         ),
-        'Monolog\\' =>
+        'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
-        'Mockery\\' =>
+        'Mockery\\' => 
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
         ),
-        'Matrix\\' =>
+        'Matrix\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
-        'League\\MimeTypeDetection\\' =>
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'Maatwebsite\\Excel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maatwebsite/excel/src',
+        ),
+        'League\\MimeTypeDetection\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/mime-type-detection/src',
         ),
-        'League\\Flysystem\\Local\\' =>
+        'League\\Flysystem\\Local\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem-local',
         ),
-        'League\\Flysystem\\' =>
+        'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
         ),
-        'League\\Config\\' =>
+        'League\\Config\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/config/src',
         ),
-        'League\\CommonMark\\' =>
+        'League\\CommonMark\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
         ),
-        'Laravel\\Ui\\' =>
+        'Laravel\\Ui\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/ui/src',
         ),
-        'Laravel\\Tinker\\' =>
+        'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
         ),
-        'Laravel\\SerializableClosure\\' =>
+        'Laravel\\SerializableClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
         ),
-        'Laravel\\Sanctum\\' =>
+        'Laravel\\Sanctum\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/sanctum/src',
         ),
-        'Laravel\\Sail\\' =>
+        'Laravel\\Sail\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
-        'Illuminate\\Support\\' =>
+        'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
             1 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Collections',
             2 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Conditionable',
         ),
-        'Illuminate\\Foundation\\Auth\\' =>
+        'Illuminate\\Foundation\\Auth\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/ui/auth-backend',
         ),
-        'Illuminate\\' =>
+        'Illuminate\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
-        'GuzzleHttp\\UriTemplate\\' =>
+        'GuzzleHttp\\UriTemplate\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/uri-template/src',
         ),
-        'GuzzleHttp\\Psr7\\' =>
+        'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
-        'GuzzleHttp\\Promise\\' =>
+        'GuzzleHttp\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
         ),
-        'GuzzleHttp\\' =>
+        'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'GrahamCampbell\\ResultType\\' =>
+        'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
         ),
-        'Fruitcake\\Cors\\' =>
+        'Fruitcake\\Cors\\' => 
         array (
             0 => __DIR__ . '/..' . '/fruitcake/php-cors/src',
         ),
-        'FontLib\\' =>
+        'FontLib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
         ),
-        'Faker\\' =>
+        'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
-        'Egulias\\EmailValidator\\' =>
+        'Egulias\\EmailValidator\\' => 
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
-        'Dotenv\\' =>
+        'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
-        'Dompdf\\' =>
+        'Dompdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
         ),
-        'Doctrine\\Inflector\\' =>
+        'Doctrine\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
         ),
-        'Doctrine\\Common\\Lexer\\' =>
+        'Doctrine\\Common\\Lexer\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/lexer/src',
         ),
-        'Dflydev\\DotAccessData\\' =>
+        'Dflydev\\DotAccessData\\' => 
         array (
             0 => __DIR__ . '/..' . '/dflydev/dot-access-data/src',
         ),
-        'Detection\\' =>
+        'Detection\\' => 
         array (
             0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/src',
         ),
-        'DeepCopy\\' =>
+        'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
-        'Database\\Seeders\\' =>
+        'Database\\Seeders\\' => 
         array (
             0 => __DIR__ . '/../..' . '/database/seeders',
             1 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
         ),
-        'Database\\Factories\\' =>
+        'Database\\Factories\\' => 
         array (
             0 => __DIR__ . '/../..' . '/database/factories',
             1 => __DIR__ . '/..' . '/laravel/pint/database/factories',
         ),
-        'Cron\\' =>
+        'Cron\\' => 
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
-        'Composer\\Semver\\' =>
+        'Composer\\Semver\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/semver/src',
         ),
-        'Complex\\' =>
+        'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
-        'Carbon\\' =>
+        'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
-        'Brick\\Math\\' =>
+        'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'Barryvdh\\DomPDF\\' =>
+        'Barryvdh\\DomPDF\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src',
         ),
-        'App\\' =>
+        'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
@@ -592,9 +602,9 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
     );
 
     public static $prefixesPsr0 = array (
-        'H' =>
+        'H' => 
         array (
-            'HTMLPurifier' =>
+            'HTMLPurifier' => 
             array (
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
             ),
@@ -604,7 +614,6 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
-        'App\\Exports\\ExcelExport' => __DIR__ . '/../..' . '/app/Exports/ExcelExport.php',
         'App\\Http\\Controllers\\ArshipController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArshipController.php',
         'App\\Http\\Controllers\\ArsipTKController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArsipTKController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -3618,6 +3627,170 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
+        'Maatwebsite\\Excel\\Cache\\BatchCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/BatchCache.php',
+        'Maatwebsite\\Excel\\Cache\\BatchCacheDeprecated' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/BatchCacheDeprecated.php',
+        'Maatwebsite\\Excel\\Cache\\CacheManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/CacheManager.php',
+        'Maatwebsite\\Excel\\Cache\\MemoryCache' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/MemoryCache.php',
+        'Maatwebsite\\Excel\\Cache\\MemoryCacheDeprecated' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cache/MemoryCacheDeprecated.php',
+        'Maatwebsite\\Excel\\Cell' => __DIR__ . '/..' . '/maatwebsite/excel/src/Cell.php',
+        'Maatwebsite\\Excel\\ChunkReader' => __DIR__ . '/..' . '/maatwebsite/excel/src/ChunkReader.php',
+        'Maatwebsite\\Excel\\Concerns\\Exportable' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/Exportable.php',
+        'Maatwebsite\\Excel\\Concerns\\FromArray' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromArray.php',
+        'Maatwebsite\\Excel\\Concerns\\FromCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromCollection.php',
+        'Maatwebsite\\Excel\\Concerns\\FromGenerator' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromGenerator.php',
+        'Maatwebsite\\Excel\\Concerns\\FromIterator' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromIterator.php',
+        'Maatwebsite\\Excel\\Concerns\\FromQuery' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromQuery.php',
+        'Maatwebsite\\Excel\\Concerns\\FromView' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/FromView.php',
+        'Maatwebsite\\Excel\\Concerns\\HasReferencesToOtherSheets' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/HasReferencesToOtherSheets.php',
+        'Maatwebsite\\Excel\\Concerns\\Importable' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/Importable.php',
+        'Maatwebsite\\Excel\\Concerns\\MapsCsvSettings' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/MapsCsvSettings.php',
+        'Maatwebsite\\Excel\\Concerns\\OnEachRow' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/OnEachRow.php',
+        'Maatwebsite\\Excel\\Concerns\\RegistersEventListeners' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/RegistersEventListeners.php',
+        'Maatwebsite\\Excel\\Concerns\\RemembersChunkOffset' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/RemembersChunkOffset.php',
+        'Maatwebsite\\Excel\\Concerns\\RemembersRowNumber' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/RemembersRowNumber.php',
+        'Maatwebsite\\Excel\\Concerns\\ShouldAutoSize' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/ShouldAutoSize.php',
+        'Maatwebsite\\Excel\\Concerns\\ShouldQueueWithoutChain' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/ShouldQueueWithoutChain.php',
+        'Maatwebsite\\Excel\\Concerns\\SkipsEmptyRows' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/SkipsEmptyRows.php',
+        'Maatwebsite\\Excel\\Concerns\\SkipsErrors' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/SkipsErrors.php',
+        'Maatwebsite\\Excel\\Concerns\\SkipsFailures' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/SkipsFailures.php',
+        'Maatwebsite\\Excel\\Concerns\\SkipsOnError' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/SkipsOnError.php',
+        'Maatwebsite\\Excel\\Concerns\\SkipsOnFailure' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/SkipsOnFailure.php',
+        'Maatwebsite\\Excel\\Concerns\\SkipsUnknownSheets' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/SkipsUnknownSheets.php',
+        'Maatwebsite\\Excel\\Concerns\\ToArray' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/ToArray.php',
+        'Maatwebsite\\Excel\\Concerns\\ToCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/ToCollection.php',
+        'Maatwebsite\\Excel\\Concerns\\ToModel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/ToModel.php',
+        'Maatwebsite\\Excel\\Concerns\\WithBackgroundColor' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithBackgroundColor.php',
+        'Maatwebsite\\Excel\\Concerns\\WithBatchInserts' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithBatchInserts.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCalculatedFormulas' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCalculatedFormulas.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCharts' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCharts.php',
+        'Maatwebsite\\Excel\\Concerns\\WithChunkReading' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithChunkReading.php',
+        'Maatwebsite\\Excel\\Concerns\\WithColumnFormatting' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithColumnFormatting.php',
+        'Maatwebsite\\Excel\\Concerns\\WithColumnLimit' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithColumnLimit.php',
+        'Maatwebsite\\Excel\\Concerns\\WithColumnWidths' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithColumnWidths.php',
+        'Maatwebsite\\Excel\\Concerns\\WithConditionalSheets' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithConditionalSheets.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCustomChunkSize' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCustomChunkSize.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCustomCsvSettings' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCustomCsvSettings.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCustomQuerySize' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCustomQuerySize.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCustomStartCell' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCustomStartCell.php',
+        'Maatwebsite\\Excel\\Concerns\\WithCustomValueBinder' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithCustomValueBinder.php',
+        'Maatwebsite\\Excel\\Concerns\\WithDefaultStyles' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithDefaultStyles.php',
+        'Maatwebsite\\Excel\\Concerns\\WithDrawings' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithDrawings.php',
+        'Maatwebsite\\Excel\\Concerns\\WithEvents' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithEvents.php',
+        'Maatwebsite\\Excel\\Concerns\\WithFormatData' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithFormatData.php',
+        'Maatwebsite\\Excel\\Concerns\\WithGroupedHeadingRow' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithGroupedHeadingRow.php',
+        'Maatwebsite\\Excel\\Concerns\\WithHeadingRow' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithHeadingRow.php',
+        'Maatwebsite\\Excel\\Concerns\\WithHeadings' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithHeadings.php',
+        'Maatwebsite\\Excel\\Concerns\\WithLimit' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithLimit.php',
+        'Maatwebsite\\Excel\\Concerns\\WithMappedCells' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithMappedCells.php',
+        'Maatwebsite\\Excel\\Concerns\\WithMapping' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithMapping.php',
+        'Maatwebsite\\Excel\\Concerns\\WithMultipleSheets' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithMultipleSheets.php',
+        'Maatwebsite\\Excel\\Concerns\\WithPreCalculateFormulas' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithPreCalculateFormulas.php',
+        'Maatwebsite\\Excel\\Concerns\\WithProgressBar' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithProgressBar.php',
+        'Maatwebsite\\Excel\\Concerns\\WithProperties' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithProperties.php',
+        'Maatwebsite\\Excel\\Concerns\\WithReadFilter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithReadFilter.php',
+        'Maatwebsite\\Excel\\Concerns\\WithStartRow' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithStartRow.php',
+        'Maatwebsite\\Excel\\Concerns\\WithStrictNullComparison' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithStrictNullComparison.php',
+        'Maatwebsite\\Excel\\Concerns\\WithStyles' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithStyles.php',
+        'Maatwebsite\\Excel\\Concerns\\WithTitle' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithTitle.php',
+        'Maatwebsite\\Excel\\Concerns\\WithUpsertColumns' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithUpsertColumns.php',
+        'Maatwebsite\\Excel\\Concerns\\WithUpserts' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithUpserts.php',
+        'Maatwebsite\\Excel\\Concerns\\WithValidation' => __DIR__ . '/..' . '/maatwebsite/excel/src/Concerns/WithValidation.php',
+        'Maatwebsite\\Excel\\Console\\ExportMakeCommand' => __DIR__ . '/..' . '/maatwebsite/excel/src/Console/ExportMakeCommand.php',
+        'Maatwebsite\\Excel\\Console\\ImportMakeCommand' => __DIR__ . '/..' . '/maatwebsite/excel/src/Console/ImportMakeCommand.php',
+        'Maatwebsite\\Excel\\Console\\WithModelStub' => __DIR__ . '/..' . '/maatwebsite/excel/src/Console/WithModelStub.php',
+        'Maatwebsite\\Excel\\DefaultValueBinder' => __DIR__ . '/..' . '/maatwebsite/excel/src/DefaultValueBinder.php',
+        'Maatwebsite\\Excel\\DelegatedMacroable' => __DIR__ . '/..' . '/maatwebsite/excel/src/DelegatedMacroable.php',
+        'Maatwebsite\\Excel\\Events\\AfterImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/AfterImport.php',
+        'Maatwebsite\\Excel\\Events\\AfterSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/AfterSheet.php',
+        'Maatwebsite\\Excel\\Events\\BeforeExport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/BeforeExport.php',
+        'Maatwebsite\\Excel\\Events\\BeforeImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/BeforeImport.php',
+        'Maatwebsite\\Excel\\Events\\BeforeSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/BeforeSheet.php',
+        'Maatwebsite\\Excel\\Events\\BeforeWriting' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/BeforeWriting.php',
+        'Maatwebsite\\Excel\\Events\\Event' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/Event.php',
+        'Maatwebsite\\Excel\\Events\\ImportFailed' => __DIR__ . '/..' . '/maatwebsite/excel/src/Events/ImportFailed.php',
+        'Maatwebsite\\Excel\\Excel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Excel.php',
+        'Maatwebsite\\Excel\\ExcelServiceProvider' => __DIR__ . '/..' . '/maatwebsite/excel/src/ExcelServiceProvider.php',
+        'Maatwebsite\\Excel\\Exceptions\\ConcernConflictException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/ConcernConflictException.php',
+        'Maatwebsite\\Excel\\Exceptions\\LaravelExcelException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/LaravelExcelException.php',
+        'Maatwebsite\\Excel\\Exceptions\\NoFilePathGivenException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/NoFilePathGivenException.php',
+        'Maatwebsite\\Excel\\Exceptions\\NoFilenameGivenException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/NoFilenameGivenException.php',
+        'Maatwebsite\\Excel\\Exceptions\\NoTypeDetectedException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/NoTypeDetectedException.php',
+        'Maatwebsite\\Excel\\Exceptions\\RowSkippedException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/RowSkippedException.php',
+        'Maatwebsite\\Excel\\Exceptions\\SheetNotFoundException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/SheetNotFoundException.php',
+        'Maatwebsite\\Excel\\Exceptions\\UnreadableFileException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exceptions/UnreadableFileException.php',
+        'Maatwebsite\\Excel\\Exporter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Exporter.php',
+        'Maatwebsite\\Excel\\Facades\\Excel' => __DIR__ . '/..' . '/maatwebsite/excel/src/Facades/Excel.php',
+        'Maatwebsite\\Excel\\Factories\\ReaderFactory' => __DIR__ . '/..' . '/maatwebsite/excel/src/Factories/ReaderFactory.php',
+        'Maatwebsite\\Excel\\Factories\\WriterFactory' => __DIR__ . '/..' . '/maatwebsite/excel/src/Factories/WriterFactory.php',
+        'Maatwebsite\\Excel\\Fakes\\ExcelFake' => __DIR__ . '/..' . '/maatwebsite/excel/src/Fakes/ExcelFake.php',
+        'Maatwebsite\\Excel\\Files\\Disk' => __DIR__ . '/..' . '/maatwebsite/excel/src/Files/Disk.php',
+        'Maatwebsite\\Excel\\Files\\Filesystem' => __DIR__ . '/..' . '/maatwebsite/excel/src/Files/Filesystem.php',
+        'Maatwebsite\\Excel\\Files\\LocalTemporaryFile' => __DIR__ . '/..' . '/maatwebsite/excel/src/Files/LocalTemporaryFile.php',
+        'Maatwebsite\\Excel\\Files\\RemoteTemporaryFile' => __DIR__ . '/..' . '/maatwebsite/excel/src/Files/RemoteTemporaryFile.php',
+        'Maatwebsite\\Excel\\Files\\TemporaryFile' => __DIR__ . '/..' . '/maatwebsite/excel/src/Files/TemporaryFile.php',
+        'Maatwebsite\\Excel\\Files\\TemporaryFileFactory' => __DIR__ . '/..' . '/maatwebsite/excel/src/Files/TemporaryFileFactory.php',
+        'Maatwebsite\\Excel\\Filters\\ChunkReadFilter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Filters/ChunkReadFilter.php',
+        'Maatwebsite\\Excel\\Filters\\LimitFilter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Filters/LimitFilter.php',
+        'Maatwebsite\\Excel\\HasEventBus' => __DIR__ . '/..' . '/maatwebsite/excel/src/HasEventBus.php',
+        'Maatwebsite\\Excel\\HeadingRowImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/HeadingRowImport.php',
+        'Maatwebsite\\Excel\\Helpers\\ArrayHelper' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/ArrayHelper.php',
+        'Maatwebsite\\Excel\\Helpers\\CellHelper' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/CellHelper.php',
+        'Maatwebsite\\Excel\\Helpers\\FileTypeDetector' => __DIR__ . '/..' . '/maatwebsite/excel/src/Helpers/FileTypeDetector.php',
+        'Maatwebsite\\Excel\\Importer' => __DIR__ . '/..' . '/maatwebsite/excel/src/Importer.php',
+        'Maatwebsite\\Excel\\Imports\\EndRowFinder' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/EndRowFinder.php',
+        'Maatwebsite\\Excel\\Imports\\HeadingRowExtractor' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/HeadingRowExtractor.php',
+        'Maatwebsite\\Excel\\Imports\\HeadingRowFormatter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/HeadingRowFormatter.php',
+        'Maatwebsite\\Excel\\Imports\\ModelImporter' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/ModelImporter.php',
+        'Maatwebsite\\Excel\\Imports\\ModelManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Imports/ModelManager.php',
+        'Maatwebsite\\Excel\\Jobs\\AfterImportJob' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AfterImportJob.php',
+        'Maatwebsite\\Excel\\Jobs\\AppendDataToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendDataToSheet.php',
+        'Maatwebsite\\Excel\\Jobs\\AppendQueryToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendQueryToSheet.php',
+        'Maatwebsite\\Excel\\Jobs\\AppendViewToSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/AppendViewToSheet.php',
+        'Maatwebsite\\Excel\\Jobs\\CloseSheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/CloseSheet.php',
+        'Maatwebsite\\Excel\\Jobs\\ExtendedQueueable' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ExtendedQueueable.php',
+        'Maatwebsite\\Excel\\Jobs\\Middleware\\LocalizeJob' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/Middleware/LocalizeJob.php',
+        'Maatwebsite\\Excel\\Jobs\\ProxyFailures' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ProxyFailures.php',
+        'Maatwebsite\\Excel\\Jobs\\QueueExport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/QueueExport.php',
+        'Maatwebsite\\Excel\\Jobs\\QueueImport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/QueueImport.php',
+        'Maatwebsite\\Excel\\Jobs\\ReadChunk' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/ReadChunk.php',
+        'Maatwebsite\\Excel\\Jobs\\StoreQueuedExport' => __DIR__ . '/..' . '/maatwebsite/excel/src/Jobs/StoreQueuedExport.php',
+        'Maatwebsite\\Excel\\MappedReader' => __DIR__ . '/..' . '/maatwebsite/excel/src/MappedReader.php',
+        'Maatwebsite\\Excel\\Mixins\\DownloadCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Mixins/DownloadCollection.php',
+        'Maatwebsite\\Excel\\Mixins\\StoreCollection' => __DIR__ . '/..' . '/maatwebsite/excel/src/Mixins/StoreCollection.php',
+        'Maatwebsite\\Excel\\QueuedWriter' => __DIR__ . '/..' . '/maatwebsite/excel/src/QueuedWriter.php',
+        'Maatwebsite\\Excel\\Reader' => __DIR__ . '/..' . '/maatwebsite/excel/src/Reader.php',
+        'Maatwebsite\\Excel\\RegistersCustomConcerns' => __DIR__ . '/..' . '/maatwebsite/excel/src/RegistersCustomConcerns.php',
+        'Maatwebsite\\Excel\\Row' => __DIR__ . '/..' . '/maatwebsite/excel/src/Row.php',
+        'Maatwebsite\\Excel\\SettingsProvider' => __DIR__ . '/..' . '/maatwebsite/excel/src/SettingsProvider.php',
+        'Maatwebsite\\Excel\\Sheet' => __DIR__ . '/..' . '/maatwebsite/excel/src/Sheet.php',
+        'Maatwebsite\\Excel\\Transactions\\DbTransactionHandler' => __DIR__ . '/..' . '/maatwebsite/excel/src/Transactions/DbTransactionHandler.php',
+        'Maatwebsite\\Excel\\Transactions\\NullTransactionHandler' => __DIR__ . '/..' . '/maatwebsite/excel/src/Transactions/NullTransactionHandler.php',
+        'Maatwebsite\\Excel\\Transactions\\TransactionHandler' => __DIR__ . '/..' . '/maatwebsite/excel/src/Transactions/TransactionHandler.php',
+        'Maatwebsite\\Excel\\Transactions\\TransactionManager' => __DIR__ . '/..' . '/maatwebsite/excel/src/Transactions/TransactionManager.php',
+        'Maatwebsite\\Excel\\Validators\\Failure' => __DIR__ . '/..' . '/maatwebsite/excel/src/Validators/Failure.php',
+        'Maatwebsite\\Excel\\Validators\\RowValidator' => __DIR__ . '/..' . '/maatwebsite/excel/src/Validators/RowValidator.php',
+        'Maatwebsite\\Excel\\Validators\\ValidationException' => __DIR__ . '/..' . '/maatwebsite/excel/src/Validators/ValidationException.php',
+        'Maatwebsite\\Excel\\Writer' => __DIR__ . '/..' . '/maatwebsite/excel/src/Writer.php',
+        'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
+        'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
+        'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',
+        'Masterminds\\HTML5\\Exception' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Exception.php',
+        'Masterminds\\HTML5\\InstructionProcessor' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/InstructionProcessor.php',
+        'Masterminds\\HTML5\\Parser\\CharacterReference' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/CharacterReference.php',
+        'Masterminds\\HTML5\\Parser\\DOMTreeBuilder' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php',
+        'Masterminds\\HTML5\\Parser\\EventHandler' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/EventHandler.php',
+        'Masterminds\\HTML5\\Parser\\FileInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/FileInputStream.php',
+        'Masterminds\\HTML5\\Parser\\InputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/InputStream.php',
+        'Masterminds\\HTML5\\Parser\\ParseError' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/ParseError.php',
+        'Masterminds\\HTML5\\Parser\\Scanner' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Scanner.php',
+        'Masterminds\\HTML5\\Parser\\StringInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/StringInputStream.php',
+        'Masterminds\\HTML5\\Parser\\Tokenizer' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Tokenizer.php',
+        'Masterminds\\HTML5\\Parser\\TreeBuildingRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php',
+        'Masterminds\\HTML5\\Parser\\UTF8Utils' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/UTF8Utils.php',
+        'Masterminds\\HTML5\\Serializer\\HTML5Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php',
+        'Masterminds\\HTML5\\Serializer\\OutputRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
+        'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
+        'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
         'Matrix\\Builder' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Builder.php',
         'Matrix\\Decomposition\\Decomposition' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Decomposition/Decomposition.php',
         'Matrix\\Decomposition\\LU' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Decomposition/LU.php',
