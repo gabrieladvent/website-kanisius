@@ -13,7 +13,7 @@
                         <p class="ms-2 fw-bold fs-5"> {{ $user->name }} </p>
                     </div>
                     <div class="">
-                        <label class="ms-2">Nama Sekolah</label>
+                        <label class="ms-2">Nama Yayasan</label>
                         <p class="ms-2 fw-bold fs-5">{{ $user->namasekolah }}</p>
                     </div>
                 </div>

@@ -409,12 +409,10 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
-
         'Psr\\Clock\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/clock/src',
         ),
-
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -491,12 +489,10 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
-
         'Laravel\\Prompts\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
         ),
-
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -630,6 +626,7 @@ class ComposerStaticInitf2721f2ef698994400235e06f27d5a11
         'App\\Console\\Commands\\HapusKirimanDibaca' => __DIR__ . '/../..' . '/app/Console/Commands/HapusKirimanDibaca.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\LaporanExport' => __DIR__ . '/../..' . '/app/Exports/LaporanExport.php',
         'App\\Http\\Controllers\\ArshipController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArshipController.php',
         'App\\Http\\Controllers\\ArsipTKController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArsipTKController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

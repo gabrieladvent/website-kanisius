@@ -9,6 +9,7 @@ return array(
     'App\\Console\\Commands\\HapusKirimanDibaca' => $baseDir . '/app/Console/Commands/HapusKirimanDibaca.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\LaporanExport' => $baseDir . '/app/Exports/LaporanExport.php',
     'App\\Http\\Controllers\\ArshipController' => $baseDir . '/app/Http/Controllers/ArshipController.php',
     'App\\Http\\Controllers\\ArsipTKController' => $baseDir . '/app/Http/Controllers/ArsipTKController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

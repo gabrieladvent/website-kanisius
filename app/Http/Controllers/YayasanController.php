@@ -146,7 +146,7 @@ class YayasanController extends Controller
         }
         $userKirim = User::where('id', $idLoginNotif)->value('namasekolah');
         // Pastikan file Excel ada pada path yang sesuai
-        $excelPath = public_path('storage/simpanFile/' . $notifikasi->nama_file);
+        $excelPath = storage_path('app/public/simpanFile/'. $notifikasi->nama_file);
 
         // Baca data dari file Excel
         $spreadsheet = IOFactory::load($excelPath);
