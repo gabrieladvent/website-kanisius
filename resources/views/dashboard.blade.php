@@ -166,4 +166,5 @@
             </div>
         </div>
     </div>
+@extends('navbar.footer')
 @endsection

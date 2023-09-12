@@ -55,8 +55,7 @@
                         }
                     }
                 </script>
-
-            </li>
+          
         </ul>
     </nav>
 @else
