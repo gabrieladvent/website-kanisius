@@ -88,7 +88,7 @@
     @elseif(!$isFromShow && !$dataSekolah->isEmpty())
         <div class="ms-5 mt-5">
             <div class="mt-5">
-                <h2 class="fw-bold text-center mb-5 pt-5 text-white">Daftar Sekolah <br> Di Kanisius Cabang Yogyakarta </h2>
+                <h2 class="fw-bold text-center mb-5 pt-5 " style="color: #FFF000">Daftar Sekolah <br> Di Kanisius Cabang Yogyakarta </h2>
             </div>
             <div class="message-box p-3" style="background-color: white; box-shadow:4px 7px 10px rgba(0,0,0,.4);">
 
@@ -153,7 +153,7 @@
         </div>
     @else
         <div class="toper text-center mt-5">
-            <h2 class="text-white fw-bold">TIDAK ADA PESAN</h2>
+            <h2 class="fw-bold" style="color: #FFF000">TIDAK ADA PESAN</h2>
         </div>
     @endif
     {{-- @endforeach   --}}

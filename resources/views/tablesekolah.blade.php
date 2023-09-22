@@ -130,7 +130,7 @@
                     <script>
                         setTimeout(function() {
                             window.location.href = "{{ route('notifikasi') }}";
-                        }, 2000);
+                        }, 3000);
                     </script>
             @endif
             </div>

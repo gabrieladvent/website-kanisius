@@ -43,6 +43,7 @@
     <div>
         @yield('isi-content')
     </div>
+    @include('navbar.footer')
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -108,6 +109,8 @@
     @stack('js')
     @stack('table')
     @stack('laporan')
+    
+
 </body>
 
 </html>

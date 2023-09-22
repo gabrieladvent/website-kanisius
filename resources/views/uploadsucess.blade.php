@@ -68,7 +68,7 @@
             <div class="mb-1 ms-2">
                 <div class="row mt-5 mb-3 ms-5 d-flex justify-content-center">
                     <div class="col-3">
-                    @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) === true && $kirim->status === 2)
+                    @if (\Carbon\Carbon::now()->between(\Carbon\Carbon::parse($upload_start), \Carbon\Carbon::parse($upload_end)) == true && $kirim->status == 2)
                         <script>
                             alert('File Sudah Diupdate');
                         </script>

@@ -36,7 +36,7 @@
         </ul>
 
         <ul class="logout">
-            <li style="margin-bottom: 10px;">
+            <li style="">
                 <a href="{{ route('profile') }}">
                     <img src="{{ asset('/icon/user-tie-solid.svg') }}" alt="" class="fa fa-2x">
                     <span class="nav-text">Profile</span>
